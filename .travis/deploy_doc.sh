@@ -9,7 +9,7 @@ die()
     exit 1
 }
 
-#set -x
+set -x
 
 # Make documentation
 echo 'Generating documentation ...'
@@ -38,7 +38,7 @@ git remote add origin ${REPO_LINK} || die
 git fetch origin -t || die
 git checkout -b gh-pages origin/gh-pages || die
 cd doc || die
-rm -rf embARC_Document.html embARC_Document || rm -rf build
+rm -rf build
 cp ../../doc.tar.gz . || die
 tar xzf doc.tar.gz || die
 rm -rf doc.tar.gz || die
