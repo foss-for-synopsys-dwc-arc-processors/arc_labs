@@ -37,7 +37,7 @@ git init . || die
 git remote add origin ${REPO_LINK} || die
 git fetch origin -t || die
 git checkout -b gh-pages origin/gh-pages || die
-if [ -e doc ] ; then
+if [ ! -e doc ] ; then
     mkdir doc
 fi
 cd doc || die
