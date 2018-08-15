@@ -1,6 +1,6 @@
 #!/bin/sh
 
-REPO_NAME="github.com/wangnuannuan/arc_labs.git"
+REPO_NAME=${REPO_NAME=:"github.com/foss-for-synopsys-dwc-arc-processors/arc_labs.git"}
 REPO_LINK="https://""${GH_TOKEN}""@""${REPO_NAME}"
 
 die()
@@ -9,7 +9,7 @@ die()
     exit 1
 }
 
-set -x
+#set -x
 
 # Make documentation
 echo 'Generating documentation ...'
@@ -21,15 +21,13 @@ cd ../doc
 # mkdir -p build/doxygen/xml || die
 # make doxygen &> build_doxygen.log || die
 # Generate by sphinx
-make html &> build_html.log || die
-
-
+make html &> build_html.log || die "build doc failed"
 
 echo 'Push generated documentation to gh-pages branch...'
 
 # Only commit changes when it is not a pull request
 # tar doc
-tar czf doc.tar.gz build || die
+tar czf doc.tar.gz build || die "Failed to archieve document into tar"
 
 git fetch origin || die
 git branch -a || die
