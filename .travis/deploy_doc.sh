@@ -18,8 +18,8 @@ echo 'Generating documentation ...'
 # Generate xml by doxygen
 # cd ../..
 cd ../doc
-mkdir -p build/doxygen/xml || die
-make doxygen &> build_doxygen.log || die
+# mkdir -p build/doxygen/xml || die
+# make doxygen &> build_doxygen.log || die
 # Generate by sphinx
 make html &> build_html.log || die
 
