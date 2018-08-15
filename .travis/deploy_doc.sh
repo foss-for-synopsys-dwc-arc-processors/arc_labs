@@ -1,6 +1,6 @@
 #!/bin/sh
 
-REPO_NAME=${REPO_NAME=:"github.com/foss-for-synopsys-dwc-arc-processors/arc_labs.git"}
+REPO_NAME=${REPO_NAME:="github.com/foss-for-synopsys-dwc-arc-processors/arc_labs.git"}
 REPO_LINK="https://""${GH_TOKEN}""@""${REPO_NAME}"
 
 die()
