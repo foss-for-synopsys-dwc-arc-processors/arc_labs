@@ -36,10 +36,8 @@ after_failure:
 script:
   - bash .travis/script.sh
   
-
 matrix:
   include:
-
     - env: NAME="doc" TOOLCHAIN="sphinx" OSP_ROOT="none" GNU_VER="none"
       os: linux
       compiler: gcc
