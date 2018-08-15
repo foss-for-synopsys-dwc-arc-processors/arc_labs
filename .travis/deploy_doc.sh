@@ -23,6 +23,19 @@ cd ../doc
 # Generate by sphinx
 make html &> build_html.log || die "build doc failed"
 
+# Check if this is a pull request
+if [ "$TRAVIS_PULL_REQUEST" != "false" ] ; then
+    echo "Don't push built docs to gh-pages for pull request "
+    exit 0
+fi
+
+# Check if this is master branch
+# Only push doc changes to gh-pages when this is master branch
+if [ "$TRAVIS_BRANCH" != "master" ] ; then
+    echo "Don't push built docs to gh-pages for non master branch "
+    exit 0
+fi
+
 echo 'Push generated documentation to gh-pages branch...'
 
 # Only commit changes when it is not a pull request
