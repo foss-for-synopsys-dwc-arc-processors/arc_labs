@@ -7,12 +7,14 @@ die() {
 
 set -x
 
-[ $TRAVIS_OS_NAME != linux ] || {
-    bash -c "$STATUS" pending "Local $NAME is in progress" || die
+[ "$TRAVIS_OS_NAME" != "linux" ] || {
+    if [ "STATUS" != "" ] ; then
+        bash -c "$STATUS" pending "Local $NAME is in progress" || die
+    fi
     git checkout -- . || die
     cd .travis || die
 
-    if [ $TOOLCHAIN == sphinx ] ; then
+    if [ "$TOOLCHAIN" == "sphinx" ] ; then
         bash deploy_doc.sh || die
     fi
 
