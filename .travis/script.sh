@@ -8,7 +8,7 @@ die() {
 set -x
 
 [ "$TRAVIS_OS_NAME" != "linux" ] || {
-    if [ "STATUS" != "" ] ; then
+    if [ "$STATUS" != "" ] ; then
         bash -c "$STATUS" pending "Local $NAME is in progress" || die
     fi
     git checkout -- . || die
