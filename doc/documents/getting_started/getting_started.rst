@@ -37,3 +37,18 @@ Check the following items and set development environment.
   * If running GNU program with using the GNU toolchain on Linux, modify the **OpenOCD** configuration file as Linux format with LF line terminators. **dos2unix** can be used to convert it.
 
 .. note:: Check the version of your toolchain. The embARC software build system is purely makefile-based. make/gmake is provided in the MetaWare toolkit (gmake) and ARC GNU toolchain (make)
+
+Install Software Tools
+######################
+
+Install Metaware Toolkit
+************************
+
+Install ARC GNU Toolchain
+*************************
+
+Install embARC OSP
+******************
+
+Install USB-JTAG Drivers
+************************
