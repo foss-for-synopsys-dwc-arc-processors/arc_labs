@@ -2,3 +2,21 @@
 
 How to use FreeRTOS
 ###################
+Purpose
+=======
+
+Equipment
+=========
+
+Content
+========
+
+Principles
+==========
+
+Steps
+=====
+
+
+Exercises
+=========
