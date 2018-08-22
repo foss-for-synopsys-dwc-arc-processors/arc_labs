@@ -4,9 +4,9 @@ APPL ?= lab3_timer
 ##
 # Current Board And Core
 ##
-BOARD ?= emsk
-BD_VER ?= 22
-CUR_CORE ?= arcem7d
+BOARD ?= iotdk
+BD_VER ?= 10
+CUR_CORE ?= arcem9d
 
 
 ##
