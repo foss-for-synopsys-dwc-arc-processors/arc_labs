@@ -178,21 +178,317 @@
 <span id="lab3"></span><h1>ARC features: timer and auxiliary registers<a class="headerlink" href="#arc-features-timer-and-auxiliary-registers" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>To learn the timer resource of ARC EM processor</li>
+<li>To learn how to use the auxiliary registers to control the timer</li>
+<li>Read the count value of the timer, and implement a time clock by the timer</li>
+</ul>
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
+<p>PC, IoTDK, embARC OSP, example \Lab\timer in embARC OSP</p>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>Read the auxiliary registers of ARC EM to get the version and  other setting information of the timer resource. As all the EM processors have <strong>Timer0</strong>, we use the <strong>Timer0</strong> in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introduction-of-timer-and-auxiliary-registers">
+<h3>Introduction of timer and auxiliary registers<a class="headerlink" href="#introduction-of-timer-and-auxiliary-registers" title="Permalink to this headline">¶</a></h3>
+<p>The timers in ARC EM processor</p>
+<ul class="simple">
+<li>Two 32-bits programmable timers <strong>Timer0</strong> and <strong>Timer1</strong></li>
+<li>One 64-bits <strong>RTC</strong>(Real-Time Counter)</li>
+</ul>
+<p>All the times are configurable, for example, there are four EM processor cores in <strong>ARC EMSK1.1</strong>, the configuration information are as follow.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="12%" />
+<col width="26%" />
+<col width="12%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Timer</th>
+<th class="head">EM4</th>
+<th class="head">EM4_16CR</th>
+<th class="head">EM4</th>
+<th class="head">EM4_16CR</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>HAS_TIMER0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>HAS_TIMER1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>RTC_OPTION</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The auxiliary register Timer BCR storaged the timer resource information of an EM processor core, the register address of <strong>TIMER_BUILD</strong> is <em>0x75</em>.</p>
+<p><strong>TIMER_BUILD</strong></p>
+<img alt="register bit" src="../../_images/lab3_register_TIMER_BUILD.png" />
+<p>As we know the timer resources the EM processor configured, we can get the timer’s configuration information and control the timers by writing and reading the auxiliary register of that timer. For example, there are the related auxiliary registers of the <strong>Timer0</strong>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="14%" />
+<col width="16%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Auxiliary Register</th>
+<th class="head">Name</th>
+<th class="head">Permission</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x21</td>
+<td>COUNT0</td>
+<td>RW</td>
+<td>Processor timer 0 count value</td>
+</tr>
+<tr class="row-odd"><td>0x22</td>
+<td>CONTROL0</td>
+<td>RW</td>
+<td>Processor timer 0 control value</td>
+</tr>
+<tr class="row-even"><td>0x23</td>
+<td>LIMIT0</td>
+<td>RW</td>
+<td>Processor timer 0 limit value</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="program-flow-chart">
+<h3>Program flow chart<a class="headerlink" href="#program-flow-chart" title="Permalink to this headline">¶</a></h3>
+<img alt="program flow chart" src="../../_images/lab3_program_flow_chart.png" />
+</div>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="makefile-configuration">
+<h3>Makefile configuration<a class="headerlink" href="#makefile-configuration" title="Permalink to this headline">¶</a></h3>
+<p>There are two ways to do the configuration.</p>
+<p>First, configured by compile command, for example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make BOARD=emsk BD_VER=22 CUR_CORE=arcem9d -j4 TOOLCHAIN=gnu run</span>
+</pre></div>
+</div>
+<p>Second, configured by modifying the makefile. At here, the compile command will be very simple, for example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j4 run</span>
+</pre></div>
+</div>
+<p>Open the folder <em>embarc_osp\example\Lab\timer</em>, and open the <em>makefile</em>, here is the default configuration.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> Application name
+<span class="go">APPL ?= lab_3_Timer_Interrupts</span>
+
+<span class="gp">#</span><span class="c1">#</span>
+<span class="gp">#</span> Current Board And Core
+<span class="gp">#</span><span class="c1">#</span>
+<span class="go">BOARD ?= nsim</span>
+<span class="go">BD_VER ?= 1506</span>
+<span class="go">CUR_CORE ?= arcemfull</span>
+
+<span class="gp">#</span><span class="c1">#</span>
+<span class="gp">#</span> Set toolchain
+<span class="gp">#</span><span class="c1">#</span>
+<span class="go">TOOLCHAIN ?= gnu</span>
+
+<span class="gp">#</span>
+<span class="gp">#</span> root dir of embARC
+<span class="gp">#</span>
+<span class="go">EMBARC_ROOT = ../../..</span>
+
+<span class="go">MID_SEL = common</span>
+
+<span class="gp">#</span> application <span class="nb">source</span> <span class="nb">dirs</span>
+<span class="go">APPL_CSRC_DIR = .</span>
+<span class="go">APPL_ASMSRC_DIR = .</span>
+
+<span class="gp">#</span> application include <span class="nb">dirs</span>
+<span class="go">APPL_INC_DIR = .</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Reconfigure <strong>BOARD</strong> and <strong>CUR_CORE</strong>, in this lab, we use the launch board <em>iotdk</em></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="c1">#</span>
+<span class="gp">#</span> Current Board And Core
+<span class="gp">#</span><span class="c1">#</span>
+<span class="go">BOARD ?= iotdk</span>
+<span class="go">BD_VER ?= 10</span>
+<span class="go">CUR_CORE ?= arcem9d</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Reconfigure <strong>TOOLCHAIN</strong>, select the toolchain <em>gnu</em> or <em>metaware</em> you used</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="c1">#</span>
+<span class="gp">#</span> Set toolchain
+<span class="gp">#</span><span class="c1">#</span>
+<span class="go">TOOLCHAIN ?= gnu</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Reconfigure <strong>EMBARC_ROOT</strong>, make sure the relative path between <em>embARC OSP</em> root folder and the <em>timer</em> folder is correct.</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>
+<span class="gp">#</span> root dir of embARC
+<span class="gp">#</span>
+<span class="go">EMBARC_ROOT = ../../..</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="main-code">
+<h3>Main code<a class="headerlink" href="#main-code" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="read-auxiliary-register-bcr-build">
+<h4>Read auxiliary register BCR_BUILD<a class="headerlink" href="#read-auxiliary-register-bcr-build" title="Permalink to this headline">¶</a></h4>
+<p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_read</span></code> to read the auxiliary register for the timer resource information.</p>
+<p>Read auxiliary register <strong>TIMER_BUILD</strong>. In the register <strong>TIMER_BUILD</strong> The lower 8 bits indicate the core version information, the bit 9 indicate the <strong>Timer0</strong>, the bit 10 indicate the <strong>Timer1</strong>, the bit 11 indicate the <strong>RTC</strong>. Here is the code:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uint32_t bcr = _arc_aux_read(AUX_BCR_TIMERS);</span>
+<span class="go">int timer0_flag=(bcr &gt;&gt; 8) &amp; 1;</span>
+<span class="go">int timer1_flag=(bcr &gt;&gt; 9) &amp; 1;</span>
+<span class="go">int RTC_flag=(bcr &gt;&gt; 10) &amp; 1;</span>
+</pre></div>
+</div>
+<p>Read timer related auxiliary registers, for example, the <strong>Timer0</strong>. Here is the code:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EMBARC_PRINTF(&quot;Does this timer0 exist?  YES\r\n&quot;);</span>
+<span class="go">/*Read auxiliary register configuration information*/</span>
+<span class="go">EMBARC_PRINTF(&quot;timer0&#39;s operating mode:0x%08x\r\n&quot;,_arc_aux_read(AUX_TIMER0_CTRL));</span>
+<span class="go">EMBARC_PRINTF(&quot;timer0&#39;s limit value :0x%08x\r\n&quot;,_arc_aux_read(AUX_TIMER0_LIMIT));</span>
+<span class="go">EMBARC_PRINTF(&quot;timer0&#39;s current cnt_number:0x%08x\r\n&quot;,_arc_aux_read(AUX_TIMER0_CNT));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stop-set-start-the-timer0">
+<h4>Stop-Set-Start the Timer0<a class="headerlink" href="#stop-set-start-the-timer0" title="Permalink to this headline">¶</a></h4>
+<p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_write</span></code> to write the auxiliary register.</p>
+<p>To control the <strong>Timer0</strong> with the related auxiliary registers.</p>
+<ul class="simple">
+<li><strong>COUNT0</strong>: write this register to set the initial value of the <strong>Timer0</strong>. It will increase from the set value at anytime you write this register.</li>
+<li><strong>CONTROL0</strong>: write this register to update the control modes of the <strong>Timer0</strong>.</li>
+<li><strong>LIMIT0</strong>: write this register to set the limit value of the <strong>Timer0</strong>, the limit value is the value after which an interrupt or a reset must be generated.</li>
+</ul>
+<p>In this lab, we should stop timer before setting and starting it, the function <code class="docutils literal notranslate"><span class="pre">timer_stop</span></code> is already encapsulated in embARC OSP, you can  use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">    /* Stop it first since it might be enabled before */</span>
+<span class="go">    _arc_aux_write(AUX_TIMER0_CTRL, 0);</span>
+<span class="go">    _arc_aux_write(AUX_TIMER0_LIMIT,0);</span>
+<span class="go">    _arc_aux_write(AUX_TIMER0_CNT, 0);</span>
+<span class="go">    /*This is a example about timer0&#39;s timer function.*/</span>
+<span class="go">    uint32_t mode = TIMER_CTRL_NH;/*Timing without triggering interruption.*/</span>
+<span class="go">    uint32_t val = MAX_COUNT;</span>
+<span class="go">    _arc_aux_write(AUX_TIMER0_CNT, 0);</span>
+<span class="go">    _arc_aux_write(AUX_TIMER0_LIMIT,val);</span>
+<span class="go">/*start the specific timer*/</span>
+<span class="go">    _arc_aux_write(AUX_TIMER0_CTRL,mode);</span>
+</pre></div>
+</div>
+<p>When the timer is running, we can read the count value of the timer,and calculate the execution time of a code block. Here is the code:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uint32_t start_cnt=_arc_aux_read(AUX_TIMER0_CNT);</span>
+<span class="go">/**</span>
+<span class="go"> * code block</span>
+<span class="go"> */</span>
+<span class="go">uint32_t end_cnt=_arc_aux_read(AUX_TIMER0_CNT);</span>
+<span class="go">uint32_t time=(end_cnt-start_cnt)/(BOARD_CPU_CLOCK/1000);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-and-debug">
+<h4>Compile and debug<a class="headerlink" href="#compile-and-debug" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Compile and download</li>
+</ul>
+<p>Open <code class="docutils literal notranslate"><span class="pre">cmd</span></code> under the folder <em>example\Lab\timer</em>, input the compile command as follow:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j4 run</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If your toolchain is meteware, you should use <code class="docutils literal notranslate"><span class="pre">gmake</span></code></p>
+</div>
+<ul class="simple">
+<li>Output</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-----------------------------------------------------------</span>
+<span class="go">      ____                                _ ____</span>
+<span class="go">     |  _ \ _____      _____ _ __ ___  __| | __ ) _   _</span>
+<span class="go">     | |_) / _ \ \ /\ / / _ \ &#39;__/ _ \/ _` |  _ \| | | |</span>
+<span class="go">     |  __/ (_) \ V  V /  __/ | |  __/ (_| | |_) | |_| |</span>
+<span class="go">     |_|   \___/ \_/\_/ \___|_|  \___|\__,_|____/ \__, |</span>
+<span class="go">                                                  |___/</span>
+<span class="go">                          _       _    ____   ____</span>
+<span class="go">            ___ _ __ ___ | |__   / \  |  _ \ / ___|</span>
+<span class="go">           / _ \ &#39;_ ` _ \| &#39;_ \ / _ \ | |_) | |</span>
+<span class="go">          |  __/ | | | | | |_) / ___ \|  _ &lt;| |___</span>
+<span class="go">           \___|_| |_| |_|_.__/_/   \_\_| \_\\____|</span>
+<span class="go">     ------------------------------------------------------------</span>
+
+<span class="go">     embARC Build Time: Aug 22 2018, 15:32:54</span>
+<span class="go">     Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1 (branches/release_40)</span>
+<span class="go">     Does this timer0 exist?  YES</span>
+<span class="go">     timer0&#39;s operating mode:0x00000003</span>
+<span class="go">     timer0&#39;s limit value :0x00023280</span>
+<span class="go">     timer0&#39;s current cnt_number:0x0000c236</span>
+
+<span class="go">     Does this timer1 exist?  YES</span>
+<span class="go">     timer1&#39;s operating mode:0x00000000</span>
+<span class="go">     timer1&#39;s limit value :0x00000000</span>
+<span class="go">     timer1&#39;s current cnt_number:0x00000000</span>
+
+<span class="go">     Does this RTC_timer exist?   NO</span>
+
+<span class="go">     The start_cnt number is:2</span>
+<span class="go">     /******** TEST MODE START ********/</span>
+
+<span class="go">     This is TEST CODE.</span>
+
+<span class="go">     This is TEST CODE.</span>
+
+<span class="go">     This is TEST CODE.</span>
+
+<span class="go">     /******** TEST MODE END ********/</span>
+<span class="go">     The end_cnt number is:16785931</span>
+<span class="go">     The board cpu clock is:144000000</span>
+
+<span class="go">     Total time of TEST CODE BLOCK operation:116</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Debug</li>
+</ul>
+<p>Open <code class="docutils literal notranslate"><span class="pre">cmd</span></code> under the folder <em>example\Lab\timer</em>, input the command as follow:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make gui</span>
+</pre></div>
+</div>
+<img alt="debug view 1" src="../../_images/lab3_debug_view_1.png" />
+<img alt="debug view 2" src="../../_images/lab3_debug_view_2.png" />
+<p>The debug view will pop up automatically, we can watch the variables and registers.</p>
+</div>
+</div>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>In the debug view, observe and understand the contents of the interrupt vector table.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click the Memory button in the debug view Debugger drop-down menu to see the contents of the memory in real time.</p>
+</div>
 </div>
 </div>
 
