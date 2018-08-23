@@ -9,23 +9,14 @@ die()
     exit 1
 }
 
-set -x
+#set -x
 
 # Make documentation
 echo 'Generating documentation ...'
-# cd ../doc/documents/example || die
-# ln -s ../../../example example || die
-# Generate xml by doxygen
-# cd ../..
 cd ../doc
-# mkdir -p build/doxygen/xml || die
-# make doxygen &> build_doxygen.log || die
 # Generate by sphinx
+echo 'Generating html documentation ...'
 make html &> build_html.log || die "build doc failed"
-make latex || die
-make latexpdf || die
-make latexpdf || die
-find build/latex -type f -not -name "*.pdf" -delete || die
 # Check if this is a pull request
 if [ "$TRAVIS_PULL_REQUEST" != "false" ] ; then
     echo "Don't push built docs to gh-pages for pull request "
@@ -38,6 +29,14 @@ if [ "$TRAVIS_BRANCH" != "master" ] ; then
     echo "Don't push built docs to gh-pages for non master branch "
     exit 0
 fi
+
+# Generate latex pdf only on non-pull request master branch
+# this is time costing including creating the documentation
+echo 'Generating pdf documentation ...'
+make latex || die "Build Latex failing"
+make latexpdf || die "Build latex pdf failing in phase 1"
+make latexpdf || die "Build latex pdf failing in phase 2"
+find build/latex -type f -not -name "*.pdf" -delete || die "No latex pdf generated"
 
 echo 'Push generated documentation to gh-pages branch...'
 
@@ -63,7 +62,6 @@ tar xzf doc.tar.gz || die
 rm -rf doc.tar.gz || die
 
 git add --all || die
-# git commit -s -a -m "Update gh-pages branch, Travis build: $TRAVIS_BUILD_NUMBER, commit: "
 git commit -s -a -m "doc: Push updated generated sphinx documentation of commit ${TRAVIS_COMMIT}" || die
 if [ $? -eq 0 ] ; then
     echo 'Push changes to gh-pages branch.'
