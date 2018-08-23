@@ -17,7 +17,9 @@ die() {
     #sudo apt-get install lib32z1 || die
     #sudo apt-get install dos2unix || die
     #sudo apt-get install doxygen || die
-    if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$TRAVIS_BRANCH" != "master" ] ; then
+
+    if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ] ; then
+        # only install texlive on non pull request master branch
         sudo apt-get install texlive-full || die
     fi
     pip install --upgrade pip || die
