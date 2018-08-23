@@ -286,11 +286,11 @@
 <div class="section" id="makefile-configuration">
 <h3>Makefile configuration<a class="headerlink" href="#makefile-configuration" title="Permalink to this headline">¶</a></h3>
 <p>There are two ways to do the configuration.</p>
-<p>First, configured by compile command, for example:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make BOARD=emsk BD_VER=22 CUR_CORE=arcem9d -j4 TOOLCHAIN=gnu run</span>
+<p><strong>First</strong>, configured by compile command, for example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d -j4 TOOLCHAIN=gnu run</span>
 </pre></div>
 </div>
-<p>Second, configured by modifying the makefile. At here, the compile command will be very simple, for example:</p>
+<p><strong>Second</strong>, configured by modifying the makefile. At here, the compile command will be very simple, for example:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j4 run</span>
 </pre></div>
 </div>
@@ -301,9 +301,9 @@
 <span class="gp">#</span><span class="c1">#</span>
 <span class="gp">#</span> Current Board And Core
 <span class="gp">#</span><span class="c1">#</span>
-<span class="go">BOARD ?= nsim</span>
-<span class="go">BD_VER ?= 1506</span>
-<span class="go">CUR_CORE ?= arcemfull</span>
+<span class="go">BOARD ?= iotdk</span>
+<span class="go">BD_VER ?= 10</span>
+<span class="go">CUR_CORE ?= arcem9d</span>
 
 <span class="gp">#</span><span class="c1">#</span>
 <span class="gp">#</span> Set toolchain
@@ -386,17 +386,17 @@
 <li><strong>LIMIT0</strong>: write this register to set the limit value of the <strong>Timer0</strong>, the limit value is the value after which an interrupt or a reset must be generated.</li>
 </ul>
 <p>In this lab, we should stop timer before setting and starting it, the function <code class="docutils literal notranslate"><span class="pre">timer_stop</span></code> is already encapsulated in embARC OSP, you can  use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">    /* Stop it first since it might be enabled before */</span>
-<span class="go">    _arc_aux_write(AUX_TIMER0_CTRL, 0);</span>
-<span class="go">    _arc_aux_write(AUX_TIMER0_LIMIT,0);</span>
-<span class="go">    _arc_aux_write(AUX_TIMER0_CNT, 0);</span>
-<span class="go">    /*This is a example about timer0&#39;s timer function.*/</span>
-<span class="go">    uint32_t mode = TIMER_CTRL_NH;/*Timing without triggering interruption.*/</span>
-<span class="go">    uint32_t val = MAX_COUNT;</span>
-<span class="go">    _arc_aux_write(AUX_TIMER0_CNT, 0);</span>
-<span class="go">    _arc_aux_write(AUX_TIMER0_LIMIT,val);</span>
-<span class="go">/*start the specific timer*/</span>
-<span class="go">    _arc_aux_write(AUX_TIMER0_CTRL,mode);</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/* Stop it first since it might be enabled before */</span>
+<span class="go">_arc_aux_write(AUX_TIMER0_CTRL, 0);</span>
+<span class="go">_arc_aux_write(AUX_TIMER0_LIMIT,0);</span>
+<span class="go">_arc_aux_write(AUX_TIMER0_CNT, 0);</span>
+<span class="go">/* This is a example about timer0&#39;s timer function. */</span>
+<span class="go">uint32_t mode = TIMER_CTRL_NH;/*Timing without triggering interruption.*/</span>
+<span class="go">uint32_t val = MAX_COUNT;</span>
+<span class="go">_arc_aux_write(AUX_TIMER0_CNT, 0);</span>
+<span class="go">_arc_aux_write(AUX_TIMER0_LIMIT,val);</span>
+<span class="go">/* start the specific timer */</span>
+<span class="go">_arc_aux_write(AUX_TIMER0_CTRL,mode);</span>
 </pre></div>
 </div>
 <p>When the timer is running, we can read the count value of the timer,and calculate the execution time of a code block. Here is the code:</p>
@@ -420,7 +420,8 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If your toolchain is meteware, you should use <code class="docutils literal notranslate"><span class="pre">gmake</span></code></p>
+<p class="last">If your toolchain is meteware, you should use <code class="docutils literal notranslate"><span class="pre">gmake</span></code>.
+If you don’t use core configuration specified in makefile, you need to pass all the make options to trigger make command</p>
 </div>
 <ul class="simple">
 <li>Output</li>
