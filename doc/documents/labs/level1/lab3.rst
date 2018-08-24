@@ -68,13 +68,13 @@ Makefile configuration
 
 There are two ways to do the configuration.
 
-First, configured by compile command, for example:
+**First**, configured by compile command, for example:
 
 .. code-block:: console
 
-	make BOARD=emsk BD_VER=22 CUR_CORE=arcem9d -j4 TOOLCHAIN=gnu run
+	make BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d -j4 TOOLCHAIN=gnu run
 
-Second, configured by modifying the makefile. At here, the compile command will be very simple, for example:
+**Second**, configured by modifying the makefile. At here, the compile command will be very simple, for example:
 
 .. code-block:: console
 
@@ -90,9 +90,9 @@ Open the folder *embarc_osp\\example\\Lab\\timer*, and open the *makefile*, here
 	##
 	# Current Board And Core
 	##
-	BOARD ?= nsim
-	BD_VER ?= 1506
-	CUR_CORE ?= arcemfull
+	BOARD ?= iotdk
+	BD_VER ?= 10
+	CUR_CORE ?= arcem9d
 
 	##
 	# Set toolchain
@@ -186,12 +186,12 @@ In this lab, we should stop timer before setting and starting it, the function `
 	_arc_aux_write(AUX_TIMER0_CTRL, 0);
 	_arc_aux_write(AUX_TIMER0_LIMIT,0);
 	_arc_aux_write(AUX_TIMER0_CNT, 0);
-	/*This is a example about timer0's timer function.*/
+	/* This is a example about timer0's timer function. */
 	uint32_t mode = TIMER_CTRL_NH;/*Timing without triggering interruption.*/
 	uint32_t val = MAX_COUNT;
 	_arc_aux_write(AUX_TIMER0_CNT, 0);
 	_arc_aux_write(AUX_TIMER0_LIMIT,val);
-    /*start the specific timer*/
+        /* start the specific timer */
 	_arc_aux_write(AUX_TIMER0_CTRL,mode);
 
 When the timer is running, we can read the count value of the timer,and calculate the execution time of a code block. Here is the code:
@@ -216,7 +216,8 @@ Open ``cmd`` under the folder *example\\Lab\\timer*, input the compile command a
     make -j4 run
 
 .. note::
-    If your toolchain is meteware, you should use ``gmake``
+    If your toolchain is meteware, you should use ``gmake``. 
+    If you don't use core configuration specified in makefile, you need to pass all the make options to trigger make command
 
 - Output
 
