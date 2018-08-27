@@ -21,11 +21,82 @@ Software Requirement
 
     * `Open Source ARC GNU IDE (2017.09) <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_
       The ARC GNU Toolchain offers all of the benefits of open source tools, including complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with `ARC GNU plugin for Eclipse <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases>`_, `ARC GNU prebuilt toolchain <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_ and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_
+* `Digilent Adept Software <http://store.digilentinc.com/digilent-adept-2-download-only/>`_ for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger, so just one USB cable is required, no need for external debugger.
 
-* `Digilent Adept Software <http://store.digilentinc.com/digilent-adept-2-download-only/>`_ for Digilent JTAG-USB cable driver
 * `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection, 115200 baud, 8 bits data, 1 stop bit and no parity (115200-8-N-1) by default.
 
 .. note:: If using embARC with GNU toolchain on Windows, install `Zadig <http://zadig.akeo.ie>`_ to replace FTDI driver with WinUSB driver. See `How to Use OpenOCD on Windows <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows>`_ for more information.
+
+Install Software Tools
+######################
+
+Install Metaware Toolkit
+************************
+
+Here we will start install MetaWare Development Toolkit (2017.09).
+
+1. Double click the **mw_dekit_arc_i_2017_09_win_install.exe**, it will show
+
+.. image:: /img/mwdt_1.png
+
+2. Click next, choose I accept, continue to click next
+
+.. image:: /img/mwdt_2.png
+
+3. Choose Typical installation, then click next
+
+.. image:: /img/mwdt_3.png
+
+4. Set the install path (please use English letters only and no space), then
+   click next until the installation is finished
+
+.. image:: /img/mwdt_4.png
+
+5. Set the license file (SNPSLMD_LICENSE_FILE) for MetaWare Development
+   Toolkit. It can be a real file containing license, also can be a license server
+
+* For Windows, go to Computer->property->Advanced->Environment Variables->System Variables->New to  Set
+
+.. image:: /img/mwdt_5.png
+
+* For Linux, please add SNPSLMD_LICENSE_FILE into your system variables
+
+6. Test the MetaWare Development Toolkit and its license
+
+Open cmd.exe in Windows and find the queens.c in the installation folder of
+MetaWare Development Toolkit, e.g., **C:\ARC\MetaWare\arc\demos\queen.c**. Type the following commands in cmd
+
+ .. code-block:: console
+
+     # On Windows
+     cd  C:\ARC\MetaWare\arc\demos
+     mcc queens.c
+
+If you get the following message and no error, it means MetaWare Development
+Toolkit is successfully installed and  license is ok.
+
+.. code-block:: console
+
+    MetaWare C Compiler N-2017.09 (build 005)       Serial 1-799999.
+    (c) Copyright 1987-2017, Synopsys, Inc.
+    MetaWare ARC Assembler N-2017.09 (build 005)
+    (c) Copyright 1996-2017, Synopsys, Inc.
+    MetaWare Linker (ELF/ARCompact) N-2017.09 (build 005)
+    (c) Copyright 1995-2017, Synopsys, Inc.
+
+
+Install ARC GNU Toolchain
+*************************
+
+Install embARC OSP
+******************
+
+Install USB-JTAG Drivers
+************************
+
+
+Final Check
+###########
 
 Check the following items and set development environment.
 
@@ -38,17 +109,4 @@ Check the following items and set development environment.
 
 .. note:: Check the version of your toolchain. The embARC software build system is purely makefile-based. make/gmake is provided in the MetaWare toolkit (gmake) and ARC GNU toolchain (make)
 
-Install Software Tools
-######################
 
-Install Metaware Toolkit
-************************
-
-Install ARC GNU Toolchain
-*************************
-
-Install embARC OSP
-******************
-
-Install USB-JTAG Drivers
-************************

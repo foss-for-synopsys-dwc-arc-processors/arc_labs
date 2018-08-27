@@ -95,6 +95,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#install-usb-jtag-drivers">Install USB-JTAG Drivers</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#final-check">Final Check</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/labs.html">Labs</a></li>
@@ -189,7 +190,7 @@ The ARC GNU Toolchain offers all of the benefits of open source tools, including
 </li>
 </ul>
 </li>
-<li><p class="first"><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only/">Digilent Adept Software</a> for Digilent JTAG-USB cable driver</p>
+<li><p class="first"><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only/">Digilent Adept Software</a> for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger, so just one USB cable is required, no need for external debugger.</p>
 </li>
 <li><p class="first"><a class="reference external" href="http://ttssh2.osdn.jp/">Tera Term</a> or <a class="reference external" href="https://www.putty.org/">PuTTY</a> for serial terminal connection, 115200 baud, 8 bits data, 1 stop bit and no parity (115200-8-N-1) by default.</p>
 </li>
@@ -198,6 +199,75 @@ The ARC GNU Toolchain offers all of the benefits of open source tools, including
 <p class="first admonition-title">Note</p>
 <p class="last">If using embARC with GNU toolchain on Windows, install <a class="reference external" href="http://zadig.akeo.ie">Zadig</a> to replace FTDI driver with WinUSB driver. See <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows">How to Use OpenOCD on Windows</a> for more information.</p>
 </div>
+</div>
+<div class="section" id="install-software-tools">
+<h2>Install Software Tools<a class="headerlink" href="#install-software-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-metaware-toolkit">
+<h3>Install Metaware Toolkit<a class="headerlink" href="#install-metaware-toolkit" title="Permalink to this headline">¶</a></h3>
+<p>Here we will start install MetaWare Development Toolkit (2017.09).</p>
+<ol class="arabic simple">
+<li>Double click the <strong>mw_dekit_arc_i_2017_09_win_install.exe</strong>, it will show</li>
+</ol>
+<img alt="../_images/mwdt_1.png" src="../_images/mwdt_1.png" />
+<ol class="arabic simple" start="2">
+<li>Click next, choose I accept, continue to click next</li>
+</ol>
+<img alt="../_images/mwdt_2.png" src="../_images/mwdt_2.png" />
+<ol class="arabic simple" start="3">
+<li>Choose Typical installation, then click next</li>
+</ol>
+<img alt="../_images/mwdt_3.png" src="../_images/mwdt_3.png" />
+<ol class="arabic simple" start="4">
+<li>Set the install path (please use English letters only and no space), then
+click next until the installation is finished</li>
+</ol>
+<img alt="../_images/mwdt_4.png" src="../_images/mwdt_4.png" />
+<ol class="arabic simple" start="5">
+<li>Set the license file (SNPSLMD_LICENSE_FILE) for MetaWare Development
+Toolkit. It can be a real file containing license, also can be a license server</li>
+</ol>
+<ul class="simple">
+<li>For Windows, go to Computer-&gt;property-&gt;Advanced-&gt;Environment Variables-&gt;System Variables-&gt;New to  Set</li>
+</ul>
+<img alt="../_images/mwdt_5.png" src="../_images/mwdt_5.png" />
+<ul class="simple">
+<li>For Linux, please add SNPSLMD_LICENSE_FILE into your system variables</li>
+</ul>
+<ol class="arabic simple" start="6">
+<li>Test the MetaWare Development Toolkit and its license</li>
+</ol>
+<p>Open cmd.exe in Windows and find the queens.c in the installation folder of
+MetaWare Development Toolkit, e.g., <strong>C:ARCMetaWarearcdemosqueen.c</strong>. Type the following commands in cmd</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> On Windows
+<span class="go">cd  C:\ARC\MetaWare\arc\demos</span>
+<span class="go">mcc queens.c</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>If you get the following message and no error, it means MetaWare Development
+Toolkit is successfully installed and  license is ok.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">MetaWare C Compiler N-2017.09 (build 005)       Serial 1-799999.</span>
+<span class="go">(c) Copyright 1987-2017, Synopsys, Inc.</span>
+<span class="go">MetaWare ARC Assembler N-2017.09 (build 005)</span>
+<span class="go">(c) Copyright 1996-2017, Synopsys, Inc.</span>
+<span class="go">MetaWare Linker (ELF/ARCompact) N-2017.09 (build 005)</span>
+<span class="go">(c) Copyright 1995-2017, Synopsys, Inc.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-arc-gnu-toolchain">
+<h3>Install ARC GNU Toolchain<a class="headerlink" href="#install-arc-gnu-toolchain" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="install-embarc-osp">
+<h3>Install embARC OSP<a class="headerlink" href="#install-embarc-osp" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="install-usb-jtag-drivers">
+<h3>Install USB-JTAG Drivers<a class="headerlink" href="#install-usb-jtag-drivers" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="final-check">
+<h2>Final Check<a class="headerlink" href="#final-check" title="Permalink to this headline">¶</a></h2>
 <p>Check the following items and set development environment.</p>
 <ul class="simple">
 <li>Make sure the paths of the above required tools for the MetaWare toolkit and ARC GNU toolchain are added to the system variable <strong>PATH</strong> in your environment variables.</li>
@@ -210,21 +280,6 @@ The ARC GNU Toolchain offers all of the benefits of open source tools, including
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Check the version of your toolchain. The embARC software build system is purely makefile-based. make/gmake is provided in the MetaWare toolkit (gmake) and ARC GNU toolchain (make)</p>
-</div>
-</div>
-<div class="section" id="install-software-tools">
-<h2>Install Software Tools<a class="headerlink" href="#install-software-tools" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="install-metaware-toolkit">
-<h3>Install Metaware Toolkit<a class="headerlink" href="#install-metaware-toolkit" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="install-arc-gnu-toolchain">
-<h3>Install ARC GNU Toolchain<a class="headerlink" href="#install-arc-gnu-toolchain" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="install-embarc-osp">
-<h3>Install embARC OSP<a class="headerlink" href="#install-embarc-osp" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="install-usb-jtag-drivers">
-<h3>Install USB-JTAG Drivers<a class="headerlink" href="#install-usb-jtag-drivers" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>

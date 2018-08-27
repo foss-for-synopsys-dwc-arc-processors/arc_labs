@@ -173,21 +173,225 @@
 <span id="lab11"></span><h1>AWS IoT Smarthome<a class="headerlink" href="#aws-iot-smarthome" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Show the smart home solution based on ARC and AWS IoT Cloud</li>
+<li>Learn how to use the AWS IoT Cloud</li>
+<li>Learn how to use the EMSK Board peripheral modules and onboard resources</li>
+</ul>
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="reguired-hardware">
+<h3>Reguired Hardware<a class="headerlink" href="#reguired-hardware" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=arc_em_starter_kit">[DesignWare ARC EM Starter Kit(EMSK)]</a></li>
+<li><a class="reference external" href="http://store.digilentinc.com/pmodwifi-wifi-interface-802-11g/">[Digilent PMOD WiFi(MRF24WG0MA)]</a></li>
+<li><a class="reference external" href="http://store.digilentinc.com/pmod-tmp2-temperature-sensor/">[Digilent PMOD TMP2]</a></li>
+<li>SD Card</li>
+<li>WiFi Hotspot(SSID:<strong>embARC</strong>, Password:<strong>qazwsxedc</strong>, WPA/WPA2 encypted)</li>
+</ul>
+</div>
+<div class="section" id="required-software">
+<h3>Required Software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Metaware or ARC GNU Toolset</li>
+<li>Serial port terminal, such as putty, tera-term or minicom</li>
+</ul>
+</div>
+<div class="section" id="hardware-connection-emsk-board">
+<h3>Hardware Connection(EMSK Board)<a class="headerlink" href="#hardware-connection-emsk-board" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Connect PMOD WiFi to J5, connect PMOD TMP2 to J2.</li>
+</ul>
+<img alt="hardware connection" src="../../_images/lab11_emsk_connections.png" />
+<ul class="simple">
+<li>Configure your hardware with proper core configuration.</li>
+<li>The hardware resources are allocated as following table.</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Hardware Resources</th>
+<th class="head">Represent</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>BUTTON R</td>
+<td>Livingroom Lights Control</td>
+</tr>
+<tr class="row-odd"><td>LED 0-1</td>
+<td>Livingroom Lights Status(On or Off)</td>
+</tr>
+<tr class="row-even"><td>BUTTON L</td>
+<td>Kitchen Lights Control</td>
+</tr>
+<tr class="row-odd"><td>LED 2-3</td>
+<td>Kitchen Lights Status(On or Off)</td>
+</tr>
+<tr class="row-even"><td>BUTTON X</td>
+<td>Front Door Lock Control</td>
+</tr>
+<tr class="row-odd"><td>LED 4-5</td>
+<td>Front Door Lock Status(On or Off)</td>
+</tr>
+<tr class="row-even"><td>LED 7</td>
+<td>WiFi connection status(On for connected, Off for not)</td>
+</tr>
+<tr class="row-odd"><td>LED X</td>
+<td>Node working status(toggling in 2s period if working well)</td>
+</tr>
+<tr class="row-even"><td>PMOD TMP2</td>
+<td>Temperature Sensor</td>
+</tr>
+<tr class="row-odd"><td>PMOD WiFi</td>
+<td>Provide WiFi Connection</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>This article provides instructions on how to establish connection between the EMSK and
+Amazon Web Services Internet of Things (AWS IoT) cloud in a simulated smart home application.
+AWS IoT is a managed cloud platform that lets connected devices securely interact with cloud
+applications and other devices. It supports Message Queue Telemetry Transport (MQTT) and
+provides authentication and end-to-end encryption.</p>
+<img alt="smarthome system" src="../../_images/lab11_smarthome_system.png" />
+<p>This application is designed to show how to connect only 1 EMSK and AWS IoT Cloud
+using embARC. The connection between EMSK and AWS IoT Cloud is secured by TLS.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<p>This application demonstrates the smart home solution based on EMSK by establishing
+the connection between EMSK Board and AWS IoT Cloud. The AWS IoT Device C SDK for the
+embedded platform has been optimized and transplanted for embARC.</p>
+<p>In the application, the EMSK Board peripheral modules and onboard resources are used
+to simulate the objects which is controlled and monitored in smart home, the AWS IoT
+Cloud is used as the Cloud host and control platform which communicate with the EMSK
+Board through the MQTT protocol, and a special HTML5 Web APP is designed, which provide
+a dash board to monitor and control smart home nodes.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-and-setting-smart-home-node">
+<h3>Creating and setting smart home node<a class="headerlink" href="#creating-and-setting-smart-home-node" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Create an AWS account in <a class="reference external" href="http://aws.amazon.com/">[here]</a>. Amazon offers various account levels,
+including a free tier for AWS IoT.</p>
+</li>
+<li><p class="first">Log into AWS console and choose AWS IoT.</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_1.png" />
+</li>
+<li><p class="first">Choose an appropriate IoT server in the top right corner of the AWS IoT console page.</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_2.png" />
+</li>
+<li><p class="first">Create your smart home node in the thing registry and generate X.509 certificate for the
+node. Create an AWS IoT policy. Then attach your smart home node and policy to the X.509
+certificate.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">for more details <a class="reference external" href="http://embarc.org/pdf/embARC_appnote_how_to_use_smart_home_iot.pdf">[Using a Smart Home Iot Application with EMSK]</a></p>
+</div>
+<img alt="smarthome system" src="../../_images/lab11_steps_3.png" />
+</li>
+<li><p class="first">Download the root CA certificate from
+<a class="reference external" href="https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem/">[here]</a>.
+Rename it rootCA.crt. Copy the certificate files cert.crt, privateKey.pem and rootCA.crt to folder <em>cert\smarthome</em>.
+Insert the SD card to your PC, and copy the certificate folder cert to the SD Card root.</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_4.png" />
+</li>
+<li><p class="first">Open the <a class="reference external" href="http://embarc.org/freeboard/">[Web App]</a> in a web browser and load the configuration file dashboard-smarthomesinglething.json
+obtained from <em>embARC\example\freertos\iot\aws\smarthome_demo</em>. The dashboard can be loaded automatically</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_5.png" />
+</li>
+<li><p class="first">Click “ADD” to go to DATASOURCE page and fill up the forms.</p>
+</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha">
+<li><p class="first">TYPE: Choose AWS IoT.</p>
+</li>
+<li><p class="first">NAME: Name is aws.</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_6.png" />
+</li>
+<li><p class="first">AWS IOT ENDPOINT: Go to AWS IoT console and click your smart home node “SmartHome”. Copy the content
+XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com in REST API endpoint to AWS IOT ENDPOINT.</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_7.png" />
+</li>
+<li><p class="first">REGION: Copy the AWS region of your smart home node in REST API endpoint to REGION. For example,
+<a class="reference external" href="https://XXXXXXXXXXXXXX.iot.us-east1.amazonaws.com/things/SmartHome/shadow">https://XXXXXXXXXXXXXX.iot.us-east1.amazonaws.com/things/SmartHome/shadow</a>. REGION is us-east-1.</p>
+</li>
+<li><p class="first">CLIENT ID: Leave it blank as default.</p>
+</li>
+<li><p class="first">ACCESS KEY and SECRET KEY: Go to AWS Services page and click “IAM”.</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_8.png" />
+<p>Go to User page and click “Create New Users”. Enter User Names “AWSIoTUser”. Then
+download user security credentials, Access Key ID and Secret Access Key. Copy Access
+Key ID to ACCESS KEY and Secret Access Key to SECRET KEY.</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_9.png" />
+<p>Go to User page and click “AWSIoTUser”. Click “Attach Policy” to attach “AWSIoTDataAccess” to “AWSIoTUser”.</p>
+</li>
+<li><p class="first">THINGS: AWS IoT thing name “SmartHome”.</p>
+<img alt="smarthome system" src="../../_images/lab11_steps_10.png" />
+</li>
+<li><p class="first">Click “Save” to finish the setting.</p>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="building-and-running-aws-iot-smart-home-example">
+<h3>Building and running AWS IoT smart home example<a class="headerlink" href="#building-and-running-aws-iot-smart-home-example" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>The AWS IoT thing SDK for C has been ported to embARC. Check the above steps in
+order for your IoT application to work smoothly. Go to <em>embARC\example\freertos\iot\aws\smarthome_demo</em>.
+Modify aws_iot_config.h to match your AWS IoT configuration. The macro AWS_IOT_MQTT_HOST can be copied
+from the REST API endpoint in AWS IoT console. For example,
+<a class="reference external" href="https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow">https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow</a>. AWS_IOT_MQTT_HOST should be
+XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com.</li>
+</ol>
+<blockquote>
+<div><img alt="smarthome system" src="../../_images/lab11_builds_1.png" />
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p class="first">Use USB cable to connect the EMSK board. Set the baud rate of the terminal emulator to 115200.</p>
+</li>
+<li><p class="first">Insert the SD Card into the EMSK board SD Card slot. Run the AWS IoT application using JTAG.
+Go to <em>embARC\example\freertos\iot\aws\smarthome_demo</em> in command line, input the compile command as follow:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make TOOLCHAIN=gnu BD_VER=22 CUR_CORE=arcem7d run</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">FreeRTOS-based runtime environment can be loaded automatically. Wait for WiFi initialization and
+connection establishment(30 seconds or less) until the “WiFi connected” message is shown in the
+terminal emulator. “Network is ok” will be shown after the certificate files cert.crt, privateKey.pem
+and rootCA.crt are validated. The information in “reported”: {} is the state of the EMSK-based
+smart home node. “Updated Accepted !!” means the connection works between the smart home node and AWS IoT cloud.</p>
+</li>
+</ol>
+<blockquote>
+<div><img alt="smarthome system" src="../../_images/lab11_builds_2.png" />
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Interact using EMSK and Dashboard. You can press the button L/R/X to see the led changes on board and also on dashboard web app.
+You can also click the lights of DESIRED STATUS pane on the dashboard app, and see the led changes on board and dashboard web app.</li>
+</ol>
+<blockquote>
+<div><img alt="smarthome system" src="../../_images/lab11_builds_3.png" />
+</div></blockquote>
+</div>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>This application is designed to show how to connect only 1 EMSK and AWS IoT Cloud using embARC.
+Try to do the Multi Node AWS IoT Smarthome Demo.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Related demo codes you can find <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome">[here]</a></p>
+</div>
 </div>
 </div>
 
