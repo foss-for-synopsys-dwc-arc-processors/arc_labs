@@ -16,7 +16,7 @@ echo 'Generating documentation ...'
 cd ../doc
 # Generate by sphinx
 echo 'Generating html documentation ...'
-make html &> build_html.log || die "build doc failed"
+make html &> build_html.log || { tail -n 100 build_html.log ; die "build doc failed" ; }
 # Check if this is a pull request
 if [ "$TRAVIS_PULL_REQUEST" != "false" ] ; then
     echo "Don't push built docs to gh-pages for pull request "
@@ -33,9 +33,9 @@ fi
 # Generate latex pdf only on non-pull request master branch
 # this is time costing including creating the documentation
 echo 'Generating pdf documentation ...'
-make latex || die "Build Latex failing"
-make latexpdf || die "Build latex pdf failing in phase 1"
-make latexpdf || die "Build latex pdf failing in phase 2"
+make latex &> build_latex.log || { tail -n 100 build_latex.log ; die "Build Latex failing" ; }
+make latexpdf &> build_latexpdf_phase1.log || { tail -n 100 build_latexpdf_phase1.log ; die "Build latex pdf failing in phase 1" ; }
+make latexpdf &> build_latexpdf_phase2.log || { tail -n 100 build_latexpdf_phase2.log ; die "Build latex pdf failing in phase 2" ; }
 find build/latex -type f -not -name "*.pdf" -delete || die "No latex pdf generated"
 
 echo 'Push generated documentation to gh-pages branch...'
