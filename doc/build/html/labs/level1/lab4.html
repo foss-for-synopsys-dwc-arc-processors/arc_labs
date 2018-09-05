@@ -178,21 +178,441 @@
 <span id="lab4"></span><h1>ARC features: interrupts<a class="headerlink" href="#arc-features-interrupts" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Introduce the interrupt module in the ARC embedded processor</li>
+<li>Demonstrate how to use the interrupt and timer APIs already defined in the embARC processor in the program</li>
+</ul>
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
+<p>PC, MetaWare toolchain/ARC GNU toolchain, nSIM simulator (to use GNU, you need to add nSIM to the environment variable first), interrupt source code</p>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>This lab and lab 3 are both introductions to the internal characteristics of the embARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through examplelabinterrupt in the embARC OSP package. The two routines give you a preliminary understanding of the ARC interrupt resources.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<p>The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type, that is, the entry address of the interrupt service program, and then jumps to the address to execute the interrupt service routine. After the execution is completed, return to the interrupted program and complete the response of the interrupt event.</p>
+<p>In embARC OSP, we use the int_handler_install function to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then we can achieve the above functions.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="open-and-browse-lab-one">
+<h3>Open and browse lab one<a class="headerlink" href="#open-and-browse-lab-one" title="Permalink to this headline">¶</a></h3>
+<p>Go to the embarc_osp\example\Lab\interrupt directory, where there are two folders, lab_4_1 and lab_4_2.</p>
+<p>We first enter lab_4_1, which implements the precise timing function through the timer interrupt, which is the application of the interrupt comparison basis.</p>
+<p>Open main.c and browse the entire program.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>include <span class="s2">&quot;embARC.h&quot;</span>
+<span class="gp">#</span>include <span class="s2">&quot;embARC_debug.h&quot;</span>
+
+<span class="gp">#</span>define COUNT <span class="o">(</span>BOARD_CPU_CLOCK/1000<span class="o">)</span>
+
+<span class="go">volatile static int t0 = 0;</span>
+<span class="go">volatile static int second = 0;</span>
+
+<span class="go">/** arc timer 0 interrupt routine */</span>
+<span class="go">static void timer0_isr(void *ptr)</span>
+<span class="go">{</span>
+<span class="go">  timer_int_clear(TIMER_0);</span>
+<span class="go">  t0++;</span>
+<span class="go">}</span>
+
+<span class="go">/** arc timer 0 interrupt delay */</span>
+<span class="go">void timer0_delay_ms(int ms)</span>
+<span class="go">{</span>
+<span class="go">  t0 = 0;</span>
+<span class="go"> while(t0&lt;ms);</span>
+<span class="go">}</span>
+
+<span class="go">/** main entry for testing arc fiq interrupt */</span>
+<span class="go">int main(void)</span>
+<span class="go">{</span>
+<span class="go">  int_disable(INTNO_TIMER0);</span>
+<span class="go">  timer_stop(TIMER_0);</span>
+
+<span class="go">  int_handler_install(INTNO_TIMER0, timer0_isr);</span>
+<span class="go">  int_pri_set(INTNO_TIMER0, INT_PRI_MIN);</span>
+
+<span class="go">  EMBARC_PRINTF(&quot;\r\nThis is a example about timer interrupt.\r\n&quot;);</span>
+<span class="go">  EMBARC_PRINTF(&quot;\r\n/******** TEST MODE START ********/\r\n\r\n&quot;);</span>
+
+<span class="go">  int_enable(INTNO_TIMER0);</span>
+<span class="go">  timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);</span>
+
+<span class="go">  while(1)</span>
+<span class="go">  {</span>
+<span class="go">        timer0_delay_ms(1000);</span>
+<span class="go">        EMBARC_PRINTF(&quot;\r\n %ds.\r\n&quot;,second);</span>
+<span class="go">        second ++;</span>
+<span class="go">  }</span>
+<span class="go">  return E_SYS;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sub-module-analysis-lab-one-code">
+<h3>Sub-module analysis lab one code<a class="headerlink" href="#sub-module-analysis-lab-one-code" title="Permalink to this headline">¶</a></h3>
+<p>The code can be roughly divided into three parts: interrupt service function, main function, and delay function.</p>
+<p>Let’s analyze each one below:</p>
+<ul class="simple">
+<li>Interrupt service function:</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">static void timer0_isr(void *ptr)</span>
+<span class="go">{</span>
+<span class="go">timer_int_clear(TIMER_0);</span>
+<span class="go">t0++;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>This code is a standard example of an interrupt service function, enters the service function, clears the interrupt flag bit, and then performs the processing that needs to be done in the interrupt service function. Other interrupt service functions can also be written using this template.</p>
+<p>In this function, we incremented the count variable t0 by one.</p>
+<ul class="simple">
+<li>Main function</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">int main(void)</span>
+<span class="go">{</span>
+<span class="go">  int_disable(INTNO_TIMER0);</span>
+<span class="go">  timer_stop(TIMER_0);</span>
+
+<span class="go">  int_handler_install(INTNO_TIMER0, timer0_isr);</span>
+<span class="go">  int_pri_set(INTNO_TIMER0, INT_PRI_MIN);</span>
+
+<span class="go">  EMBARC_PRINTF(&quot;\r\nThis is a example about timer interrupt.\r\n&quot;);</span>
+<span class="go">  EMBARC_PRINTF(&quot;\r\n/******** TEST MODE START ********/\r\n\r\n&quot;);</span>
+
+<span class="go">  int_enable(INTNO_TIMER0);</span>
+<span class="go">  timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);</span>
+
+<span class="go">  while(1)</span>
+<span class="go">  {</span>
+<span class="go">        timer0_delay_ms(1000);</span>
+<span class="go">        EMBARC_PRINTF(&quot;\r\n %ds.\r\n&quot;,second);</span>
+<span class="go">        second ++;</span>
+<span class="go">  }</span>
+<span class="go">  return E_SYS;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">EMBARC_PRINTF</span></code> function in this code is only used to send information to the computer, which can be ignored during analysis.</p>
+<p>This code is divided into two parts: initialization and looping.</p>
+<p>In the initialization section, we configured the timer and timer interrupts.</p>
+<p>Unlike Lab 3, this code uses the embARC OSP API to implement it. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.</p>
+<p><strong>First</strong>, in order to configure <strong>Timer0</strong> and its interrupts, we need to turn them off first. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_disable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_stop</span></code>.</p>
+<p><strong>Then</strong> we configure the interrupt service function and priority for our interrupts. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_handler_install</span></code> and <code class="docutils literal notranslate"><span class="pre">int_pri_set</span></code>.</p>
+<p><strong>Finally</strong>, after the interrupt configuration is complete, we need to enable the <strong>Timer0</strong> and interrupts that we previously turned off. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_enable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>.
+The implementation of the <code class="docutils literal notranslate"><span class="pre">timer_start</span></code> function is basically the same as the reading and writing of the auxiliary registers in our lab_3. Interested students can view them in the file arc_timer.c. One point to note in this step is the configuration of <code class="docutils literal notranslate"><span class="pre">timer_limit</span></code> (the last parameter of <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>). We need to configure the interrupt time to 1ms , so we need to do a simple calculation (the formula is the expression after COUNT).</p>
+<p>In this example, the loop body only serves as an effect display. We call our own delay function in the loop body to print the time per second.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since nSIM is only simulated by computer, there may be time inaccuracy when using this function. Interested students can use the EMSK to program the program in the development board. In this case, the time will be much higher than that in nSIM.</p>
+</div>
+<ul class="simple">
+<li>Delay function</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">static void timer0_isr(void *ptr)</span>
+<span class="go">{</span>
+<span class="go">t0 = 0;</span>
+<span class="go">while(t0&lt;ms);</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>This code is very simple and the idea is clear. When we enter the function, we clear the global variable t0. Since we have set the interrupt interval to 1ms in the above timer_start, we can think that every time t0 is incremented, the time has passed 1ms.</p>
+<p>Then, we wait through the while(t0&lt;ms) sentence, so that we can get the full ms delay with higher precision.</p>
+</div>
+<div class="section" id="lab-one-labal-phenomenon">
+<h3>Lab one Labal phenomenon<a class="headerlink" href="#lab-one-labal-phenomenon" title="Permalink to this headline">¶</a></h3>
+<p>After the lab one program is successfully downloaded, the serial output is as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar 16 2018, 09:58:46</span>
+<span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1</span>
+
+<span class="go">This is an example about timer interrupt</span>
+<span class="go">/********TEST MODE START********/</span>
+<span class="go">0s</span>
+
+<span class="go">1s</span>
+
+<span class="go">2s</span>
+
+<span class="go">3s</span>
+
+<span class="go">4s</span>
+
+<span class="go">5s</span>
+
+<span class="go">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="open-and-browse-the-lab-two">
+<h3>Open and browse the lab two<a class="headerlink" href="#open-and-browse-the-lab-two" title="Permalink to this headline">¶</a></h3>
+<p>We then enter lab_4_2, which mainly shows the working state of priority and interrupt nesting.</p>
+<p>Open main.c and browse through the entire program.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>include <span class="s2">&quot;embARC.h&quot;</span>
+<span class="gp">#</span>include <span class="s2">&quot;embARC_debug.h&quot;</span>
+
+<span class="gp">#</span>define MAX_COUNT 0xfffff
+
+<span class="go">volatile static uint8_t timer_flag = 0;</span>
+<span class="go">volatile static uint8_t hits = 0;</span>
+
+<span class="go">volatile static uint8_t nesting_flag = 1;</span>
+
+<span class="go">/** arc timer 0 interrupt routine */</span>
+<span class="go">static void timer0_isr(void *ptr)</span>
+<span class="go">{</span>
+<span class="go">    timer_int_clear(TIMER_0);</span>
+
+<span class="go">    timer_flag = 0;</span>
+
+<span class="go">    board_delay_ms(10, 1);</span>
+
+<span class="go">    if(timer_flag)</span>
+<span class="go">    {</span>
+<span class="go">            EMBARC_PRINTF(&quot;Interrupt nesting!\r\n&quot;);</span>
+<span class="go">    }</span>
+<span class="go">    else</span>
+<span class="go">    {</span>
+<span class="go">            EMBARC_PRINTF(&quot;Interrupt\r\n&quot;);</span>
+<span class="go">    }</span>
+
+<span class="go">    hits++;</span>
+<span class="go">}</span>
+
+<span class="go">/** arc timer 1 interrupt routine */</span>
+<span class="go">static void timer1_isr(void *ptr)</span>
+<span class="go">{</span>
+<span class="go">    timer_int_clear(TIMER_1);</span>
+
+<span class="go">    timer_flag = 1;</span>
+<span class="go">}</span>
+
+<span class="go">/** main entry for testing arc fiq interrupt */</span>
+<span class="go">int main(void)</span>
+<span class="go">{</span>
+<span class="go">    timer_stop(TIMER_0);</span>
+<span class="go">    timer_stop(TIMER_1);</span>
+
+<span class="go">    int_disable(INTNO_TIMER0);</span>
+<span class="go">    int_disable(INTNO_TIMER1);</span>
+
+<span class="go">    int_handler_install(INTNO_TIMER0, timer0_isr);</span>
+<span class="go">    int_pri_set(INTNO_TIMER0, INT_PRI_MAX);</span>
+
+<span class="go">    int_handler_install(INTNO_TIMER1, timer1_isr);</span>
+<span class="go">    int_pri_set(INTNO_TIMER1, INT_PRI_MIN);</span>
+
+<span class="go">    EMBARC_PRINTF(&quot;\r\nThe test will start in 1s.\r\n&quot;);</span>
+<span class="go">    EMBARC_PRINTF(&quot;\r\n/******** TEST MODE START ********/\r\n\r\n&quot;);</span>
+
+<span class="go">    int_enable(INTNO_TIMER0);</span>
+<span class="go">    int_enable(INTNO_TIMER1);</span>
+
+<span class="go">    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
+<span class="go">    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
+
+<span class="go">    while(1)</span>
+<span class="go">    {</span>
+<span class="go">            if((hits &gt;= 5)&amp;&amp;(nesting_flag == 1))</span>
+<span class="go">            {</span>
+<span class="go">                    timer_stop(TIMER_0);</span>
+<span class="go">                    timer_stop(TIMER_1);</span>
+
+<span class="go">                    int_disable(INTNO_TIMER0);</span>
+<span class="go">                    int_disable(INTNO_TIMER1);</span>
+
+<span class="go">                    int_pri_set(INTNO_TIMER0, INT_PRI_MIN);</span>
+<span class="go">                    int_pri_set(INTNO_TIMER1, INT_PRI_MAX);</span>
+
+<span class="go">                    nesting_flag = 0;</span>
+
+<span class="go">                    int_enable(INTNO_TIMER0);</span>
+<span class="go">                    int_enable(INTNO_TIMER1);</span>
+
+<span class="go">                    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
+<span class="go">                    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
+<span class="go">            }</span>
+<span class="go">            else if((hits &gt;= 10)&amp;&amp;(nesting_flag == 0))</span>
+<span class="go">            {</span>
+<span class="go">                    timer_stop(TIMER_0);</span>
+<span class="go">                    timer_stop(TIMER_1);</span>
+
+<span class="go">                    int_disable(INTNO_TIMER0);</span>
+<span class="go">                    int_disable(INTNO_TIMER1);</span>
+
+<span class="go">                    int_pri_set(INTNO_TIMER0, INT_PRI_MAX);</span>
+<span class="go">                    int_pri_set(INTNO_TIMER1, INT_PRI_MIN);</span>
+
+<span class="go">                    hits = 0;</span>
+<span class="go">                    nesting_flag = 1;</span>
+
+<span class="go">                    int_enable(INTNO_TIMER0);</span>
+<span class="go">                    int_enable(INTNO_TIMER1);</span>
+
+<span class="go">                    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
+<span class="go">                    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
+<span class="go">            }</span>
+<span class="go">    }</span>
+<span class="go">    return E_SYS;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sub-module-analysis-lab-two-code">
+<h3>Sub-module analysis lab two code<a class="headerlink" href="#sub-module-analysis-lab-two-code" title="Permalink to this headline">¶</a></h3>
+<p>Lab two seems complicated, but it is very simple. The code for Lab two only needs to be divided into two parts: the interrupt service function and the main function.</p>
+<ul class="simple">
+<li>Interrupt service function</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">    static void timer0_isr(void *ptr)</span>
+<span class="go">{</span>
+<span class="go">    timer_int_clear(TIMER_0);</span>
+
+<span class="go">    timer_flag = 0;</span>
+
+<span class="go">    board_delay_ms(10, 1);</span>
+
+<span class="go">    if(timer_flag)</span>
+<span class="go">    {</span>
+<span class="go">            EMBARC_PRINTF(&quot;Interrupt nesting!\r\n&quot;);</span>
+<span class="go">    }</span>
+<span class="go">    else</span>
+<span class="go">    {</span>
+<span class="go">            EMBARC_PRINTF(&quot;Interrupt\r\n&quot;);</span>
+<span class="go">    }</span>
+
+<span class="go">    hits++;</span>
+<span class="go">}</span>
+
+<span class="go">static void timer1_isr(void *ptr)</span>
+<span class="go">{</span>
+<span class="go">    timer_int_clear(TIMER_1);</span>
+
+<span class="go">    timer_flag = 1;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>First, in order to analyze the code, we first ignore the extraneous parts (such as EMBARC_PRINTF, delay and hits in if).</p>
+<p>In this case, we can find that for the interrupt service function timer0_isr, it is impossible to have the timer_flag of 1 only when it is itself. The only way to do this is to have another higher priority interrupt between timer_flag=0 and if statement set it.</p>
+<p>Following this line of thought, let’s look at timer1_isr again, and sure enough.</p>
+<p>Regarding EMBARC_PRINTF, it is used to indicate the status.</p>
+<p>Regarding the delay, its role is to lengthen this period of time, making nesting more likely.</p>
+<p>Regarding hits, it will be mentioned in the main function module.</p>
+<ul class="simple">
+<li>main function</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">    int main(void)</span>
+<span class="go">{</span>
+<span class="go">    timer_stop(TIMER_0);</span>
+<span class="go">    timer_stop(TIMER_1);</span>
+
+<span class="go">    int_disable(INTNO_TIMER0);</span>
+<span class="go">    int_disable(INTNO_TIMER1);</span>
+
+<span class="go">    int_handler_install(INTNO_TIMER0, timer0_isr);</span>
+<span class="go">    int_pri_set(INTNO_TIMER0, INT_PRI_MAX);</span>
+
+<span class="go">    int_handler_install(INTNO_TIMER1, timer1_isr);</span>
+<span class="go">    int_pri_set(INTNO_TIMER1, INT_PRI_MIN);</span>
+
+<span class="go">    EMBARC_PRINTF(&quot;\r\nThe test will start in 1s.\r\n&quot;);</span>
+<span class="go">    EMBARC_PRINTF(&quot;\r\n/******** TEST MODE START ********/\r\n\r\n&quot;);</span>
+
+<span class="go">    int_enable(INTNO_TIMER0);</span>
+<span class="go">    int_enable(INTNO_TIMER1);</span>
+
+<span class="go">    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
+<span class="go">    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
+
+<span class="go">    while(1)</span>
+<span class="go">    {</span>
+<span class="go">            if((hits &gt;= 5)&amp;&amp;(nesting_flag == 1))</span>
+<span class="go">            {</span>
+<span class="go">                    timer_stop(TIMER_0);</span>
+<span class="go">                    timer_stop(TIMER_1);</span>
+
+<span class="go">                    int_disable(INTNO_TIMER0);</span>
+<span class="go">                    int_disable(INTNO_TIMER1);</span>
+
+<span class="go">                    int_pri_set(INTNO_TIMER0, INT_PRI_MIN);</span>
+<span class="go">                    int_pri_set(INTNO_TIMER1, INT_PRI_MAX);</span>
+
+<span class="go">                    nesting_flag = 0;</span>
+
+<span class="go">                    int_enable(INTNO_TIMER0);</span>
+<span class="go">                    int_enable(INTNO_TIMER1);</span>
+
+<span class="go">                    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
+<span class="go">                    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
+<span class="go">            }</span>
+<span class="go">            else if((hits &gt;= 10)&amp;&amp;(nesting_flag == 0))</span>
+<span class="go">            {</span>
+<span class="go">                    timer_stop(TIMER_0);</span>
+<span class="go">                    timer_stop(TIMER_1);</span>
+
+<span class="go">                    int_disable(INTNO_TIMER0);</span>
+<span class="go">                    int_disable(INTNO_TIMER1);</span>
+
+<span class="go">                    int_pri_set(INTNO_TIMER0, INT_PRI_MAX);</span>
+<span class="go">                    int_pri_set(INTNO_TIMER1, INT_PRI_MIN);</span>
+
+<span class="go">                    hits = 0;</span>
+<span class="go">                    nesting_flag = 1;</span>
+
+<span class="go">                    int_enable(INTNO_TIMER0);</span>
+<span class="go">                    int_enable(INTNO_TIMER1);</span>
+
+<span class="go">                    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
+<span class="go">                    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
+<span class="go">            }</span>
+<span class="go">    }</span>
+<span class="go">    return E_SYS;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>The main function looks very long, but in fact there is a considerable part of it that is repetitive (we can also build a small function to make the code look more concise).</p>
+<p>In the first lab, we have already discussed the configuration of the timer and the creation of the interrupt, we will not repeat them here.</p>
+<p>The main function is simple: when the interrupt of timer0 occurs 5 times, change the priority relationship of the two interrupts. The hits mentioned earlier are count variables to assist in the above functions.</p>
+</div>
+<div class="section" id="lab-two-labal-phenomenon">
+<h3>Lab two Labal phenomenon<a class="headerlink" href="#lab-two-labal-phenomenon" title="Permalink to this headline">¶</a></h3>
+<p>The labal phenomenon of Lab two is shown in the figure.</p>
+<p>“Interrupt nesting!” indicates that interrupt nesting has occurred, and “Interrupt” indicates that it has not occurred.</p>
+<p>For a better understanding, let’s go back and look at the priority settings in the main function.</p>
+<p>It is easy to see that when the timer0 interrupt priority is low (INT_PRI_MAX is low priority, this setting is contrary to most people’s intuition), the timer1 interrupt can be embedded therein; when the timer0 interrupt priority is high, the timer1 interrupt cannot be embedded.</p>
+<p>To summarize, high-priority interrupts can interrupt low-priority interrupts, and low-priority interrupts can be embedded by high-priority interrupts. The Main function can be understood as the lowest priority interrupt.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar 16 2018, 09:58:46</span>
+<span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1</span>
+
+<span class="go">This test will start in 1s.</span>
+
+<span class="go">/********TEST MODE START********/</span>
+
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt</span>
+<span class="go">Interrupt</span>
+<span class="go">Interrupt</span>
+<span class="go">Interrupt</span>
+<span class="go">Interrupt</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt  nesting!</span>
+<span class="go">Interrupt</span>
+<span class="go">Interrupt</span>
+<span class="go">Interrupt</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>Try using an interrupt other than a timer to write a small program. (For example, use the GPIO interrupt to implement the button lighting)</p>
 </div>
 </div>
 
