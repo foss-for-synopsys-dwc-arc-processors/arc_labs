@@ -7,7 +7,7 @@ Purpose
 =======
 - Show the smart home solution based on ARC and AWS IoT Cloud
 - Learn how to use the AWS IoT Cloud
-- Learn how to use the EMSK Board peripheral modules and onboard resources
+- Learn how to use the EMSK Board peripheral modules and on-board resources
 
 Equipment
 =========

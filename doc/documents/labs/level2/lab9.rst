@@ -24,7 +24,7 @@ Background
 ----------
 A Real Time Operating System (RTOS) is an operating system intended to serve real-time applications that process data in limited time as it comes in. Being within time bound and highly reliable are two important characters of RTOS.
 
-As resources becoming abundant for morden micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilizaion of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. These are the reasons of why we choose to learn FreeRTOS in this lab.
+As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. These are the reasons of why we choose to learn FreeRTOS in this lab.
 
 Design
 ------
@@ -180,7 +180,7 @@ This message implys that three tasks are working correctly.
 
 Implement task 3
 ----------------
-It is required for task 3 to retrive new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, so the only new function to learn is xQueueReceive(). This is a FreeRTOS API to pop and read an item from queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
+It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, so the only new function to learn is xQueueReceive(). This is a FreeRTOS API to pop and read an item from queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
 
 Implement task 1
 ----------------

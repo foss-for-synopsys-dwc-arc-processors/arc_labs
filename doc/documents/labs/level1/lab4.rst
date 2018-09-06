@@ -38,9 +38,9 @@ Open main.c and browse the entire program.
 
 	#include "embARC.h"
 	#include "embARC_debug.h"
-	
+
 	#define COUNT (BOARD_CPU_CLOCK/1000)
-	
+
 	volatile static int t0 = 0;
 	volatile static int second = 0;
 
@@ -50,14 +50,14 @@ Open main.c and browse the entire program.
 	  timer_int_clear(TIMER_0);
 	  t0++;
 	}
-	
+
 	/** arc timer 0 interrupt delay */
 	void timer0_delay_ms(int ms)
 	{
 	  t0 = 0;
 	 while(t0<ms);
 	}
-	 
+
 	/** main entry for testing arc fiq interrupt */
 	int main(void)
 	{
@@ -81,7 +81,7 @@ Open main.c and browse the entire program.
 	  }
 	  return E_SYS;
         }
-	
+
 Sub-module analysis lab one code
 ---------------------------------
 
@@ -111,7 +111,7 @@ In this function, we incremented the count variable t0 by one.
 	{
 	  int_disable(INTNO_TIMER0);
 	  timer_stop(TIMER_0);
-	
+
 	  int_handler_install(INTNO_TIMER0, timer0_isr);
 	  int_pri_set(INTNO_TIMER0, INT_PRI_MIN);
 
@@ -147,8 +147,8 @@ The implementation of the ``timer_start`` function is basically the same as the 
 
 In this example, the loop body only serves as an effect display. We call our own delay function in the loop body to print the time per second.
 
-.. note:: 
-    Since nSIM is only simulated by computer, there may be time inaccuracy when using this function. Interested students can use the EMSK to program the program in the development board. In this case, the time will be much higher than that in nSIM. 
+.. note::
+    Since nSIM is only simulated by computer, there may be time inaccuracy when using this function. Interested students can use the EMSK to program the program in the development board. In this case, the time will be much higher than that in nSIM.
 
 - Delay function
 
@@ -158,7 +158,7 @@ In this example, the loop body only serves as an effect display. We call our own
 	{
 	t0 = 0;
 	while(t0<ms);
-	} 
+	}
 
 This code is very simple and the idea is clear. When we enter the function, we clear the global variable t0. Since we have set the interrupt interval to 1ms in the above timer_start, we can think that every time t0 is incremented, the time has passed 1ms.
 
@@ -172,22 +172,22 @@ After the lab one program is successfully downloaded, the serial output is as fo
 .. code-block:: console
 
     embARC Build Time: Mar 16 2018, 09:58:46
-    Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1 
-    
+    Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1
+
     This is an example about timer interrupt
     /********TEST MODE START********/
     0s
-    
+
     1s
-    
+
     2s
-    
+
     3s
-    
+
     4s
-    
+
     5s
-    
+
     ...
 
 Open and browse the lab two
@@ -449,10 +449,10 @@ To summarize, high-priority interrupts can interrupt low-priority interrupts, an
 .. code-block:: console
 
     embARC Build Time: Mar 16 2018, 09:58:46
-    Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1 
+    Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1
 
     This test will start in 1s.
- 
+
     /********TEST MODE START********/
 
     Interrupt  nesting!
@@ -460,22 +460,22 @@ To summarize, high-priority interrupts can interrupt low-priority interrupts, an
     Interrupt  nesting!
     Interrupt  nesting!
     Interrupt  nesting!
-    Interrupt 
-    Interrupt 
     Interrupt
-    Interrupt 
-    Interrupt 
-    Interrupt  nesting!
-    Interrupt  nesting!
-    Interrupt  nesting!
-    Interrupt  nesting!
-    Interrupt  nesting!
-    Interrupt 
-    Interrupt 
     Interrupt
-    
+    Interrupt
+    Interrupt
+    Interrupt
+    Interrupt  nesting!
+    Interrupt  nesting!
+    Interrupt  nesting!
+    Interrupt  nesting!
+    Interrupt  nesting!
+    Interrupt
+    Interrupt
+    Interrupt
+
 Exercises
-==========  
+==========
 
 Try using an interrupt other than a timer to write a small program. (For example, use the GPIO interrupt to implement the button lighting)
 

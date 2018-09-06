@@ -7,7 +7,7 @@ MetaWare ToolKit
 Purpose
 ^^^^^^^^
 
-* Learn the MetaWare IDE integration interface 
+* Learn the MetaWare IDE integration interface
 * Familiar with the use of the MetaWare IDE interface and command line
 * Familiar with the features and usage of the MetaWare Debugger debugger
 
@@ -20,7 +20,7 @@ Content
 ^^^^^^^^^
 
 Create a C project using the Metaware IDE graphical interface, import the code CoreTest.c, configure compilation options to compile, and generate executable files.
- 
+
 Start the debugger of MetaWare IDE and enter debug mode. From the different angles of C language and assembly language, use the functions of setting breakpoint, single step execution, full speed execution, etc., combined with observing PC address, register status, global variable status and Profiling performance to analyze the debug target program.
 
 
@@ -44,47 +44,47 @@ Routine code CoreTest.c:
     // For purposes of simplicity, the data points used in the computations
     // are hardcoded into the POINTX and POINTY constant values below
     /////////////////////////////////////////////////////////////////////////
-    
-    
+
+
     #ifdef _DEBUG
     #include "stdio.h"
     #endif
-    
+
     #define POINTX {1, 2, 3, 4,  5,  6,  7,  8,  9, 10}
     #define POINTY {2, 4, 6, 8, 10, 12, 14, 16, 18, 20}
     #define POINTS 10
-    
+
     #define GetError(x, y, Px, Py) \
     	( (x-Px)*(x-Px) + (y-Py)*(y-Py) )
 
     int main(int argc, char* argv[]) {
     	int pPointX[] = POINTX;
     	int pPointY[] = POINTY;
-    
+
     	int x, y;
     	int index, error, minindex, minerror;
-    
+
     	x = 4;
     	y = 5;
-    
+
     	minerror = GetError(x, y, pPointX[0], pPointY[0]);
     	minindex = 0;
-    
+
     	for(index = 1; index < POINTS; index++) {
 		error = GetError(x, y, pPointX[index], pPointY[index]);
-    
+
     		if (error < minerror) {
     			minerror = error;
     			minindex = index;
                 }
             }
-    
+
     #ifdef _DEBUG
     	printf("minindex = %d, minerror = %d.\n", minindex, minerror);
     	printf("The point is (%d, %d).\n", pPointX[minindex], pPointY[minindex]);
     	getchar();
     #endif
-    
+
     	return 0;
         }
 
@@ -99,8 +99,8 @@ Open the MetaWare IDE, create an empty project called demo, and select the ARC E
 |figure1|
 
 **Import the code file CoreTest.c to the project demo.**
- 
-In the Project Explorer on the left side of the MetaWare IDE main interface, click the icon 
+
+In the Project Explorer on the left side of the MetaWare IDE main interface, click the icon
 |icon1|
 and select Import from the pop-up menu.
 
@@ -128,7 +128,7 @@ Finally select MetaWare ARC EM C/C++ and check the settings compile options in t
 
 Select Build Project from the Project drop-down menu in the MetaWare IDE main menu or click the icon
 |icon2|
-. In the middle of the MetaWare IDE main interface, select the Console tab to view the logs during compilation. When the message 'Finished building target: demo.elf' appears, the compilation is successful, and the compiled executable file demo.elf can be seen in the Project Exporer on the left side of the MetaWare IDE main interface, as shown in the following figure(figure5).
+. In the middle of the MetaWare IDE main interface, select the Console tab to view the logs during compilation. When the message 'Finished building target: demo.elf' appears, the compilation is successful, and the compiled executable file demo.elf can be seen in the Project Explorer on the left side of the MetaWare IDE main interface, as shown in the following figure(figure5).
 
 |figure5|
 
@@ -162,7 +162,7 @@ can choose to step through a C language statement or an assembly instruction to 
 
 **Code performance analysis using the debugger**
 
-Based on the previous project demo, open the Compile Options dialog in step 3 and set the Opimization Level to -O0 in the Optimization/Debugging column. Then click
+Based on the previous project demo, open the Compile Options dialog in step 3 and set the Optimization Level to -O0 in the Optimization/Debugging column. Then click
 |icon8|
 to recompile the project, then click
 |icon9|
@@ -178,7 +178,7 @@ Let's take this project as an example to continue to introduce the use of the Pr
 |icon11|
 in the Profiling window to clear the current information. If you click the icon
 |icon12|
-again, nothing will be displayed, And it indicat that the cleaning is successful. Then, set a breakpoint at the last statement of the main() function (either C statement or assembly statement), and click the icon
+again, nothing will be displayed, And it indicate that the cleaning is successful. Then, set a breakpoint at the last statement of the main() function (either C statement or assembly statement), and click the icon
 |icon13|
 in the toolbar above the debug interface to let the program execute to the breakpoint. Next, click on the icon
 |icon14|
