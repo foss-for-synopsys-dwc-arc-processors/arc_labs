@@ -25,7 +25,7 @@ Software Requirement
 
 * `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection, 115200 baud, 8 bits data, 1 stop bit and no parity (115200-8-N-1) by default.
 
-.. note:: If using embARC with GNU toolchain on Windows, install `Zadig <http://zadig.akeo.ie>`_ to replace FTDI driver with WinUSB driver. See `How to Use OpenOCD on Windows <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows>`_ for more information.
+.. note:: If using embARC with GNU toolchain on Windows, install `Zadig <http://zadig.akeo.ie>`_ to replace FTDI driver with WinUSB driver. See `How to Use OpenOCD on Windows <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows>`_ for more information. If you wanto switch back to Metaware toolchain,  you should also switch back the usb-jtag driver from WinUSB to FTDI driver.
 
 Install Software Tools
 ######################
@@ -88,11 +88,32 @@ Toolkit is successfully installed and  license is ok.
 Install ARC GNU Toolchain
 *************************
 
+Please go `here <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`__ (https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases) to get the latest version of
+ARC GNU toolchain.
+
+To use and install ARC GNU toolchain, you can refer `this <http://embarc.org/toolchain/ide/index.html>`__ (http://embarc.org/toolchain/ide/index.html), where has detailed instructions.
+
+It's recommended to install ARC GNU toolchain in the path (windows: ``C:\arc_gnu\``, linux: ``~/arc_gnu/``) and add ``arc_gnu/bin`` into $PATH vairable.
+
 Install embARC OSP
 ******************
 
-Install USB-JTAG Drivers
-************************
+The embARC OSP source code is hosted in a GitHub repository that supports
+cloning via git. There are scripts and such in this repo that you'll need to set up your development environment, and we'll be using Git to get this repo. If you don't have Git installed, see the beginning of the OS-specific instructions below for help.
+
+We'll begin by using Git to clone the repository anonymously.
+
+.. code-block:: console
+
+   # On Windows
+   cd %userprofile%
+   # On Linux
+   cd ~
+
+   git clone https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp.git embarc_osp
+
+You have successfully checked out a copy of the source code to your local
+machine.
 
 
 Final Check
