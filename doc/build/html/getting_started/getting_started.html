@@ -92,7 +92,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#install-metaware-toolkit">Install Metaware Toolkit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-arc-gnu-toolchain">Install ARC GNU Toolchain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-embarc-osp">Install embARC OSP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-usb-jtag-drivers">Install USB-JTAG Drivers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#final-check">Final Check</a></li>
@@ -197,7 +196,7 @@ The ARC GNU Toolchain offers all of the benefits of open source tools, including
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If using embARC with GNU toolchain on Windows, install <a class="reference external" href="http://zadig.akeo.ie">Zadig</a> to replace FTDI driver with WinUSB driver. See <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows">How to Use OpenOCD on Windows</a> for more information.</p>
+<p class="last">If using embARC with GNU toolchain on Windows, install <a class="reference external" href="http://zadig.akeo.ie">Zadig</a> to replace FTDI driver with WinUSB driver. See <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows">How to Use OpenOCD on Windows</a> for more information. If you wanto switch back to Metaware toolchain,  you should also switch back the usb-jtag driver from WinUSB to FTDI driver.</p>
 </div>
 </div>
 <div class="section" id="install-software-tools">
@@ -258,12 +257,26 @@ Toolkit is successfully installed and  license is ok.</p>
 </div>
 <div class="section" id="install-arc-gnu-toolchain">
 <h3>Install ARC GNU Toolchain<a class="headerlink" href="#install-arc-gnu-toolchain" title="Permalink to this headline">¶</a></h3>
+<p>Please go <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">here</a> (<a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases</a>) to get the latest version of
+ARC GNU toolchain.</p>
+<p>To use and install ARC GNU toolchain, you can refer <a class="reference external" href="http://embarc.org/toolchain/ide/index.html">this</a> (<a class="reference external" href="http://embarc.org/toolchain/ide/index.html">http://embarc.org/toolchain/ide/index.html</a>), where has detailed instructions.</p>
+<p>It’s recommended to install ARC GNU toolchain in the path (windows: <code class="docutils literal notranslate"><span class="pre">C:\arc_gnu\</span></code>, linux: <code class="docutils literal notranslate"><span class="pre">~/arc_gnu/</span></code>) and add <code class="docutils literal notranslate"><span class="pre">arc_gnu/bin</span></code> into $PATH vairable.</p>
 </div>
 <div class="section" id="install-embarc-osp">
 <h3>Install embARC OSP<a class="headerlink" href="#install-embarc-osp" title="Permalink to this headline">¶</a></h3>
+<p>The embARC OSP source code is hosted in a GitHub repository that supports
+cloning via git. There are scripts and such in this repo that you’ll need to set up your development environment, and we’ll be using Git to get this repo. If you don’t have Git installed, see the beginning of the OS-specific instructions below for help.</p>
+<p>We’ll begin by using Git to clone the repository anonymously.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> On Windows
+<span class="go">cd %userprofile%</span>
+<span class="gp">#</span> On Linux
+<span class="go">cd ~</span>
+
+<span class="go">git clone https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp.git embarc_osp</span>
+</pre></div>
 </div>
-<div class="section" id="install-usb-jtag-drivers">
-<h3>Install USB-JTAG Drivers<a class="headerlink" href="#install-usb-jtag-drivers" title="Permalink to this headline">¶</a></h3>
+<p>You have successfully checked out a copy of the source code to your local
+machine.</p>
 </div>
 </div>
 <div class="section" id="final-check">
@@ -337,7 +350,6 @@ Toolkit is successfully installed and  license is ok.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

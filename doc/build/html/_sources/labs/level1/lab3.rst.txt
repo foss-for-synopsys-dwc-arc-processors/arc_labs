@@ -216,7 +216,7 @@ Open ``cmd`` under the folder *example\\Lab\\timer*, input the compile command a
     make -j4 run
 
 .. note::
-    If your toolchain is meteware, you should use ``gmake``. 
+    If your toolchain is meteware, you should use ``gmake``.
     If you don't use core configuration specified in makefile, you need to pass all the make options to trigger make command
 
 - Output

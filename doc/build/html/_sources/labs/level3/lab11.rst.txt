@@ -5,9 +5,10 @@ AWS IoT Smarthome
 
 Purpose
 =======
+
 - Show the smart home solution based on ARC and AWS IoT Cloud
 - Learn how to use the AWS IoT Cloud
-- Learn how to use the EMSK Board peripheral modules and onboard resources
+- Learn how to use the EMSK Board peripheral modules and on-board resources
 
 Equipment
 =========
@@ -93,7 +94,7 @@ Steps
 Creating and setting smart home node
 ------------------------------------
 
-1. Create an AWS account in `[here] <http://aws.amazon.com/>`_. Amazon offers various account levels,
+1. Create an AWS account in `[here] <http://aws.amazon.com/>`__. Amazon offers various account levels,
    including a free tier for AWS IoT.
 
 2. Log into AWS console and choose AWS IoT.
@@ -214,4 +215,4 @@ This application is designed to show how to connect only 1 EMSK and AWS IoT Clou
 Try to do the Multi Node AWS IoT Smarthome Demo.
 
 .. note::
-    Related demo codes you can find `[here] <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome>`_
+    Related demo codes you can find `[here] <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome>`__
