@@ -32,7 +32,7 @@ Install Sphinx, either from a distribution package or from PyPI. And install it 
 
 	to build HTML docs in the build directory you chose.
 
-3. Open the index.html with a brower in build directory to check the HTML docs.
+3. Open the index.html with a browser in build directory to check the HTML docs.
 
 
 #### generate PDF documents(Optional)
