@@ -197,6 +197,128 @@ How can I implement multiplication more efficiently with fewer instructions? App
 
     The expand multiply instruction
 
+
+ARC GNU TOOLCHAIN
+-------------------
+Purpose
+^^^^^^^^^^
+
+* Learn the ARC GNU IDE integration interface
+* Familiar with the ARC GNU IDE interface and command line usage
+* Familiar with the functions and usage of the ARC GNU IDE debugger
+
+Equipment
+^^^^^^^^^^^^
+
+PC, ARC GNU IDE software, nSIM simulator, core_test source code in embAR OSP package
+
+Content
+^^^^^^^^^^^
+
+Create a C project using the ARC GNU IDE graphical interface, import the routine code CoreTest.c, configure compilation options to compile, and generate executable files.
+
+Start the ARC GNU IDE debugger to enter the debug mode, from the C language and assembly language different perspectives, use set breakpoints, single-step execution, full-speed execution and other functions, combined with observation of PC address, register status, global variable status and Profiling Performance analysis window, analysis of the debug target program.
+
+Principles
+^^^^^^^^^^^^^
+
+Use the ARC GNU IDE integrated development environment to create projects and load routine code. In the engineering unit, configure the compile option compilation routine code to debug and analyze the compiled executable file.
+
+Steps
+^^^^^^^^^
+
+**Establishing a project**
+
+Open the ARC GNU IDE, create an empty project called core_test, and select the ARC EM series processor, as shown below(figure10).
+
+|figure10|
+
+**Import the code file CoreTest.c to the project demo**
+
+Right click on the icon
+|icon15|
+in the Project Explorer on the left side of the ARC GNU IDE main interface, then select Import from the popup menu.
+
+At this point, a dialog called Import appears, select the File System item in the General tab, and then click next. As shown in the figure below(figure11), add the file directory where the source code CoreTest.c is located. The dialog box will automatically display the name of the directory and the file name of the file contained in the directory. Select the file to be added, CoreTest.c, and click Finish to complete the entire import process.
+
+|figure11|
+
+After the import is complete, you can see the code file CoreTest.c that you just added in the Project Explorer on the left side of the ARC GNU IDE main interface.
+
+**Set compilation options**
+
+Right click on the current project core_test and select Properties in the popup tab. Click C/C++ Build, settings, Tool Settings to open the compile option settings page, as shown below(figure12).
+
+|figure12|
+
+In the current interface, select Debugging to set the compiler optimization and debugging level. For example, set the optimization level to off optimization, and the debugging level is to load all debugging information.
+
+Select Processor in the current interface to set the compile options corresponding to the target processor hardware attributes, such as the version of the processor, whether to support extended instructions such as shift, multiplication, floating-point operations, etc., whether to include Timer0/1.
+
+In step 1, we have already built the project using the engineering template of EMSK, so the corresponding necessary options have been set by default. If there is no special requirement, check the setting compile options in the All options column on the right. Then click OK to close the Properties dialog.
+
+**Compile the project core_test**
+
+Select Build Project from the Project drop-down menu in the ARC GNU IDE main menu or click the icon
+|icon16|
+. In the middle of the ARC GNU IDE main interface, select the Console tab to view the logs during the compilation process. When the message 'Finished building target: Core_test.elf' appears, the compilation is successful, and the compiled executable file Core_test.elf can be seen in the Project Exporer on the left side of the main interface of the ARC GNU IDE, as shown in the following figure(figure13).
+
+|figure13|
+
+**Set debug options**
+
+Select Debug Configurations from the Run drop-down menu in the main menu. Then double-click on C/C++ Application or right-click on New to get a dialog similar to the one below(figure14).
+
+|figure14|
+
+As shown in the figure above, check if the information in Main is correct. Since we use Nsim simulator to simulate EMSK development board, we need to modify the settings of Debugger, Common, and Terminal (this is because Nsim cannot be called directly in GNU IDE. Still need GDB Server for indirect calls). The specific settings are as follows:
+
+* Set Debugger->Gdbsrever Settings
+
+|figure15|
+
+As shown in the above figure(figure15), the ARC GDB Server should select nSIM. At this time, the port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF boot file is under *nSIM\\nSIM\\etc\\tcf\\templates* (the default installation path). If you have downloaded the Metaware IDE, its own nSIM path is *C:\\ARC\\nSIM\\nSIM\\etc\\tcf\\templates*, and you can select a TCF file in this folder (depending on the version of the board you are simulating and the kernel model), as shown above.
+
+* Pay attention to Debug in Common(figure16)
+
+|figure16|
+
+* Terminal settings
+
+If you are using the EMSK development board, the terminal will automatically select the correct port number, and we are using the emulator without a port, so uncheck it, as show bellow(figure17).
+
+|figure17|
+
+After all settings are completed, click Debug to enter the debugging interface.
+
+**Debug executable file core_test.elf**
+
+First, select the required debug window in the pull-down menu Debugger in the main menu of the debug interface, such as source code window, assembly code window, register window, global variable window, breakpoint window, function window, etc., as shown in the following figure(figure18).
+
+|figure18|
+
+In the C code window, right-click the code line number on the left side of the window, select Toggle Breakpoint in the pop-up menu or double-click the line number to set a breakpoint on the current line. In the assembly code window, double-click a line of code to set a breakpoint on the current line.
+
+Once the breakpoint is set, click the icon
+|icon17|
+to run the program. After that, the program will run directly to the nearest breakpoint. At this point, you can observe the current program execution and the relevant status information of the processor through the various windows called in the previous step. If you want to know more about the details of program execution and the instruction behavior of the processor, you can use the following three execution commands
+|icon18|
+to perform single-step debugging. The icon
+|icon19|
+can choose to step through a C language statement or an assembly instruction to match the status information of each window and it is very convenient for program debugging. If you want to end the current debugging process, click the icon
+|icon20|
+. If you want to return to the IDE main page, click C/C++ in the upper right corner icon
+|icon21|
+.
+
+**Code performance analysis using the debugger**
+
+Same as the code performance analysis method of MetaWare IDE. For details, please refer to the first part of Experiment 1.
+
+For the use of these two IDEs, you can refer to the Help documentation in the respective IDE, or you can view the online documentation provided by the company.
+
+
+
 .. |figure1| image:: /img/lab1_figure1.png
 .. |figure2| image:: /img/lab1_figure2.png
 .. |figure3| image:: /img/lab1_figure3.png
@@ -206,6 +328,15 @@ How can I implement multiplication more efficiently with fewer instructions? App
 .. |figure7| image:: /img/lab1_figure7.png
 .. |figure8| image:: /img/lab1_figure8.png
 .. |figure9| image:: /img/lab1_figure9.png
+.. |figure10| image:: /img/lab1_figure10.png
+.. |figure11| image:: /img/lab1_figure11.png
+.. |figure12| image:: /img/lab1_figure12.png
+.. |figure13| image:: /img/lab1_figure13.png
+.. |figure14| image:: /img/lab1_figure14.png
+.. |figure15| image:: /img/lab1_figure15.png
+.. |figure16| image:: /img/lab1_figure16.png
+.. |figure17| image:: /img/lab1_figure17.png
+.. |figure18| image:: /img/lab1_figure18.png
 
 .. |icon1| image:: /img/lab1_icon1.png
 .. |icon2| image:: /img/lab1_icon2.png
@@ -221,6 +352,13 @@ How can I implement multiplication more efficiently with fewer instructions? App
 .. |icon12| image:: /img/lab1_icon12.png
 .. |icon13| image:: /img/lab1_icon13.png
 .. |icon14| image:: /img/lab1_icon14.png
+.. |icon15| image:: /img/lab1_icon15.png
+.. |icon16| image:: /img/lab1_icon16.png
+.. |icon17| image:: /img/lab1_icon17.png
+.. |icon18| image:: /img/lab1_icon18.png
+.. |icon19| image:: /img/lab1_icon19.png
+.. |icon20| image:: /img/lab1_icon20.png
+.. |icon21| image:: /img/lab1_icon21.png
 
 
 

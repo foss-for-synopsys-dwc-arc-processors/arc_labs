@@ -330,6 +330,91 @@ in the Profiling window again, and only the information related to the main() fu
 </div>
 </div>
 </div>
+<div class="section" id="arc-gnu-toolchain">
+<h2>ARC GNU TOOLCHAIN<a class="headerlink" href="#arc-gnu-toolchain" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Purpose<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Learn the ARC GNU IDE integration interface</li>
+<li>Familiar with the ARC GNU IDE interface and command line usage</li>
+<li>Familiar with the functions and usage of the ARC GNU IDE debugger</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Equipment<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>PC, ARC GNU IDE software, nSIM simulator, core_test source code in embAR OSP package</p>
+</div>
+<div class="section" id="id3">
+<h3>Content<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Create a C project using the ARC GNU IDE graphical interface, import the routine code CoreTest.c, configure compilation options to compile, and generate executable files.</p>
+<p>Start the ARC GNU IDE debugger to enter the debug mode, from the C language and assembly language different perspectives, use set breakpoints, single-step execution, full-speed execution and other functions, combined with observation of PC address, register status, global variable status and Profiling Performance analysis window, analysis of the debug target program.</p>
+</div>
+<div class="section" id="id4">
+<h3>Principles<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Use the ARC GNU IDE integrated development environment to create projects and load routine code. In the engineering unit, configure the compile option compilation routine code to debug and analyze the compiled executable file.</p>
+</div>
+<div class="section" id="id5">
+<h3>Steps<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p><strong>Establishing a project</strong></p>
+<p>Open the ARC GNU IDE, create an empty project called core_test, and select the ARC EM series processor, as shown below(figure10).</p>
+<p><img alt="figure10" src="../../_images/lab1_figure10.png" /></p>
+<p><strong>Import the code file CoreTest.c to the project demo</strong></p>
+<p>Right click on the icon
+<img alt="icon15" src="../../_images/lab1_icon15.png" />
+in the Project Explorer on the left side of the ARC GNU IDE main interface, then select Import from the popup menu.</p>
+<p>At this point, a dialog called Import appears, select the File System item in the General tab, and then click next. As shown in the figure below(figure11), add the file directory where the source code CoreTest.c is located. The dialog box will automatically display the name of the directory and the file name of the file contained in the directory. Select the file to be added, CoreTest.c, and click Finish to complete the entire import process.</p>
+<p><img alt="figure11" src="../../_images/lab1_figure11.png" /></p>
+<p>After the import is complete, you can see the code file CoreTest.c that you just added in the Project Explorer on the left side of the ARC GNU IDE main interface.</p>
+<p><strong>Set compilation options</strong></p>
+<p>Right click on the current project core_test and select Properties in the popup tab. Click C/C++ Build, settings, Tool Settings to open the compile option settings page, as shown below(figure12).</p>
+<p><img alt="figure12" src="../../_images/lab1_figure12.png" /></p>
+<p>In the current interface, select Debugging to set the compiler optimization and debugging level. For example, set the optimization level to off optimization, and the debugging level is to load all debugging information.</p>
+<p>Select Processor in the current interface to set the compile options corresponding to the target processor hardware attributes, such as the version of the processor, whether to support extended instructions such as shift, multiplication, floating-point operations, etc., whether to include Timer0/1.</p>
+<p>In step 1, we have already built the project using the engineering template of EMSK, so the corresponding necessary options have been set by default. If there is no special requirement, check the setting compile options in the All options column on the right. Then click OK to close the Properties dialog.</p>
+<p><strong>Compile the project core_test</strong></p>
+<p>Select Build Project from the Project drop-down menu in the ARC GNU IDE main menu or click the icon
+<img alt="icon16" src="../../_images/lab1_icon16.png" />
+. In the middle of the ARC GNU IDE main interface, select the Console tab to view the logs during the compilation process. When the message ‘Finished building target: Core_test.elf’ appears, the compilation is successful, and the compiled executable file Core_test.elf can be seen in the Project Exporer on the left side of the main interface of the ARC GNU IDE, as shown in the following figure(figure13).</p>
+<p><img alt="figure13" src="../../_images/lab1_figure13.png" /></p>
+<p><strong>Set debug options</strong></p>
+<p>Select Debug Configurations from the Run drop-down menu in the main menu. Then double-click on C/C++ Application or right-click on New to get a dialog similar to the one below(figure14).</p>
+<p><img alt="figure14" src="../../_images/lab1_figure14.png" /></p>
+<p>As shown in the figure above, check if the information in Main is correct. Since we use Nsim simulator to simulate EMSK development board, we need to modify the settings of Debugger, Common, and Terminal (this is because Nsim cannot be called directly in GNU IDE. Still need GDB Server for indirect calls). The specific settings are as follows:</p>
+<ul class="simple">
+<li>Set Debugger-&gt;Gdbsrever Settings</li>
+</ul>
+<p><img alt="figure15" src="../../_images/lab1_figure15.png" /></p>
+<p>As shown in the above figure(figure15), the ARC GDB Server should select nSIM. At this time, the port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF boot file is under <em>nSIM\nSIM\etc\tcf\templates</em> (the default installation path). If you have downloaded the Metaware IDE, its own nSIM path is <em>C:\ARC\nSIM\nSIM\etc\tcf\templates</em>, and you can select a TCF file in this folder (depending on the version of the board you are simulating and the kernel model), as shown above.</p>
+<ul class="simple">
+<li>Pay attention to Debug in Common(figure16)</li>
+</ul>
+<p><img alt="figure16" src="../../_images/lab1_figure16.png" /></p>
+<ul class="simple">
+<li>Terminal settings</li>
+</ul>
+<p>If you are using the EMSK development board, the terminal will automatically select the correct port number, and we are using the emulator without a port, so uncheck it, as show bellow(figure17).</p>
+<p><img alt="figure17" src="../../_images/lab1_figure17.png" /></p>
+<p>After all settings are completed, click Debug to enter the debugging interface.</p>
+<p><strong>Debug executable file core_test.elf</strong></p>
+<p>First, select the required debug window in the pull-down menu Debugger in the main menu of the debug interface, such as source code window, assembly code window, register window, global variable window, breakpoint window, function window, etc., as shown in the following figure(figure18).</p>
+<p><img alt="figure18" src="../../_images/lab1_figure18.png" /></p>
+<p>In the C code window, right-click the code line number on the left side of the window, select Toggle Breakpoint in the pop-up menu or double-click the line number to set a breakpoint on the current line. In the assembly code window, double-click a line of code to set a breakpoint on the current line.</p>
+<p>Once the breakpoint is set, click the icon
+<img alt="icon17" src="../../_images/lab1_icon17.png" />
+to run the program. After that, the program will run directly to the nearest breakpoint. At this point, you can observe the current program execution and the relevant status information of the processor through the various windows called in the previous step. If you want to know more about the details of program execution and the instruction behavior of the processor, you can use the following three execution commands
+<img alt="icon18" src="../../_images/lab1_icon18.png" />
+to perform single-step debugging. The icon
+<img alt="icon19" src="../../_images/lab1_icon19.png" />
+can choose to step through a C language statement or an assembly instruction to match the status information of each window and it is very convenient for program debugging. If you want to end the current debugging process, click the icon
+<img alt="icon20" src="../../_images/lab1_icon20.png" />
+. If you want to return to the IDE main page, click C/C++ in the upper right corner icon
+<img alt="icon21" src="../../_images/lab1_icon21.png" />
+.</p>
+<p><strong>Code performance analysis using the debugger</strong></p>
+<p>Same as the code performance analysis method of MetaWare IDE. For details, please refer to the first part of Experiment 1.</p>
+<p>For the use of these two IDEs, you can refer to the Help documentation in the respective IDE, or you can view the online documentation provided by the company.</p>
+</div>
+</div>
 </div>
 
 
