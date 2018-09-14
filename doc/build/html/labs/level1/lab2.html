@@ -178,21 +178,355 @@
 <span id="lab2"></span><h1>How to use embARC OSP<a class="headerlink" href="#how-to-use-embarc-osp" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>to know what embARC OSP is</li>
+<li>to know how to run the provided examples in embARC OSP</li>
+<li>to know how to debug the provided examples in embARC OSP</li>
+<li>to know how to do application development in embARC OSP</li>
+</ul>
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
+<p>The following hardware and software tools are required:</p>
+<ul class="simple">
+<li>PC host</li>
+<li>ARC board (EM Starter kit/IoT Development Kit)</li>
+<li>embARC OSP packages</li>
+</ul>
+<p>The detailed software requirements can be found <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/getting_started/software_requirement.html">here</a></p>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>First, a brief introduction of embARC OSP will be made and also how to get it.
+Then, you will get to how to run the provided examples and debug them. Finally, you
+can try to create you own embARC applications.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>IoT OS/Platform</li>
+</ol>
+<p>As more and more devices are connected and become more complex, the software
+running in them are becoming more and more complex.</p>
+<p>An IoT OS is an operating system that is designed to perform within the
+constraints that are particular to Internet of Things devices, including
+restrictions on memory, size, power and processing capacity. IoT operating
+systems are a type of embedded OS but by definition are designed to enable
+data transfer over the internet and more other features.</p>
+<ol class="arabic simple" start="2">
+<li>embARC OSP</li>
+</ol>
+<p>The embARC Open Software Platform (OSP) is an open software platform to
+facilitate the development of embedded systems based on DesignWare® ARC® processors.</p>
+<p>It is designed to provide a unified platform for DesignWare® ARC® processors users by defining
+consistent and simple software interfaces to the processor and peripherals,
+together with ports of several well known FOSS embedded software stacks to
+DesignWare® ARC® processors.</p>
+<p>For more details, please go to <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/introduction/introduction.html">embARC OSP on-line documentation</a></p>
+<ol class="arabic simple" start="3">
+<li>Other platforms</li>
+</ol>
+<p>Besides embARC OSP, there are also other IoT platforms:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.zephyrproject.org/">Zephyr</a></li>
+<li><a class="reference external" href="https://aws.amazon.com/freertos/">Amazon FreeRTOS</a></li>
+</ul>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-embarc-osp">
+<h3>Get embARC OSP<a class="headerlink" href="#get-embarc-osp" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Through git</li>
+</ul>
+<p>The embARC OSP source code is hosted in a GitHub repository that supports
+cloning via git. There are scripts and such in this repo that you’ll need to set up your development environment, and we’ll be using Git to get this repo. If you don’t have Git installed, see the beginning of the OS-specific instructions below for help.</p>
+<p>We’ll begin by using Git to clone the repository anonymously.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> On Windows
+<span class="go">cd %userprofile%</span>
+<span class="gp">#</span> On Linux
+<span class="go">cd ~</span>
+
+<span class="go">git clone https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp.git embarc_osp</span>
+</pre></div>
+</div>
+<p>You have successfully checked out a copy of the source code to your local
+machine.</p>
+<ul class="simple">
+<li>Through http download</li>
+</ul>
+<p>If you are not familiar with git, you can also try to get the latest release of embarc from
+its <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/releases">release page</a>.</p>
+</div>
+<div class="section" id="run-the-examples">
+<h3>Run the examples<a class="headerlink" href="#run-the-examples" title="Permalink to this headline">¶</a></h3>
+<p>the command line interface is the default interface to use embARC OSP. After getting the embARC OSP
+package, you need to open a <strong>cmd</strong> console in Winodws / a <strong>terminal</strong> in Linux and cd to the root of embARC osp.</p>
+<p>Here, take the <strong>blinky</strong> as an example.</p>
+<ol class="arabic simple">
+<li>go the <strong>blinky</strong> example folder</li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd example\baremetal\blinky</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>connect your board to PC host, and open the UART terminal with putty/teraterm/minicom</li>
+<li>build and run it, here ARC GNU toolchain is selected</li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> For emsk <span class="m">2</span>.3
+<span class="go">make TOOLCHAIN=gnu BOARD=emsk BD_VER=23 CUR_CORE=arcem11d run</span>
+<span class="gp">#</span> For emsk <span class="m">2</span>.2
+<span class="go">make TOOLCHAIN=gnu BOARD=emsk BD_VER=22 CUR_CORE=arcem7d run</span>
+<span class="gp">#</span> For IoTDK
+<span class="go">make TOOLCHAIN=gnu BOARD=iotdk run</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">for emsk, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware</p>
+</div>
+<ol class="arabic simple" start="4">
+<li>Get the results</li>
+</ol>
+<ul class="simple">
+<li>For EMSK, you can see the on-board leds start to blink when the download is successful.</li>
+<li>For IoTDK, as it doesn’t have usable leds except some status leds, you will the output log from UART instead.</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">led out: ff, ff</span>
+<span class="go">led out: ff00, ff</span>
+<span class="go">led out: ff, ff</span>
+<span class="go">led out: ff00, ff</span>
+<span class="go">led out: ff, ff</span>
+<span class="go">led out: ff00, ff</span>
+<span class="go">led out: ff, ff</span>
+<span class="go">led out: ff00, ff</span>
+<span class="go">led out: ff, ff</span>
+<span class="go">led out: ff00, ff</span>
+<span class="go">led out: ff, ff</span>
+<span class="go">led out: ff00, ff</span>
+<span class="go">led out: ff, ff</span>
+<span class="go">led out: ff00, ff</span>
+<span class="go">led out: ff, ff</span>
+<span class="go">.................</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debug-the-examples">
+<h3>Debug the examples<a class="headerlink" href="#debug-the-examples" title="Permalink to this headline">¶</a></h3>
+<p>Still take the <strong>blink</strong> as example, to debug it, you need to run the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> For emsk <span class="m">2</span>.3
+<span class="go">make TOOLCHAIN=gnu BOARD=emsk BD_VER=23 CUR_CORE=arcem11d gui</span>
+<span class="gp">#</span> For emsk <span class="m">2</span>.2
+<span class="go">make TOOLCHAIN=gnu BOARD=emsk BD_VER=22 CUR_CORE=arcem7d gui</span>
+<span class="gp">#</span> For IoTDK
+<span class="go">make TOOLCHAIN=gnu BOARD=iotdk gui</span>
+</pre></div>
+</div>
+<p>For Metaware toolchain, the mdb (MetaWare debugger) is used and it’s a GUI interface.
+You can refer the Metaware toolchain use manual for details.</p>
+<p>For ARC GNU toolchain,  the command line based gdb is used. You need to have some basic knowledge of gdb
+debug.</p>
+</div>
+<div class="section" id="create-your-own-application">
+<h3>Create your own application<a class="headerlink" href="#create-your-own-application" title="Permalink to this headline">¶</a></h3>
+<p>Here, it’s your turn to create your own application in embARC OSP, taking a
+well-known simple <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code> as an example.</p>
+<ul>
+<li><p class="first">Goals</p>
+<blockquote>
+<div><ul class="simple">
+<li>Baremetal application based on embARC OSP</li>
+<li>Hardware: EMSK 2.2 - ARC EM7D Configuration / IoTDK</li>
+<li>Print “Hello world from embARC” through UART at 115200 bps</li>
+<li>Use GNU toolchain to running and debugging in the command line</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<ol class="arabic">
+<li><p class="first">Creat a folder named <code class="docutils literal notranslate"><span class="pre">hello_world</span></code> under <code class="docutils literal notranslate"><span class="pre">embarc/example/baremetal</span></code>.</p>
+</li>
+<li><p class="first">Copy the makefile template <code class="docutils literal notranslate"><span class="pre">example/example.makefile</span></code> and <code class="docutils literal notranslate"><span class="pre">main.c.tmpl</span></code>
+into <code class="docutils literal notranslate"><span class="pre">hello_world</span></code> folder and rename <code class="docutils literal notranslate"><span class="pre">example.makefile</span></code> to <code class="docutils literal notranslate"><span class="pre">makefile</span></code>,
+rename <code class="docutils literal notranslate"><span class="pre">main.c.tmpl</span></code> to <code class="docutils literal notranslate"><span class="pre">main.c</span></code>.</p>
+</li>
+<li><p class="first">Change the configurations in makefile according to your hardware configuration and application.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Change the application name: change the value of <code class="docutils literal notranslate"><span class="pre">APPL</span></code> to <code class="docutils literal notranslate"><span class="pre">helloworld</span></code>.</p>
+</li>
+<li><p class="first">Change the board name: change the value of <code class="docutils literal notranslate"><span class="pre">BOARD</span></code> to <code class="docutils literal notranslate"><span class="pre">emsk</span></code> / <code class="docutils literal notranslate"><span class="pre">iotdk</span></code>. This
+option can also be given in cmd line. If not specified, the default value
+will be <code class="docutils literal notranslate"><span class="pre">emsk</span></code></p>
+</li>
+<li><p class="first">Change the board version: change the value of <code class="docutils literal notranslate"><span class="pre">BD_VER</span></code> to <code class="docutils literal notranslate"><span class="pre">22</span></code> (for emsk) or <code class="docutils literal notranslate"><span class="pre">10</span></code> (for iotdk).This
+option can also be given in cmd line. If not specified, the default value
+will be <code class="docutils literal notranslate"><span class="pre">22</span></code> for board <code class="docutils literal notranslate"><span class="pre">emsk</span></code>.</p>
+</li>
+<li><p class="first">Change the core configuration: change the value of <strong>CUR_CORE</strong> to
+<strong>arcem7d</strong> This option can also be given in cmd line. If not specified,
+the default value will <code class="docutils literal notranslate"><span class="pre">arcem7d</span></code> for board <code class="docutils literal notranslate"><span class="pre">emsk</span></code> and version <code class="docutils literal notranslate"><span class="pre">22</span></code>.
+For iotdk, <strong>CUR_CORE</strong> can be bypassed as iotdk only has one core configuration.</p>
+</li>
+<li><p class="first">Change the embARC OSP root: change the value of <code class="docutils literal notranslate"><span class="pre">EMBARC_ROOT</span></code> to
+<code class="docutils literal notranslate"><span class="pre">../../..</span></code>. <code class="docutils literal notranslate"><span class="pre">EMBARC_ROOT</span></code> can be relative path or an absolute path.</p>
+</li>
+<li><p class="first">Add the middleware that you need for this application: Change the value
+of MID_SEL.</p>
+<blockquote>
+<div><ul class="simple">
+<li>The value of <code class="docutils literal notranslate"><span class="pre">MID_SEL</span></code> must be the folder name in
+<code class="docutils literal notranslate"><span class="pre">&lt;embARC&gt;/middleware</span></code>, such as <code class="docutils literal notranslate"><span class="pre">common</span></code> or <code class="docutils literal notranslate"><span class="pre">lwip</span></code>.</li>
+<li>If using <code class="docutils literal notranslate"><span class="pre">lwip</span></code>, <code class="docutils literal notranslate"><span class="pre">ntshell</span></code>, <code class="docutils literal notranslate"><span class="pre">fatfs</span></code>, and <code class="docutils literal notranslate"><span class="pre">common</span></code>, set
+<code class="docutils literal notranslate"><span class="pre">MID_SEL</span></code> to <code class="docutils literal notranslate"><span class="pre">lwip</span> <span class="pre">ntshell</span> <span class="pre">fatfs</span> <span class="pre">common</span></code>.</li>
+<li>Set it to <code class="docutils literal notranslate"><span class="pre">common</span></code> in the “HelloWorld” application.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Change your toolchain: change the value of <code class="docutils literal notranslate"><span class="pre">TOOLCHAIN</span></code> to <code class="docutils literal notranslate"><span class="pre">gnu</span></code>.</p>
+</li>
+<li><p class="first">Update source folders and include folder settings.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Update the C code folder settings: change the value of
+<code class="docutils literal notranslate"><span class="pre">APPL_CSRC_DIR</span></code> to <code class="docutils literal notranslate"><span class="pre">.</span></code>. <code class="docutils literal notranslate"><span class="pre">APPL_CSRC_DIR</span></code> is the C code relative
+path to the application folder</li>
+<li>Update the assembly source-folder settings: change the value of <code class="docutils literal notranslate"><span class="pre">APPL_ASMSRC_DIR</span></code>.</li>
+<li>Update the include-folders settings: change the value of
+<code class="docutils literal notranslate"><span class="pre">APPL_INC_DIR</span></code> which is the application include path to the
+application folder (-I).</li>
+<li>If more than one directory is needed, use whitespace between the folder paths.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Set your application defined macros: Change the value of <code class="docutils literal notranslate"><span class="pre">APPL_DEFINES</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li>For example, if define <code class="docutils literal notranslate"><span class="pre">APPLICATION=1</span></code>, set APPL_DEFINES to <code class="docutils literal notranslate"><span class="pre">-DAPPLICATION=1</span></code>.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>Then <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code> application’s makefile will be like this</p>
+<blockquote>
+<div><div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">## embARC application makefile template ##</span>
+<span class="c">### You can copy this file to your application folder</span>
+<span class="c">### and rename it to makefile.</span>
+<span class="c">##</span>
+
+<span class="c">##</span>
+<span class="c"># Application name</span>
+<span class="c">##</span>
+<span class="nv">APPL</span> <span class="o">?=</span> helloworld
+
+<span class="c">##</span>
+<span class="c"># Extended device list</span>
+<span class="c">##</span>
+<span class="nv">EXT_DEV_LIST</span> <span class="o">+=</span>
+
+<span class="c"># Optimization level</span>
+<span class="c"># Please refer to toolchain_xxx.mk for this option</span>
+<span class="nv">OLEVEL</span> <span class="o">?=</span> O2
+
+<span class="c">##</span>
+<span class="c"># Current board and core (for emsk)</span>
+<span class="c">##</span>
+<span class="nv">BOARD</span> <span class="o">?=</span> emsk
+<span class="nv">BD_VER</span> <span class="o">?=</span> <span class="m">22</span>
+<span class="nv">CUR_CORE</span> <span class="o">?=</span> arcem7d
+
+<span class="c">##</span>
+<span class="c"># Current board and core (for iotdk)</span>
+<span class="nv">BOARD</span> <span class="o">?=</span> iotdk
+<span class="nv">BD_VER</span> <span class="o">?=</span> <span class="m">10</span>
+
+
+<span class="c">##</span>
+<span class="c"># Debugging JTAG</span>
+<span class="c">##</span>
+<span class="nv">JTAG</span> <span class="o">?=</span> usb
+
+<span class="c">##</span>
+<span class="c"># Toolchain</span>
+<span class="c">##</span>
+<span class="nv">TOOLCHAIN</span> <span class="o">?=</span> gnu
+
+<span class="c">##</span>
+<span class="c"># Uncomment following options</span>
+<span class="c"># if you want to set your own heap and stack size</span>
+<span class="c"># Default settings see options.mk</span>
+<span class="c">##</span>
+<span class="c">#HEAPSZ ?= 8192</span>
+<span class="c">#STACKSZ ?= 8192</span>
+
+<span class="c">##</span>
+<span class="c"># Uncomment following options</span>
+<span class="c"># if you want to add your own library into link process</span>
+<span class="c"># For example:</span>
+<span class="c"># If you want link math lib for gnu toolchain,</span>
+<span class="c"># you need to set the option to -lm</span>
+<span class="c">##</span>
+<span class="c">#APPL_LIBS ?=</span>
+
+<span class="c">##</span>
+<span class="c"># Root path of embARC</span>
+<span class="c">##</span>
+<span class="nv">EMBARC_ROOT</span> <span class="o">=</span> ../..
+
+<span class="c">##</span>
+<span class="c"># Middleware</span>
+<span class="c">##</span>
+<span class="nv">MID_SEL</span> <span class="o">=</span> common
+
+<span class="c">##</span>
+<span class="c"># Application source path</span>
+<span class="c">##</span>
+<span class="nv">APPL_CSRC_DIR</span> <span class="o">=</span> .
+<span class="nv">APPL_ASMSRC_DIR</span> <span class="o">=</span> .
+
+<span class="c">##</span>
+<span class="c"># Application include path</span>
+<span class="c">##</span>
+<span class="nv">APPL_INC_DIR</span> <span class="o">=</span> .
+
+<span class="c">##</span>
+<span class="c"># Application defines</span>
+<span class="c">##</span>
+<span class="nv">APPL_DEFINES</span> <span class="o">=</span>
+
+<span class="c">##</span>
+<span class="c"># Include current project makefile</span>
+<span class="c">##</span>
+<span class="nv">COMMON_COMPILE_PREREQUISITES</span> <span class="o">+=</span> makefile
+
+<span class="c">### Options above must be added before include options.mk ###</span>
+<span class="c"># Include key embARC build system makefile</span>
+<span class="nf">override EMBARC_ROOT </span><span class="o">:</span>= <span class="k">$(</span><span class="nv">strip</span> <span class="k">$(</span><span class="nv">subst</span> \,/,<span class="k">$(</span><span class="nv">EMBARC_ROOT</span><span class="k">)))</span>
+<span class="cp">include $(EMBARC_ROOT)/options/options.mk</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple" start="4">
+<li>run</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Set your EMSK 2.2 hardware configuration to ARC EM7D (no need to set for iotdk), and connect it to
+your PC. Open <code class="docutils literal notranslate"><span class="pre">PuTTY</span></code> or <code class="docutils literal notranslate"><span class="pre">Tera-term</span></code>, and connect to the right COM
+port. Set the baudrate to <strong>115200 bps</strong>.</li>
+<li>Enter <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> in the command line to run this application.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>Create your application which is different with <strong>blinky</strong> and <strong>hello_world</strong> in embARC OSP.</p>
 </div>
 </div>
 
@@ -249,6 +583,7 @@
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
