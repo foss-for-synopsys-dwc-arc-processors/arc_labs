@@ -107,6 +107,21 @@ build finished with problems.
 Makefile:20: recipe for target 'linkcheck' failed
 make: *** [linkcheck] Error 1
 ```
+**If all the broken links are fixed, it will output as follows:**
+```
+... ....
+(line  120) ok        https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem
+(line  128) ok        http://embarc.org/freeboard/
+(line  115) ok        http://embarc.org/pdf/embARC_appnote_how_to_use_smart_home_iot.pdf
+(line   97) redirect  http://aws.amazon.com/ - permanently to https://aws.amazon.com/
+(line   23) redirect  http://store.digilentinc.com/pmod-tmp2-temperature-sensor/ - permanently to https://store.digilentinc.com/pmod-tmp2-temperature-sensor/
+(line   21) redirect  http://store.digilentinc.com/pmodwifi-wifi-interface-802-11g/ - permanently to https://store.digilentinc.com/pmodwifi-wifi-interface-802-11g/
+(line  218) ok        https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome
+
+build succeeded.
+
+Look for any errors in the above output or in build\linkcheck/output.txt
+```
 
 4. Open the `doc/build/html/index.html` with a browser to check the HTML docs.
 
