@@ -299,8 +299,8 @@ certificate.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_3.png" />
 </li>
 <li><p class="first">Download the root CA certificate from
-<a class="reference external" href="https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem/">[here]</a>.
-Rename it rootCA.crt. Copy the certificate files cert.crt, privateKey.pem and rootCA.crt to folder <em>cert\smarthome</em>.
+<a class="reference external" href="https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem">[here]</a>.
+Rename it <em>rootCA.crt</em>. Copy the certificate files <em>cert.crt, privateKey.pem and rootCA.crt</em> to folder <em>cert\smarthome</em>.
 Insert the SD card to your PC, and copy the certificate folder cert to the SD Card root.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_4.png" />
 </li>
@@ -319,11 +319,11 @@ obtained from <em>embARC\example\freertos\iot\aws\smarthome_demo</em>. The dashb
 <img alt="smarthome system" src="../../_images/lab11_steps_6.png" />
 </li>
 <li><p class="first">AWS IOT ENDPOINT: Go to AWS IoT console and click your smart home node “SmartHome”. Copy the content
-XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com in REST API endpoint to AWS IOT ENDPOINT.</p>
+<code class="docutils literal notranslate"><span class="pre">XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com</span></code> in REST API endpoint to AWS IOT ENDPOINT.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_7.png" />
 </li>
 <li><p class="first">REGION: Copy the AWS region of your smart home node in REST API endpoint to REGION. For example,
-<a class="reference external" href="https://XXXXXXXXXXXXXX.iot.us-east1.amazonaws.com/things/SmartHome/shadow">https://XXXXXXXXXXXXXX.iot.us-east1.amazonaws.com/things/SmartHome/shadow</a>. REGION is us-east-1.</p>
+<code class="docutils literal notranslate"><span class="pre">https://XXXXXXXXXXXXXX.iot.us-east1.amazonaws.com/things/SmartHome/shadow</span></code>. REGION is us-east-1.</p>
 </li>
 <li><p class="first">CLIENT ID: Leave it blank as default.</p>
 </li>
@@ -348,10 +348,10 @@ Key ID to ACCESS KEY and Secret Access Key to SECRET KEY.</p>
 <ol class="arabic simple">
 <li>The AWS IoT thing SDK for C has been ported to embARC. Check the above steps in
 order for your IoT application to work smoothly. Go to <em>embARC\example\freertos\iot\aws\smarthome_demo</em>.
-Modify aws_iot_config.h to match your AWS IoT configuration. The macro AWS_IOT_MQTT_HOST can be copied
+Modify aws_iot_config.h to match your AWS IoT configuration. The macro <strong>AWS_IOT_MQTT_HOST</strong> can be copied
 from the REST API endpoint in AWS IoT console. For example,
-<a class="reference external" href="https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow">https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow</a>. AWS_IOT_MQTT_HOST should be
-XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com.</li>
+<code class="docutils literal notranslate"><span class="pre">https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow</span></code>. <strong>AWS_IOT_MQTT_HOST</strong> should be
+<code class="docutils literal notranslate"><span class="pre">XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com</span></code>.</li>
 </ol>
 <blockquote>
 <div><img alt="smarthome system" src="../../_images/lab11_builds_1.png" />
