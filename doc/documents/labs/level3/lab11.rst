@@ -118,8 +118,8 @@ Creating and setting smart home node
         :alt: smarthome system
 
 5. Download the root CA certificate from
-   `[here] <https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem/>`_.
-   Rename it rootCA.crt. Copy the certificate files cert.crt, privateKey.pem and rootCA.crt to folder *cert\\smarthome*.
+   `[here] <https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem>`_.
+   Rename it *rootCA.crt*. Copy the certificate files *cert.crt, privateKey.pem and rootCA.crt* to folder *cert\\smarthome*.
    Insert the SD card to your PC, and copy the certificate folder cert to the SD Card root.
 
    .. image:: /img/lab11_steps_4.png
@@ -131,7 +131,7 @@ Creating and setting smart home node
    .. image:: /img/lab11_steps_5.png
         :alt: smarthome system
 
-7. Click “ADD” to go to DATASOURCE page and fill up the forms.
+7. Click "ADD" to go to DATASOURCE page and fill up the forms.
 
   a) TYPE: Choose AWS IoT.
   b) NAME: Name is aws.
@@ -140,46 +140,46 @@ Creating and setting smart home node
            :alt: smarthome system
 
   c) AWS IOT ENDPOINT: Go to AWS IoT console and click your smart home node "SmartHome". Copy the content
-     XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com in REST API endpoint to AWS IOT ENDPOINT.
+     ``XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com`` in REST API endpoint to AWS IOT ENDPOINT.
 
      .. image:: /img/lab11_steps_7.png
            :alt: smarthome system
 
   d) REGION: Copy the AWS region of your smart home node in REST API endpoint to REGION. For example,
-     https://XXXXXXXXXXXXXX.iot.us-east1.amazonaws.com/things/SmartHome/shadow. REGION is us-east-1.
+     ``https://XXXXXXXXXXXXXX.iot.us-east1.amazonaws.com/things/SmartHome/shadow``. REGION is us-east-1.
 
   e) CLIENT ID: Leave it blank as default.
 
-  f) ACCESS KEY and SECRET KEY: Go to AWS Services page and click “IAM”.
+  f) ACCESS KEY and SECRET KEY: Go to AWS Services page and click "IAM".
 
      .. image:: /img/lab11_steps_8.png
            :alt: smarthome system
 
-     Go to User page and click “Create New Users”. Enter User Names “AWSIoTUser”. Then
+     Go to User page and click "Create New Users". Enter User Names "AWSIoTUser". Then
      download user security credentials, Access Key ID and Secret Access Key. Copy Access
      Key ID to ACCESS KEY and Secret Access Key to SECRET KEY.
 
      .. image:: /img/lab11_steps_9.png
            :alt: smarthome system
 
-     Go to User page and click “AWSIoTUser”. Click “Attach Policy” to attach “AWSIoTDataAccess” to “AWSIoTUser”.
+     Go to User page and click "AWSIoTUser". Click "Attach Policy" to attach "AWSIoTDataAccess" to "AWSIoTUser".
 
-  g) THINGS: AWS IoT thing name “SmartHome”.
+  g) THINGS: AWS IoT thing name "SmartHome".
 
      .. image:: /img/lab11_steps_10.png
            :alt: smarthome system
 
-  h) Click “Save” to finish the setting.
+  h) Click "Save" to finish the setting.
 
 Building and running AWS IoT smart home example
 -----------------------------------------------
 
 1. The AWS IoT thing SDK for C has been ported to embARC. Check the above steps in
    order for your IoT application to work smoothly. Go to *embARC\\example\\freertos\\iot\\aws\\smarthome_demo*.
-   Modify aws_iot_config.h to match your AWS IoT configuration. The macro AWS_IOT_MQTT_HOST can be copied
+   Modify aws_iot_config.h to match your AWS IoT configuration. The macro **AWS_IOT_MQTT_HOST** can be copied
    from the REST API endpoint in AWS IoT console. For example,
-   https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow. AWS_IOT_MQTT_HOST should be
-   XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com.
+   ``https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow``. **AWS_IOT_MQTT_HOST** should be
+   ``XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com``.
 
   .. image:: /img/lab11_builds_1.png
         :alt: smarthome system
@@ -194,10 +194,10 @@ Building and running AWS IoT smart home example
        make TOOLCHAIN=gnu BD_VER=22 CUR_CORE=arcem7d run
 
 4. FreeRTOS-based runtime environment can be loaded automatically. Wait for WiFi initialization and
-   connection establishment(30 seconds or less) until the “WiFi connected” message is shown in the
-   terminal emulator. “Network is ok” will be shown after the certificate files cert.crt, privateKey.pem
-   and rootCA.crt are validated. The information in “reported”: {} is the state of the EMSK-based
-   smart home node. “Updated Accepted !!” means the connection works between the smart home node and AWS IoT cloud.
+   connection establishment(30 seconds or less) until the "WiFi connected" message is shown in the
+   terminal emulator. "Network is ok" will be shown after the certificate files cert.crt, privateKey.pem
+   and rootCA.crt are validated. The information in "reported": {} is the state of the EMSK-based
+   smart home node. "Updated Accepted !!" means the connection works between the smart home node and AWS IoT cloud.
 
   .. image:: /img/lab11_builds_2.png
         :alt: smarthome system
