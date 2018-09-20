@@ -26,8 +26,8 @@ TOOLCHAIN ?= gnu
 ##
 # HEAP & STACK SETTINGS
 ##
-HEAPSZ ?= 81920
-STACKSZ ?= 81920
+#HEAPSZ ?= 81920
+#STACKSZ ?= 81920
 
 #
 # root dir of embARC
