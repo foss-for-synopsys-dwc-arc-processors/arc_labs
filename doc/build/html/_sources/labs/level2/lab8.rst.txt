@@ -4,8 +4,8 @@ Memory map and linker
 #####################
 Purpose
 =======
-- Familiar with the memory mapping in the compile process
-- Learn how to use the linker
+- To get familiar with the memory mapping in the compile process
+- To learn how to use the linker
 
 Equipment
 =========
@@ -13,14 +13,14 @@ PC, MetaWare Development Toolkit, nsim simulator, example \\labs\\lab8_linker in
 
 Content
 ========
-Customizing your program with **compiler pragmas**. 
-At first, using "pragma code" to specify a new name of section in which the code of function reside. 
-Then mapping this code section into specified memory location with linker. 
+Customizing your program with **compiler pragmas**.
+At first, using "pragma code" to specify a new name of section in which the code of function reside.
+Then mapping this code section into specified memory location with linker.
 Finally, checking the location of this code section after bulid process.
 
 Principles
 ==========
-By default, compiler-generated code is placed in the *.text* section. The default code section name can be overridden by using the *code pragma*. After compile process, the linker will automatically map all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a linker command file. 
+By default, compiler-generated code is placed in the *.text* section. The default code section name can be overridden by using the *code pragma*. After compile process, the linker will automatically map all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a linker command file.
 
 Steps
 =====
@@ -28,11 +28,11 @@ Steps
 Create a project and overriding code section name
 ---------------------------------------------------
 
-Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under *\\labs\\lab8_linker* directory into the project. 
+Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under *\\labs\\lab8_linker* directory into the project.
 
-Open main.c file in MetaWare IDE, using "pragma code" to change the section in which function ``modify`` reside from *.text* to a new name "*modify_seg*". 
+Open main.c file in MetaWare IDE, using "pragma code" to change the section in which function ``modify`` reside from *.text* to a new name "*modify_seg*".
 
-.. code-block:: console
+.. code-block:: c
 
 	#pragma Code ("modify_seg")
 	void modify(int list[], int size) {
@@ -50,7 +50,7 @@ Open main.c file in MetaWare IDE, using "pragma code" to change the section in w
 
 Pragma code has two forms that must be used in pairs to bracket the affected function definitions:
 
-.. code-block:: console
+.. code-block:: c
 
 	#pragma code(Section_name)
 	/* ----- Affected function definitions go here ---- */
@@ -67,7 +67,7 @@ Edit the linker command file
 Open the link.cmd file, there are two parts, one is for memory blocks location, the other is for sections mapping.
 Add one new block named "*MyBlock*" in MEMORY, the start address is 0x00002000, and the size is 32KB. Then add one new GROUP in SECTIONS, and mapping section "*modify_seg*" into *MyBlock*.
 
-.. code-block:: console
+.. code-block:: c
 
 	MEMORY {
 	    // Note: overlap of code and data spaces is not recommended since it makes

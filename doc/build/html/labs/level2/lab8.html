@@ -177,8 +177,8 @@
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Familiar with the memory mapping in the compile process</li>
-<li>Learn how to use the linker</li>
+<li>To get familiar with the memory mapping in the compile process</li>
+<li>To learn how to use the linker</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -202,25 +202,25 @@ Finally, checking the location of this code section after bulid process.</p>
 <h3>Create a project and overriding code section name<a class="headerlink" href="#create-a-project-and-overriding-code-section-name" title="Permalink to this headline">¶</a></h3>
 <p>Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under <em>\labs\lab8_linker</em> directory into the project.</p>
 <p>Open main.c file in MetaWare IDE, using “pragma code” to change the section in which function <code class="docutils literal notranslate"><span class="pre">modify</span></code> reside from <em>.text</em> to a new name “<em>modify_seg</em>”.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>pragma Code <span class="o">(</span><span class="s2">&quot;modify_seg&quot;</span><span class="o">)</span>
-<span class="go">void modify(int list[], int size) {</span>
-<span class="go">    int out, in, temp;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma Code (&quot;modify_seg&quot;)</span>
+<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="p">,</span> <span class="n">temp</span><span class="p">;</span>
 
-<span class="go">    for(out=0; out&lt;size; out++)</span>
-<span class="go">        for(in=out+1; in&lt;size; in++)</span>
-<span class="go">            if(list[out] &gt; list[in]) {</span>
-<span class="go">                temp = list[in];</span>
-<span class="go">                list[in] = list[out];</span>
-<span class="go">                list[out] = temp;</span>
-<span class="go">            }</span>
-<span class="go">}</span>
-<span class="gp">#</span>pragma Code <span class="o">()</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">out</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span> <span class="n">out</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">in</span><span class="o">=</span><span class="n">out</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">in</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span> <span class="n">in</span><span class="o">++</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">list</span><span class="p">[</span><span class="n">in</span><span class="p">])</span> <span class="p">{</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">in</span><span class="p">];</span>
+                <span class="n">list</span><span class="p">[</span><span class="n">in</span><span class="p">]</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">out</span><span class="p">];</span>
+                <span class="n">list</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+            <span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#pragma Code ()</span>
 </pre></div>
 </div>
 <p>Pragma code has two forms that must be used in pairs to bracket the affected function definitions:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>pragma code<span class="o">(</span>Section_name<span class="o">)</span>
-<span class="go">/* ----- Affected function definitions go here ---- */</span>
-<span class="gp">#</span>pragma code<span class="o">()</span> /* No parameters here */
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma code(Section_name)</span>
+<span class="cm">/* ----- Affected function definitions go here ---- */</span>
+<span class="cp">#pragma code() </span><span class="cm">/* No parameters here */</span><span class="cp"></span>
 </pre></div>
 </div>
 <p>Section_name is a constant string expression that denotes the name of the section</p>
@@ -233,19 +233,19 @@ Finally, checking the location of this code section after bulid process.</p>
 <h3>Edit the linker command file<a class="headerlink" href="#edit-the-linker-command-file" title="Permalink to this headline">¶</a></h3>
 <p>Open the link.cmd file, there are two parts, one is for memory blocks location, the other is for sections mapping.
 Add one new block named “<em>MyBlock</em>” in MEMORY, the start address is 0x00002000, and the size is 32KB. Then add one new GROUP in SECTIONS, and mapping section “<em>modify_seg</em>” into <em>MyBlock</em>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">MEMORY {</span>
-<span class="go">    // Note: overlap of code and data spaces is not recommended since it makes</span>
-<span class="go">    //       Address validity checking impossible with the debugger and simulator</span>
-<span class="go">    MyBlock: ORIGIN = 0x00002000, LENGTH = 32K</span>
-<span class="go">    MEMORY_BLOCK1:  ORIGIN = 0x0010000, LENGTH = 64K</span>
-<span class="go">    MEMORY_BLOCK2:  ORIGIN = 0x0020000, LENGTH = 128K</span>
-<span class="go">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">MEMORY</span> <span class="p">{</span>
+    <span class="c1">// Note: overlap of code and data spaces is not recommended since it makes</span>
+    <span class="c1">//       Address validity checking impossible with the debugger and simulator</span>
+    <span class="nl">MyBlock</span><span class="p">:</span> <span class="n">ORIGIN</span> <span class="o">=</span> <span class="mh">0x00002000</span><span class="p">,</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">32</span><span class="n">K</span>
+    <span class="nl">MEMORY_BLOCK1</span><span class="p">:</span>  <span class="n">ORIGIN</span> <span class="o">=</span> <span class="mh">0x0010000</span><span class="p">,</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">64</span><span class="n">K</span>
+    <span class="nl">MEMORY_BLOCK2</span><span class="p">:</span>  <span class="n">ORIGIN</span> <span class="o">=</span> <span class="mh">0x0020000</span><span class="p">,</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">128</span><span class="n">K</span>
+<span class="p">}</span>
 
-<span class="go">SECTIONS {</span>
-<span class="go">    GROUP: {</span>
-<span class="go">                modify_seg: {}</span>
-<span class="go">           }&gt;MyBlock</span>
-<span class="go">......</span>
+<span class="n">SECTIONS</span> <span class="p">{</span>
+    <span class="nl">GROUP</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nl">modify_seg</span><span class="p">:</span> <span class="p">{}</span>
+           <span class="p">}</span><span class="o">&gt;</span><span class="n">MyBlock</span>
+<span class="p">......</span>
 </pre></div>
 </div>
 <div class="admonition note">
