@@ -179,10 +179,10 @@
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>to know what embARC OSP is</li>
-<li>to know how to run the provided examples in embARC OSP</li>
-<li>to know how to debug the provided examples in embARC OSP</li>
-<li>to know how to do application development in embARC OSP</li>
+<li>To know what embARC OSP is</li>
+<li>To know how to run the provided examples in embARC OSP</li>
+<li>To know how to debug the provided examples in embARC OSP</li>
+<li>To know how to do application development in embARC OSP</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -250,8 +250,7 @@ cloning via git. There are scripts and such in this repo that you’ll need to s
 <span class="go">git clone https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp.git embarc_osp</span>
 </pre></div>
 </div>
-<p>You have successfully checked out a copy of the source code to your local
-machine.</p>
+<p>Then you will have checked out a copy of the source code to your local machine.</p>
 <ul class="simple">
 <li>Through http download</li>
 </ul>
@@ -260,22 +259,22 @@ its <a class="reference external" href="https://github.com/foss-for-synopsys-dwc
 </div>
 <div class="section" id="run-the-examples">
 <h3>Run the examples<a class="headerlink" href="#run-the-examples" title="Permalink to this headline">¶</a></h3>
-<p>the command line interface is the default interface to use embARC OSP. After getting the embARC OSP
+<p>The command line interface is the default interface to use embARC OSP. After getting the embARC OSP
 package, you need to open a <strong>cmd</strong> console in Winodws / a <strong>terminal</strong> in Linux and cd to the root of embARC osp.</p>
 <p>Here, take the <strong>blinky</strong> as an example.</p>
 <ol class="arabic simple">
-<li>go the <strong>blinky</strong> example folder</li>
+<li>go to the <strong>blinky</strong> example folder</li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd example\baremetal\blinky</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li>connect your board to PC host, and open the UART terminal with putty/teraterm/minicom</li>
-<li>build and run it, here ARC GNU toolchain is selected</li>
+<li>connect your board to PC host, and open the UART terminal with putty/tera term/minicom</li>
+<li>build and run it with command showing below, here ARC GNU toolchain is selected</li>
 </ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> For emsk <span class="m">2</span>.3
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> For EMSK <span class="m">2</span>.3
 <span class="go">make TOOLCHAIN=gnu BOARD=emsk BD_VER=23 CUR_CORE=arcem11d run</span>
-<span class="gp">#</span> For emsk <span class="m">2</span>.2
+<span class="gp">#</span> For EMSK <span class="m">2</span>.2
 <span class="go">make TOOLCHAIN=gnu BOARD=emsk BD_VER=22 CUR_CORE=arcem7d run</span>
 <span class="gp">#</span> For IoTDK
 <span class="go">make TOOLCHAIN=gnu BOARD=iotdk run</span>
@@ -283,7 +282,8 @@ package, you need to open a <strong>cmd</strong> console in Winodws / a <strong>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">for emsk, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware</p>
+<p class="last">for EMSK, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
+You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board infomation will be sent by uart and shown on your uart terminal.</p>
 </div>
 <ol class="arabic simple" start="4">
 <li>Get the results</li>
@@ -408,7 +408,7 @@ application folder (-I).</li>
 </li>
 </ul>
 </div></blockquote>
-<p>Then <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code> application’s makefile will be like this</p>
+<p>Then makefile for <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code> application will be like this</p>
 <blockquote>
 <div><div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">## embARC application makefile template ##</span>
 <span class="c">### You can copy this file to your application folder</span>

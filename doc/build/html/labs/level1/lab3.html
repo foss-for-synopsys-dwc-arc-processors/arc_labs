@@ -295,63 +295,63 @@
 </pre></div>
 </div>
 <p>Open the folder <em>embarc_osp\example\Lab\timer</em>, and open the <em>makefile</em>, here is the default configuration.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> Application name
-<span class="go">APPL ?= lab_3_Timer_Interrupts</span>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># Application name</span>
+<span class="nv">APPL</span> <span class="o">?=</span> lab_3_Timer_Interrupts
 
-<span class="gp">#</span><span class="c1">#</span>
-<span class="gp">#</span> Current Board And Core
-<span class="gp">#</span><span class="c1">#</span>
-<span class="go">BOARD ?= iotdk</span>
-<span class="go">BD_VER ?= 10</span>
-<span class="go">CUR_CORE ?= arcem9d</span>
+<span class="c">##</span>
+<span class="c"># Current Board And Core</span>
+<span class="c">##</span>
+<span class="nv">BOARD</span> <span class="o">?=</span> iotdk
+<span class="nv">BD_VER</span> <span class="o">?=</span> <span class="m">10</span>
+<span class="nv">CUR_CORE</span> <span class="o">?=</span> arcem9d
 
-<span class="gp">#</span><span class="c1">#</span>
-<span class="gp">#</span> Set toolchain
-<span class="gp">#</span><span class="c1">#</span>
-<span class="go">TOOLCHAIN ?= gnu</span>
+<span class="c">##</span>
+<span class="c"># Set toolchain</span>
+<span class="c">##</span>
+<span class="nv">TOOLCHAIN</span> <span class="o">?=</span> gnu
 
-<span class="gp">#</span>
-<span class="gp">#</span> root dir of embARC
-<span class="gp">#</span>
-<span class="go">EMBARC_ROOT = ../../..</span>
+<span class="c">#</span>
+<span class="c"># root dir of embARC</span>
+<span class="c">#</span>
+<span class="nv">EMBARC_ROOT</span> <span class="o">=</span> ../../..
 
-<span class="go">MID_SEL = common</span>
+<span class="nv">MID_SEL</span> <span class="o">=</span> common
 
-<span class="gp">#</span> application <span class="nb">source</span> <span class="nb">dirs</span>
-<span class="go">APPL_CSRC_DIR = .</span>
-<span class="go">APPL_ASMSRC_DIR = .</span>
+<span class="c"># application source dirs</span>
+<span class="nv">APPL_CSRC_DIR</span> <span class="o">=</span> .
+<span class="nv">APPL_ASMSRC_DIR</span> <span class="o">=</span> .
 
-<span class="gp">#</span> application include <span class="nb">dirs</span>
-<span class="go">APPL_INC_DIR = .</span>
+<span class="c"># application include dirs</span>
+<span class="nv">APPL_INC_DIR</span> <span class="o">=</span> .
 </pre></div>
 </div>
 <ul class="simple">
 <li>Reconfigure <strong>BOARD</strong> and <strong>CUR_CORE</strong>, in this lab, we use the launch board <em>iotdk</em></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="c1">#</span>
-<span class="gp">#</span> Current Board And Core
-<span class="gp">#</span><span class="c1">#</span>
-<span class="go">BOARD ?= iotdk</span>
-<span class="go">BD_VER ?= 10</span>
-<span class="go">CUR_CORE ?= arcem9d</span>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">##</span>
+<span class="c"># Current Board And Core</span>
+<span class="c">##</span>
+<span class="nv">BOARD</span> <span class="o">?=</span> iotdk
+<span class="nv">BD_VER</span> <span class="o">?=</span> <span class="m">10</span>
+<span class="nv">CUR_CORE</span> <span class="o">?=</span> arcem9d
 </pre></div>
 </div>
 <ul class="simple">
 <li>Reconfigure <strong>TOOLCHAIN</strong>, select the toolchain <em>gnu</em> or <em>metaware</em> you used</li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="c1">#</span>
-<span class="gp">#</span> Set toolchain
-<span class="gp">#</span><span class="c1">#</span>
-<span class="go">TOOLCHAIN ?= gnu</span>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">##</span>
+<span class="c"># Set toolchain</span>
+<span class="c">##</span>
+<span class="nv">TOOLCHAIN</span> <span class="o">?=</span> gnu
 </pre></div>
 </div>
 <ul class="simple">
 <li>Reconfigure <strong>EMBARC_ROOT</strong>, make sure the relative path between <em>embARC OSP</em> root folder and the <em>timer</em> folder is correct.</li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>
-<span class="gp">#</span> root dir of embARC
-<span class="gp">#</span>
-<span class="go">EMBARC_ROOT = ../../..</span>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#</span>
+<span class="c"># root dir of embARC</span>
+<span class="c">#</span>
+<span class="nv">EMBARC_ROOT</span> <span class="o">=</span> ../../..
 </pre></div>
 </div>
 </div>
@@ -359,53 +359,53 @@
 <h3>Main code<a class="headerlink" href="#main-code" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="read-auxiliary-register-bcr-build">
 <h4>Read auxiliary register BCR_BUILD<a class="headerlink" href="#read-auxiliary-register-bcr-build" title="Permalink to this headline">¶</a></h4>
-<p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_read</span></code> to read the auxiliary register for the timer resource information.</p>
+<p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_read()</span></code> to read the auxiliary register for the timer resource information.</p>
 <p>Read auxiliary register <strong>TIMER_BUILD</strong>. In the register <strong>TIMER_BUILD</strong> The lower 8 bits indicate the core version information, the bit 9 indicate the <strong>Timer0</strong>, the bit 10 indicate the <strong>Timer1</strong>, the bit 11 indicate the <strong>RTC</strong>. Here is the code:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uint32_t bcr = _arc_aux_read(AUX_BCR_TIMERS);</span>
-<span class="go">int timer0_flag=(bcr &gt;&gt; 8) &amp; 1;</span>
-<span class="go">int timer1_flag=(bcr &gt;&gt; 9) &amp; 1;</span>
-<span class="go">int RTC_flag=(bcr &gt;&gt; 10) &amp; 1;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span> <span class="n">bcr</span> <span class="o">=</span> <span class="n">_arc_aux_read</span><span class="p">(</span><span class="n">AUX_BCR_TIMERS</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">timer0_flag</span><span class="o">=</span><span class="p">(</span><span class="n">bcr</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">timer1_flag</span><span class="o">=</span><span class="p">(</span><span class="n">bcr</span> <span class="o">&gt;&gt;</span> <span class="mi">9</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">RTC_flag</span><span class="o">=</span><span class="p">(</span><span class="n">bcr</span> <span class="o">&gt;&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Read timer related auxiliary registers, for example, the <strong>Timer0</strong>. Here is the code:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EMBARC_PRINTF(&quot;Does this timer0 exist?  YES\r\n&quot;);</span>
-<span class="go">/*Read auxiliary register configuration information*/</span>
-<span class="go">EMBARC_PRINTF(&quot;timer0&#39;s operating mode:0x%08x\r\n&quot;,_arc_aux_read(AUX_TIMER0_CTRL));</span>
-<span class="go">EMBARC_PRINTF(&quot;timer0&#39;s limit value :0x%08x\r\n&quot;,_arc_aux_read(AUX_TIMER0_LIMIT));</span>
-<span class="go">EMBARC_PRINTF(&quot;timer0&#39;s current cnt_number:0x%08x\r\n&quot;,_arc_aux_read(AUX_TIMER0_CNT));</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Does this timer0 exist?  YES</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="cm">/*Read auxiliary register configuration information*/</span>
+<span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;timer0&#39;s operating mode:0x%08x</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">_arc_aux_read</span><span class="p">(</span><span class="n">AUX_TIMER0_CTRL</span><span class="p">));</span>
+<span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;timer0&#39;s limit value :0x%08x</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">_arc_aux_read</span><span class="p">(</span><span class="n">AUX_TIMER0_LIMIT</span><span class="p">));</span>
+<span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;timer0&#39;s current cnt_number:0x%08x</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">_arc_aux_read</span><span class="p">(</span><span class="n">AUX_TIMER0_CNT</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="stop-set-start-the-timer0">
 <h4>Stop-Set-Start the Timer0<a class="headerlink" href="#stop-set-start-the-timer0" title="Permalink to this headline">¶</a></h4>
-<p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_write</span></code> to write the auxiliary register.</p>
+<p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_write()</span></code> to write the auxiliary register.</p>
 <p>To control the <strong>Timer0</strong> with the related auxiliary registers.</p>
 <ul class="simple">
 <li><strong>COUNT0</strong>: write this register to set the initial value of the <strong>Timer0</strong>. It will increase from the set value at anytime you write this register.</li>
 <li><strong>CONTROL0</strong>: write this register to update the control modes of the <strong>Timer0</strong>.</li>
 <li><strong>LIMIT0</strong>: write this register to set the limit value of the <strong>Timer0</strong>, the limit value is the value after which an interrupt or a reset must be generated.</li>
 </ul>
-<p>In this lab, we should stop timer before setting and starting it, the function <code class="docutils literal notranslate"><span class="pre">timer_stop</span></code> is already encapsulated in embARC OSP, you can  use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/* Stop it first since it might be enabled before */</span>
-<span class="go">_arc_aux_write(AUX_TIMER0_CTRL, 0);</span>
-<span class="go">_arc_aux_write(AUX_TIMER0_LIMIT,0);</span>
-<span class="go">_arc_aux_write(AUX_TIMER0_CNT, 0);</span>
-<span class="go">/* This is a example about timer0&#39;s timer function. */</span>
-<span class="go">uint32_t mode = TIMER_CTRL_NH;/*Timing without triggering interruption.*/</span>
-<span class="go">uint32_t val = MAX_COUNT;</span>
-<span class="go">_arc_aux_write(AUX_TIMER0_CNT, 0);</span>
-<span class="go">_arc_aux_write(AUX_TIMER0_LIMIT,val);</span>
-<span class="go">/* start the specific timer */</span>
-<span class="go">_arc_aux_write(AUX_TIMER0_CTRL,mode);</span>
+<p>In this lab, we should stop timer before setting and starting it, the function <code class="docutils literal notranslate"><span class="pre">timer_stop()</span></code> is already encapsulated in embARC OSP, you can  use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Stop it first since it might be enabled before */</span>
+<span class="n">_arc_aux_write</span><span class="p">(</span><span class="n">AUX_TIMER0_CTRL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">_arc_aux_write</span><span class="p">(</span><span class="n">AUX_TIMER0_LIMIT</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">_arc_aux_write</span><span class="p">(</span><span class="n">AUX_TIMER0_CNT</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="cm">/* This is a example about timer0&#39;s timer function. */</span>
+<span class="kt">uint32_t</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">TIMER_CTRL_NH</span><span class="p">;</span><span class="cm">/*Timing without triggering interruption.*/</span>
+<span class="kt">uint32_t</span> <span class="n">val</span> <span class="o">=</span> <span class="n">MAX_COUNT</span><span class="p">;</span>
+<span class="n">_arc_aux_write</span><span class="p">(</span><span class="n">AUX_TIMER0_CNT</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">_arc_aux_write</span><span class="p">(</span><span class="n">AUX_TIMER0_LIMIT</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+<span class="cm">/* start the specific timer */</span>
+<span class="n">_arc_aux_write</span><span class="p">(</span><span class="n">AUX_TIMER0_CTRL</span><span class="p">,</span><span class="n">mode</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>When the timer is running, we can read the count value of the timer,and calculate the execution time of a code block. Here is the code:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uint32_t start_cnt=_arc_aux_read(AUX_TIMER0_CNT);</span>
-<span class="go">/**</span>
-<span class="go"> * code block</span>
-<span class="go"> */</span>
-<span class="go">uint32_t end_cnt=_arc_aux_read(AUX_TIMER0_CNT);</span>
-<span class="go">uint32_t time=(end_cnt-start_cnt)/(BOARD_CPU_CLOCK/1000);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span> <span class="n">start_cnt</span><span class="o">=</span><span class="n">_arc_aux_read</span><span class="p">(</span><span class="n">AUX_TIMER0_CNT</span><span class="p">);</span>
+<span class="cm">/**</span>
+<span class="cm"> * code block</span>
+<span class="cm"> */</span>
+<span class="kt">uint32_t</span> <span class="n">end_cnt</span><span class="o">=</span><span class="n">_arc_aux_read</span><span class="p">(</span><span class="n">AUX_TIMER0_CNT</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">end_cnt</span><span class="o">-</span><span class="n">start_cnt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">BOARD_CPU_CLOCK</span><span class="o">/</span><span class="mi">1000</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>

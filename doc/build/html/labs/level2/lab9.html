@@ -177,9 +177,9 @@
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Learn how to implement tasks in FreeRTOS operating system</li>
-<li>Learn how to register tasks in FreeRTOS</li>
-<li>Get familiar with inter-task communication of FreeRTOS</li>
+<li>To learn how to implement tasks in FreeRTOS operating system</li>
+<li>To learn how to register tasks in FreeRTOS</li>
+<li>To get familiar with inter-task communication of FreeRTOS</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -188,7 +188,7 @@
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>This lab utilizes FreeRTOS v9.0.0, and will create 3 tasks based on embARC_osp. You should apply inter-task communicate methods such as semaphore and message queue in order to get running LEDs result. We should go though basic functions of FreeRTOS first.</p>
+<p>This lab utilizes FreeRTOS v9.0.0, and will create 3 tasks based on embARC_osp. You should apply inter-task communicating methods such as semaphore and message queue in order to get running LEDs result. We should go though basic functions of FreeRTOS first.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
@@ -332,7 +332,7 @@
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="build-and-run-the-incompleted-code">
 <h3>Build and run the incompleted code<a class="headerlink" href="#build-and-run-the-incompleted-code" title="Permalink to this headline">¶</a></h3>
-<p>the code is at ‘embarc_osp\example\Lab\lab_9’, use an uart terminal console and run the code, you will see a message from program like the one shown below:</p>
+<p>the code is at <code class="docutils literal notranslate"><span class="pre">embarc_osp\\example\\Lab\\lab_9</span></code>, use an uart terminal console and run the code, you will see a message from program like the one shown below:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar  9 2018, 17:57:50</span>
 <span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1 (branches/release_40)</span>
 <span class="go">Create task1 Successfully</span>
@@ -344,18 +344,18 @@
 </div>
 <div class="section" id="implement-task-3">
 <h3>Implement task 3<a class="headerlink" href="#implement-task-3" title="Permalink to this headline">¶</a></h3>
-<p>It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, so the only new function to learn is xQueueReceive(). This is a FreeRTOS API to pop and read an item from queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
+<p>It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, so the only new function to learn is <code class="docutils literal notranslate"><span class="pre">xQueueReceive()</span></code>. This is a FreeRTOS API to pop and read an item from queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
 </div>
 <div class="section" id="implement-task-1">
 <h3>Implement task 1<a class="headerlink" href="#implement-task-1" title="Permalink to this headline">¶</a></h3>
 <p>It is required for task 1 to check if value from queue is legal. If not, a reset signal is needed to be sent.</p>
-<p>Two new functions might be helpful for this task: xSemaphoreGive() for release a signal and xQueuePeek() for read item but not pop from a queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
-<p>Do notice the difference between xQueueReceive() and xQueuePeek().</p>
+<p>Two new functions might be helpful for this task: <code class="docutils literal notranslate"><span class="pre">xSemaphoreGive()</span></code> for release a signal and <code class="docutils literal notranslate"><span class="pre">xQueuePeek()</span></code> for read item but not pop from a queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
+<p>Do notice the difference between <code class="docutils literal notranslate"><span class="pre">xQueueReceive()</span></code> and <code class="docutils literal notranslate"><span class="pre">xQueuePeek()</span></code>.</p>
 </div>
 <div class="section" id="implement-task-2">
 <h3>Implement task 2<a class="headerlink" href="#implement-task-2" title="Permalink to this headline">¶</a></h3>
 <p>There are two different works for task 2 to complete: to shift led_val and queue it, and to reset both led_val and queue when illegal led_val is detected.</p>
-<p>Three functions can be helpful: xQueueSend(), xSemaphoreTake(), xQueueReset(). Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
+<p>Three functions can be helpful: <code class="docutils literal notranslate"><span class="pre">xQueueSend()</span></code>, <code class="docutils literal notranslate"><span class="pre">xSemaphoreTake()</span></code>, <code class="docutils literal notranslate"><span class="pre">xQueueReset()</span></code>. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
 </div>
 <div class="section" id="build-and-run-the-completed-code">
 <h3>Build and run the completed code<a class="headerlink" href="#build-and-run-the-completed-code" title="Permalink to this headline">¶</a></h3>

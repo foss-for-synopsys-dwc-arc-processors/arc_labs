@@ -5,9 +5,9 @@ How to use FreeRTOS
 
 Purpose
 =======
-- Learn how to implement tasks in FreeRTOS operating system
-- Learn how to register tasks in FreeRTOS
-- Get familiar with inter-task communication of FreeRTOS
+- To learn how to implement tasks in FreeRTOS operating system
+- To learn how to register tasks in FreeRTOS
+- To get familiar with inter-task communication of FreeRTOS
 
 Equipment
 =========
@@ -15,7 +15,7 @@ PC, IoTDK, embARC OSP, example \\Lab\\FreeRTOS in embARC OSP
 
 Content
 ========
-This lab utilizes FreeRTOS v9.0.0, and will create 3 tasks based on embARC_osp. You should apply inter-task communicate methods such as semaphore and message queue in order to get running LEDs result. We should go though basic functions of FreeRTOS first.
+This lab utilizes FreeRTOS v9.0.0, and will create 3 tasks based on embARC_osp. You should apply inter-task communicating methods such as semaphore and message queue in order to get running LEDs result. We should go though basic functions of FreeRTOS first.
 
 Principles
 ==========
@@ -166,7 +166,7 @@ Steps
 
 Build and run the incompleted code
 ----------------------------------
-the code is at 'embarc_osp\\example\\Lab\\lab_9', use an uart terminal console and run the code, you will see a message from program like the one shown below:
+the code is at ``embarc_osp\\example\\Lab\\lab_9``, use an uart terminal console and run the code, you will see a message from program like the one shown below:
 
 .. code-block:: console
 
@@ -180,21 +180,21 @@ This message implys that three tasks are working correctly.
 
 Implement task 3
 ----------------
-It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, so the only new function to learn is xQueueReceive(). This is a FreeRTOS API to pop and read an item from queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
+It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, so the only new function to learn is ``xQueueReceive()``. This is a FreeRTOS API to pop and read an item from queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
 
 Implement task 1
 ----------------
 It is required for task 1 to check if value from queue is legal. If not, a reset signal is needed to be sent.
 
-Two new functions might be helpful for this task: xSemaphoreGive() for release a signal and xQueuePeek() for read item but not pop from a queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
+Two new functions might be helpful for this task: ``xSemaphoreGive()`` for release a signal and ``xQueuePeek()`` for read item but not pop from a queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
 
-Do notice the difference between xQueueReceive() and xQueuePeek().
+Do notice the difference between ``xQueueReceive()`` and ``xQueuePeek()``.
 
 Implement task 2
 ----------------
 There are two different works for task 2 to complete: to shift led_val and queue it, and to reset both led_val and queue when illegal led_val is detected.
 
-Three functions can be helpful: xQueueSend(), xSemaphoreTake(), xQueueReset(). Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
+Three functions can be helpful: ``xQueueSend()``, ``xSemaphoreTake()``, ``xQueueReset()``. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
 
 Build and run the completed code
 --------------------------------

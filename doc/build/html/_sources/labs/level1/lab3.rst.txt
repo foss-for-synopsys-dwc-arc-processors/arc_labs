@@ -82,7 +82,7 @@ There are two ways to do the configuration.
 
 Open the folder *embarc_osp\\example\\Lab\\timer*, and open the *makefile*, here is the default configuration.
 
-.. code-block:: console
+.. code-block:: makefile
 
 	# Application name
 	APPL ?= lab_3_Timer_Interrupts
@@ -115,7 +115,7 @@ Open the folder *embarc_osp\\example\\Lab\\timer*, and open the *makefile*, here
 
 - Reconfigure **BOARD** and **CUR_CORE**, in this lab, we use the launch board *iotdk*
 
-.. code-block:: console
+.. code-block:: makefile
 
 	##
 	# Current Board And Core
@@ -126,7 +126,7 @@ Open the folder *embarc_osp\\example\\Lab\\timer*, and open the *makefile*, here
 
 - Reconfigure **TOOLCHAIN**, select the toolchain *gnu* or *metaware* you used
 
-.. code-block:: console
+.. code-block:: makefile
 
 	##
 	# Set toolchain
@@ -135,7 +135,7 @@ Open the folder *embarc_osp\\example\\Lab\\timer*, and open the *makefile*, here
 
 - Reconfigure **EMBARC_ROOT**, make sure the relative path between *embARC OSP* root folder and the *timer* folder is correct.
 
-.. code-block:: console
+.. code-block:: makefile
 
 	#
 	# root dir of embARC
@@ -147,11 +147,11 @@ Main code
 
 Read auxiliary register BCR_BUILD
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-We can use the function ``_arc_aux_read`` to read the auxiliary register for the timer resource information.
+We can use the function ``_arc_aux_read()`` to read the auxiliary register for the timer resource information.
 
 Read auxiliary register **TIMER_BUILD**. In the register **TIMER_BUILD** The lower 8 bits indicate the core version information, the bit 9 indicate the **Timer0**, the bit 10 indicate the **Timer1**, the bit 11 indicate the **RTC**. Here is the code:
 
-.. code-block:: console
+.. code-block:: c
 
 	uint32_t bcr = _arc_aux_read(AUX_BCR_TIMERS);
 	int timer0_flag=(bcr >> 8) & 1;
@@ -160,7 +160,7 @@ Read auxiliary register **TIMER_BUILD**. In the register **TIMER_BUILD** The low
 
 Read timer related auxiliary registers, for example, the **Timer0**. Here is the code:
 
-.. code-block:: console
+.. code-block:: c
 
 	EMBARC_PRINTF("Does this timer0 exist?  YES\r\n");
 	/*Read auxiliary register configuration information*/
@@ -170,7 +170,7 @@ Read timer related auxiliary registers, for example, the **Timer0**. Here is the
 
 Stop-Set-Start the Timer0
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-We can use the function ``_arc_aux_write`` to write the auxiliary register.
+We can use the function ``_arc_aux_write()`` to write the auxiliary register.
 
 To control the **Timer0** with the related auxiliary registers.
 
@@ -178,9 +178,9 @@ To control the **Timer0** with the related auxiliary registers.
 - **CONTROL0**: write this register to update the control modes of the **Timer0**.
 - **LIMIT0**: write this register to set the limit value of the **Timer0**, the limit value is the value after which an interrupt or a reset must be generated.
 
-In this lab, we should stop timer before setting and starting it, the function ``timer_stop`` is already encapsulated in embARC OSP, you can  use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:
+In this lab, we should stop timer before setting and starting it, the function ``timer_stop()`` is already encapsulated in embARC OSP, you can  use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:
 
-.. code-block:: console
+.. code-block:: c
 
 	/* Stop it first since it might be enabled before */
 	_arc_aux_write(AUX_TIMER0_CTRL, 0);
@@ -196,7 +196,7 @@ In this lab, we should stop timer before setting and starting it, the function `
 
 When the timer is running, we can read the count value of the timer,and calculate the execution time of a code block. Here is the code:
 
-.. code-block:: console
+.. code-block:: c
 
     uint32_t start_cnt=_arc_aux_read(AUX_TIMER0_CNT);
     /**

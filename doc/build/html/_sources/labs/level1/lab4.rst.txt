@@ -5,8 +5,8 @@ ARC features: interrupts
 
 Purpose
 ========
-- Introduce the interrupt module in the ARC embedded processor
-- Demonstrate how to use the interrupt and timer APIs already defined in the embARC processor in the program
+- To introduce the interrupt module in the ARC embedded processor
+- To demonstrate how to use the interrupt and timer APIs already defined in the embARC processor in the program
 
 Equipment
 ==========
@@ -18,9 +18,9 @@ This lab and lab 3 are both introductions to the internal characteristics of the
 
 Principles
 ===========
-The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type, that is, the entry address of the interrupt service program, and then jumps to the address to execute the interrupt service routine. After the execution is completed, return to the interrupted program and complete the response of the interrupt event.
+The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, return to the interrupted program and complete the response of the interrupt event.
 
-In embARC OSP, we use the int_handler_install function to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then we can achieve the above functions.
+In embARC OSP, we use the ``int_handler_install()`` function to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then we can achieve the above functions.
 
 Steps
 ======
@@ -30,11 +30,11 @@ Open and browse lab one
 
 Go to the embarc_osp\\example\\Lab\\interrupt directory, where there are two folders, lab_4_1 and lab_4_2.
 
-We first enter lab_4_1, which implements the precise timing function through the timer interrupt, which is the application of the interrupt comparison basis.
+The lab_4_1 is more fundamental compared to lab_4_2. So we first enter folder lab_4_1, in which the precise timing function is implemented through the timer interrupt.
 
 Open main.c and browse the entire program.
 
-.. code-block:: console
+.. code-block:: c
 
 	#include "embARC.h"
 	#include "embARC_debug.h"
@@ -91,7 +91,7 @@ Let's analyze each one below:
 
 - Interrupt service function:
 
-.. code-block:: console
+.. code-block:: c
 
 	static void timer0_isr(void *ptr)
 	{
@@ -105,7 +105,7 @@ In this function, we incremented the count variable t0 by one.
 
 - Main function
 
-.. code-block:: console
+.. code-block:: c
 
 	int main(void)
 	{
@@ -152,7 +152,7 @@ In this example, the loop body only serves as an effect display. We call our own
 
 - Delay function
 
-.. code-block:: console
+.. code-block:: c
 
 	static void timer0_isr(void *ptr)
 	{
@@ -197,7 +197,7 @@ We then enter lab_4_2, which mainly shows the working state of priority and inte
 
 Open main.c and browse through the entire program.
 
-.. code-block:: console
+.. code-block:: c
 
     #include "embARC.h"
     #include "embARC_debug.h"
@@ -314,7 +314,7 @@ Lab two seems complicated, but it is very simple. The code for Lab two only need
 
 - Interrupt service function
 
-.. code-block:: console
+.. code-block:: c
 
 	static void timer0_isr(void *ptr)
     {
@@ -357,7 +357,7 @@ Regarding hits, it will be mentioned in the main function module.
 
 - main function
 
-.. code-block:: console
+.. code-block:: c
 
 	int main(void)
     {
@@ -477,5 +477,5 @@ To summarize, high-priority interrupts can interrupt low-priority interrupts, an
 Exercises
 ==========
 
-Try using an interrupt other than a timer to write a small program. (For example, use the GPIO interrupt to implement the button lighting)
+Try using an interrupt other than a timer to write a small program. (For example, try to implement a button controled LED using GPIO interrupt)
 

@@ -179,8 +179,8 @@
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Introduce the interrupt module in the ARC embedded processor</li>
-<li>Demonstrate how to use the interrupt and timer APIs already defined in the embARC processor in the program</li>
+<li>To introduce the interrupt module in the ARC embedded processor</li>
+<li>To demonstrate how to use the interrupt and timer APIs already defined in the embARC processor in the program</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -193,61 +193,61 @@
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
-<p>The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type, that is, the entry address of the interrupt service program, and then jumps to the address to execute the interrupt service routine. After the execution is completed, return to the interrupted program and complete the response of the interrupt event.</p>
-<p>In embARC OSP, we use the int_handler_install function to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then we can achieve the above functions.</p>
+<p>The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, return to the interrupted program and complete the response of the interrupt event.</p>
+<p>In embARC OSP, we use the <code class="docutils literal notranslate"><span class="pre">int_handler_install()</span></code> function to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then we can achieve the above functions.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="open-and-browse-lab-one">
 <h3>Open and browse lab one<a class="headerlink" href="#open-and-browse-lab-one" title="Permalink to this headline">¶</a></h3>
 <p>Go to the embarc_osp\example\Lab\interrupt directory, where there are two folders, lab_4_1 and lab_4_2.</p>
-<p>We first enter lab_4_1, which implements the precise timing function through the timer interrupt, which is the application of the interrupt comparison basis.</p>
+<p>The lab_4_1 is more fundamental compared to lab_4_2. So we first enter folder lab_4_1, in which the precise timing function is implemented through the timer interrupt.</p>
 <p>Open main.c and browse the entire program.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>include <span class="s2">&quot;embARC.h&quot;</span>
-<span class="gp">#</span>include <span class="s2">&quot;embARC_debug.h&quot;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 
-<span class="gp">#</span>define COUNT <span class="o">(</span>BOARD_CPU_CLOCK/1000<span class="o">)</span>
+<span class="cp">#define COUNT (BOARD_CPU_CLOCK/1000)</span>
 
-<span class="go">volatile static int t0 = 0;</span>
-<span class="go">volatile static int second = 0;</span>
+<span class="k">volatile</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">volatile</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="go">/** arc timer 0 interrupt routine */</span>
-<span class="go">static void timer0_isr(void *ptr)</span>
-<span class="go">{</span>
-<span class="go">  timer_int_clear(TIMER_0);</span>
-<span class="go">  t0++;</span>
-<span class="go">}</span>
+<span class="cm">/** arc timer 0 interrupt routine */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+  <span class="n">t0</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="go">/** arc timer 0 interrupt delay */</span>
-<span class="go">void timer0_delay_ms(int ms)</span>
-<span class="go">{</span>
-<span class="go">  t0 = 0;</span>
-<span class="go"> while(t0&lt;ms);</span>
-<span class="go">}</span>
+<span class="cm">/** arc timer 0 interrupt delay */</span>
+<span class="kt">void</span> <span class="nf">timer0_delay_ms</span><span class="p">(</span><span class="kt">int</span> <span class="n">ms</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="k">while</span><span class="p">(</span><span class="n">t0</span><span class="o">&lt;</span><span class="n">ms</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="go">/** main entry for testing arc fiq interrupt */</span>
-<span class="go">int main(void)</span>
-<span class="go">{</span>
-<span class="go">  int_disable(INTNO_TIMER0);</span>
-<span class="go">  timer_stop(TIMER_0);</span>
+<span class="cm">/** main entry for testing arc fiq interrupt */</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+  <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
 
-<span class="go">  int_handler_install(INTNO_TIMER0, timer0_isr);</span>
-<span class="go">  int_pri_set(INTNO_TIMER0, INT_PRI_MIN);</span>
+  <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
+  <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-<span class="go">  EMBARC_PRINTF(&quot;\r\nThis is a example about timer interrupt.\r\n&quot;);</span>
-<span class="go">  EMBARC_PRINTF(&quot;\r\n/******** TEST MODE START ********/\r\n\r\n&quot;);</span>
+  <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">This is a example about timer interrupt.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
 
-<span class="go">  int_enable(INTNO_TIMER0);</span>
-<span class="go">  timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);</span>
+  <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+  <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">);</span>
 
-<span class="go">  while(1)</span>
-<span class="go">  {</span>
-<span class="go">        timer0_delay_ms(1000);</span>
-<span class="go">        EMBARC_PRINTF(&quot;\r\n %ds.\r\n&quot;,second);</span>
-<span class="go">        second ++;</span>
-<span class="go">  }</span>
-<span class="go">  return E_SYS;</span>
-<span class="go">}</span>
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="p">{</span>
+        <span class="n">timer0_delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s"> %ds.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">second</span><span class="p">);</span>
+        <span class="n">second</span> <span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -258,11 +258,11 @@
 <ul class="simple">
 <li>Interrupt service function:</li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">static void timer0_isr(void *ptr)</span>
-<span class="go">{</span>
-<span class="go">timer_int_clear(TIMER_0);</span>
-<span class="go">t0++;</span>
-<span class="go">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+<span class="n">t0</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>This code is a standard example of an interrupt service function, enters the service function, clears the interrupt flag bit, and then performs the processing that needs to be done in the interrupt service function. Other interrupt service functions can also be written using this template.</p>
@@ -270,28 +270,28 @@
 <ul class="simple">
 <li>Main function</li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">int main(void)</span>
-<span class="go">{</span>
-<span class="go">  int_disable(INTNO_TIMER0);</span>
-<span class="go">  timer_stop(TIMER_0);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+  <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
 
-<span class="go">  int_handler_install(INTNO_TIMER0, timer0_isr);</span>
-<span class="go">  int_pri_set(INTNO_TIMER0, INT_PRI_MIN);</span>
+  <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
+  <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-<span class="go">  EMBARC_PRINTF(&quot;\r\nThis is a example about timer interrupt.\r\n&quot;);</span>
-<span class="go">  EMBARC_PRINTF(&quot;\r\n/******** TEST MODE START ********/\r\n\r\n&quot;);</span>
+  <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">This is a example about timer interrupt.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
 
-<span class="go">  int_enable(INTNO_TIMER0);</span>
-<span class="go">  timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);</span>
+  <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+  <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">);</span>
 
-<span class="go">  while(1)</span>
-<span class="go">  {</span>
-<span class="go">        timer0_delay_ms(1000);</span>
-<span class="go">        EMBARC_PRINTF(&quot;\r\n %ds.\r\n&quot;,second);</span>
-<span class="go">        second ++;</span>
-<span class="go">  }</span>
-<span class="go">  return E_SYS;</span>
-<span class="go">}</span>
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="p">{</span>
+        <span class="n">timer0_delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s"> %ds.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">second</span><span class="p">);</span>
+        <span class="n">second</span> <span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">EMBARC_PRINTF</span></code> function in this code is only used to send information to the computer, which can be ignored during analysis.</p>
@@ -310,11 +310,11 @@ The implementation of the <code class="docutils literal notranslate"><span class
 <ul class="simple">
 <li>Delay function</li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">static void timer0_isr(void *ptr)</span>
-<span class="go">{</span>
-<span class="go">t0 = 0;</span>
-<span class="go">while(t0&lt;ms);</span>
-<span class="go">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">t0</span><span class="o">&lt;</span><span class="n">ms</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>This code is very simple and the idea is clear. When we enter the function, we clear the global variable t0. Since we have set the interrupt interval to 1ms in the above timer_start, we can think that every time t0 is incremented, the time has passed 1ms.</p>
@@ -348,113 +348,113 @@ The implementation of the <code class="docutils literal notranslate"><span class
 <h3>Open and browse the lab two<a class="headerlink" href="#open-and-browse-the-lab-two" title="Permalink to this headline">¶</a></h3>
 <p>We then enter lab_4_2, which mainly shows the working state of priority and interrupt nesting.</p>
 <p>Open main.c and browse through the entire program.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>include <span class="s2">&quot;embARC.h&quot;</span>
-<span class="gp">#</span>include <span class="s2">&quot;embARC_debug.h&quot;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 
-<span class="gp">#</span>define MAX_COUNT 0xfffff
+<span class="cp">#define MAX_COUNT 0xfffff</span>
 
-<span class="go">volatile static uint8_t timer_flag = 0;</span>
-<span class="go">volatile static uint8_t hits = 0;</span>
+<span class="k">volatile</span> <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">volatile</span> <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="go">volatile static uint8_t nesting_flag = 1;</span>
+<span class="k">volatile</span> <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
-<span class="go">/** arc timer 0 interrupt routine */</span>
-<span class="go">static void timer0_isr(void *ptr)</span>
-<span class="go">{</span>
-<span class="go">    timer_int_clear(TIMER_0);</span>
+<span class="cm">/** arc timer 0 interrupt routine */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
 
-<span class="go">    timer_flag = 0;</span>
+    <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="go">    board_delay_ms(10, 1);</span>
+    <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
-<span class="go">    if(timer_flag)</span>
-<span class="go">    {</span>
-<span class="go">            EMBARC_PRINTF(&quot;Interrupt nesting!\r\n&quot;);</span>
-<span class="go">    }</span>
-<span class="go">    else</span>
-<span class="go">    {</span>
-<span class="go">            EMBARC_PRINTF(&quot;Interrupt\r\n&quot;);</span>
-<span class="go">    }</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">timer_flag</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Interrupt nesting!</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Interrupt</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
 
-<span class="go">    hits++;</span>
-<span class="go">}</span>
+    <span class="n">hits</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="go">/** arc timer 1 interrupt routine */</span>
-<span class="go">static void timer1_isr(void *ptr)</span>
-<span class="go">{</span>
-<span class="go">    timer_int_clear(TIMER_1);</span>
+<span class="cm">/** arc timer 1 interrupt routine */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">timer1_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-<span class="go">    timer_flag = 1;</span>
-<span class="go">}</span>
+    <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="go">/** main entry for testing arc fiq interrupt */</span>
-<span class="go">int main(void)</span>
-<span class="go">{</span>
-<span class="go">    timer_stop(TIMER_0);</span>
-<span class="go">    timer_stop(TIMER_1);</span>
+<span class="cm">/** main entry for testing arc fiq interrupt */</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-<span class="go">    int_disable(INTNO_TIMER0);</span>
-<span class="go">    int_disable(INTNO_TIMER1);</span>
+    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">    int_handler_install(INTNO_TIMER0, timer0_isr);</span>
-<span class="go">    int_pri_set(INTNO_TIMER0, INT_PRI_MAX);</span>
+    <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
+    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
 
-<span class="go">    int_handler_install(INTNO_TIMER1, timer1_isr);</span>
-<span class="go">    int_pri_set(INTNO_TIMER1, INT_PRI_MIN);</span>
+    <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">timer1_isr</span><span class="p">);</span>
+    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-<span class="go">    EMBARC_PRINTF(&quot;\r\nThe test will start in 1s.\r\n&quot;);</span>
-<span class="go">    EMBARC_PRINTF(&quot;\r\n/******** TEST MODE START ********/\r\n\r\n&quot;);</span>
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">The test will start in 1s.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
 
-<span class="go">    int_enable(INTNO_TIMER0);</span>
-<span class="go">    int_enable(INTNO_TIMER1);</span>
+    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
-<span class="go">    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
+    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
 
-<span class="go">    while(1)</span>
-<span class="go">    {</span>
-<span class="go">            if((hits &gt;= 5)&amp;&amp;(nesting_flag == 1))</span>
-<span class="go">            {</span>
-<span class="go">                    timer_stop(TIMER_0);</span>
-<span class="go">                    timer_stop(TIMER_1);</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">hits</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">nesting_flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="p">{</span>
+                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-<span class="go">                    int_disable(INTNO_TIMER0);</span>
-<span class="go">                    int_disable(INTNO_TIMER1);</span>
+                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">                    int_pri_set(INTNO_TIMER0, INT_PRI_MIN);</span>
-<span class="go">                    int_pri_set(INTNO_TIMER1, INT_PRI_MAX);</span>
+                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
+                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
 
-<span class="go">                    nesting_flag = 0;</span>
+                    <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="go">                    int_enable(INTNO_TIMER0);</span>
-<span class="go">                    int_enable(INTNO_TIMER1);</span>
+                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">                    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
-<span class="go">                    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
-<span class="go">            }</span>
-<span class="go">            else if((hits &gt;= 10)&amp;&amp;(nesting_flag == 0))</span>
-<span class="go">            {</span>
-<span class="go">                    timer_stop(TIMER_0);</span>
-<span class="go">                    timer_stop(TIMER_1);</span>
+                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="n">hits</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">nesting_flag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="p">{</span>
+                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-<span class="go">                    int_disable(INTNO_TIMER0);</span>
-<span class="go">                    int_disable(INTNO_TIMER1);</span>
+                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">                    int_pri_set(INTNO_TIMER0, INT_PRI_MAX);</span>
-<span class="go">                    int_pri_set(INTNO_TIMER1, INT_PRI_MIN);</span>
+                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
+                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-<span class="go">                    hits = 0;</span>
-<span class="go">                    nesting_flag = 1;</span>
+                    <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
-<span class="go">                    int_enable(INTNO_TIMER0);</span>
-<span class="go">                    int_enable(INTNO_TIMER1);</span>
+                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">                    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
-<span class="go">                    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
-<span class="go">            }</span>
-<span class="go">    }</span>
-<span class="go">    return E_SYS;</span>
-<span class="go">}</span>
+                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -464,32 +464,32 @@ The implementation of the <code class="docutils literal notranslate"><span class
 <ul class="simple">
 <li>Interrupt service function</li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">    static void timer0_isr(void *ptr)</span>
-<span class="go">{</span>
-<span class="go">    timer_int_clear(TIMER_0);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
 
-<span class="go">    timer_flag = 0;</span>
+    <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="go">    board_delay_ms(10, 1);</span>
+    <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
-<span class="go">    if(timer_flag)</span>
-<span class="go">    {</span>
-<span class="go">            EMBARC_PRINTF(&quot;Interrupt nesting!\r\n&quot;);</span>
-<span class="go">    }</span>
-<span class="go">    else</span>
-<span class="go">    {</span>
-<span class="go">            EMBARC_PRINTF(&quot;Interrupt\r\n&quot;);</span>
-<span class="go">    }</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">timer_flag</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Interrupt nesting!</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Interrupt</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
 
-<span class="go">    hits++;</span>
-<span class="go">}</span>
+    <span class="n">hits</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="go">static void timer1_isr(void *ptr)</span>
-<span class="go">{</span>
-<span class="go">    timer_int_clear(TIMER_1);</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">timer1_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-<span class="go">    timer_flag = 1;</span>
-<span class="go">}</span>
+    <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>First, in order to analyze the code, we first ignore the extraneous parts (such as EMBARC_PRINTF, delay and hits in if).</p>
@@ -501,73 +501,73 @@ The implementation of the <code class="docutils literal notranslate"><span class
 <ul class="simple">
 <li>main function</li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">    int main(void)</span>
-<span class="go">{</span>
-<span class="go">    timer_stop(TIMER_0);</span>
-<span class="go">    timer_stop(TIMER_1);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-<span class="go">    int_disable(INTNO_TIMER0);</span>
-<span class="go">    int_disable(INTNO_TIMER1);</span>
+    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">    int_handler_install(INTNO_TIMER0, timer0_isr);</span>
-<span class="go">    int_pri_set(INTNO_TIMER0, INT_PRI_MAX);</span>
+    <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
+    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
 
-<span class="go">    int_handler_install(INTNO_TIMER1, timer1_isr);</span>
-<span class="go">    int_pri_set(INTNO_TIMER1, INT_PRI_MIN);</span>
+    <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">timer1_isr</span><span class="p">);</span>
+    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-<span class="go">    EMBARC_PRINTF(&quot;\r\nThe test will start in 1s.\r\n&quot;);</span>
-<span class="go">    EMBARC_PRINTF(&quot;\r\n/******** TEST MODE START ********/\r\n\r\n&quot;);</span>
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">The test will start in 1s.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
 
-<span class="go">    int_enable(INTNO_TIMER0);</span>
-<span class="go">    int_enable(INTNO_TIMER1);</span>
+    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
-<span class="go">    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
+    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
 
-<span class="go">    while(1)</span>
-<span class="go">    {</span>
-<span class="go">            if((hits &gt;= 5)&amp;&amp;(nesting_flag == 1))</span>
-<span class="go">            {</span>
-<span class="go">                    timer_stop(TIMER_0);</span>
-<span class="go">                    timer_stop(TIMER_1);</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">hits</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">nesting_flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="p">{</span>
+                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-<span class="go">                    int_disable(INTNO_TIMER0);</span>
-<span class="go">                    int_disable(INTNO_TIMER1);</span>
+                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">                    int_pri_set(INTNO_TIMER0, INT_PRI_MIN);</span>
-<span class="go">                    int_pri_set(INTNO_TIMER1, INT_PRI_MAX);</span>
+                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
+                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
 
-<span class="go">                    nesting_flag = 0;</span>
+                    <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="go">                    int_enable(INTNO_TIMER0);</span>
-<span class="go">                    int_enable(INTNO_TIMER1);</span>
+                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">                    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
-<span class="go">                    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
-<span class="go">            }</span>
-<span class="go">            else if((hits &gt;= 10)&amp;&amp;(nesting_flag == 0))</span>
-<span class="go">            {</span>
-<span class="go">                    timer_stop(TIMER_0);</span>
-<span class="go">                    timer_stop(TIMER_1);</span>
+                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="n">hits</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">nesting_flag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="p">{</span>
+                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-<span class="go">                    int_disable(INTNO_TIMER0);</span>
-<span class="go">                    int_disable(INTNO_TIMER1);</span>
+                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">                    int_pri_set(INTNO_TIMER0, INT_PRI_MAX);</span>
-<span class="go">                    int_pri_set(INTNO_TIMER1, INT_PRI_MIN);</span>
+                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
+                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-<span class="go">                    hits = 0;</span>
-<span class="go">                    nesting_flag = 1;</span>
+                    <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
-<span class="go">                    int_enable(INTNO_TIMER0);</span>
-<span class="go">                    int_enable(INTNO_TIMER1);</span>
+                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-<span class="go">                    timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);</span>
-<span class="go">                    timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);</span>
-<span class="go">            }</span>
-<span class="go">    }</span>
-<span class="go">    return E_SYS;</span>
-<span class="go">}</span>
+                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>The main function looks very long, but in fact there is a considerable part of it that is repetitive (we can also build a small function to make the code look more concise).</p>
@@ -612,7 +612,7 @@ The implementation of the <code class="docutils literal notranslate"><span class
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
-<p>Try using an interrupt other than a timer to write a small program. (For example, use the GPIO interrupt to implement the button lighting)</p>
+<p>Try using an interrupt other than a timer to write a small program. (For example, try to implement a button controled LED using GPIO interrupt)</p>
 </div>
 </div>
 

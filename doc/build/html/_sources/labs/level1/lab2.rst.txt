@@ -5,10 +5,10 @@ How to use embARC OSP
 
 Purpose
 =======
-* to know what embARC OSP is
-* to know how to run the provided examples in embARC OSP
-* to know how to debug the provided examples in embARC OSP
-* to know how to do application development in embARC OSP
+* To know what embARC OSP is
+* To know how to run the provided examples in embARC OSP
+* To know how to debug the provided examples in embARC OSP
+* To know how to do application development in embARC OSP
 
 Equipment
 =========
@@ -87,8 +87,7 @@ We'll begin by using Git to clone the repository anonymously.
 
    git clone https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp.git embarc_osp
 
-You have successfully checked out a copy of the source code to your local
-machine.
+Then you will have checked out a copy of the source code to your local machine.
 
 * Through http download
 
@@ -98,31 +97,32 @@ its `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embar
 Run the examples
 ****************
 
-the command line interface is the default interface to use embARC OSP. After getting the embARC OSP
+The command line interface is the default interface to use embARC OSP. After getting the embARC OSP
 package, you need to open a **cmd** console in Winodws / a **terminal** in Linux and cd to the root of embARC osp.
 
 Here, take the **blinky** as an example.
 
-1. go the **blinky** example folder
+1. go to the **blinky** example folder
 
 .. code-block:: console
 
    cd example\baremetal\blinky
 
-2. connect your board to PC host, and open the UART terminal with putty/teraterm/minicom
+2. connect your board to PC host, and open the UART terminal with putty/tera term/minicom
 
-3. build and run it, here ARC GNU toolchain is selected
+3. build and run it with command showing below, here ARC GNU toolchain is selected
 
 .. code-block:: console
 
-   # For emsk 2.3
+   # For EMSK 2.3
    make TOOLCHAIN=gnu BOARD=emsk BD_VER=23 CUR_CORE=arcem11d run
-   # For emsk 2.2
+   # For EMSK 2.2
    make TOOLCHAIN=gnu BOARD=emsk BD_VER=22 CUR_CORE=arcem7d run
    # For IoTDK
    make TOOLCHAIN=gnu BOARD=iotdk run
 
-.. note:: for emsk, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware
+.. note:: for EMSK, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
+  You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board infomation will be sent by uart and shown on your uart terminal.
 
 
 4. Get the results
@@ -241,7 +241,7 @@ well-known simple ``hello world`` as an example.
 
         * For example, if define ``APPLICATION=1``, set APPL_DEFINES to ``-DAPPLICATION=1``.
 
-   Then ``hello world`` application's makefile will be like this
+   Then makefile for ``hello world`` application will be like this
 
     .. code-block:: makefile
 
