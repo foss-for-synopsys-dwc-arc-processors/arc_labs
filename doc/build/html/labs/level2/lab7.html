@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>A BLE Lamp &mdash; ARC Labs 2018.09 documentation</title>
+  <title>BLE Communication &mdash; ARC Labs 2018.09 documentation</title>
   
 
   
@@ -93,7 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../level1.html">Level 1 Labs</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../level2.html">Level 2 Labs</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="lab10.html">A WiFi temperature monitor</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">A BLE Lamp</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">BLE Communication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab8.html">Memory map and linker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab9.html">How to use FreeRTOS</a></li>
 </ul>
@@ -153,7 +153,7 @@
         
           <li><a href="../level2.html">Level 2 Labs</a> &raquo;</li>
         
-      <li>A BLE Lamp</li>
+      <li>BLE Communication</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,25 +172,134 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="a-ble-lamp">
-<span id="lab7"></span><h1>A BLE Lamp<a class="headerlink" href="#a-ble-lamp" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="ble-communication">
+<span id="lab7"></span><h1>BLE Communication<a class="headerlink" href="#ble-communication" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Familiar with the wireless communication in IoT</li>
+<li>Familiar with the usage of RN4020 BLE module on IoTDK board</li>
+<li>Learn to use the API of RN4020 driver in embARC OSP</li>
+</ul>
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
+<p>PC, IoTDK board, embARC OSP packages, example \labs\lab6_ble_rn4020 in ARC labs</p>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>Complete the commulication between smartphone and IoTDK board through RN4020 BLE module.
+At first, setup RN4020 BLE module by using API of RN4020 driver.
+Then connect mobile phone and RN4020 by BLE, and check the data send by IoTDK in smartphone.
+Finally, send data from smartphone to IoTDK board, and print this data value in terminal.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<p>RN4020 BLE module is controlled by the user through input/output lines (i.e., physical device pins) and a UART interface.
+The UART Interface supports ASCII commands to control/configure the RN4020 modules for any specific requirement based on the application.</p>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>Before connecting an RN4020 module to a smartphone device, user may need to set up the RN4020 module as follows.</p>
+<ol class="arabic simple">
+<li>Configure UART which connected to RN4020 with these parameters: <strong>Baud rate - 115200, Data bits - 8, Parity - None, Stop bits - 1</strong></li>
+<li>Set the <strong>WAKE_SW</strong> pin high to enter Command mode</li>
+<li>Issue the command <strong>SF, 1</strong> to reset to the factory default configuration</li>
+<li>Issue the command <strong>SN, IoT DK</strong> to set the device name to be “IoT DK”</li>
+<li>Issue the command <strong>SS, C0000001</strong> to enable support of the Device Information, Battery Service and User Defined Private Service</li>
+<li>Issue the command <strong>SR, 00002000</strong> to set the RN4020 module as a server</li>
+<li>Issue the command <strong>PZ</strong> to clear all settings of the private service and the private characteristics</li>
+<li>Issue the command <strong>PS, 11223344556677889900AABBCCDDEEFF</strong> to set the UUID of user defined private service to be 0x11223344556677889900AABBCCDDEEFF</li>
+<li>Issue the command <strong>PC, 010203040506070809000A0B0C0D0E0F, 18, 06</strong> to add private characteristic 0x010203040506070809000A0B0C0D0E0F to current private service. The property of this characteristic is 0x18 (writable and could notify) and has a maximum data size of 6bytes.</li>
+<li>Issue the command <strong>R, 1</strong> to reboot the RN4020 module and to make the new settings effective</li>
+<li>Issue the command <strong>LS</strong> to display the services</li>
+</ol>
+<p>The source code using the API of RN4020 driver in embARC OSP as follows.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rn4020_setup(rn4020_ble);</span>
+<span class="go">rn4020_reset_to_factory(rn4020_ble);</span>
+
+<span class="go">/* Set device Name */</span>
+<span class="go">rn4020_set_dev_name(rn4020_ble, &quot;IoT DK&quot;);</span>
+
+<span class="go">/* Set device services */</span>
+<span class="go">rn4020_set_services(rn4020_ble, RN4020_SERVICE_DEVICE_INFORMATION |</span>
+<span class="go">                                RN4020_SERVICE_BATTERY |</span>
+<span class="go">                                RN4020_SERVICE_USER_DEFINED);</span>
+
+<span class="go">rn4020_set_features(rn4020_ble, RN4020_FEATURE_SERVER_ONLY);</span>
+<span class="go">rn4020_clear_private(rn4020_ble);</span>
+
+<span class="go">/* Set private service UUID and private characteristic */</span>
+<span class="go">rn4020_set_prv_uuid(rn4020_ble, RN4020_PRV_SERV_HIGH_UUID, RN4020_PRV_SERV_LOW_UUID);</span>
+<span class="go">rn4020_set_prv_char(rn4020_ble, RN4020_PRV_CHAR_HIGH_UUID, RN4020_PRV_CHAR_LOW_UUID, 0x18, 0x06, RN4020_PRIVATE_CHAR_SEC_NONE);</span>
+
+<span class="go">/* Reboot RN4020 to make changes effective */</span>
+<span class="go">rn4020_reset(rn4020_ble);</span>
+
+<span class="go">rn4020_refresh_handle_uuid_table(rn4020_ble);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="advertise">
+<h3>Advertise<a class="headerlink" href="#advertise" title="Permalink to this headline">¶</a></h3>
+<p>Issue the command <strong>A</strong> to start advertisement.
+The source code using the API of RN4020 driver in embARC OSP as follows.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rn4020_advertise(rn4020_ble);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="send-data">
+<h3>Send data<a class="headerlink" href="#send-data" title="Permalink to this headline">¶</a></h3>
+<p>Issue the command <strong>SUW, 2A19, value</strong> to set the level of Battery.
+The source code using the API of RN4020 driver in embARC OSP as follows.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">while (1) {</span>
+
+<span class="go">        rn4020_battery_set_level(rn4020_ble, battery--);</span>
+
+<span class="go">        board_delay_ms(1000, 0);</span>
+<span class="go">        if (battery &lt; 30) {</span>
+<span class="go">                battery = 100;</span>
+<span class="go">        }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">About detailed usage of RN4020 BLE module, please refer to the document “RN4020 Bluetooth Low Energy Module User’s Guide”</p>
+</div>
+</div>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="run-project">
+<h3>Run project<a class="headerlink" href="#run-project" title="Permalink to this headline">¶</a></h3>
+<p>Open the serial terminal emulator in PC (e.g. Tera Term), set as <strong>115200 baud, 8 bits data, 1 stop bit and no parity</strong>,  connect to the IoTDK board.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">cmd</span></code> under the folder <em>example\labs\lab6_ble_rn4020</em>, input the command as follow</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make run</span>
+</pre></div>
+</div>
+<p>Then you will see the output in the serial terminal
+<a class="reference internal" href="../../_images/lab7_figure1.png"><img alt="figure1" src="../../_images/lab7_figure1.png" style="width: 550px;" /></a></p>
+</div>
+<div class="section" id="connection">
+<h3>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h3>
+<p>Open the BLE browser APP in smartphone (e.g. LightBlue in IOS), and scan for BLE peripherals, connect the “IoT DK” device.
+Then you will see the output in the serial terminal.
+<a class="reference internal" href="../../_images/lab7_figure2.png"><img alt="figure2" src="../../_images/lab7_figure2.png" style="width: 550px;" /></a></p>
+<p>And the device information in BLE browser APP.</p>
+<p><a class="reference internal" href="../../_images/lab7_figure3.png"><img alt="figure3" src="../../_images/lab7_figure3.png" style="width: 300px;" /></a></p>
+</div>
+<div class="section" id="communication">
+<h3>Communication<a class="headerlink" href="#communication" title="Permalink to this headline">¶</a></h3>
+<p>Read the data of Battery services in BLE browser APP. Check whether the data decrease gradually.</p>
+<p><a class="reference internal" href="../../_images/lab7_figure4.png"><img alt="figure4" src="../../_images/lab7_figure4.png" style="width: 300px;" /></a></p>
+<p>Write data to in BLE browser APP. Check the received data in BLE browser APP.</p>
+<p><a class="reference internal" href="../../_images/lab7_figure5.png"><img alt="figure5" src="../../_images/lab7_figure5.png" style="width: 300px;" /></a></p>
+<p><a class="reference internal" href="../../_images/lab7_figure6.png"><img alt="figure6" src="../../_images/lab7_figure6.png" style="width: 550px;" /></a></p>
+</div>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>Try to use the received data in IoTDK board, and do some control by using GPIO. (e.g. LED on/off)</p>
 </div>
 </div>
 
