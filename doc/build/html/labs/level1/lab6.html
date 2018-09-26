@@ -178,21 +178,182 @@
 <span id="lab6"></span><h1>A simple bootloader<a class="headerlink" href="#a-simple-bootloader" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Understand the memory map of ARC boards</li>
+<li>Understand the principles of bootloader and self-booting</li>
+<li>Understand the usage of shell commands in cmd</li>
+<li>Create a self-booting application.</li>
+</ul>
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
+<p>The following hardware and software tools are required:</p>
+<ul class="simple">
+<li>PC host</li>
+<li>ARC GNU toolchain/MetaWare Development Toolkit</li>
+<li>ARC board (EM Starter kit/IoT Development Kit)</li>
+<li>SD card</li>
+<li>embARC OSP package</li>
+<li><code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code></li>
+</ul>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Build and run the  <code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code>.</li>
+<li>Download the generated <code class="docutils literal notranslate"><span class="pre">bootloader.bin</span></code> into flash</li>
+<li>Build a self-boot applicaiton and boot it from SD card</li>
+<li>use the ntshell commands</li>
+</ol>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="memory-map-of-arc-board">
+<h3>Memory Map of ARC board<a class="headerlink" href="#memory-map-of-arc-board" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="em-starter-kit">
+<h4>EM Starter Kit<a class="headerlink" href="#em-starter-kit" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="colwidths-auto docutils" id="id5">
+<caption><span class="caption-text">Memory Map of EM Starter Kit</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Start address</th>
+<th class="head">Size</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>on-chip ICCM</td>
+<td>0x00000000</td>
+<td>256/128 KB</td>
+</tr>
+<tr class="row-odd"><td>on-chip DCCM</td>
+<td>0x80000000</td>
+<td>128 KB</td>
+</tr>
+<tr class="row-even"><td>on-board DDR RAM</td>
+<td>0x10000000</td>
+<td>128 MB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="iot-developer-kit">
+<h4>IoT Developer Kit<a class="headerlink" href="#iot-developer-kit" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="colwidths-auto docutils" id="id6">
+<caption><span class="caption-text">Memory Map of IoT Developer Kit</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Start address</th>
+<th class="head">Size</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>on-chip eflash</td>
+<td>0x00000000</td>
+<td>256 KB</td>
+</tr>
+<tr class="row-odd"><td>external boot SPI flash</td>
+<td>0x10000000</td>
+<td>2 MB</td>
+</tr>
+<tr class="row-even"><td>on-chip ICCM</td>
+<td>0x20000000</td>
+<td>256 KB</td>
+</tr>
+<tr class="row-odd"><td>on-chip SRAM</td>
+<td>0x30000000</td>
+<td>128 KB</td>
+</tr>
+<tr class="row-even"><td>on-chip DCCM</td>
+<td>0x80000000</td>
+<td>128 KB</td>
+</tr>
+<tr class="row-odd"><td>on-chip XCCM</td>
+<td>0xC0000000</td>
+<td>32 KB</td>
+</tr>
+<tr class="row-even"><td>on-chip YCCM</td>
+<td>0xE0000000</td>
+<td>32 KB</td>
+</tr>
+</tbody>
+</table>
+<p>In this lab, on-chip eflash and on-chip SRAM are reserved for the simple
+bootloader, CCMs are reserved for application.</p>
+</div>
+</div>
+<div class="section" id="boot-of-arc-board">
+<h3>Boot of ARC board<a class="headerlink" href="#boot-of-arc-board" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>EM Starter Kit<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>The EMSK uses a Xilinx SPARTAN-6 FPGA part which can be configured to run
+different members of the ARCv2 EM Processor family.  The EMSK includes a SPI
+flash pre-programmed with four FPGA configurations of ARC EM cores.</p>
+<p>When a “power on” or reset/configure is issued, the FPGA will auto-load one of
+the pre-installed FPGA configurations from SPI flash. After the FPGA
+configuration is loaded from the SPI flash, a simple primary bootloader is
+loaded in ICCM.  Through the primary bootloader, an application can be loaded
+from SPI Flash into ICCM or external DDR memory.</p>
+<p>Considering that the SPI Flash is used to store FPGA images, the secondary
+bootloader is designed based on the primary bootloader to load an application
+from an SD card since it can be read and written easily. The startup sequence
+is listed below:</p>
+<ol class="arabic simple">
+<li>Power on or reset event.</li>
+<li>Load FPGA configuration from the SPI flash.</li>
+<li>Run primary bootloader, which loads the secondary bootloader from the SPI Flash into main memory (DRAM).</li>
+<li>Run secondary bootloader from main memory to load application from the SD card into ICCM/DRAM memory.</li>
+<li>Run the application from ICCM/DRAM memory.</li>
+</ol>
+<img alt="Boot sequence of EMSK" src="../../_images/lab6_emsk_boot.png" />
+</div>
+<div class="section" id="id2">
+<h4>IoT Developer Kit<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>IOTDK can boot from on-chip eflash and extern boot eflash, which is decided by
+the FWU switch of IOTDK. When this switch is set of “off”, the processor
+starts executing the program stored in on-chip eflash; When this switch is set
+of “on”, the processor starts executing the program stored in external boot-
+spi eflash;</p>
+</div>
+</div>
+<div class="section" id="how-to-flash-the-arc-board">
+<h3>How to flash the ARC board<a class="headerlink" href="#how-to-flash-the-arc-board" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>EM Starter Kit<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="id4">
+<h4>IoT Developer Kit<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="simple-bootloader">
+<h3>Simple bootloader<a class="headerlink" href="#simple-bootloader" title="Permalink to this headline">¶</a></h3>
+<p>This simple bootloader is designed to work as a secondary/simple bootloader
+for embARC, it will load boot.hex or boot.bin on SDCard and run that program.
+And this example itself can be used as ntshell application.</p>
+<p>The following features are provided in this simple bootloader:</p>
+<ul class="simple">
+<li>boot application from SD card</li>
+<li>File operations on SD card</li>
+<li>UART Y-modem protocol to update application</li>
+<li>Operations on ARC processors</li>
+</ul>
+</div>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Build and run the  <code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code>.</li>
+<li>Download the generated <code class="docutils literal notranslate"><span class="pre">bootloader.bin</span></code> into flash</li>
+<li>Build a self-boot applicaiton and boot it from SD card</li>
+<li>Use the ntshell commands</li>
+</ol>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Create and build a different self-boot embARC application</li>
+<li>Use the ntshell commands</li>
+<li>Use the UART-ymodem to load your application</li>
+</ol>
 </div>
 </div>
 

@@ -12,16 +12,16 @@ Software Requirement
 
   * MetaWare Toolkit
 
-    * `Premium MetaWare Development Toolkit (2018.06) <http://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
+    * `Premium MetaWare Development Toolkit (2018.06) <https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
       The DesignWare ARC MetaWare Development Toolkit builds upon a 25-year legacy of industry-leading compiler and debugger products. It is a complete solution that contains all the components needed to support the development, debugging and tuning of embedded applications for the DesignWare ARC processors.
-    * `DesignWare ARC MetaWare Toolkit Lite (2018.06) <http://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
+    * `DesignWare ARC MetaWare Toolkit Lite (2018.06) <https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
       A demonstration/evaluation version of the MetaWare Development Toolkit is available for free from the Synopsys website. MetaWare Lite is a functioning demonstration of the MetaWare Development Toolkit, but has a number of restrictions, including a code-size limit of 32 Kilobytes and no runtime library sources. It is available for Microsoft Windows only.
 
   * ARC GNU Toolchain
 
     * `Open Source ARC GNU IDE (2018.03) <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_
       The ARC GNU Toolchain offers all of the benefits of open source tools, including complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with `ARC GNU plugin for Eclipse <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases>`_, `ARC GNU prebuilt toolchain <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_ and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_
-* `Digilent Adept Software <http://store.digilentinc.com/digilent-adept-2-download-only/>`_ for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger, so just one USB cable is required, no need for external debugger.
+* `Digilent Adept Software <https://store.digilentinc.com/digilent-adept-2-download-only/>`_ for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger, so just one USB cable is required, no need for external debugger.
 
 * `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection, 115200 baud, 8 bits data, 1 stop bit and no parity (115200-8-N-1) by default.
 

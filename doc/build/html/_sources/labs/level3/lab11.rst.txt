@@ -18,9 +18,9 @@ Reguired Hardware
 
 - `[DesignWare ARC EM Starter Kit(EMSK)] <https://www.synopsys.com/dw/ipdir.php?ds=arc_em_starter_kit>`_
 
-- `[Digilent PMOD WiFi(MRF24WG0MA)] <http://store.digilentinc.com/pmodwifi-wifi-interface-802-11g/>`_
+- `[Digilent PMOD WiFi(MRF24WG0MA)] <https://store.digilentinc.com/pmodwifi-wifi-interface-802-11g/>`_
 
-- `[Digilent PMOD TMP2] <http://store.digilentinc.com/pmod-tmp2-temperature-sensor/>`_
+- `[Digilent PMOD TMP2] <https://store.digilentinc.com/pmod-tmp2-temperature-sensor/>`_
 
 - SD Card
 
@@ -94,7 +94,7 @@ Steps
 Creating and setting smart home node
 ------------------------------------
 
-1. Create an AWS account in `[here] <http://aws.amazon.com/>`__. Amazon offers various account levels,
+1. Create an AWS account in `[here] <https://aws.amazon.com/>`__. Amazon offers various account levels,
    including a free tier for AWS IoT.
 
 2. Log into AWS console and choose AWS IoT.

@@ -10,11 +10,17 @@ Purpose
 
 Equipment
 ==========
-PC, MetaWare toolchain/ARC GNU toolchain, nSIM simulator (to use GNU, you need to add nSIM to the environment variable first), interrupt source code
+The following hardware and software tools are required:
+
+* PC host
+* ARC GNU toolchain/MetaWare Development Toolkit
+* ARC board (EM Starter kit/IoT Development Kit)
+* embARC OSP packag
+* ``labs/lab4_interrupt``
 
 Content
 =========
-This lab and lab 3 are both introductions to the internal characteristics of the embARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through example\lab\interrupt in the embARC OSP package. The two routines give you a preliminary understanding of the ARC interrupt resources.
+This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through **labs\\lab4_interrupt** in the embARC OSP package. The two routines give you a preliminary understanding of the ARC interrupt resources.
 
 Principles
 ===========
