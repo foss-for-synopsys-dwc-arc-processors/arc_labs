@@ -14,9 +14,9 @@ die() {
         die "Not able to post status to github, did you set EMBARC_BOT variable in travis ci setting page"
     fi
     sudo apt-get update || die "Failed to update software"
-    #sudo apt-get install lib32z1 || die
-    #sudo apt-get install dos2unix || die
-    #sudo apt-get install doxygen || die
+    sudo apt-get install lib32z1 || die
+    sudo apt-get install dos2unix || die
+    sudo apt-get install doxygen || die
 
     if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ] ; then
         # only install texlive on non pull request master branch
