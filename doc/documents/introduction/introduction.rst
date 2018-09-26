@@ -43,7 +43,7 @@ together with ports of several well known FOSS embedded software stacks to
 |arc|.
 
 For more details about embARC OSP, please refer its
-`online docs <http://foss-for-synopsys-dwc-arc-processors.github.io/embarc_osp>`__
+`online docs <http://embarc.org/embarc_osp/>`__
 
 Supported Hardware Platform
 ###########################

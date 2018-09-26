@@ -11,7 +11,13 @@ Purpose
 
 Equipment
 =========
-PC, IoTDK, embARC OSP, example \\Lab\\timer in embARC OSP
+The following hardware and software tools are required:
+
+* PC host
+* ARC GNU toolchain/MetaWare Development Toolkit
+* ARC board (EM Starter kit/IoT Development Kit)
+* embARC OSP packag
+* ``labs/lab3_timer``
 
 Content
 ========

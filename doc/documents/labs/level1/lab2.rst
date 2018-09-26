@@ -16,6 +16,7 @@ Equipment
 The following hardware and software tools are required:
 
 * PC host
+* ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
 * embARC OSP packages
 

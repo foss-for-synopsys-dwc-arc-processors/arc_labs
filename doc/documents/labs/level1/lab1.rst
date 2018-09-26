@@ -14,6 +14,13 @@ Purpose
 Equipment
 ^^^^^^^^^^
 
+The following hardware and software tools are required:
+
+* PC host
+* MetaWare Development Toolkit
+* nSIM simulator or ARC board (EM Starter kit/IoT Development Kit)
+* ``labs/lab1_core_test``
+
 PC, MetaWare Development Toolkit, nSIM simulator, core_test source file in embAR OSP
 
 Content
