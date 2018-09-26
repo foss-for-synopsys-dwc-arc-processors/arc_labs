@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ARC DSP Using DSP Library &mdash; ARC Labs 2018.09 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="A WiFi temperature monitor" href="lab10.html" />
+    <link rel="prev" title="Programming ARC DSP Using FXAPI" href="dsp_lab2_fxapi.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ARC Labs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018.09
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introduction.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../labs.html">Labs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../labs.html#overview">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../labs.html#id2">Labs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../level1.html">Level 1 Labs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../level2.html">Level 2 Labs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab1_compiler_opt.html">Compiler Optimizations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab2_fxapi.html">Programming ARC DSP Using FXAPI</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ARC DSP Using DSP Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab10.html">A WiFi temperature monitor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab7.html">BLE Communication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab8.html">Memory map and linker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab9.html">How to use FreeRTOS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../level3.html">Level 3 Labs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendix/appendix.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ARC Labs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../labs.html">Labs</a> &raquo;</li>
+        
+          <li><a href="../level2.html">Level 2 Labs</a> &raquo;</li>
+        
+      <li>ARC DSP Using DSP Library</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/labs/level2/dsp_lab3_dsp_lib.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="arc-dsp-using-dsp-library">
+<span id="dsp-lab3-dsp-lib"></span><h1>ARC DSP Using DSP Library<a class="headerlink" href="#arc-dsp-using-dsp-library" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="part-1-prerequisites">
+<h2>Part 1. Prerequisites<a class="headerlink" href="#part-1-prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before starting using ARC DSP the following prerequisites are required:</p>
+<ul>
+<li><p class="first">Have MetaWare tools for Windows installed</p>
+<p><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware</a></p>
+</li>
+<li><p class="first">Known how to create, edit, build and debug projects in MetaWare IDE</p>
+</li>
+<li><p class="first">Have ARC EM Starter Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
+<p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
+</li>
+<li><p class="first">IOTDK board configured with DSP-enabled core configuration EM9D</p>
+</li>
+</ul>
+<p>The following needs to be tested before starting this lab:</p>
+<ul class="simple">
+<li>Connecting IOTDK board to computer</li>
+<li>Configuring IOTDK board to use ARC core with DSP extensions (these labs use EM5D core configuration)</li>
+<li>Connecting serial console (PuTTY) to IOTDK COM port(For information on how to do initial board setup and configuration please refer to  <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IOTDK  board.)</li>
+</ul>
+</div>
+<div class="section" id="part-2-lab-objectives">
+<h2>Part 2. Lab Objectives<a class="headerlink" href="#part-2-lab-objectives" title="Permalink to this headline">¶</a></h2>
+<p>Use DSP Library and compare program run speed with and without DSP library, i.e. DSP extension usage.</p>
+</div>
+<div class="section" id="part-3-lab-principle-and-method">
+<h2>Part 3. Lab principle and method<a class="headerlink" href="#part-3-lab-principle-and-method" title="Permalink to this headline">¶</a></h2>
+<p>This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions as well as write shorter code.</p>
+<p>In this lab two implementations of matrix multiplication are shown: done manually and with the use of DSP library.</p>
+<div class="section" id="matrix-multiplication">
+<h3>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Permalink to this headline">¶</a></h3>
+<p>Multiplication of two matrices A and B of sizes [M*N] and [N*K] respectively is done using the following formula:</p>
+<p><img alt="dsp_icon_3.1" src="../../_images/dsp_icon_3.1.png" /></p>
+<p>Where i= 0…(M-1) and j = 0..(K-1) are row and column indexes of output matrix, with size [M*N].</p>
+</div>
+<div class="section" id="implementation-without-dsp">
+<h3>Implementation without DSP<a class="headerlink" href="#implementation-without-dsp" title="Permalink to this headline">¶</a></h3>
+<p>An implementation of matrix multiplication of two matrices containing “short” values is shown below. By convention matrices here are implemented as 1D arrays with row-first indexing, where element a_ik is indexed as
+<img alt="dsp_icon_3.2" src="../../_images/dsp_icon_3.2.png" />
+. Build with the command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#define MATRIX_SIZE 20</span>
+<span class="cp">#define MAX_NUM 1000</span>
+<span class="cp">#define LOOPS 100000</span>
+
+<span class="cm">/* ********************************************* */</span>
+
+<span class="cm">/* Matrix manipulation functions */</span>
+
+<span class="cm">/* randomize matrix with values up to &#39;max_value */</span>
+<span class="kt">void</span> <span class="nf">rand_sq_mat</span><span class="p">(</span><span class="kt">short</span> <span class="n">x</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">int</span> <span class="n">SIZE</span><span class="p">,</span> <span class="kt">int</span> <span class="n">max_value</span><span class="p">)</span> <span class="p">;</span>
+
+<span class="cm">/* multiply two square matrices of same size*/</span>
+<span class="kt">void</span> <span class="nf">mul_sq_mat</span><span class="p">(</span><span class="kt">short</span> <span class="n">x</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">short</span> <span class="n">y</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">short</span> <span class="n">z</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">;</span>
+
+<span class="cm">/* print square matrix through UART*/</span>
+<span class="kt">void</span> <span class="nf">print_sq_mat</span><span class="p">(</span><span class="kt">short</span> <span class="n">x</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">int</span> <span class="n">SIZE</span><span class="p">);</span>
+
+<span class="cm">/* ********************************************* */</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+
+    <span class="kt">short</span> <span class="n">a</span><span class="p">[</span><span class="n">MATRIX_SIZE</span><span class="p">][</span><span class="n">MATRIX_SIZE</span><span class="p">];</span>
+    <span class="kt">short</span> <span class="n">b</span><span class="p">[</span><span class="n">MATRIX_SIZE</span><span class="p">][</span><span class="n">MATRIX_SIZE</span><span class="p">];</span>
+    <span class="kt">short</span> <span class="n">c</span><span class="p">[</span><span class="n">MATRIX_SIZE</span><span class="p">][</span><span class="n">MATRIX_SIZE</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span><span class="n">MATRIX_SIZE</span><span class="p">;</span>
+
+    <span class="n">rand_sq_mat</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="n">MAX_NUM</span><span class="p">);</span>
+    <span class="n">rand_sq_mat</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="n">MAX_NUM</span><span class="p">);</span>
+
+    <span class="n">print_sq_mat</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">print_sq_mat</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">led_status</span> <span class="o">=</span> <span class="mh">0x40</span> <span class="p">;</span>
+    <span class="n">led_status</span> <span class="o">=</span> <span class="mh">0x7F</span><span class="p">;</span>
+
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;*** Start ***</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">LOOPS</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="n">mul_sq_mat</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+            <span class="p">};</span>
+            <span class="n">led_write</span><span class="p">(</span><span class="n">led_status</span><span class="p">,</span> <span class="n">BOARD_LED_MASK</span><span class="p">);</span>
+            <span class="n">led_status</span> <span class="o">=</span> <span class="n">led_status</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">print_sq_mat</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;*** Exit ***</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+<span class="kt">void</span> <span class="nf">rand_sq_mat</span><span class="p">(</span><span class="kt">short</span> <span class="n">x</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">int</span> <span class="n">SIZE</span><span class="p">,</span> <span class="kt">int</span> <span class="n">max_value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">max_value</span><span class="p">);</span> <span class="c1">//plus 1 to avoid zeros</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">mul_sq_mat</span><span class="p">(</span><span class="kt">short</span> <span class="n">x</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span><span class="kt">short</span> <span class="n">y</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">short</span> <span class="n">z</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+                    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+                    <span class="p">}</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">print_sq_mat</span><span class="p">(</span><span class="kt">short</span> <span class="n">x</span><span class="p">[</span><span class="n">MATRIX_SIZE</span><span class="p">][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">int</span> <span class="n">SIZE</span><span class="p">){</span>
+
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;------</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span> <span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">){</span>
+            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\r</span><span class="s">&quot;</span> <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;------</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementation-with-dsplib">
+<h3>Implementation with DSPLIB<a class="headerlink" href="#implementation-with-dsplib" title="Permalink to this headline">¶</a></h3>
+<p>DSP library contains matrix multiplication function so doing matrix multiplication using DSP library requires just initialization of matrix arrays (1D) and call to <code class="docutils literal notranslate"><span class="pre">dsp_mat_mult_q15</span></code>. The overall code is just 4 lines, as highlighted in the following code. Note that dsplib.h must be included, and matrix a, b and c must be declared as global variable. As the numbers are in q15 type, it is better to make elements of a and b between 32767 (~0.99) and 16384 (0.5), or 32768(-1) and 49152 (-0.5) so that the result in c is not round to zero. Note as IOTDK is configured to have small AGU, the DSP library routine is not significantly faster.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;dsplib.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#define MATRIX_SIZE 20</span>
+<span class="cp">#define MAX_NUM 1000</span>
+<span class="cp">#define LOOPS 100000</span>
+
+<span class="cm">/* ********************************************* */</span>
+
+<span class="cm">/* Matrix manipulation functions */</span>
+
+<span class="cm">/* randomize matrix with values up to &#39;max_value */</span>
+<span class="c1">//void rand_sq_mat(short x[][MATRIX_SIZE], int SIZE, int max_value) ;</span>
+
+<span class="cm">/* multiply two square matrices of same size*/</span>
+<span class="kt">void</span> <span class="nf">mul_sq_mat</span><span class="p">(</span><span class="kt">short</span> <span class="n">x</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">short</span> <span class="n">y</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">short</span> <span class="n">z</span><span class="p">[][</span><span class="n">MATRIX_SIZE</span><span class="p">],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">;</span>
+
+<span class="cm">/* print square matrix through UART*/</span>
+<span class="kt">void</span> <span class="nf">print_sq_mat</span><span class="p">(</span><span class="kt">short</span><span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">SIZE</span><span class="p">);</span>
+
+<span class="cm">/* ********************************************* */</span>
+    <span class="n">__xy</span> <span class="n">q15_t</span> <span class="n">a</span><span class="p">[</span><span class="n">MATRIX_SIZE</span><span class="o">*</span><span class="n">MATRIX_SIZE</span><span class="p">];</span>
+    <span class="n">__xy</span> <span class="n">q15_t</span> <span class="n">b</span><span class="p">[</span><span class="n">MATRIX_SIZE</span><span class="o">*</span><span class="n">MATRIX_SIZE</span><span class="p">];</span>
+    <span class="n">__xy</span> <span class="n">q15_t</span> <span class="n">c</span><span class="p">[</span><span class="n">MATRIX_SIZE</span><span class="o">*</span><span class="n">MATRIX_SIZE</span><span class="p">];</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span><span class="n">MATRIX_SIZE</span><span class="p">;</span>
+<span class="n">matrix_q15_t</span> <span class="n">matA</span><span class="p">,</span> <span class="n">matB</span><span class="p">,</span> <span class="n">matC</span><span class="p">;</span>
+
+    <span class="c1">//rand_sq_mat(a,n, MAX_NUM);</span>
+    <span class="c1">//rand_sq_mat(b,n, MAX_NUM);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">MATRIX_SIZE</span><span class="o">*</span><span class="n">MATRIX_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">16384</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">MATRIX_SIZE</span><span class="o">*</span><span class="n">MATRIX_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">16383</span><span class="p">;</span> <span class="p">}</span>
+
+
+    <span class="n">print_sq_mat</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">print_sq_mat</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+
+<span class="n">dsp_mat_init_q15</span><span class="p">(</span><span class="o">&amp;</span><span class="n">matA</span><span class="p">,</span>  <span class="n">MATRIX_SIZE</span><span class="p">,</span> <span class="n">MATRIX_SIZE</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+<span class="n">dsp_mat_init_q15</span><span class="p">(</span><span class="o">&amp;</span><span class="n">matB</span><span class="p">,</span>  <span class="n">MATRIX_SIZE</span><span class="p">,</span> <span class="n">MATRIX_SIZE</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="n">dsp_mat_init_q15</span><span class="p">(</span><span class="o">&amp;</span><span class="n">matC</span><span class="p">,</span>  <span class="n">MATRIX_SIZE</span><span class="p">,</span> <span class="n">MATRIX_SIZE</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+<span class="n">dsp_status</span> <span class="n">status</span><span class="p">;</span>
+
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">led_status</span> <span class="o">=</span> <span class="mh">0x40</span> <span class="p">;</span>
+    <span class="n">led_status</span> <span class="o">=</span> <span class="mh">0x7F</span><span class="p">;</span>
+
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;*** Start ***</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">LOOPS</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="n">dsp_mat_mult_q15</span><span class="p">(</span><span class="o">&amp;</span><span class="n">matA</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">matB</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">matC</span><span class="p">);</span>
+            <span class="p">};</span>
+            <span class="n">led_write</span><span class="p">(</span><span class="n">led_status</span><span class="p">,</span> <span class="n">BOARD_LED_MASK</span><span class="p">);</span>
+            <span class="n">led_status</span> <span class="o">=</span> <span class="n">led_status</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">status</span> <span class="o">==</span> <span class="n">DSP_ERR_OK</span> <span class="p">)</span> <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;done</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;something wrong&quot;</span><span class="p">);</span>
+    <span class="n">print_sq_mat</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;*** Exit ***</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">//void rand_sq_mat(short x[][MATRIX_SIZE], int SIZE, int max_value) {</span>
+<span class="c1">//  for (int i=0;i&lt;SIZE;i++) {</span>
+<span class="c1">//          for(int j=0;j&lt;SIZE;j++) {</span>
+<span class="c1">//                  x[i][j] = 1 + (rand() % max_value); //plus 1 to avoid zeros</span>
+<span class="c1">//          }</span>
+<span class="c1">//  }</span>
+<span class="c1">//}</span>
+<span class="c1">//</span>
+<span class="c1">//void mul_sq_mat(short x[][MATRIX_SIZE],short y[][MATRIX_SIZE], short z[][MATRIX_SIZE], int size) {</span>
+<span class="c1">//  for (int i=0; i&lt;size; i++) {</span>
+<span class="c1">//          for(int j=0;j&lt;size;j++) {</span>
+<span class="c1">//                  z[i][j]=0;</span>
+<span class="c1">//                  for(int k=0;k&lt;size;k++) {</span>
+<span class="c1">//                          z[i][j] += x[i][k]*y[k][j];</span>
+<span class="c1">//                  }</span>
+<span class="c1">//          }</span>
+<span class="c1">//  }</span>
+<span class="c1">//}</span>
+
+<span class="kt">void</span> <span class="nf">print_sq_mat</span><span class="p">(</span><span class="kt">short</span><span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">SIZE</span><span class="p">){</span>
+
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;------</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span> <span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">){</span>
+            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">*</span><span class="n">SIZE</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\r</span><span class="s">&quot;</span> <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;------</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Assignment 1:</strong> Use example in previous lab to create an IOTDK board application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library. Adjust number of loops made to achieve measurable delay.</p>
+</div>
+</div>
+</div>
+<div class="section" id="part-4-test">
+<h2>Part 4. Test<a class="headerlink" href="#part-4-test" title="Permalink to this headline">¶</a></h2>
+<p>To test the example below an example program needs to be created that has two loops of matrix multiplications with and without DSP library.</p>
+<p>Both examples are to be compiled with DSP extensions, with the following options set:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-O2</span>&#160; <span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-Xlib</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xdsp1</span> <span class="pre">-Hdsplib</span></code></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Assignment 2:</strong> Run the example and compare computational delay with and without DSPLIB</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that DSPLIB is  statically linked with the project when  -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program won’t affect DSPLIB performance. On the other hand even with highest optimization level a function utilizing simple instructions on “short” type (even converted to MACs if possible) will be less efficient that direct use of DSPLIB.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="lab10.html" class="btn btn-neutral float-right" title="A WiFi temperature monitor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dsp_lab2_fxapi.html" class="btn btn-neutral" title="Programming ARC DSP Using FXAPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Synopsys.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2018.09',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

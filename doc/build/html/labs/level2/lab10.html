@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="BLE Communication" href="lab7.html" />
-    <link rel="prev" title="Level 2 Labs" href="../level2.html" /> 
+    <link rel="prev" title="ARC DSP Using DSP Library" href="dsp_lab3_dsp_lib.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -92,6 +92,9 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../labs.html#id2">Labs</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../level1.html">Level 1 Labs</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../level2.html">Level 2 Labs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab1_compiler_opt.html">Compiler Optimizations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab2_fxapi.html">Programming ARC DSP Using FXAPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab3_dsp_lib.html">ARC DSP Using DSP Library</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">A WiFi temperature monitor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab7.html">BLE Communication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab8.html">Memory map and linker</a></li>
@@ -174,23 +177,231 @@
             
   <div class="section" id="a-wifi-temperature-monitor">
 <span id="lab10"></span><h1>A WiFi temperature monitor<a class="headerlink" href="#a-wifi-temperature-monitor" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="espb266-wifi-module">
+<h2>ESPB266 WIFI module<a class="headerlink" href="#espb266-wifi-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="purpose">
-<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Learn how to build a wireless sensor terminal based on the embARC_osp package</li>
+<li>Further familiarity with the use of the FreeRTOS operating system</li>
+<li>Learn about the use of the esp8266 module and AT command</li>
+</ul>
 </div>
 <div class="section" id="equipment">
-<h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
+<h3>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h3>
+<p>PC, MetaWare tool chain/ARC GNU tool chain, EMSK, esp8266 WIFI module, Lab\esp8266_wifi source code</p>
 </div>
 <div class="section" id="content">
-<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<h3>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h3>
+<p>This experiment is based on the embARC_osp package extension to support the popular esp8266 WIFI module, use the AT command to set the esp8266 to the server mode, and then use the PC or mobile phone under the same LAN to access its IP address, based on the TCP protocol to achieve static page display of the client.</p>
+<p>Through this experiment, we will have a preliminary understanding of the use of the esp8266 WIFI module and the AT command.</p>
 </div>
 <div class="section" id="principles">
-<h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
+<h3>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h3>
+<p><strong>Esp8266</strong></p>
+<p>The ESP8266 is an ultra-low-power Wi-Fi chip with industry-leading package size and ultra-low power technology designed for mobile devices and IoT applications, connecting users’ physical devices to Wi-Fi wireless On the network, Internet or LAN communication is implemented to implement networking functions.</p>
+<p>The ESP8266 is available in a variety of encapsulation. The antenna supports the onboard PCB antenna, IPEX interface and stamp hole interface.</p>
+<p>ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handheld devices, industrial control and other fields.</p>
+<p>Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as its core(The Wi-Fi modules are shown below).</p>
+<p><img alt="figure1" src="../../_images/lab10.2_figure1.png" /></p>
+<p><strong>Program structure</strong>
+(as shown bellow)</p>
+<p><img alt="figure2" src="../../_images/lab10.2_figure2.png" /></p>
+<p><strong>Code</strong>
+(as shown bellow)</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;board.h&quot;</span><span class="cp"></span>
+<span class="c1">//#include &quot;dev_uart.h&quot;</span>
+<span class="cp">#include</span> <span class="cpf">&quot;esp8266.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#define WIFI_SSID   &quot;\&quot;liu\&quot;&quot;</span>
+<span class="cp">#define WIFI_PWD    &quot;\&quot;12345678\&quot;&quot;</span>
+
+<span class="k">static</span> <span class="kt">char</span> <span class="n">http_get</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;GET /&quot;</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">char</span> <span class="n">http_IDP</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;+IPD,&quot;</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">char</span> <span class="n">http_html_header</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;HTTP/1.x 200 OK</span><span class="se">\r\n</span><span class="s">Content-type: text/html</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">char</span> <span class="n">http_html_body_1</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;ESP8266_AT_HttpServer&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Welcome to this Website&lt;/h1&gt;&quot;</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">char</span> <span class="n">http_html_body_2</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;&lt;p&gt;This Website is used to test the AT command about HttpServer of ESP8266.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="kt">char</span> <span class="o">*</span><span class="n">conn_buf</span><span class="p">;</span>
+        <span class="kt">char</span> <span class="n">scan_result</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+
+        <span class="c1">//ESP8266 Init</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;============================ Init ============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+        <span class="n">ESP8266_DEFINE</span><span class="p">(</span><span class="n">esp8266</span><span class="p">);</span>
+        <span class="n">esp8266_init</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">UART_BAUDRATE_115200</span><span class="p">);</span>
+        <span class="n">at_test</span><span class="p">(</span><span class="n">esp8266</span><span class="o">-&gt;</span><span class="n">p_at</span><span class="p">);</span>
+        <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="c1">//Set Mode</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;============================ Set Mode ============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+        <span class="n">esp8266_wifi_mode_get</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+        <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">esp8266_wifi_mode_set</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+        <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="c1">//Connect WiFi</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;============================ Connect WiFi ============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+        <span class="k">do</span>
+        <span class="p">{</span>
+                <span class="n">esp8266_wifi_scan</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">scan_result</span><span class="p">);</span>
+                <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Searching for WIFI %s ......</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+                <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">scan_result</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">)</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WIFI %s found! Try to connect</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+
+        <span class="k">while</span><span class="p">(</span><span class="n">esp8266_wifi_connect</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">,</span> <span class="n">WIFI_PWD</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span><span class="o">!=</span><span class="n">AT_OK</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WIFI %s connect failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+                <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WIFI %s connect succeed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+
+        <span class="c1">//Creat Server</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;============================ Connect Server ============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+        <span class="n">esp8266_tcp_server_open</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+
+        <span class="c1">//Show IP</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;============================ Show IP ============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+        <span class="n">esp8266_address_get</span><span class="p">(</span><span class="n">esp8266</span><span class="p">);</span>
+        <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;============================ while ============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="n">memset</span><span class="p">(</span><span class="n">scan_result</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">scan_result</span><span class="p">));</span>
+                <span class="n">at_read</span><span class="p">(</span><span class="n">esp8266</span><span class="o">-&gt;</span><span class="n">p_at</span> <span class="p">,</span><span class="n">scan_result</span> <span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+                <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="c1">//EMBARC_PRINTF(&quot;Alive\n&quot;);</span>
+
+                <span class="k">if</span><span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">scan_result</span><span class="p">,</span> <span class="n">http_get</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+                <span class="p">{</span>
+
+<span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;============================ send ============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+                        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">The message is:</span><span class="se">\n</span><span class="s">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">scan_result</span><span class="p">);</span>
+
+                        <span class="n">conn_buf</span> <span class="o">=</span> <span class="n">strstr</span><span class="p">(</span><span class="n">scan_result</span><span class="p">,</span> <span class="n">http_IDP</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+                        <span class="o">*</span><span class="p">(</span><span class="n">conn_buf</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+                        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Send Start</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                        <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+                        <span class="n">esp8266_connect_write</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">http_html_header</span><span class="p">,</span> <span class="n">conn_buf</span><span class="p">,</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">http_html_header</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+                        <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+                        <span class="n">esp8266_connect_write</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">http_html_body_1</span><span class="p">,</span> <span class="n">conn_buf</span><span class="p">,</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">http_html_body_1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+                        <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+                        <span class="n">esp8266_connect_write</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">http_html_body_2</span><span class="p">,</span> <span class="n">conn_buf</span><span class="p">,</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">http_html_body_2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+                        <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+                        <span class="n">esp8266_CIPCLOSE</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">conn_buf</span><span class="p">);</span>
+
+                        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Send Finish</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">E_OK</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="steps">
-<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<h3>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
+<p><strong>Hardware connection</strong>
+(as shown bellow)</p>
+<p><img alt="figure3" src="../../_images/lab10.2_figure3.png" /></p>
+<p><strong>Compile and download</strong></p>
+<p>Compile and download the program, after downloading successfully, you will see the relevant download information in the cmd window(as shown bellow).</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>0x00000004 in ?? ()
+Loading section .init, size 0x1b0 lma 0x10000000
+Loading section .vector, size 0x400 lma 0x10000400
+Loading section .text, size 0x1446c lma 0x10000800
+Loading section .rodata, size 0x1cb4 lma 0x10014c6c
+Loading section .data, size 0xc2c lma 0x10016920
+Start address 0x10000004, load size 94972
+Transfer rate: 602 KB/sec, 9497 bytes/write.
+Continuing.
+</pre></div>
+</div>
+<p>At this point, the serial port debugging tool will see the serial port feedback information, reflecting the process of the EMSK development board using the AT command to establish the httpserver(as shown bellow).</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>embARC Build Time: Mar 21 2018, 17:53:27
+Compiler Version: ARC GNU, 7.1.1 20170710
+============================ Init ============================
+[at_parser_init]56: obj-&gt;psio 0x1006ba30 -&gt; 0x10057948
+
+.............
+
+OK&quot; (9)
+============================ Set Mode ============================
+[at_send_cmd]117: at_out: &quot;AT+CWMODE_CUR?
+&quot; (16)
+
+.................
+
+OK&quot; (24)
+============================ Connect WiFi ============================
+[at_send_cmd]117: at_out: &quot;AT+CWLAP
+&quot; (10)
+
+..................
+
+OK&quot; (24)
+[at_send_cmd]117: at_out: &quot;AT+CWJAP_CUR=&quot;liusongwei&quot;,&quot;632139751&quot;
+
+..........
+
+WIFI &quot;liusongwei&quot; connect succeed
+============================ Connect Server ============================
+[at_send_cmd]117: at_out: &quot;AT+CIPMUX=1
+&quot; (13)
+
+........
+
+OK&quot; (26)
+============================ Show IP ============================
+[at_send_cmd]117: at_out: &quot;AT+CIFSR
+&quot; (10)
+[at_get_reply]137: &quot;
+AT+CIFSR
++CIFSR:STAIP,&quot;192.168.137.81&quot;
++CIFSR:STAMAC,&quot;5c:cf:7f:0b:5c:d1&quot;
+
+OK&quot; (83)
+============================ while ============================
+.............
+============================ send  ============================
+..............
+
+Send Start
+Send Finish
+</pre></div>
+</div>
+<p><strong>Access server</strong></p>
+<p>It can be seen from the serial port feedback information in above <em>Compile and download</em> that the EMSK development board has successfully connected to the target WIFI through esp8266, and is set to the server mode by using the AT command, and the IP address of the server is given.</p>
+<p>At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page.</p>
 </div>
 <div class="section" id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
+<p>Referring to the experiment of MRF24G WIFI module, using esp8266 and TCN75 temperature sensor to build httpserver to make the page display the sensor temperature in real time.</p>
+</div>
 </div>
 </div>
 
@@ -205,7 +416,7 @@
         <a href="lab7.html" class="btn btn-neutral float-right" title="BLE Communication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../level2.html" class="btn btn-neutral" title="Level 2 Labs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dsp_lab3_dsp_lib.html" class="btn btn-neutral" title="ARC DSP Using DSP Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

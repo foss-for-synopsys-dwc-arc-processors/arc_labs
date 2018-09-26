@@ -1,0 +1,388 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Programming ARC DSP Using FXAPI &mdash; ARC Labs 2018.09 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ARC DSP Using DSP Library" href="dsp_lab3_dsp_lib.html" />
+    <link rel="prev" title="Compiler Optimizations" href="dsp_lab1_compiler_opt.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ARC Labs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2018.09
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introduction.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../labs.html">Labs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../labs.html#overview">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../labs.html#id2">Labs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../level1.html">Level 1 Labs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../level2.html">Level 2 Labs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab1_compiler_opt.html">Compiler Optimizations</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Programming ARC DSP Using FXAPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab3_dsp_lib.html">ARC DSP Using DSP Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab10.html">A WiFi temperature monitor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab7.html">BLE Communication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab8.html">Memory map and linker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab9.html">How to use FreeRTOS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../level3.html">Level 3 Labs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendix/appendix.html">Appendix</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ARC Labs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../labs.html">Labs</a> &raquo;</li>
+        
+          <li><a href="../level2.html">Level 2 Labs</a> &raquo;</li>
+        
+      <li>Programming ARC DSP Using FXAPI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/labs/level2/dsp_lab2_fxapi.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="programming-arc-dsp-using-fxapi">
+<span id="dsp-lab2-fxapi"></span><h1>Programming ARC DSP Using FXAPI<a class="headerlink" href="#programming-arc-dsp-using-fxapi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="part-1-prerequisites">
+<h2>Part 1. Prerequisites<a class="headerlink" href="#part-1-prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before starting using ARC DSP the following prerequisites are required:</p>
+<ul>
+<li><p class="first">Have MetaWare tools for Windows installed</p>
+<p><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware</a></p>
+</li>
+<li><p class="first">Known how to create, edit, build and debug projects in MetaWare IDE</p>
+</li>
+<li><p class="first">Have ARC IOT Design Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
+<p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
+</li>
+<li><p class="first">IOTDK board is based on DSP-enabled core configurationEM9D</p>
+</li>
+</ul>
+<p>The following needs to be tested before starting this lab:</p>
+<ul class="simple">
+<li>Connecting IOTDK board to computer</li>
+<li>Connecting serial console (PuTTY) to IOTDK COM port(For information on how to do initial board setup and configuration please refer to  <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IOTDK  board.)</li>
+</ul>
+</div>
+<div class="section" id="part-2-lab-objectives">
+<h2>Part 2. Lab Objectives<a class="headerlink" href="#part-2-lab-objectives" title="Permalink to this headline">¶</a></h2>
+<p>Use FXAPI and compare program run speed with and without FXAPI, i.e. DSP extension usage.</p>
+</div>
+<div class="section" id="part-3-lab-principle-and-method">
+<h2>Part 3. Lab principle and method<a class="headerlink" href="#part-3-lab-principle-and-method" title="Permalink to this headline">¶</a></h2>
+<p>This lab uses complex number multiplication as an example where using just compiler optimization options cannot gain the same effect as calling DSP instructions manually through FXAPI.</p>
+<p>In this lab two implementations of complex multiplication are shown with and without FXAPI.</p>
+<div class="section" id="complex-number-multiplication">
+<h3>Complex number multiplication<a class="headerlink" href="#complex-number-multiplication" title="Permalink to this headline">¶</a></h3>
+<p>Multiplication of two complex numbers
+<img alt="dsp_icon_2.1" src="../../_images/dsp_icon_2.1.png" />
+and
+<img alt="dsp_icon_2.2" src="../../_images/dsp_icon_2.2.png" /></p>
+<p>Is done using formula:</p>
+<p><img alt="dsp_icon_2.3" src="../../_images/dsp_icon_2.3.png" /></p>
+<p>In this lab example multiplication and accumulation of two arrays of complex numbers will be used as a way to compare performance of ARC DSP extensions when used effectively.</p>
+<p>The sum of element wise products of two arrays of complex numbers is calculated according to the following formula:</p>
+<p><img alt="dsp_icon_2.4" src="../../_images/dsp_icon_2.4.png" /></p>
+<p>where a and b are arrays of N complex numbers.</p>
+</div>
+<div class="section" id="implementation-without-dsp">
+<h3>Implementation without DSP<a class="headerlink" href="#implementation-without-dsp" title="Permalink to this headline">¶</a></h3>
+<p>In order to calculate element wise products of two arrays of complex numbers a struct cat be defined that stores real and imaginary parts of the complex number, thus the calculation process receives an array of structures and works on it. The code is shown below:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> <span class="kt">short</span> <span class="n">real</span><span class="p">;</span> <span class="kt">short</span> <span class="n">imag</span><span class="p">;</span> <span class="p">}</span> <span class="n">complex_short</span><span class="p">;</span>
+
+<span class="n">complex_short</span> <span class="nf">short_complex_array_mult</span> <span class="p">(</span><span class="n">complex_short</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">complex_short</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">complex_short</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="n">acci</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">accr</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">accr</span>  <span class="o">+=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">real</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">real</span> <span class="p">);</span>
+            <span class="n">accr</span>  <span class="o">-=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">imag</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">imag</span> <span class="p">);</span>
+
+            <span class="n">acci</span>  <span class="o">+=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">real</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">imag</span> <span class="p">);</span>
+            <span class="n">acci</span>  <span class="o">+=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">imag</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">real</span> <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">result</span><span class="p">.</span><span class="n">real</span> <span class="o">=</span> <span class="p">(</span><span class="kt">short</span><span class="p">)</span> <span class="n">accr</span><span class="p">;</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">imag</span> <span class="o">=</span> <span class="p">(</span><span class="kt">short</span><span class="p">)</span> <span class="n">acci</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The example keep real and imaginary values in variables of type “short”, while multiplication results are kept in “int” integer to avoid truncation. Final result is casted to short to return complex number as a result.</p>
+</div>
+<div class="section" id="implementation-with-fxapi">
+<h3>Implementation with FXAPI<a class="headerlink" href="#implementation-with-fxapi" title="Permalink to this headline">¶</a></h3>
+<p>FXAPI makes it possible to directly access complex number instructions (like MAC)  available in ARC DSP Extensions. This is done through complex number type cq15_t, and various fx_* functions. Here <code class="docutils literal notranslate"><span class="pre">fx_v2a40_cmac_cq15</span></code> FXAPI function is called which performs MAC of two cq15_t complex numbers.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">cq15_t</span> <span class="nf">fx_complex_array_mult</span><span class="p">(</span><span class="n">cq15_t</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">cq15_t</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">v2accum40_t</span> <span class="n">acc</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+       <span class="n">acc</span> <span class="o">=</span> <span class="n">fx_v2a40_cmac_cq15</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="o">++</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="o">++</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">fx_cq15_cast_v2a40</span><span class="p">(</span> <span class="n">acc</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As with previous implementation <code class="docutils literal notranslate"><span class="pre">q15_t</span></code> is of similar size as <code class="docutils literal notranslate"><span class="pre">short</span></code> type thus multiplication result needs larger storage. Here 40b vector accumulator is used directly to store intermediate results of MAC, and is casted to <code class="docutils literal notranslate"><span class="pre">cq15_t</span></code> on return.</p>
+</div>
+<div class="section" id="using-iotdk-board-for-performance-comparison">
+<h3>Using IOTDK board for performance comparison<a class="headerlink" href="#using-iotdk-board-for-performance-comparison" title="Permalink to this headline">¶</a></h3>
+<p>To compare performance of these two functions a simple ESMK application is created that performance complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop  (1 000 000-10 000 000 times) to make calculation delay measurable in seconds, this is done 8 times, and after each loop a LED on board is turn on. In the result LED strip on board works as a “progress bar” showing the process of looped multiplicaitons.</p>
+<p>The main performance check loop is shown below, the outer loop runs 8 times (number of LEDs on LED strip) the inner loop makes “LOOPS/8” calls to complex multiplication function, LOOPS variable is configurable to change the total delay. The example below uses DSP types, and can be changed to use short-based struct type.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;fxarc.h&quot;</span><span class="cp"></span>
+<span class="cp">#define LOOPS 10000000</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">led_status</span> <span class="o">=</span> <span class="mh">0x40</span> <span class="p">;</span>
+    <span class="n">DWCREG_PTR</span> <span class="n">pctr</span> <span class="o">=</span>
+         <span class="p">(</span><span class="n">DWCREG_PTR</span><span class="p">)</span> <span class="p">(</span><span class="n">DWC_GPIO_0</span> <span class="o">|</span> <span class="n">PERIPHERAL_BASE</span><span class="p">);</span>
+    <span class="n">DWCREG_PTR</span> <span class="n">uart</span> <span class="o">=</span>
+         <span class="p">(</span><span class="n">DWCREG_PTR</span><span class="p">)</span> <span class="p">(</span><span class="n">DWC_UART_CONSOLE</span> <span class="o">|</span> <span class="n">PERIPHERAL_BASE</span><span class="p">);</span>
+
+    <span class="n">gpio_init</span><span class="p">(</span><span class="n">pctr</span><span class="p">);</span>
+    <span class="n">uart_initDevice</span><span class="p">(</span><span class="n">uart</span><span class="p">,</span> <span class="n">UART_CFG_BAUDRATE_115200</span><span class="p">,</span>
+           <span class="n">UART_CFG_DATA_8BITS</span><span class="p">,</span>
+           <span class="n">UART_CFG_1STOP</span><span class="p">,</span> <span class="n">UART_CFG_PARITY_NONE</span><span class="p">);</span>
+
+    <span class="n">cq15_t</span>  <span class="n">cq15_a</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="p">{{</span><span class="mh">0x2000</span><span class="p">,</span><span class="mi">10</span><span class="p">},{</span><span class="mh">0x100</span><span class="p">,</span><span class="mi">20</span><span class="p">},{</span><span class="mi">4</span><span class="p">,</span><span class="mi">30</span><span class="p">}};</span>
+    <span class="n">cq15_t</span>  <span class="n">cq15_b</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="p">{{</span><span class="mh">0x2000</span><span class="p">,</span><span class="mi">11</span><span class="p">},{</span><span class="mh">0x100</span><span class="p">,</span><span class="mi">21</span><span class="p">},{</span><span class="mi">5</span><span class="p">,</span><span class="mi">31</span><span class="p">}};</span>
+    <span class="n">cq15_t</span> <span class="n">res</span><span class="p">;</span>
+
+    <span class="n">uart_print</span><span class="p">(</span><span class="n">uart</span><span class="p">,</span> <span class="s">&quot;*** Start ***</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+
+    <span class="n">led_status</span> <span class="o">=</span> <span class="mh">0x7F</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">gpio_set_leds</span><span class="p">(</span><span class="n">pctr</span><span class="p">,</span> <span class="n">led_status</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">LOOPS</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">fx_complex_array_mult</span><span class="p">(</span><span class="n">cq15_a</span><span class="p">,</span> <span class="n">cq15_b</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+            <span class="p">};</span>
+
+            <span class="n">led_status</span> <span class="o">=</span> <span class="n">led_status</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">gpio_set_leds</span><span class="p">(</span><span class="n">pctr</span><span class="p">,</span> <span class="mh">0x01ff</span><span class="p">);</span>
+    <span class="n">uart_print</span><span class="p">(</span><span class="n">uart</span><span class="p">,</span> <span class="s">&quot;*** End ***</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="part-4-test">
+<h2>Part 4. Test<a class="headerlink" href="#part-4-test" title="Permalink to this headline">¶</a></h2>
+<p>To test the example below some modification of the code will be required to make have two loops with and without DSP. First you must re-build libraries for this particular configuration of IOTDK:</p>
+<p><code class="docutils literal notranslate"><span class="pre">buildlib</span> <span class="pre">my_dsp</span> <span class="pre">-tcf=&lt;IOTDK</span> <span class="pre">tcf</span> <span class="pre">file&gt;</span> <span class="pre">-bd</span> <span class="pre">.</span> <span class="pre">-f</span></code></p>
+<p>IOTDK tcf file can be found in <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/tree/feature/iotdk/board/iotdk/configs/10/tcf/arcem9d.tcf">https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/tree/feature/iotdk/board/iotdk/configs/10/tcf/arcem9d.tcf</a></p>
+<p>Both examples are to be compiled with DSP extensions, with the following options set:</p>
+<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></p>
+<p>With high optimization level set high function using “short” type is compiled to us DSP MAC operation, enabling significant speedup.</p>
+<p><img alt="dsp_figure_2.1" src="../../_images/dsp_figure_2.1.png" /></p>
+<p>However, using FXAPI enables compiler to directly use complex MAC instruction “cmachfr”.</p>
+<p><img alt="dsp_figure_2.2" src="../../_images/dsp_figure_2.2.png" /></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dsp_lab3_dsp_lib.html" class="btn btn-neutral float-right" title="ARC DSP Using DSP Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dsp_lab1_compiler_opt.html" class="btn btn-neutral" title="Compiler Optimizations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Synopsys.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2018.09',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
