@@ -6,6 +6,9 @@ dist: trusty
 
 cache:
   pip: true
+  directories:
+    - .cache/result
+    - .cache/toolchain
 env:
   global:
     - >
@@ -18,6 +21,12 @@ env:
       "target_url": "https://travis-ci.org/$TRAVIS_REPO_SLUG/jobs/$TRAVIS_JOB_ID"
       }\nDATA'
 
+      COMMENT=none
+      COMMENTS=$'curl -so/dev/null --user "$EMBARC_BOT" --request POST
+      https://api.github.com/repos/$TRAVIS_REPO_SLUG/issues/$TRAVIS_PULL_REQUEST/comments
+      --data @- << DATA\n{
+      "body": "$COMMENT"
+      }\nDATA'
 
 branches:
   except:
@@ -41,5 +50,21 @@ script:
 matrix:
   include:
     - env: NAME="doc" TOOLCHAIN="sphinx" OSP_ROOT="none" GNU_VER="none"
+      os: linux
+      compiler: gcc
+
+    - env: NAME="labs-emsk-gnu-201709" TOOLCHAIN="gnu" BOARD="emsk" OSP_ROOT="." TOOLCHAIN_VER="2017.09" EXAMPLES="arc_labs"
+      os: linux
+      compiler: gcc
+
+    - env: NAME="labs-emsk-gnu-201803" TOOLCHAIN="gnu" BOARD="emsk" OSP_ROOT="." TOOLCHAIN_VER="2018.03" EXAMPLES="arc_labs"
+      os: linux
+      compiler: gcc
+
+    - env: NAME="labs-iotdk-gnu-201709" TOOLCHAIN="gnu" BOARD="iotdk" OSP_ROOT="." TOOLCHAIN_VER="2017.09" EXAMPLES="arc_labs"
+      os: linux
+      compiler: gcc
+
+    - env: NAME="labs-iotdk-gnu-201803" TOOLCHAIN="gnu" BOARD="iotdk" OSP_ROOT="." TOOLCHAIN_VER="2018.03" EXAMPLES=arc_labs"
       os: linux
       compiler: gcc

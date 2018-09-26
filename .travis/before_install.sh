@@ -27,4 +27,8 @@ die() {
     pip install breathe || die "Failed to install breathe"
     pip install recommonmark || die "Failed to install recommonmark"
     pip install sphinx_rtd_theme || die "Failed to install sphinx_rtd_theme"
+    pip install PrettyTable || die
+    pip install colorama || die
+    pip install configparser || die
+    pip install requests || die
 }
