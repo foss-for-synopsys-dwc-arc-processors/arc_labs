@@ -190,13 +190,13 @@
 <li>PC host</li>
 <li>ARC GNU toolchain/MetaWare Development Toolkit</li>
 <li>ARC board (EM Starter kit/IoT Development Kit)</li>
-<li>embARC OSP packag</li>
+<li>embARC OSP package</li>
 <li><code class="docutils literal notranslate"><span class="pre">labs/lab4_interrupt</span></code></li>
 </ul>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through <strong>labs\lab4_interrupt</strong> in the embARC OSP package. The two routines give you a preliminary understanding of the ARC interrupt resources.</p>
+<p>This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through <code class="docutils literal notranslate"><span class="pre">labs/lab4_interrupt</span></code> in the embARC OSP packagee. The two routines give you a preliminary understanding of the ARC interrupt resources.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
@@ -207,8 +207,10 @@
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="open-and-browse-lab-one">
 <h3>Open and browse lab one<a class="headerlink" href="#open-and-browse-lab-one" title="Permalink to this headline">¶</a></h3>
-<p>Go to the embarc_osp\example\Lab\interrupt directory, where there are two folders, lab_4_1 and lab_4_2.</p>
-<p>The lab_4_1 is more fundamental compared to lab_4_2. So we first enter folder lab_4_1, in which the precise timing function is implemented through the timer interrupt.</p>
+<p>Go to the <code class="docutils literal notranslate"><span class="pre">labs/lab4_interrupt</span></code>, where there are two folders, <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code> and <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code> is more fundamental compared to <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>. So we first enter
+folder <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code>, in which the precise timing function is implemented
+through the timer interrupt.</p>
 <p>Open main.c and browse the entire program.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
@@ -353,7 +355,8 @@ The implementation of the <code class="docutils literal notranslate"><span class
 </div>
 <div class="section" id="open-and-browse-the-lab-two">
 <h3>Open and browse the lab two<a class="headerlink" href="#open-and-browse-the-lab-two" title="Permalink to this headline">¶</a></h3>
-<p>We then enter lab_4_2, which mainly shows the working state of priority and interrupt nesting.</p>
+<p>We then enter <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>, which mainly shows the working state of priority
+and interrupt nesting.</p>
 <p>Open main.c and browse through the entire program.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>

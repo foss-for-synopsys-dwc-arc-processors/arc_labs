@@ -92,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#install-metaware-toolkit">Install Metaware Toolkit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-arc-gnu-toolchain">Install ARC GNU Toolchain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-embarc-osp">Install embARC OSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-arc-labs-code">Install ARC labs code</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#final-check">Final Check</a></li>
@@ -277,6 +278,20 @@ cloning via git. There are scripts and such in this repo that you’ll need to s
 </div>
 <p>You have successfully checked out a copy of the source code to your local
 machine.</p>
+</div>
+<div class="section" id="install-arc-labs-code">
+<h3>Install ARC labs code<a class="headerlink" href="#install-arc-labs-code" title="Permalink to this headline">¶</a></h3>
+<p>The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first, then copy the <code class="docutils literal notranslate"><span class="pre">labs</span></code> folder to the <code class="docutils literal notranslate"><span class="pre">example</span></code> folder of embARC OSP. You will get the following folder structure:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">example</span>
+<span class="go">├── baremetal</span>
+<span class="go">├── example.makefile</span>
+<span class="go">├── example.rst</span>
+<span class="go">├── freertos</span>
+<span class="go">├── labs</span>
+<span class="go">├── main.c.tmpl</span>
+<span class="go">└── makefile</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="final-check">

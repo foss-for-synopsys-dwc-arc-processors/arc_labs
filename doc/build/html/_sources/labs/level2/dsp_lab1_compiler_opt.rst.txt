@@ -8,18 +8,18 @@ Part 1. Prerequisites
 
 Before starting using ARC DSP the following prerequisites are required:
 
-* Have MetaWare tools for Windows installed 
-  
-  `<https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_ 
+* Have MetaWare tools for Windows installed
+
+  `<https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
 
 * Known how to create, edit, build and debug projects in MetaWare IDE
-* Have IOT Design Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested 
-  
+* Have IOT Design Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested
+
   `<http://store.digilentinc.com/digilent-adept-2-download-only>`_
 
 * IOTDK board is EM9D based
 
-The following needs to be tested before starting this lab: 
+The following needs to be tested before starting this lab:
 
 * Connecting IOTDK board to computer
 * Connecting serial console (PuTTY) to IOTDK COM port(For information on how to do initial board setup and configuration please refer to *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board.)
@@ -65,7 +65,7 @@ Options that are used in the lab are:
 
 * ``-Hfxapi``: Use the Fixed Point API support library
 
-  Used with ``-Xdsp``. Provides low level intrinsic support for EM DSP instructions. 
+  Used with ``-Xdsp``. Provides low level intrinsic support for EM DSP instructions.
 
   Programs written using this API execute natively on an ARC EM processor with DSP extensions and can also be emulated on x86 Windows hosts.
 
@@ -78,7 +78,7 @@ Options that are used in the lab are:
   Enables AGU, and specifies its size. Note IOTDK has small AGU
 
 .. note::
- 
+
     Because ARC is configurable processor, different cores can contain different extensions on hardware level. Thus options set for compiler should match underlying hardware. On the other hand if specific hardware future is present in the core but compiler option is not set, it won't be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.
 
 Optimization level
@@ -96,36 +96,36 @@ A regular code without direct usage of DSP extensions can be optimized to use DS
 Checking options
 ^^^^^^^^^^^^^^^^^^
 
-Options are specified in the makefile or command line, as shown in the previous section. 
+Options are specified in the makefile or command line, as shown in the previous section.
 
 Part 4. Optimizing code
 --------------------------
 
-An example code below contains a function called "test"  which contains a 20 step for loop and a multiply accumulate operation done manually. 
+An example code below contains a function called "test"  which contains a 20 step for loop and a multiply accumulate operation done manually.
 
 .. code-block:: c
 
     #include <stdio.h>
-     
+
     short test(short *a, short *b) {
     	int i;
-    
+
     	long acc = 0;
     	for(i = 0; i < 10; i++)
     		acc += ( ((long)(*a++)) * *b++) <<1 ;
-    
+
     	return (short) (acc);
     }
-    
+
     short a[] = {1,2,3,4,5, 6,7,8,9,10};
     short b[] = {11,12,13,14,15, 16,17,18,19,20};
-    
+
     int main(int argc, char *argv[]) {
-    
+
     	short c = test(a,b);
-    
+
     	printf("result=%d",c);
-    
+
     	return 0;
     }
 
@@ -134,7 +134,7 @@ Step 1. Compiling without DSP extensions
 
 Set optimization level "-O0", and no DSP extensions (unchecking -Xdsp1, -Xdsp2).
 
-After compilation open disassembly window and check assembly code for function "test". 
+After compilation open disassembly window and check assembly code for function "test".
 
 Below is the list options used when launching gmake:
 
@@ -175,7 +175,7 @@ Adding -Xdsp1 (optimization level changed to -O3) helps compiler to optimize awa
 |dsp_figure_1.3|
 
 .. note::
-    
+
     **Assignment:** Remove "<<1" from test function, see what changes in output instructions.
 
 Appendix A.IOTDK Default Core Configurations
@@ -192,9 +192,9 @@ This is an ARC EM core with 32 bits of address space, 128 KB of code memory (ICC
 This is an ARC EM core with 32 bits of address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:
 
 ``-arcv2em -core2 -HL -Xcode_density -Xdiv_rem=radix2 -Xswap``
- 
+
 ``-Xbitscan -Xmpy_option=mpyd -Xshift_assist -Xbarrel_shifter``
- 
+
 ``-Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_accshift=limited -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac``
 
 **ARC_EM9D**
@@ -204,13 +204,13 @@ This is an ARC EM core with 32 bits of address space, 256 KB of code memory (ICC
 ``-arcv2em -core2 -Hrgf_banked_regs=32 -HL -Xcode_density``
 
 ``-Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd``
- 
+
 ``-Xshift_assist -Xbarrel_shifter -Xdsp2 -Xdsp_complex``
 
 ``-Xdsp_divsqrt=radix2 -Xdsp_itu-Xdsp_accshift=full -Xagu_large``
 
 ``-Xxy -Xbitstream -Xfpus_div -Xfpu_mac -Xfpus_mpy_slow``
- 
+
 ``-Xfpus_div_slow -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac``
 
 **ARC_EM11D Configuration**

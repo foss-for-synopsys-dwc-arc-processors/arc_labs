@@ -16,7 +16,7 @@ The following hardware and software tools are required:
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
-* embARC OSP packag
+* |embarc| package
 * ``labs/lab3_timer``
 
 Content
@@ -86,7 +86,7 @@ There are two ways to do the configuration.
 
 	make -j4 run
 
-Open the folder *embarc_osp\\example\\Lab\\timer*, and open the *makefile*, here is the default configuration.
+Open the folder ``embarc_osp\\example\\Lab\\timer``, and open the ``makefile``, here is the default configuration.
 
 .. code-block:: makefile
 

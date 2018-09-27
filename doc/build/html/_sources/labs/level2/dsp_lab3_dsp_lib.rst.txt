@@ -1,7 +1,7 @@
 .. _dsp_lab3_dsp_lib:
 
 ARC DSP Using DSP Library
-===================================
+=========================
 
 Part 1.	Prerequisites
 -----------------------------
@@ -20,7 +20,7 @@ Before starting using ARC DSP the following prerequisites are required:
 
 * IOTDK board configured with DSP-enabled core configuration EM9D
 
-The following needs to be tested before starting this lab: 
+The following needs to be tested before starting this lab:
 
 * Connecting IOTDK board to computer
 
@@ -36,9 +36,9 @@ Use DSP Library and compare program run speed with and without DSP library, i.e.
 Part 3.	Lab principle and method
 -------------------------------------
 
-This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions as well as write shorter code.  
+This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions as well as write shorter code.
 
-In this lab two implementations of matrix multiplication are shown: done manually and with the use of DSP library. 
+In this lab two implementations of matrix multiplication are shown: done manually and with the use of DSP library.
 
 Matrix multiplication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -52,7 +52,7 @@ Where i= 0...(M-1) and j = 0..(K-1) are row and column indexes of output matrix,
 Implementation without DSP
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-An implementation of matrix multiplication of two matrices containing "short" values is shown below. By convention matrices here are implemented as 1D arrays with row-first indexing, where element a_ik is indexed as 
+An implementation of matrix multiplication of two matrices containing "short" values is shown below. By convention matrices here are implemented as 1D arrays with row-first indexing, where element a_ik is indexed as
 |dsp_icon_3.2|
 . Build with the command:
 
@@ -63,44 +63,44 @@ An implementation of matrix multiplication of two matrices containing "short" va
     #include "embARC.h"
     #include "embARC_debug.h"
     #include <stdlib.h>
-    
+
     #define MATRIX_SIZE 20
     #define MAX_NUM 1000
     #define LOOPS 100000
-    
+
     /* ********************************************* */
-    
+
     /* Matrix manipulation functions */
-    
+
     /* randomize matrix with values up to 'max_value */
     void rand_sq_mat(short x[][MATRIX_SIZE], int SIZE, int max_value) ;
-    
+
     /* multiply two square matrices of same size*/
     void mul_sq_mat(short x[][MATRIX_SIZE], short y[][MATRIX_SIZE], short z[][MATRIX_SIZE], int size) ;
-    
+
     /* print square matrix through UART*/
     void print_sq_mat(short x[][MATRIX_SIZE], int SIZE);
-    
+
     /* ********************************************* */
-    
+
     int main(int argc, char *argv[]) {
-    	
+
     	short a[MATRIX_SIZE][MATRIX_SIZE];
     	short b[MATRIX_SIZE][MATRIX_SIZE];
     	short c[MATRIX_SIZE][MATRIX_SIZE];
     	int n =MATRIX_SIZE;
-    
+
     	rand_sq_mat(a,n, MAX_NUM);
     	rand_sq_mat(b,n, MAX_NUM);
-    
+
     	print_sq_mat(a,n);
     	print_sq_mat(b,n);
-    
+
     	unsigned int led_status = 0x40 ;
     	led_status = 0x7F;
-    
+
     	EMBARC_PRINTF("*** Start ***\n\r");
-    
+
     	for (int i =0; i< 8; i++) {
     		for (int j = 1; j < LOOPS/8; j++ ) {
     			mul_sq_mat(a,b,c,n);
@@ -108,16 +108,16 @@ An implementation of matrix multiplication of two matrices containing "short" va
     		led_write(led_status, BOARD_LED_MASK);
     		led_status = led_status >> 1;
     	}
-    
+
     	print_sq_mat(c,n);
-    
+
     	EMBARC_PRINTF("*** Exit ***\n\r");
-    
+
     	return 0;
     }
-    
-    
-    
+
+
+
     void rand_sq_mat(short x[][MATRIX_SIZE], int SIZE, int max_value) {
     	for (int i=0;i<SIZE;i++) {
     		for(int j=0;j<SIZE;j++) {
@@ -125,7 +125,7 @@ An implementation of matrix multiplication of two matrices containing "short" va
     		}
     	}
     }
-    
+
     void mul_sq_mat(short x[][MATRIX_SIZE],short y[][MATRIX_SIZE], short z[][MATRIX_SIZE], int size) {
     	for (int i=0; i<size; i++) {
     		for(int j=0;j<size;j++) {
@@ -136,18 +136,18 @@ An implementation of matrix multiplication of two matrices containing "short" va
     		}
     	}
     }
-    
+
     void print_sq_mat(short x[MATRIX_SIZE][MATRIX_SIZE], int SIZE){
-    
+
     	EMBARC_PRINTF("------\n\r");
-    
+
     	for(int j = 0; j < SIZE; j++ ){
             for(int i = 0; i < SIZE; i ++){
                 EMBARC_PRINTF("%d\t", x[j][i]);
             }
             EMBARC_PRINTF("\n\r" );
         }
-    
+
         EMBARC_PRINTF("------\n\r");
     }
 
@@ -162,53 +162,53 @@ DSP library contains matrix multiplication function so doing matrix multiplicati
     #include "embARC_debug.h"
     #include <stdlib.h>
     #include "dsplib.h"
-    
+
     #define MATRIX_SIZE 20
     #define MAX_NUM 1000
     #define LOOPS 100000
-    
+
     /* ********************************************* */
-    
+
     /* Matrix manipulation functions */
-    
+
     /* randomize matrix with values up to 'max_value */
     //void rand_sq_mat(short x[][MATRIX_SIZE], int SIZE, int max_value) ;
-    
+
     /* multiply two square matrices of same size*/
     void mul_sq_mat(short x[][MATRIX_SIZE], short y[][MATRIX_SIZE], short z[][MATRIX_SIZE], int size) ;
-    
+
     /* print square matrix through UART*/
     void print_sq_mat(short* x, int SIZE);
-    
+
     /* ********************************************* */
     	__xy q15_t a[MATRIX_SIZE*MATRIX_SIZE];
     	__xy q15_t b[MATRIX_SIZE*MATRIX_SIZE];
     	__xy q15_t c[MATRIX_SIZE*MATRIX_SIZE];
-    
+
     int main(int argc, char *argv[]) {
-    	
+
     	int n =MATRIX_SIZE;
     matrix_q15_t matA, matB, matC;
-    
+
     	//rand_sq_mat(a,n, MAX_NUM);
     	//rand_sq_mat(b,n, MAX_NUM);
     	for (int i =0; i< MATRIX_SIZE*MATRIX_SIZE; i++) { a[i]=16384; }
     	for (int i =0; i< MATRIX_SIZE*MATRIX_SIZE; i++) { b[i]=16383; }
-    
-    
+
+
     	print_sq_mat(a,n);
     	print_sq_mat(b,n);
-    
+
     dsp_mat_init_q15(&matA,  MATRIX_SIZE, MATRIX_SIZE, a);
     dsp_mat_init_q15(&matB,  MATRIX_SIZE, MATRIX_SIZE, b);
     dsp_mat_init_q15(&matC,  MATRIX_SIZE, MATRIX_SIZE, c);
     dsp_status status;
-    
+
     	unsigned int led_status = 0x40 ;
     	led_status = 0x7F;
-    
+
     	EMBARC_PRINTF("*** Start ***\n\r");
-    
+
     	for (int i =0; i< 8; i++) {
     		for (int j = 1; j < LOOPS/8; j++ ) {
     			status = dsp_mat_mult_q15(&matA, &matB, &matC);
@@ -216,18 +216,18 @@ DSP library contains matrix multiplication function so doing matrix multiplicati
     		led_write(led_status, BOARD_LED_MASK);
     		led_status = led_status >> 1;
     	}
-    
+
     	if ( status == DSP_ERR_OK ) EMBARC_PRINTF("done\n");
     	else EMBARC_PRINTF("something wrong");
     	print_sq_mat(c,n);
-    
+
     	EMBARC_PRINTF("*** Exit ***\n\r");
-    
+
     	return 0;
     }
-    
-    
-    
+
+
+
     //void rand_sq_mat(short x[][MATRIX_SIZE], int SIZE, int max_value) {
     //	for (int i=0;i<SIZE;i++) {
     //		for(int j=0;j<SIZE;j++) {
@@ -246,18 +246,18 @@ DSP library contains matrix multiplication function so doing matrix multiplicati
     //		}
     //	}
     //}
-    
+
     void print_sq_mat(short* x, int SIZE){
-    
+
     	EMBARC_PRINTF("------\n\r");
-    
+
     	for(int j = 0; j < SIZE; j++ ){
             for(int i = 0; i < SIZE; i ++){
                 EMBARC_PRINTF("%d\t", x[i+j*SIZE]);
             }
             EMBARC_PRINTF("\n\r" );
         }
-    
+
         EMBARC_PRINTF("------\n\r");
     }
 
@@ -268,7 +268,7 @@ DSP library contains matrix multiplication function so doing matrix multiplicati
 Part 4.	Test
 -----------------
 
-To test the example below an example program needs to be created that has two loops of matrix multiplications with and without DSP library. 
+To test the example below an example program needs to be created that has two loops of matrix multiplications with and without DSP library.
 
 Both examples are to be compiled with DSP extensions, with the following options set:
 

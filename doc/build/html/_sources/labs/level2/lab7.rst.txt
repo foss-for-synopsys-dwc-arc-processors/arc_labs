@@ -7,25 +7,25 @@ Purpose
 =======
 - Familiar with the wireless communication in IoT
 - Familiar with the usage of RN4020 BLE module on IoTDK board
-- Learn to use the API of RN4020 driver in embARC OSP 
+- Learn to use the API of RN4020 driver in |embarc|
 
 
 Equipment
 =========
-PC, IoTDK board, embARC OSP packages, example \\labs\\lab6_ble_rn4020 in ARC labs
+PC, IoTDK board, |embarc| packagees, example \\labs\\lab6_ble_rn4020 in ARC labs
 
 Content
 ========
 Complete the commulication between smartphone and IoTDK board through RN4020 BLE module.
-At first, setup RN4020 BLE module by using API of RN4020 driver.  
-Then connect mobile phone and RN4020 by BLE, and check the data send by IoTDK in smartphone. 
+At first, setup RN4020 BLE module by using API of RN4020 driver.
+Then connect mobile phone and RN4020 by BLE, and check the data send by IoTDK in smartphone.
 Finally, send data from smartphone to IoTDK board, and print this data value in terminal.
 
 
 Principles
 ==========
 RN4020 BLE module is controlled by the user through input/output lines (i.e., physical device pins) and a UART interface.
-The UART Interface supports ASCII commands to control/configure the RN4020 modules for any specific requirement based on the application. 
+The UART Interface supports ASCII commands to control/configure the RN4020 modules for any specific requirement based on the application.
 
 
 Setup
@@ -54,7 +54,7 @@ Before connecting an RN4020 module to a smartphone device, user may need to set 
 
 11. Issue the command **LS** to display the services
 
-The source code using the API of RN4020 driver in embARC OSP as follows.
+The source code using the API of RN4020 driver in |embarc| as follows.
 
 .. code-block:: console
 
@@ -62,7 +62,7 @@ The source code using the API of RN4020 driver in embARC OSP as follows.
 	rn4020_reset_to_factory(rn4020_ble);
 
 	/* Set device Name */
-	rn4020_set_dev_name(rn4020_ble, "IoT DK"); 
+	rn4020_set_dev_name(rn4020_ble, "IoT DK");
 
 	/* Set device services */
 	rn4020_set_services(rn4020_ble, RN4020_SERVICE_DEVICE_INFORMATION |
@@ -71,7 +71,7 @@ The source code using the API of RN4020 driver in embARC OSP as follows.
 
 	rn4020_set_features(rn4020_ble, RN4020_FEATURE_SERVER_ONLY);
 	rn4020_clear_private(rn4020_ble);
-    
+
 	/* Set private service UUID and private characteristic */
 	rn4020_set_prv_uuid(rn4020_ble, RN4020_PRV_SERV_HIGH_UUID, RN4020_PRV_SERV_LOW_UUID);
 	rn4020_set_prv_char(rn4020_ble, RN4020_PRV_CHAR_HIGH_UUID, RN4020_PRV_CHAR_LOW_UUID, 0x18, 0x06, RN4020_PRIVATE_CHAR_SEC_NONE);
@@ -86,18 +86,18 @@ Advertise
 ---------
 
 Issue the command **A** to start advertisement.
-The source code using the API of RN4020 driver in embARC OSP as follows.
+The source code using the API of RN4020 driver in |embarc| as follows.
 
 .. code-block:: console
 
 	rn4020_advertise(rn4020_ble);
 
- 
+
 Send data
 ---------
 
 Issue the command **SUW, 2A19, value** to set the level of Battery.
-The source code using the API of RN4020 driver in embARC OSP as follows.
+The source code using the API of RN4020 driver in |embarc| as follows.
 
 .. code-block:: console
 
