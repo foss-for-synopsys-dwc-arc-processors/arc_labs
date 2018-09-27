@@ -11,7 +11,13 @@ Purpose
 
 Equipment
 =========
-PC, IoTDK, embARC OSP, example \\Lab\\FreeRTOS in embARC OSP
+The following hardware and software tools are required:
+
+* PC host
+* ARC GNU toolchain/MetaWare Development Toolkit
+* ARC board (EM Starter kit/IoT Development Kit)
+* |embarc| package
+* ``labs/lab9_freertos``
 
 Content
 ========

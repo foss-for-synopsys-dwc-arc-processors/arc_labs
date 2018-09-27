@@ -9,14 +9,19 @@ Purpose
 
 Equipment
 =========
-PC, MetaWare Development Toolkit, nsim simulator, example \\labs\\lab8_linker in ARC labs
+The following hardware and software tools are required:
+
+* PC host
+* ARC GNU toolchain/MetaWare Development Toolkit
+* nsim simulator
+* ``labs/lab8_linker``
 
 Content
 ========
 Customizing your program with **compiler pragmas**.
 At first, using "pragma code" to specify a new name of section in which the code of function reside.
 Then mapping this code section into specified memory location with linker.
-Finally, checking the location of this code section after bulid process.
+Finally, checking the location of this code section after build process.
 
 Principles
 ==========
@@ -59,7 +64,7 @@ Pragma code has two forms that must be used in pairs to bracket the affected fun
 Section_name is a constant string expression that denotes the name of the section
 
 .. note::
-	About detailed usage of the compiler pragmas, please refer to the document "MetaWare C/C++ Progarmmer's Guide for the ccac Compiler"
+	About detailed usage of the compiler pragmas, please refer to the document "MetaWare C/C++ Programmer's Guide for the ccac Compiler"
 
 Edit the linker command file
 ----------------------------
