@@ -15,12 +15,12 @@ The following hardware and software tools are required:
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
-* embARC OSP packag
+* |embarc| package
 * ``labs/lab4_interrupt``
 
 Content
 =========
-This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through **labs\\lab4_interrupt** in the embARC OSP package. The two routines give you a preliminary understanding of the ARC interrupt resources.
+This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through ``labs/lab4_interrupt`` in the |embarc| packagee. The two routines give you a preliminary understanding of the ARC interrupt resources.
 
 Principles
 ===========
@@ -34,9 +34,11 @@ Steps
 Open and browse lab one
 ------------------------
 
-Go to the embarc_osp\\example\\Lab\\interrupt directory, where there are two folders, lab_4_1 and lab_4_2.
+Go to the ``labs/lab4_interrupt``, where there are two folders, ``lab_4_1`` and ``lab_4_2``.
 
-The lab_4_1 is more fundamental compared to lab_4_2. So we first enter folder lab_4_1, in which the precise timing function is implemented through the timer interrupt.
+The ``lab_4_1`` is more fundamental compared to ``lab_4_2``. So we first enter
+folder ``lab_4_1``, in which the precise timing function is implemented
+through the timer interrupt.
 
 Open main.c and browse the entire program.
 
@@ -199,7 +201,8 @@ After the lab one program is successfully downloaded, the serial output is as fo
 Open and browse the lab two
 ----------------------------
 
-We then enter lab_4_2, which mainly shows the working state of priority and interrupt nesting.
+We then enter ``lab_4_2``, which mainly shows the working state of priority
+and interrupt nesting.
 
 Open main.c and browse through the entire program.
 

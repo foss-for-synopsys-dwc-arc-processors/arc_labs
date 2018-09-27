@@ -42,7 +42,7 @@ consistent and simple software interfaces to the processor and peripherals,
 together with ports of several well known FOSS embedded software stacks to
 |arc|.
 
-For more details about embARC OSP, please refer its
+For more details about |embarc|, please refer its
 `online docs <http://embarc.org/embarc_osp/>`__
 
 Supported Hardware Platform

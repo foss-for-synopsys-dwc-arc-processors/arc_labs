@@ -1,14 +1,14 @@
 .. _lab2:
 
-How to use embARC OSP
+How to use |embarc|
 #####################
 
 Purpose
 =======
-* To know what embARC OSP is
-* To know how to run the provided examples in embARC OSP
-* To know how to debug the provided examples in embARC OSP
-* To know how to do application development in embARC OSP
+* To know what |embarc| is
+* To know how to run the provided examples in |embarc|
+* To know how to debug the provided examples in |embarc|
+* To know how to do application development in |embarc|
 
 Equipment
 =========
@@ -18,15 +18,15 @@ The following hardware and software tools are required:
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
-* embARC OSP packages
+* |embarc| packages
 
-The detailed software requirements can be found `here <http://embarc.org/embar
+The detailed software requirements of |embarc| can be found `here <http://embarc.org/embar
 c_osp/doc/build/html/getting_started/software_requirement.html>`__
 
 Content
 ========
 
-First, a brief introduction of embARC OSP will be made and also how to get it.
+First, a brief introduction of |embarc| will be made and also how to get it.
 Then, you will get to how to run the provided examples and debug them. Finally, you
 can try to create you own embARC applications.
 
@@ -45,7 +45,7 @@ restrictions on memory, size, power and processing capacity. IoT operating
 systems are a type of embedded OS but by definition are designed to enable
 data transfer over the internet and more other features.
 
-2. embARC OSP
+2. |embarc|
 
 The embARC Open Software Platform (OSP) is an open software platform to
 facilitate the development of embedded systems based on |arc|.
@@ -55,13 +55,13 @@ consistent and simple software interfaces to the processor and peripherals,
 together with ports of several well known FOSS embedded software stacks to
 |arc|.
 
-For more details, please go to `embARC OSP on-line documentation <http://embar
+For more details, please go to |embarc| `on-line documentation <http://embar
 c.org/embarc_osp/doc/build/html/introduction/introduction.html>`__
 
 
 3. Other platforms
 
-Besides embARC OSP, there are also other IoT platforms:
+Besides |embarc|, there are also other IoT platforms:
 
 * `Zephyr <https://www.zephyrproject.org/>`__
 * `Amazon FreeRTOS <https://aws.amazon.com/freertos/>`__
@@ -69,12 +69,12 @@ Besides embARC OSP, there are also other IoT platforms:
 Steps
 =====
 
-Get embARC OSP
+Get |embarc|
 **************
 
 * Through git
 
-The embARC OSP source code is hosted in a GitHub repository that supports
+The |embarc| source code is hosted in a GitHub repository that supports
 cloning via git. There are scripts and such in this repo that you'll need to set up your development environment, and we'll be using Git to get this repo. If you don't have Git installed, see the beginning of the OS-specific instructions below for help.
 
 We'll begin by using Git to clone the repository anonymously.
@@ -98,7 +98,7 @@ its `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embar
 Run the examples
 ****************
 
-The command line interface is the default interface to use embARC OSP. After getting the embARC OSP
+The command line interface is the default interface to use |embarc|. After getting the |embarc|
 package, you need to open a **cmd** console in Winodws / a **terminal** in Linux and cd to the root of embARC osp.
 
 Here, take the **blinky** as an example.
@@ -175,12 +175,12 @@ debug.
 Create your own application
 ***************************
 
-Here, it's your turn to create your own application in embARC OSP, taking a
+Here, it's your turn to create your own application in |embarc|, taking a
 well-known simple ``hello world`` as an example.
 
 * Goals
 
-    * Baremetal application based on embARC OSP
+    * Baremetal application based on |embarc|
     * Hardware: EMSK 2.2 - ARC EM7D Configuration / IoTDK
     * Print "Hello world from embARC" through UART at 115200 bps
     * Use GNU toolchain to running and debugging in the command line
@@ -208,7 +208,7 @@ well-known simple ``hello world`` as an example.
       the default value will ``arcem7d`` for board ``emsk`` and version ``22``.
       For iotdk, **CUR_CORE** can be bypassed as iotdk only has one core configuration.
 
-    * Change the embARC OSP root: change the value of ``EMBARC_ROOT`` to
+    * Change the |embarc| root: change the value of ``EMBARC_ROOT`` to
       ``../../..``. ``EMBARC_ROOT`` can be relative path or an absolute path.
 
     * Add the middleware that you need for this application: Change the value
@@ -353,4 +353,4 @@ well-known simple ``hello world`` as an example.
 Exercises
 =========
 
-Create your application which is different with **blinky** and **hello_world** in embARC OSP.
+Create your application which is different with **blinky** and **hello_world** in |embarc|.

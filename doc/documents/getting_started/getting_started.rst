@@ -115,6 +115,23 @@ We'll begin by using Git to clone the repository anonymously.
 You have successfully checked out a copy of the source code to your local
 machine.
 
+Install ARC labs code
+*********************
+
+The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first, then copy the ``labs`` folder to the ``example`` folder of embARC OSP. You will get the following folder structure:
+
+.. code-block:: console
+
+    example
+    ├── baremetal
+    ├── example.makefile
+    ├── example.rst
+    ├── freertos
+    ├── labs
+    ├── main.c.tmpl
+    └── makefile
+
+
 
 Final Check
 ###########

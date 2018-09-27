@@ -19,7 +19,7 @@ The following hardware and software tools are required:
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
 * SD card
-* embARC OSP package
+* |embarc| package
 * ``example/baremetal/bootloader``
 
 Content
