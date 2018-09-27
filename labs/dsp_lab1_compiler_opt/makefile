@@ -1,5 +1,5 @@
 # Application name
-APPL ?= lab1
+APPL ?= dsp_lab1
 
 #
 # root dir of embARC

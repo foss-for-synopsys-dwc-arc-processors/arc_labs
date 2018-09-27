@@ -26,7 +26,7 @@ void print_sq_mat(short* x, int SIZE);
 	__xy q15_t c[MATRIX_SIZE*MATRIX_SIZE];
 
 int main(int argc, char *argv[]) {
-	
+
 	int n =MATRIX_SIZE;
 matrix_q15_t matA, matB, matC;
 
