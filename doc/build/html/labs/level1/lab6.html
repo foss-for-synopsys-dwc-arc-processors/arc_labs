@@ -210,8 +210,9 @@
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="memory-map-of-arc-board">
 <h3>Memory Map of ARC board<a class="headerlink" href="#memory-map-of-arc-board" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="em-starter-kit">
-<h4>EM Starter Kit<a class="headerlink" href="#em-starter-kit" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="emsk">
+<h4>EM Starter Kit<a class="headerlink" href="#emsk" title="Permalink to this headline">¶</a></h4>
+<p>The available memory regions of EM Starter Kit are shown below.</p>
 <table border="1" class="colwidths-auto docutils" id="id5">
 <caption><span class="caption-text">Memory Map of EM Starter Kit</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
@@ -235,11 +236,14 @@
 </tr>
 </tbody>
 </table>
+<p>In this lab, the last 1 MB of DDR is reserved for the simple bootloader,
+other memory regions are available for application.</p>
 </div>
-<div class="section" id="iot-developer-kit">
-<h4>IoT Developer Kit<a class="headerlink" href="#iot-developer-kit" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="iotdk">
+<h4>IoT Development Kit<a class="headerlink" href="#iotdk" title="Permalink to this headline">¶</a></h4>
+<p>The available memory regions of IoT Development Kit are shown below.</p>
 <table border="1" class="colwidths-auto docutils" id="id6">
-<caption><span class="caption-text">Memory Map of IoT Developer Kit</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Memory Map of IoT Development Kit</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Name</th>
 <th class="head">Start address</th>
@@ -307,8 +311,8 @@ is listed below:</p>
 <img alt="Boot sequence of EMSK" src="../../_images/lab6_emsk_boot.png" />
 </div>
 <div class="section" id="id2">
-<h4>IoT Developer Kit<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<p>IOTDK can boot from on-chip eflash and extern boot eflash, which is decided by
+<h4>IoT Development Kit<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>IoT Development Kit can boot from on-chip eflash and extern boot eflash, which is decided by
 the FWU switch of IOTDK. When this switch is set of “off”, the processor
 starts executing the program stored in on-chip eflash; When this switch is set
 of “on”, the processor starts executing the program stored in external boot-
@@ -321,7 +325,7 @@ spi eflash;</p>
 <h4>EM Starter Kit<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 </div>
 <div class="section" id="id4">
-<h4>IoT Developer Kit<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<h4>IoT Development Kit<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 </div>
 </div>
 <div class="section" id="simple-bootloader">

@@ -36,9 +36,11 @@ Principles
 Memory Map of ARC board
 -----------------------
 
-EM Starter Kit
+|emsk|
 **************
-.. table:: Memory Map of EM Starter Kit
+The available memory regions of |emsk| are shown below.
+
+.. table:: Memory Map of |emsk|
    :widths: auto
 
    +------------------------+----------------------+---------------+
@@ -52,12 +54,14 @@ EM Starter Kit
    | on-board DDR RAM       | 0x10000000           |  128 MB       |
    +------------------------+----------------------+---------------+
 
+In this lab, the last 1 MB of DDR is reserved for the simple bootloader,
+other memory regions are available for application.
 
-
-IoT Developer Kit
+|iotdk|
 *****************
+The available memory regions of |iotdk| are shown below.
 
-.. table:: Memory Map of IoT Developer Kit
+.. table:: Memory Map of |iotdk|
    :widths: auto
 
    +------------------------+----------------------+-----------+
@@ -85,7 +89,7 @@ bootloader, CCMs are reserved for application.
 Boot of ARC board
 -----------------
 
-EM Starter Kit
+|emsk|
 **************
 
 The EMSK uses a Xilinx SPARTAN-6 FPGA part which can be configured to run
@@ -117,10 +121,10 @@ is listed below:
     :alt: Boot sequence of EMSK
 
 
-IoT Developer Kit
+|iotdk|
 *****************
 
-IOTDK can boot from on-chip eflash and extern boot eflash, which is decided by
+|iotdk| can boot from on-chip eflash and extern boot eflash, which is decided by
 the FWU switch of IOTDK. When this switch is set of "off", the processor
 starts executing the program stored in on-chip eflash; When this switch is set
 of "on", the processor starts executing the program stored in external boot-
@@ -130,10 +134,10 @@ spi eflash;
 How to flash the ARC board
 --------------------------
 
-EM Starter Kit
+|emsk|
 **************
 
-IoT Developer Kit
+|iotdk|
 *****************
 
 Simple bootloader

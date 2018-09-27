@@ -6,17 +6,23 @@ BLE Communication
 Purpose
 =======
 - Familiar with the wireless communication in IoT
-- Familiar with the usage of RN4020 BLE module on IoTDK board
+- Familiar with the usage of RN4020 BLE module on |iotdk|
 - Learn to use the API of RN4020 driver in |embarc|
 
 
 Equipment
 =========
-PC, IoTDK board, |embarc| packagees, example \\labs\\lab6_ble_rn4020 in ARC labs
+The following hardware and software tools are required:
+
+* PC host
+* ARC GNU toolchain/MetaWare Development Toolkit
+* ARC board (|iotdk|)
+* |embarc| package
+* ``labs/lab6_ble_rn4020``
 
 Content
 ========
-Complete the commulication between smartphone and IoTDK board through RN4020 BLE module.
+Complete the communication between smartphone and IoTDK board through RN4020 BLE module.
 At first, setup RN4020 BLE module by using API of RN4020 driver.
 Then connect mobile phone and RN4020 by BLE, and check the data send by IoTDK in smartphone.
 Finally, send data from smartphone to IoTDK board, and print this data value in terminal.

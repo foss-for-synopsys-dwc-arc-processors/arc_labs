@@ -15,8 +15,13 @@ Purpose
 
 Equipment
 ^^^^^^^^^^
+The following hardware and software tools are required:
 
-PC, MetaWare tool chain/ARC GNU tool chain, EMSK, esp8266 WIFI module, Lab\\esp8266_wifi source code
+* PC host
+* ARC GNU toolchain/MetaWare Development Toolkit
+* ARC board (EM Starter kit/IoT Development Kit)
+* |embarc| package
+* ``labs/lab10_esp8266_wifi``
 
 Content
 ^^^^^^^^
