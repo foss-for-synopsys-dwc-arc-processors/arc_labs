@@ -72,10 +72,10 @@ Steps
 Get |embarc|
 **************
 
-* Through git
+* git
 
-The |embarc| source code is hosted in a GitHub repository that supports
-cloning via git. There are scripts and such in this repo that you'll need to set up your development environment, and we'll be using Git to get this repo. If you don't have Git installed, see the beginning of the OS-specific instructions below for help.
+The |embarc| source code is hosted in a `GitHub repository <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp>`__.
+There are scripts and such in this repo that you'll need to set up your development environment, and we'll be using Git to get this repo. If you don't have Git installed, see the beginning of the OS-specific instructions below for help.
 
 We'll begin by using Git to clone the repository anonymously.
 
@@ -90,10 +90,10 @@ We'll begin by using Git to clone the repository anonymously.
 
 Then you will have checked out a copy of the source code to your local machine.
 
-* Through http download
+* http download
 
-If you are not familiar with git, you can also try to get the latest release of embarc from
-its `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/releases>`__.
+If you are not familiar with git, you can also try to get the latest release of embarc as a zip from
+the repository, see `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/releases>`__.
 
 Run the examples
 ****************
