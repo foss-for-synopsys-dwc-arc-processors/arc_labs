@@ -32,7 +32,7 @@ TOOLCHAIN ?= gnu
 #
 # root dir of embARC
 #
-EMBARC_ROOT = ../../..
+EMBARC_ROOT = ../../../..
 # Selected OS
 OS_SEL ?= freertos
 
