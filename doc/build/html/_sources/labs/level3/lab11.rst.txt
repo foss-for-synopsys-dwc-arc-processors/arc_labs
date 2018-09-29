@@ -16,25 +16,25 @@ Equipment
 Reguired Hardware
 -----------------
 
-- `[DesignWare ARC EM Starter Kit(EMSK)] <https://www.synopsys.com/dw/ipdir.php?ds=arc_em_starter_kit>`_
+- `[DesignWare ARC EM Starter Kit (EMSK)] <https://www.synopsys.com/dw/ipdir.php?ds=arc_em_starter_kit>`_
 
-- `[Digilent PMOD WiFi(MRF24WG0MA)] <https://store.digilentinc.com/pmodwifi-wifi-interface-802-11g/>`_
+- `[Digilent PMOD WiFi (MRF24WG0MA)] <https://store.digilentinc.com/pmodwifi-wifi-interface-802-11g/>`_
 
 - `[Digilent PMOD TMP2] <https://store.digilentinc.com/pmod-tmp2-temperature-sensor/>`_
 
 - SD Card
 
-- WiFi Hotspot(SSID:**embARC**, Password:**qazwsxedc**, WPA/WPA2 encypted)
+- WiFi Hotspot (default SSID:**embARC**, Password:**qazwsxedc**, WPA/WPA2 encypted)
 
 Required Software
 -----------------
 
 - Metaware or ARC GNU Toolset
 
-- Serial port terminal, such as putty, tera-term or minicom
+- Serial port terminal (e.g. putty, tera-term or minicom)
 
-Hardware Connection(EMSK Board)
--------------------------------
+Hardware Connection (EMSK Board)
+--------------------------------
 
 - Connect PMOD WiFi to J5, connect PMOD TMP2 to J2.
 
@@ -43,29 +43,29 @@ Hardware Connection(EMSK Board)
 
 - Configure your hardware with proper core configuration.
 
-- The hardware resources are allocated as following table.
+- The hardware resources are described as per the table below.
 
 ==================== ==========================================================
  Hardware Resources  Represent
 ==================== ==========================================================
 BUTTON R             Livingroom Lights Control
-LED 0-1              Livingroom Lights Status(On or Off)
+LED 0-1              Livingroom Lights Status (On or Off)
 BUTTON L             Kitchen Lights Control
-LED 2-3              Kitchen Lights Status(On or Off)
+LED 2-3              Kitchen Lights Status (On or Off)
 BUTTON X             Front Door Lock Control
-LED 4-5              Front Door Lock Status(On or Off)
-LED 7                WiFi connection status(On for connected, Off for not)
-LED X                Node working status(toggling in 2s period if working well)
+LED 4-5              Front Door Lock Status (On or Off)
+LED 7                WiFi connection status (On for connected, Off for not)
+LED X                Node working status (toggling in 2s period if working well)
 PMOD TMP2            Temperature Sensor
 PMOD WiFi            Provide WiFi Connection
 ==================== ==========================================================
 
 Content
 ========
-This article provides instructions on how to establish connection between the EMSK and
-Amazon Web Services Internet of Things (AWS IoT) cloud in a simulated smart home application.
-AWS IoT is a managed cloud platform that lets connected devices securely interact with cloud
-applications and other devices. It supports Message Queue Telemetry Transport (MQTT) and
+This lab provides instructions on how to establish connection between the EMSK and
+Amazon Web Services Internet of Things (AWS IoT) cloud with a simulated smart home application.
+With the help of AWS IoT as a intermediate cloud platform, devices can securely interact with cloud
+applications and other devices. AWS IoT also supports Message Queue Telemetry Transport (MQTT) and
 provides authentication and end-to-end encryption.
 
 
@@ -78,15 +78,15 @@ using embARC. The connection between EMSK and AWS IoT Cloud is secured by TLS.
 Principles
 ==========
 
-This application demonstrates the smart home solution based on EMSK by establishing
+This lab demonstrates the smart home solution based on EMSK by establishing
 the connection between EMSK Board and AWS IoT Cloud. The AWS IoT Device C SDK for the
-embedded platform has been optimized and transplanted for embARC.
+embedded platform has been optimized and ported for embARC.
 
-In the application, the EMSK Board peripheral modules and onboard resources are used
-to simulate the objects which is controlled and monitored in smart home, the AWS IoT
-Cloud is used as the Cloud host and control platform which communicate with the EMSK
-Board through the MQTT protocol, and a special HTML5 Web APP is designed, which provide
-a dash board to monitor and control smart home nodes.
+In this lab application, the peripheral modules and onboard resources of EMSK board are used
+to simulate the objects which are controlled and monitored in smart home scenario. The AWS IoT
+Cloud is used as the Cloud host and control platform that communicate with the EMSK
+Board using MQTT protocol. A HTML5 Web APP is designed to provide
+a dash board in order to monitor and control smart home nodes.
 
 Steps
 =====
@@ -97,7 +97,7 @@ Creating and setting smart home node
 1. Create an AWS account in `[here] <https://aws.amazon.com/>`__. Amazon offers various account levels,
    including a free tier for AWS IoT.
 
-2. Log into AWS console and choose AWS IoT.
+2. Login AWS console and choose AWS IoT.
 
    .. image:: /img/lab11_steps_1.png
         :alt: smarthome system
@@ -194,7 +194,7 @@ Building and running AWS IoT smart home example
        make TOOLCHAIN=gnu BD_VER=22 CUR_CORE=arcem7d run
 
 4. FreeRTOS-based runtime environment can be loaded automatically. Wait for WiFi initialization and
-   connection establishment(30 seconds or less) until the "WiFi connected" message is shown in the
+   connection establishment (30 seconds or less) until the "WiFi connected" message is shown in the
    terminal emulator. "Network is ok" will be shown after the certificate files cert.crt, privateKey.pem
    and rootCA.crt are validated. The information in "reported": {} is the state of the EMSK-based
    smart home node. "Updated Accepted !!" means the connection works between the smart home node and AWS IoT cloud.
@@ -212,7 +212,7 @@ Exercises
 =========
 
 This application is designed to show how to connect only 1 EMSK and AWS IoT Cloud using embARC.
-Try to do the Multi Node AWS IoT Smarthome Demo.
+Try to add more nodes and implement a Multi-nodes AWS IoT Smarthome Demo.
 
 .. note::
     Related demo codes you can find `[here] <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome>`__
