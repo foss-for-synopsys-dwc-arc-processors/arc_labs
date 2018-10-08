@@ -6,12 +6,12 @@ Overview
 Introduction
 ############
 
-This is a handbook for ARC labs which is a part of ARC university courses. It's written to
+This is a handbook for ARC labs which is a part of ARC university courses. It's written
 to help students who attend the ARC university courses and anyone who is interested in |arc| to
 get started in |arc| processor development. It describes all the basic elements of ARC labs and
 how to finish the labs with step by step approach.
 
-This book can be used as a Lab teaching material for ARC university courses at
+This handbook can be used as a Lab teaching material for ARC university courses at
 undergraduate or graduate level with majors in Commuter Science, Computer
 Engineering, Electrical Engineering; or for professional engineers.
 
