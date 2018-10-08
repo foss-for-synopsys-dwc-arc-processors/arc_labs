@@ -22,7 +22,7 @@ Before starting using ARC DSP the following prerequisites are required:
 The following needs to be tested before starting this lab:
 
 * Connecting IOTDK board to computer
-* Connecting serial console (PuTTY) to IOTDK COM port(For information on how to do initial board setup and configuration please refer to *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board.)
+* Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board).
 
 Part 2. Lab Objectives
 -----------------------------
@@ -41,7 +41,7 @@ DSP Extensions Options
 
 We will use EMBAC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.
 
-``gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui OLEVEL=2 ADT_COPT="-Hfxapi -Xdsp2" OLEVEL=O2``
+``gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hfxapi -Xdsp2" OLEVEL=O2``
 
 Options that are used in the lab are:
 
@@ -140,7 +140,7 @@ Below is the list options used when launching gmake:
 
 ``OLEVE=O0  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1"``
 
-You can use the followong command to generated disassembly code:
+You can use the following command to generate disassembly code:
 
 ``elfdump -T -S``
 

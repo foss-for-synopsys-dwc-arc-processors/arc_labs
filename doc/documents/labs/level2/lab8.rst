@@ -13,7 +13,7 @@ The following hardware and software tools are required:
 
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
-* nsim simulator
+* nSIM simulator
 * ``labs/lab8_linker``
 
 Content
