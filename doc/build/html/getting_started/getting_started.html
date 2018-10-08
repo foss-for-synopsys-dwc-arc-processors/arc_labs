@@ -281,15 +281,19 @@ machine.</p>
 </div>
 <div class="section" id="install-arc-labs-code">
 <h3>Install ARC labs code<a class="headerlink" href="#install-arc-labs-code" title="Permalink to this headline">¶</a></h3>
-<p>The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first, then copy the <code class="docutils literal notranslate"><span class="pre">labs</span></code> folder to the <code class="docutils literal notranslate"><span class="pre">example</span></code> folder of embARC OSP. You will get the following folder structure:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">example</span>
-<span class="go">├── baremetal</span>
-<span class="go">├── example.makefile</span>
-<span class="go">├── example.rst</span>
-<span class="go">├── freertos</span>
+<p>The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first, then copy the <code class="docutils literal notranslate"><span class="pre">labs</span></code> folder to the root folder of embARC OSP. You will get the following folder structure:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embarc_osp</span>
+<span class="go">├── arc</span>
+<span class="go">├── board</span>
+<span class="go">├── device</span>
+<span class="go">├── doc</span>
+<span class="go">├── example</span>
 <span class="go">├── labs</span>
-<span class="go">├── main.c.tmpl</span>
-<span class="go">└── makefile</span>
+<span class="go">├── inc</span>
+<span class="go">├── library</span>
+<span class="go">├── middleware</span>
+<span class="go">├── options</span>
+<span class="go">└── os</span>
 </pre></div>
 </div>
 </div>
@@ -332,7 +336,7 @@ machine.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Synopsys.
+        &copy; Copyright 2018, Synopsys
 
     </p>
   </div>
@@ -351,21 +355,14 @@ machine.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'2018.09',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 
