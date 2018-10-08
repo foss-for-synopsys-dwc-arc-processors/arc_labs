@@ -27,7 +27,7 @@ EXT_DEV_LIST += ble/hm1x
 #
 # root dir of embARC
 #
-EMBARC_ROOT = ../../../..
+EMBARC_ROOT = ../../..
 
 MID_SEL = common
 
