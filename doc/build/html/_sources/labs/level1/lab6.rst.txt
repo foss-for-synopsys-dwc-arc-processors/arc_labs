@@ -8,7 +8,7 @@ Purpose
 - Understand the memory map of ARC boards
 - Understand the principles of bootloader and self-booting
 - Understand the usage of shell commands in cmd
-- Create a self-booting application.
+- Create a self-booting application
 
 
 Equipment
@@ -25,10 +25,10 @@ The following hardware and software tools are required:
 Content
 ========
 
-1. Build and run the  ``example/baremetal/bootloader``.
+1. Build and run the  ``example/baremetal/bootloader``
 2. Download the generated ``bootloader.bin`` into flash
 3. Build a self-boot applicaiton and boot it from SD card
-4. use the ntshell commands
+4. Use the ntshell commands
 
 Principles
 ==========
@@ -124,11 +124,11 @@ is listed below:
 |iotdk|
 *****************
 
-|iotdk| can boot from on-chip eflash and extern boot eflash, which is decided by
+|iotdk| can boot from on-chip eflash and extern boot SPI eflash, which is decided by
 the FWU switch of IOTDK. When this switch is set of "off", the processor
 starts executing the program stored in on-chip eflash; When this switch is set
-of "on", the processor starts executing the program stored in external boot-
-spi eflash;
+of "on", the processor starts executing the program stored in external boot
+SPI eflash;
 
 
 How to flash the ARC board
@@ -149,7 +149,7 @@ And this example itself can be used as ntshell application.
 
 The following features are provided in this simple bootloader:
 
-* boot application from SD card
+* Boot application from SD card
 * File operations on SD card
 * UART Y-modem protocol to update application
 * Operations on ARC processors
@@ -157,7 +157,7 @@ The following features are provided in this simple bootloader:
 Steps
 =====
 
-1. Build and run the  ``example/baremetal/bootloader``.
+1. Build and run the  ``example/baremetal/bootloader``
 
 2. Download the generated ``bootloader.bin`` into flash
 

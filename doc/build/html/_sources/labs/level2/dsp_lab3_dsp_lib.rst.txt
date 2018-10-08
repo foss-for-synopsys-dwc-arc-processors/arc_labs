@@ -26,7 +26,7 @@ The following needs to be tested before starting this lab:
 
 * Configuring IOTDK board to use ARC core with DSP extensions (these labs use EM5D core configuration)
 
-* Connecting serial console (PuTTY) to IOTDK COM port(For information on how to do initial board setup and configuration please refer to  *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board.)
+* Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to  *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board).
 
 Part 2.	Lab Objectives
 -----------------------------

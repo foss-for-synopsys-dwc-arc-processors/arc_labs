@@ -24,7 +24,7 @@ The following needs to be tested before starting this lab:
 
 * Connecting IOTDK board to computer
 
-* Connecting serial console (PuTTY) to IOTDK COM port(For information on how to do initial board setup and configuration please refer to  *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board.)
+* Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to  *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board).
 
 Part 2.	Lab Objectives
 ----------------------------

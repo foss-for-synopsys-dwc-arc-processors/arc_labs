@@ -93,7 +93,7 @@ ARC GNU toolchain.
 
 To use and install ARC GNU toolchain, you can refer `this <http://embarc.org/toolchain/ide/index.html>`__ (http://embarc.org/toolchain/ide/index.html), where has detailed instructions.
 
-It's recommended to install ARC GNU toolchain in the path (windows: ``C:\arc_gnu\``, linux: ``~/arc_gnu/``) and add ``arc_gnu/bin`` into $PATH vairable.
+It's recommended to install ARC GNU toolchain in the path (windows: ``C:\arc_gnu\``, linux: ``~/arc_gnu/``) and add ``arc_gnu/bin`` into $PATH variable.
 
 Install embARC OSP
 ******************

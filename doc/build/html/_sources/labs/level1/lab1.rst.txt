@@ -123,7 +123,7 @@ Right click on the current project demo and select Properties in the popup tab. 
 
 |figure3|
 
-In the current interface, select Optimization/Debugging to set the compiler optimization and debugging level. For example, set the optimization level to turn off optimization, and set the debugging level to load all debugging information
+In the current interface, select Optimization/Debugging to set the compiler optimization and debugging level. For example, set the optimization level to turn off optimization, and set the debugging level to load all debugging information.
 
 Select Processor/Extensions on the current interface to set the compile options corresponding to the target processor hardware properties, such as the version of the processor, whether to support extended instructions such as shift, multiplication, floating-point operations, etc., whether to include Timer0/1. As shown in the figure below, this setting indicates that the target processor supports normal extended instructions (figure4).
 
@@ -278,7 +278,7 @@ Select Debug Configurations from the Run drop-down menu in the main menu. Then d
 
 |figure14|
 
-As shown in the figure above, check if the information in Main is correct. Since we use Nsim simulator to simulate EMSK development board, we need to modify the settings of Debugger, Common, and Terminal (this is because Nsim cannot be called directly in GNU IDE. Still need GDB Server for indirect calls). The specific settings are as follows:
+As shown in the figure above, check if the information in Main is correct. Since we use nSIM simulator to simulate EMSK development board, we need to modify the settings of Debugger, Common, and Terminal (this is because nSIM cannot be called directly in GNU IDE. Still need GDB Server for indirect calls). The specific settings are as follows:
 
 * Set Debugger->Gdbsrever Settings
 

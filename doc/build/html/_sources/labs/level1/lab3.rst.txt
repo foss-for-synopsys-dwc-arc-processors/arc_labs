@@ -86,12 +86,12 @@ There are two ways to do the configuration.
 
 	make -j4 run
 
-Open the folder ``embarc_osp\\example\\Lab\\timer``, and open the ``makefile``, here is the default configuration.
+Open the folder ``embarc_osp/example/Lab/timer``, and open the ``makefile``, here is the default configuration.
 
 .. code-block:: makefile
 
 	# Application name
-	APPL ?= lab_3_Timer_Interrupts
+	APPL ?= lab3_timer
 
 	##
 	# Current Board And Core
@@ -215,7 +215,7 @@ Compile and debug
 ^^^^^^^^^^^^^^^^^
 - Compile and download
 
-Open ``cmd`` under the folder *example\\Lab\\timer*, input the compile command as follow:
+Open ``cmd`` under the folder *example/Lab/timer*, input the compile command as follow:
 
 .. code-block:: console
 
@@ -274,7 +274,7 @@ Open ``cmd`` under the folder *example\\Lab\\timer*, input the compile command a
 
 - Debug
 
-Open ``cmd`` under the folder *example\\Lab\\timer*, input the command as follow:
+Open ``cmd`` under the folder *example/Lab/timer*, input the command as follow:
 
 .. code-block:: console
 

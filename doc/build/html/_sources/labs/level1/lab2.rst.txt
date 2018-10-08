@@ -28,7 +28,7 @@ Content
 
 First, a brief introduction of |embarc| will be made and also how to get it.
 Then, you will get to how to run the provided examples and debug them. Finally, you
-can try to create you own embARC applications.
+can try to create your own embARC applications.
 
 
 Principles
@@ -154,7 +154,7 @@ Here, take the **blinky** as an example.
 Debug the examples
 ******************
 
-Still take the **blink** as example, to debug it, you need to run the following commands:
+Still take the **blinky** as example, to debug it, you need to run the following commands:
 
 .. code-block:: console
 

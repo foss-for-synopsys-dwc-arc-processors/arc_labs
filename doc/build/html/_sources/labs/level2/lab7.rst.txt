@@ -30,7 +30,7 @@ Finally, send data from smartphone to IoTDK board, and print this data value in 
 
 Principles
 ==========
-RN4020 BLE module is controlled by the user through input/output lines (i.e., physical device pins) and a UART interface.
+RN4020 BLE module is controlled by the user through input/output lines (i.e., physical device pins) and an UART interface.
 The UART Interface supports ASCII commands to control/configure the RN4020 modules for any specific requirement based on the application.
 
 

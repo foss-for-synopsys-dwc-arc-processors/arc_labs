@@ -20,7 +20,7 @@ The following hardware and software tools are required:
 
 Content
 =========
-This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through ``labs/lab4_interrupt`` in the |embarc| packagee. The two routines give you a preliminary understanding of the ARC interrupt resources.
+This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through ``labs/lab4_interrupt`` in the |embarc| package. The two routines give you a preliminary understanding of the ARC interrupt resources.
 
 Principles
 ===========
@@ -63,7 +63,7 @@ Open main.c and browse the entire program.
 	void timer0_delay_ms(int ms)
 	{
 	  t0 = 0;
-	 while(t0<ms);
+	  while(t0<ms);
 	}
 
 	/** main entry for testing arc fiq interrupt */
@@ -88,7 +88,7 @@ Open main.c and browse the entire program.
 		second ++;
 	  }
 	  return E_SYS;
-        }
+    }
 
 Sub-module analysis lab one code
 ---------------------------------
@@ -103,8 +103,8 @@ Let's analyze each one below:
 
 	static void timer0_isr(void *ptr)
 	{
-	timer_int_clear(TIMER_0);
-	t0++;
+	  timer_int_clear(TIMER_0);
+	  t0++;
 	}
 
 This code is a standard example of an interrupt service function, enters the service function, clears the interrupt flag bit, and then performs the processing that needs to be done in the interrupt service function. Other interrupt service functions can also be written using this template.
@@ -136,7 +136,7 @@ In this function, we incremented the count variable t0 by one.
 		second ++;
 	  }
 	  return E_SYS;
-        }
+    }
 
 The ``EMBARC_PRINTF`` function in this code is only used to send information to the computer, which can be ignored during analysis.
 
@@ -164,8 +164,8 @@ In this example, the loop body only serves as an effect display. We call our own
 
 	static void timer0_isr(void *ptr)
 	{
-	t0 = 0;
-	while(t0<ms);
+	  t0 = 0;
+	  while(t0<ms);
 	}
 
 This code is very simple and the idea is clear. When we enter the function, we clear the global variable t0. Since we have set the interrupt interval to 1ms in the above timer_start, we can think that every time t0 is incremented, the time has passed 1ms.
@@ -326,31 +326,31 @@ Lab two seems complicated, but it is very simple. The code for Lab two only need
 .. code-block:: c
 
 	static void timer0_isr(void *ptr)
-    {
-	timer_int_clear(TIMER_0);
-
-	timer_flag = 0;
-
-	board_delay_ms(10, 1);
-
-	if(timer_flag)
 	{
-		EMBARC_PRINTF("Interrupt nesting!\r\n");
+	  timer_int_clear(TIMER_0);
+
+	  timer_flag = 0;
+
+	  board_delay_ms(10, 1);
+
+	  if(timer_flag)
+	  {
+		  EMBARC_PRINTF("Interrupt nesting!\r\n");
+	  }
+	  else
+	  {
+		  EMBARC_PRINTF("Interrupt\r\n");
+	  }
+
+	  hits++;
 	}
-	else
+
+	static void timer1_isr(void *ptr)
 	{
-		EMBARC_PRINTF("Interrupt\r\n");
+	  timer_int_clear(TIMER_1);
+
+	  timer_flag = 1;
 	}
-
-	hits++;
-    }
-
-    static void timer1_isr(void *ptr)
-    {
-	timer_int_clear(TIMER_1);
-
-	timer_flag = 1;
-    }
 
 First, in order to analyze the code, we first ignore the extraneous parts (such as EMBARC_PRINTF, delay and hits in if).
 
@@ -369,7 +369,7 @@ Regarding hits, it will be mentioned in the main function module.
 .. code-block:: c
 
 	int main(void)
-    {
+	{
 	timer_stop(TIMER_0);
 	timer_stop(TIMER_1);
 
@@ -434,7 +434,7 @@ Regarding hits, it will be mentioned in the main function module.
 		}
 	}
 	return E_SYS;
-    }
+	}
 
 The main function looks very long, but in fact there is a considerable part of it that is repetitive (we can also build a small function to make the code look more concise).
 

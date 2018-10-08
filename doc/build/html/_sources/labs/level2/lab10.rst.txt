@@ -139,7 +139,7 @@ Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as its core(
                     if(strstr(scan_result, http_get) != NULL)
                     {
 
-    EMBARC_PRINTF("============================ send ============================\n");
+                            EMBARC_PRINTF("============================ send ============================\n");
 
                             EMBARC_PRINTF("\nThe message is:\n%s\n", scan_result);
 

@@ -182,7 +182,7 @@
 <li>Understand the memory map of ARC boards</li>
 <li>Understand the principles of bootloader and self-booting</li>
 <li>Understand the usage of shell commands in cmd</li>
-<li>Create a self-booting application.</li>
+<li>Create a self-booting application</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -200,10 +200,10 @@
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Build and run the  <code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code>.</li>
+<li>Build and run the  <code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code></li>
 <li>Download the generated <code class="docutils literal notranslate"><span class="pre">bootloader.bin</span></code> into flash</li>
 <li>Build a self-boot applicaiton and boot it from SD card</li>
-<li>use the ntshell commands</li>
+<li>Use the ntshell commands</li>
 </ol>
 </div>
 <div class="section" id="principles">
@@ -312,11 +312,11 @@ is listed below:</p>
 </div>
 <div class="section" id="id2">
 <h4>IoT Development Kit<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<p>IoT Development Kit can boot from on-chip eflash and extern boot eflash, which is decided by
+<p>IoT Development Kit can boot from on-chip eflash and extern boot SPI eflash, which is decided by
 the FWU switch of IOTDK. When this switch is set of “off”, the processor
 starts executing the program stored in on-chip eflash; When this switch is set
-of “on”, the processor starts executing the program stored in external boot-
-spi eflash;</p>
+of “on”, the processor starts executing the program stored in external boot
+SPI eflash;</p>
 </div>
 </div>
 <div class="section" id="how-to-flash-the-arc-board">
@@ -335,7 +335,7 @@ for embARC, it will load boot.hex or boot.bin on SDCard and run that program.
 And this example itself can be used as ntshell application.</p>
 <p>The following features are provided in this simple bootloader:</p>
 <ul class="simple">
-<li>boot application from SD card</li>
+<li>Boot application from SD card</li>
 <li>File operations on SD card</li>
 <li>UART Y-modem protocol to update application</li>
 <li>Operations on ARC processors</li>
@@ -345,7 +345,7 @@ And this example itself can be used as ntshell application.</p>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Build and run the  <code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code>.</li>
+<li>Build and run the  <code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code></li>
 <li>Download the generated <code class="docutils literal notranslate"><span class="pre">bootloader.bin</span></code> into flash</li>
 <li>Build a self-boot applicaiton and boot it from SD card</li>
 <li>Use the ntshell commands</li>

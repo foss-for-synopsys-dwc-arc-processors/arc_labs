@@ -196,7 +196,7 @@
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through <code class="docutils literal notranslate"><span class="pre">labs/lab4_interrupt</span></code> in the embARC OSP packagee. The two routines give you a preliminary understanding of the ARC interrupt resources.</p>
+<p>This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through <code class="docutils literal notranslate"><span class="pre">labs/lab4_interrupt</span></code> in the embARC OSP package. The two routines give you a preliminary understanding of the ARC interrupt resources.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
@@ -212,50 +212,50 @@
 folder <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code>, in which the precise timing function is implemented
 through the timer interrupt.</p>
 <p>Open main.c and browse the entire program.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
+    <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#define COUNT (BOARD_CPU_CLOCK/1000)</span>
+    <span class="cp">#define COUNT (BOARD_CPU_CLOCK/1000)</span>
 
-<span class="k">volatile</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="k">volatile</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">volatile</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">volatile</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="cm">/** arc timer 0 interrupt routine */</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
-  <span class="n">t0</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/** arc timer 0 interrupt routine */</span>
+    <span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+      <span class="n">t0</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<span class="cm">/** arc timer 0 interrupt delay */</span>
-<span class="kt">void</span> <span class="nf">timer0_delay_ms</span><span class="p">(</span><span class="kt">int</span> <span class="n">ms</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
- <span class="k">while</span><span class="p">(</span><span class="n">t0</span><span class="o">&lt;</span><span class="n">ms</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="cm">/** arc timer 0 interrupt delay */</span>
+    <span class="kt">void</span> <span class="nf">timer0_delay_ms</span><span class="p">(</span><span class="kt">int</span> <span class="n">ms</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">while</span><span class="p">(</span><span class="n">t0</span><span class="o">&lt;</span><span class="n">ms</span><span class="p">);</span>
+    <span class="p">}</span>
 
-<span class="cm">/** main entry for testing arc fiq interrupt */</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-  <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+    <span class="cm">/** main entry for testing arc fiq interrupt */</span>
+    <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+      <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
 
-  <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
-  <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
+      <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
+      <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-  <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">This is a example about timer interrupt.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+      <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">This is a example about timer interrupt.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+      <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
 
-  <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-  <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">);</span>
+      <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+      <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">);</span>
 
-  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-  <span class="p">{</span>
-        <span class="n">timer0_delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
-        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s"> %ds.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">second</span><span class="p">);</span>
-        <span class="n">second</span> <span class="o">++</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
+      <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="p">{</span>
+            <span class="n">timer0_delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s"> %ds.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">second</span><span class="p">);</span>
+            <span class="n">second</span> <span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -269,8 +269,8 @@ through the timer interrupt.</p>
 </ul>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
-<span class="n">t0</span><span class="o">++</span><span class="p">;</span>
+  <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+  <span class="n">t0</span><span class="o">++</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -279,27 +279,27 @@ through the timer interrupt.</p>
 <ul class="simple">
 <li>Main function</li>
 </ul>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-  <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+      <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
 
-  <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
-  <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
+      <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
+      <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-  <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">This is a example about timer interrupt.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+      <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">This is a example about timer interrupt.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+      <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
 
-  <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-  <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">);</span>
+      <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+      <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">COUNT</span><span class="p">);</span>
 
-  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-  <span class="p">{</span>
-        <span class="n">timer0_delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
-        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s"> %ds.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">second</span><span class="p">);</span>
-        <span class="n">second</span> <span class="o">++</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
+      <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="p">{</span>
+            <span class="n">timer0_delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s"> %ds.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">second</span><span class="p">);</span>
+            <span class="n">second</span> <span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -321,8 +321,8 @@ The implementation of the <code class="docutils literal notranslate"><span class
 </ul>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="k">while</span><span class="p">(</span><span class="n">t0</span><span class="o">&lt;</span><span class="n">ms</span><span class="p">);</span>
+  <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">t0</span><span class="o">&lt;</span><span class="n">ms</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -474,31 +474,31 @@ and interrupt nesting.</p>
 <ul class="simple">
 <li>Interrupt service function</li>
 </ul>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">timer0_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+  <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
 
-    <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-    <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">timer_flag</span><span class="p">)</span>
-    <span class="p">{</span>
-            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Interrupt nesting!</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span>
-    <span class="p">{</span>
-            <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Interrupt</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">timer_flag</span><span class="p">)</span>
+  <span class="p">{</span>
+          <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Interrupt nesting!</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+          <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Interrupt</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
 
-    <span class="n">hits</span><span class="o">++</span><span class="p">;</span>
+  <span class="n">hits</span><span class="o">++</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">static</span> <span class="kt">void</span> <span class="nf">timer1_isr</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
+  <span class="n">timer_int_clear</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-    <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">timer_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -511,72 +511,72 @@ and interrupt nesting.</p>
 <ul class="simple">
 <li>main function</li>
 </ul>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
-    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
+<span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+<span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
+<span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+<span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-    <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
-    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
+<span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">timer0_isr</span><span class="p">);</span>
+<span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
 
-    <span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">timer1_isr</span><span class="p">);</span>
-    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
+<span class="n">int_handler_install</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">timer1_isr</span><span class="p">);</span>
+<span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">The test will start in 1s.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">The test will start in 1s.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">/******** TEST MODE START ********/</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span><span class="p">);</span>
 
-    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
+<span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+<span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
-    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+<span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
 
-    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="p">{</span>
-            <span class="k">if</span><span class="p">((</span><span class="n">hits</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">nesting_flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
-            <span class="p">{</span>
-                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
-                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">if</span><span class="p">((</span><span class="n">hits</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">nesting_flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">{</span>
+                <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+                <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
+                <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
-                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
+                <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
+                <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
 
-                    <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
+                <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
-                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="n">hits</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">nesting_flag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
-            <span class="p">{</span>
-                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
-                    <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
+                <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+                <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="n">hits</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">nesting_flag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="p">{</span>
+                <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">);</span>
+                <span class="n">timer_stop</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">);</span>
 
-                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-                    <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
+                <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                <span class="n">int_disable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
-                    <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
+                <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">,</span> <span class="n">INT_PRI_MAX</span><span class="p">);</span>
+                <span class="n">int_pri_set</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">,</span> <span class="n">INT_PRI_MIN</span><span class="p">);</span>
 
-                    <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                    <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="n">nesting_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
-                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
-                    <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
+                <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER0</span><span class="p">);</span>
+                <span class="n">int_enable</span><span class="p">(</span><span class="n">INTNO_TIMER1</span><span class="p">);</span>
 
-                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
-                    <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
-            <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
+                <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_0</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="p">);</span>
+                <span class="n">timer_start</span><span class="p">(</span><span class="n">TIMER_1</span><span class="p">,</span> <span class="n">TIMER_CTRL_IE</span> <span class="o">|</span> <span class="n">TIMER_CTRL_NH</span><span class="p">,</span> <span class="n">MAX_COUNT</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="n">E_SYS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
