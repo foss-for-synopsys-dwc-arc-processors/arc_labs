@@ -118,18 +118,22 @@ machine.
 Install ARC labs code
 *********************
 
-The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first, then copy the ``labs`` folder to the ``example`` folder of embARC OSP. You will get the following folder structure:
+The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first, then copy the ``labs`` folder to the root folder of embARC OSP. You will get the following folder structure:
 
 .. code-block:: console
 
-    example
-    ├── baremetal
-    ├── example.makefile
-    ├── example.rst
-    ├── freertos
+    embarc_osp
+    ├── arc
+    ├── board
+    ├── device
+    ├── doc
+    ├── example
     ├── labs
-    ├── main.c.tmpl
-    └── makefile
+    ├── inc
+    ├── library
+    ├── middleware
+    ├── options
+    └── os
 
 
 
