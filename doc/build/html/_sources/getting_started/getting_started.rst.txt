@@ -112,13 +112,18 @@ We'll begin by using Git to clone the repository anonymously.
 
    git clone https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp.git embarc_osp
 
-You have successfully checked out a copy of the source code to your local
-machine.
+You have successfully checked out a copy of the source code to your local machine.
 
 Install ARC labs code
 *********************
 
-The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first, then copy the ``labs`` folder to the root folder of embARC OSP. You will get the following folder structure:
+The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first to **arc_labs** folder, then copy the ``arc_labs`` folder to the root folder of embARC OSP. You will get the following folder structure:
+
+.. code-block:: console
+
+   cd path/to/embarc_osp
+   git clone https://github.com/foss-for-synopsys-dwc-arc-processors/arc_labs.git arc_labs
+
 
 .. code-block:: console
 
@@ -128,7 +133,7 @@ The source codes of ARC labs are assumed to work with embARC OSP. You need to us
     ├── device
     ├── doc
     ├── example
-    ├── labs
+    ├── arc_labs
     ├── inc
     ├── library
     ├── middleware
