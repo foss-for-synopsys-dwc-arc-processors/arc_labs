@@ -19,7 +19,7 @@ The following hardware and software tools are required:
 * PC host
 * MetaWare Development Toolkit
 * nSIM simulator or ARC board (EM Starter kit/IoT Development Kit)
-* ``embarc_osp/labs/lab1_core_test``
+* ``embarc_osp/arc_labs/lab1_core_test``
 
 PC, MetaWare Development Toolkit, nSIM simulator, core_test source file in embAR OSP
 

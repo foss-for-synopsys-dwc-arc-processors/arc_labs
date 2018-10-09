@@ -17,7 +17,7 @@ The following hardware and software tools are required:
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
 * |embarc| package
-* ``embarc_osp/labs/lab9_freertos``
+* ``embarc_osp/arc_labs/lab9_freertos``
 
 Content
 ========
@@ -172,7 +172,7 @@ Steps
 
 Build and run the incompleted code
 ----------------------------------
-the code is at ``embarc_osp/labs/lab9_freertos``, use an uart terminal console and run the code, you will see a message from program like the one shown below:
+the code is at ``embarc_osp/arc_labs/lab9_freertos``, use an uart terminal console and run the code, you will see a message from program like the one shown below:
 
 .. code-block:: console
 

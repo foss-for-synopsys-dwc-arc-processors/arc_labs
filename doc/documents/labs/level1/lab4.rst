@@ -16,11 +16,11 @@ The following hardware and software tools are required:
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
 * |embarc| package
-* ``embarc_osp/labs/lab4_interrupt``
+* ``embarc_osp/arc_labs/lab4_interrupt``
 
 Content
 =========
-This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through ``embarc_osp/labs/lab4_interrupt`` in the |embarc| package. The two routines give you a preliminary understanding of the ARC interrupt resources.
+This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through ``embarc_osp/arc_labs/lab4_interrupt`` in the |embarc| package. The two routines give you a preliminary understanding of the ARC interrupt resources.
 
 Principles
 ===========
@@ -34,7 +34,7 @@ Steps
 Open and browse lab one
 ------------------------
 
-Go to the ``embarc_osp/labs/lab4_interrupt``, where there are two folders, ``lab_4_1`` and ``lab_4_2``.
+Go to the ``embarc_osp/arc_labs/lab4_interrupt``, where there are two folders, ``lab_4_1`` and ``lab_4_2``.
 
 The ``lab_4_1`` is more fundamental compared to ``lab_4_2``. So we first enter
 folder ``lab_4_1``, in which the precise timing function is implemented
