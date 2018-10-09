@@ -172,7 +172,7 @@ Steps
 
 Build and run the incompleted code
 ----------------------------------
-the code is at ``embarc_osp/Lab/lab_9``, use an uart terminal console and run the code, you will see a message from program like the one shown below:
+the code is at ``embarc_osp/labs/lab9_freertos``, use an uart terminal console and run the code, you will see a message from program like the one shown below:
 
 .. code-block:: console
 

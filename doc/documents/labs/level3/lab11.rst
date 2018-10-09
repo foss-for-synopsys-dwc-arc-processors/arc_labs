@@ -119,14 +119,14 @@ Creating and setting smart home node
 
 5. Download the root CA certificate from
    `[here] <https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem>`_.
-   Rename it *rootCA.crt*. Copy the certificate files *cert.crt, privateKey.pem and rootCA.crt* to folder *cert\\smarthome*.
+   Rename it *rootCA.crt*. Copy the certificate files *cert.crt, privateKey.pem and rootCA.crt* to folder *cert/smarthome*.
    Insert the SD card to your PC, and copy the certificate folder cert to the SD Card root.
 
    .. image:: /img/lab11_steps_4.png
         :alt: smarthome system
 
 6. Open the `[Web App] <http://embarc.org/freeboard/>`_ in a web browser and load the configuration file dashboard-smarthomesinglething.json
-   obtained from *embARC\\example\\freertos\\iot\\aws\\smarthome_demo*. The dashboard can be loaded automatically
+   obtained from `[embARC/example/freertos/iot/aws/smarthome_demo] <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome>`_. The dashboard can be loaded automatically
 
    .. image:: /img/lab11_steps_5.png
         :alt: smarthome system
@@ -175,7 +175,7 @@ Building and running AWS IoT smart home example
 -----------------------------------------------
 
 1. The AWS IoT thing SDK for C has been ported to embARC. Check the above steps in
-   order for your IoT application to work smoothly. Go to *embARC\\example\\freertos\\iot\\aws\\smarthome_demo*.
+   order for your IoT application to work smoothly. Go to *embARC/example/freertos/iot/aws/smarthome_demo*.
    Modify aws_iot_config.h to match your AWS IoT configuration. The macro **AWS_IOT_MQTT_HOST** can be copied
    from the REST API endpoint in AWS IoT console. For example,
    ``https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow``. **AWS_IOT_MQTT_HOST** should be
@@ -187,7 +187,7 @@ Building and running AWS IoT smart home example
 2. Use USB cable to connect the EMSK board. Set the baud rate of the terminal emulator to 115200.
 
 3. Insert the SD Card into the EMSK board SD Card slot. Run the AWS IoT application using JTAG.
-   Go to *embARC\\example\\freertos\\iot\\aws\\smarthome_demo* in command line, input the compile command as follow:
+   Go to *embARC/example/freertos/iot/aws/smarthome_demo* in command line, input the compile command as follow:
 
    .. code-block:: console
 

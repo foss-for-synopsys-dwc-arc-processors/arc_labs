@@ -128,7 +128,7 @@ Run project
 
 Open the serial terminal emulator in PC (e.g. Tera Term), set as **115200 baud, 8 bits data, 1 stop bit and no parity**,  connect to the IoTDK board.
 
-Open ``cmd`` under the folder *example\\labs\\lab6_ble_rn4020*, input the command as follow
+Open ``cmd`` under the folder *example/labs/lab6_ble_rn4020*, input the command as follow
 
 .. code-block:: console
 
