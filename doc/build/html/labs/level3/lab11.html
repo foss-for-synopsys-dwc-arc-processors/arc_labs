@@ -300,12 +300,12 @@ certificate.</p>
 </li>
 <li><p class="first">Download the root CA certificate from
 <a class="reference external" href="https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem">[here]</a>.
-Rename it <em>rootCA.crt</em>. Copy the certificate files <em>cert.crt, privateKey.pem and rootCA.crt</em> to folder <em>cert\smarthome</em>.
+Rename it <em>rootCA.crt</em>. Copy the certificate files <em>cert.crt, privateKey.pem and rootCA.crt</em> to folder <em>cert/smarthome</em>.
 Insert the SD card to your PC, and copy the certificate folder cert to the SD Card root.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_4.png" />
 </li>
 <li><p class="first">Open the <a class="reference external" href="http://embarc.org/freeboard/">[Web App]</a> in a web browser and load the configuration file dashboard-smarthomesinglething.json
-obtained from <em>embARC\example\freertos\iot\aws\smarthome_demo</em>. The dashboard can be loaded automatically</p>
+obtained from <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome">[embARC/example/freertos/iot/aws/smarthome_demo]</a>. The dashboard can be loaded automatically</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_5.png" />
 </li>
 <li><p class="first">Click “ADD” to go to DATASOURCE page and fill up the forms.</p>
@@ -347,7 +347,7 @@ Key ID to ACCESS KEY and Secret Access Key to SECRET KEY.</p>
 <h3>Building and running AWS IoT smart home example<a class="headerlink" href="#building-and-running-aws-iot-smart-home-example" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li>The AWS IoT thing SDK for C has been ported to embARC. Check the above steps in
-order for your IoT application to work smoothly. Go to <em>embARC\example\freertos\iot\aws\smarthome_demo</em>.
+order for your IoT application to work smoothly. Go to <em>embARC/example/freertos/iot/aws/smarthome_demo</em>.
 Modify aws_iot_config.h to match your AWS IoT configuration. The macro <strong>AWS_IOT_MQTT_HOST</strong> can be copied
 from the REST API endpoint in AWS IoT console. For example,
 <code class="docutils literal notranslate"><span class="pre">https://XXXXXXXXXXXXXX.iot.us-east-1.amazonaws.com/things/SmartHome/shadow</span></code>. <strong>AWS_IOT_MQTT_HOST</strong> should be
@@ -360,7 +360,7 @@ from the REST API endpoint in AWS IoT console. For example,
 <li><p class="first">Use USB cable to connect the EMSK board. Set the baud rate of the terminal emulator to 115200.</p>
 </li>
 <li><p class="first">Insert the SD Card into the EMSK board SD Card slot. Run the AWS IoT application using JTAG.
-Go to <em>embARC\example\freertos\iot\aws\smarthome_demo</em> in command line, input the compile command as follow:</p>
+Go to <em>embARC/example/freertos/iot/aws/smarthome_demo</em> in command line, input the compile command as follow:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make TOOLCHAIN=gnu BD_VER=22 CUR_CORE=arcem7d run</span>
 </pre></div>
 </div>

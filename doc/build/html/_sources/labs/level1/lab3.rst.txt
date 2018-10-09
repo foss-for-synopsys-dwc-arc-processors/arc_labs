@@ -17,7 +17,7 @@ The following hardware and software tools are required:
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
 * |embarc| package
-* ``labs/lab3_timer``
+* ``embarc_osp/labs/lab3_timer``
 
 Content
 ========
@@ -215,7 +215,7 @@ Compile and debug
 ^^^^^^^^^^^^^^^^^
 - Compile and download
 
-Open ``cmd`` under the folder *labs/timer*, input the compile command as follow:
+Open ``cmd`` under the folder *embarc_osp/labs/timer*, input the compile command as follow:
 
 .. code-block:: console
 
@@ -274,7 +274,7 @@ Open ``cmd`` under the folder *labs/timer*, input the compile command as follow:
 
 - Debug
 
-Open ``cmd`` under the folder *labs/timer*, input the command as follow:
+Open ``cmd`` under the folder *embarc_osp/labs/timer*, input the command as follow:
 
 .. code-block:: console
 

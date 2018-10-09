@@ -14,7 +14,7 @@ The following hardware and software tools are required:
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
 * nSIM simulator
-* ``labs/lab8_linker``
+* ``embarc_osp/labs/lab8_linker``
 
 Content
 ========
@@ -33,7 +33,7 @@ Steps
 Create a project and overriding code section name
 ---------------------------------------------------
 
-Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under *\\labs\\lab8_linker* directory into the project.
+Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under *embarc_osp/labs/lab8_linker* directory into the project.
 
 Open main.c file in MetaWare IDE, using "pragma code" to change the section in which function ``modify`` reside from *.text* to a new name "*modify_seg*".
 
