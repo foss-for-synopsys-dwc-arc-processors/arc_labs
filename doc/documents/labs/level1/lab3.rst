@@ -86,7 +86,7 @@ There are two ways to do the configuration.
 
 	make -j4 run
 
-Open the folder ``embarc_osp/labs/timer``, and open the ``makefile``, here is the default configuration.
+Open the folder ``embarc_osp/labs/lab3_timer``, and open the ``makefile``, here is the default configuration.
 
 .. code-block:: makefile
 
@@ -215,7 +215,7 @@ Compile and debug
 ^^^^^^^^^^^^^^^^^
 - Compile and download
 
-Open ``cmd`` under the folder *embarc_osp/labs/timer*, input the compile command as follow:
+Open ``cmd`` under the folder *embarc_osp/labs/lab3_timer*, input the compile command as follow:
 
 .. code-block:: console
 
@@ -274,7 +274,7 @@ Open ``cmd`` under the folder *embarc_osp/labs/timer*, input the compile command
 
 - Debug
 
-Open ``cmd`` under the folder *embarc_osp/labs/timer*, input the command as follow:
+Open ``cmd`` under the folder *embarc_osp/labs/lab3_timer*, input the command as follow:
 
 .. code-block:: console
 
