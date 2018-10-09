@@ -21,7 +21,7 @@ The following hardware and software tools are required:
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
 * |embarc| package
-* ``labs/lab10_esp8266_wifi``
+* ``embarc_osp/labs/lab10_esp8266_wifi``
 
 Content
 ^^^^^^^^

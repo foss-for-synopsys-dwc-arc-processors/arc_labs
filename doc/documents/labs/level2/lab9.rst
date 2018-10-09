@@ -17,7 +17,7 @@ The following hardware and software tools are required:
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
 * |embarc| package
-* ``labs/lab9_freertos``
+* ``embarc_osp/labs/lab9_freertos``
 
 Content
 ========

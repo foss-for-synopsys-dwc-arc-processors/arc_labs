@@ -14,7 +14,7 @@ The following hardware and software tools are required:
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
 * nSIM simulator
-* ``labs/lab8_linker``
+* ``embarc_osp/labs/lab8_linker``
 
 Content
 ========
