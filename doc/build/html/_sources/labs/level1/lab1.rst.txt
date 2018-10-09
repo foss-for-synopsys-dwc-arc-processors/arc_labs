@@ -19,7 +19,7 @@ The following hardware and software tools are required:
 * PC host
 * MetaWare Development Toolkit
 * nSIM simulator or ARC board (EM Starter kit/IoT Development Kit)
-* ``embarc_osp/labs/lab1_core_test``
+* ``embarc_osp/arc_labs/labs/lab1_core_test``
 
 PC, MetaWare Development Toolkit, nSIM simulator, core_test source file in embAR OSP
 
@@ -284,7 +284,7 @@ As shown in the figure above, check if the information in Main is correct. Since
 
 |figure15|
 
-As shown in the above figure (figure15), the ARC GDB Server should select nSIM. At this time, the port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF boot file is under *nSIM\\nSIM\\etc\\tcf\\templates* (the default installation path). If you have downloaded the Metaware IDE, its own nSIM path is *C:\\ARC\\nSIM\\nSIM\\etc\\tcf\\templates*, and you can select a TCF file in this folder (depending on the version of the board you are simulating and the kernel model), as shown above.
+As shown in the above figure (figure15), the ARC GDB Server should select nSIM. At this time, the port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF boot file is under *nSIM/nSIM/etc/tcf/templates* (the default installation path). If you have downloaded the Metaware IDE, its own nSIM path is *C:/ARC/nSIM/nSIM/etc/tcf/templates*, and you can select a TCF file in this folder (depending on the version of the board you are simulating and the kernel model), as shown above.
 
 * Pay attention to Debug in Common (figure16)
 

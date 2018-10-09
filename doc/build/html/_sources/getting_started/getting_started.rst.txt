@@ -64,7 +64,7 @@ Here we will start install MetaWare Development Toolkit (2017.09).
 6. Test the MetaWare Development Toolkit and its license
 
 Open cmd.exe in Windows and find the queens.c in the installation folder of
-MetaWare Development Toolkit, e.g., **C:\\ARC\\MetaWare\\arc\\demos\\queen.c**. Type the following commands in cmd
+MetaWare Development Toolkit, e.g., **C:/ARC/MetaWare/arc/demos/queen.c**. Type the following commands in cmd
 
  .. code-block:: console
 

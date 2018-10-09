@@ -191,7 +191,7 @@
 <li>PC host</li>
 <li>ARC GNU toolchain/MetaWare Development Toolkit</li>
 <li>nSIM simulator</li>
-<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/labs/lab8_linker</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab8_linker</span></code></li>
 </ul>
 </div>
 <div class="section" id="content">
@@ -209,7 +209,7 @@ Finally, checking the location of this code section after build process.</p>
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="create-a-project-and-overriding-code-section-name">
 <h3>Create a project and overriding code section name<a class="headerlink" href="#create-a-project-and-overriding-code-section-name" title="Permalink to this headline">¶</a></h3>
-<p>Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under <em>embarc_osp/labs/lab8_linker</em> directory into the project.</p>
+<p>Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under <em>embarc_osp/arc_labs/labs/lab8_linker</em> directory into the project.</p>
 <p>Open main.c file in MetaWare IDE, using “pragma code” to change the section in which function <code class="docutils literal notranslate"><span class="pre">modify</span></code> reside from <em>.text</em> to a new name “<em>modify_seg</em>”.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma Code (&quot;modify_seg&quot;)</span>
 <span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
