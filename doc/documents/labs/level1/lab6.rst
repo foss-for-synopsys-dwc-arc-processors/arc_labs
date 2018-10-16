@@ -22,12 +22,26 @@ The following hardware and software tools are required:
 * |embarc| package
 * ``example/baremetal/bootloader``
 
+Simple bootloader
+==================
+
+This simple bootloader is designed to work as a secondary/simple bootloader
+for embARC, it will load boot.hex or boot.bin on SDCard and run that program.
+And this example itself can be used as ntshell application.
+
+The following features are provided in this simple bootloader:
+
+* Boot application from SD card
+* File operations on SD card
+* UART Y-modem protocol to update application
+* Operations on ARC processors
+
 Content
 ========
 
 1. Build and run the  ``example/baremetal/bootloader``
 2. Download the generated ``bootloader.bin`` into flash
-3. Build a self-boot applicaiton and boot it from SD card
+3. Build a self-boot application and boot it from SD card
 4. Use the ntshell commands
 
 Principles
@@ -124,11 +138,20 @@ is listed below:
 |iotdk|
 *****************
 
-|iotdk| can boot from on-chip eflash and extern boot SPI eflash, which is decided by
+|iotdk| can boot from on-chip eflash and extern boot SPI flash, which is decided by
 the FWU switch of IOTDK. When this switch is set of "off", the processor
 starts executing the program stored in on-chip eflash; When this switch is set
 of "on", the processor starts executing the program stored in external boot
-SPI eflash;
+SPI eflash. The simple bootloader can be written to both flash to load an application
+from the TF card. The startup sequence for iotdk is listed below:
+
+1. Power on or reset event
+
+2. Boot from on-chip eflash or extern boot SPI flash decided by the FWU switch
+
+3. Run simple bootloader to load application from the TF card into ICCM.
+
+4. Run the application from ICCM memory.
 
 
 How to flash the ARC board
@@ -137,34 +160,74 @@ How to flash the ARC board
 |emsk|
 **************
 
+- Generate a secondary bootloader binary file
+
+.. code-block:: console
+
+    $ cd <embarc_root>/example/baremetal/bootloader
+    $ gmake BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=mw bin
+
+- Program generated secondary bootloader binary file into SPIFlash
+    + Insert SDCard to your PC, and copy the binary file *obj_emsk_23/gnu_arcem7d/emsk_bootloader_gnu_arcem7d.bin* to SDCard Root, and rename it to *em7d_2bt.bin*
+    + Insert the SDCard to EMSK Board, please choose the right core configuration, build and run the *<embARC>/example/baremetal/bootloader* example, then press any button to stop auto boot process, and enter to ntshell command mode.
+    + Then use ntshell command *spirw* to program the *em7d_2bt.bin* into spiflash.
+        - Firstly, run *spirw* to show help
+        - Secondly, run *spirw -i* to check SPIFlash ID, it should be **Device ID = ef4018**
+        - Thirdly, run *spirw -w em7d_2bt.bin 0x17f00000 0x17f00004* to program spiflash
+        - Check the output message to see if it was programmed successfully.
+
+        .. image:: /img/lab6_emsk_bootloader_program2spiflash.jpg
+
+    + If programmed successfully, when the board is reset, make sure Bit 4 of the onboard DIP switch is ON to enable secondary bootloader run.
+    + If the sdcard already contains the *boot.bin* in it, the bootloader will automatically load it from sdcard, if not, it will enter to ntshell mode.
+    + You can goto the next step to generate the *boot.bin* for proper application you want to be auto-loaded in sdcard.
+
+    .. image:: /img/lab6_emsk_bootloader_onspiflash.jpg
+
+- Generate *boot.bin* using any embARC example which ram start address should be 0x10000000 and use bootloader to run it
+
+- Know Issues
+    + Bootrom of EMSK1.x is not able to load secondary bootloader on SPIFlash, you need a modified EMSK1.x mcs file to enable this function, please send request in forum about this mcs file.
+
 |iotdk|
 *****************
 
-Simple bootloader
------------------
+- Generate a secondary bootloader binary file
 
-This simple bootloader is designed to work as a secondary/simple bootloader
-for embARC, it will load boot.hex or boot.bin on SDCard and run that program.
-And this example itself can be used as ntshell application.
+.. code-block:: console
 
-The following features are provided in this simple bootloader:
+    $ cd <embarc_root>/example/baremetal/bootloader
+    $ gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw LOCATION=eflash bin
 
-* Boot application from SD card
-* File operations on SD card
-* UART Y-modem protocol to update application
-* Operations on ARC processors
+- Program generated secondary bootloader binary file into SPIFlash
+    + Insert SDCard to your PC, and copy the binary file *obj_iotdk_10/mw_arcem9d/simple_bootloader_mw_arcem9d.bin* to SDCard Root, and rename it to *simple_bootloader.bin*
+    + copy the file *example/bootloader/boot.json* to SDCard Root, and change the boot_file value to "boot.bin", and change the ram_startaddress to 536870912(0x20000000).
 
-Steps
-=====
+    .. image:: /img/lab6_iotdk_bootloader_bootjson.jpg
 
-1. Build and run the  ``example/baremetal/bootloader``
+    + Insert the SDCard to iotdk Board, build and run the *<embARC>/example/baremetal/bootloader* example, and enter to ntshell command mode.
 
-2. Download the generated ``bootloader.bin`` into flash
+    .. code-block:: console
 
-3. Build a self-boot applicaiton and boot it from SD card
+        $ cd <embarc_root>/example/baremetal/bootloader
+        $ gmake distclean
+        $ gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw run
 
-4. Use the ntshell commands
+    + Then use ntshell command *flash* to program the *simple_bootloader.bin* into both flash.
+        - Firstly, run *flash -h* to show help.
+        - Secondly, run *spirw -eflsh simple_bootloader.bin* to program eflash.
+        - Thirdly, run *spirw -bootspi simple_bootloader.bin* to program bootspi flash.
+        - Check the output message to see if it was programmed successfully.
 
+        .. image:: /img/lab6_iotdk_bootloader_program2spiflash.jpg
+
+    + If programmed successfully, when the board is reset, make sure Bit 4 of the onboard DIP switch is ON to enable secondary bootloader run.
+    + If the sdcard already contains the *boot.bin* and *boot.json*in it, the bootloader will automatically load it from sdcard, if not, it will enter to ntshell mode.
+    + You can goto the next step to generate the *boot.bin* for proper application you want to be auto-loaded in sdcard.
+
+    .. image:: /img/lab6_iotdk_bootloader_onspiflash.jpg
+
+- Generate *boot.bin* using any embARC example which ram start address should be 0x20000000 and use bootloader to run it
 
 Exercises
 =========
