@@ -8,7 +8,7 @@ Use this guide to get started with your ARC labs development.
 Software Requirement
 ####################
 * `ARC Development Tools <https://www.synopsys.com/designware-ip/processor-solutions/arc-processors/arc-development-tools.html>`_
-    Choose **MetaWare Toolkit** and/or **ARC GNU Toolchain** from the following list according to your requirement.
+    Choose **MetaWare Toolkit** or **ARC GNU Toolchain** from the following list according to your requirement.
 
   * MetaWare Toolkit
 
@@ -35,7 +35,7 @@ Install Metaware Toolkit
 
 Here we will start install MetaWare Development Toolkit (2017.09).
 
-1. Double click the **mw_dekit_arc_i_2017_09_win_install.exe**, it will show
+1. Double click the ``mw_dekit_arc_i_2017_09_win_install.exe``, it will show
 
 .. image:: /img/mwdt_1.png
 
@@ -117,7 +117,7 @@ You have successfully checked out a copy of the source code to your local machin
 Install ARC labs code
 *********************
 
-The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs first to **arc_labs** folder, then copy the ``arc_labs`` folder to the root folder of embARC OSP. You will get the following folder structure:
+The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs to the root folder of embARC OSP. If everything is ok, you will get the following folder structure:
 
 .. code-block:: console
 
@@ -155,5 +155,3 @@ Check the following items and set development environment.
   * If running GNU program with using the GNU toolchain on Linux, modify the **OpenOCD** configuration file as Linux format with LF line terminators. **dos2unix** can be used to convert it.
 
 .. note:: Check the version of your toolchain. The embARC OSP software build system is purely makefile-based. *make/gmake* is provided in the MetaWare toolkit (gmake) and ARC GNU toolchain (make)
-
-

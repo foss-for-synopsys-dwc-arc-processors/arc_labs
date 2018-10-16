@@ -226,8 +226,8 @@ And this example itself can be used as ntshell application.</p>
 <div class="section" id="emsk">
 <h4>EM Starter Kit<a class="headerlink" href="#emsk" title="Permalink to this headline">¶</a></h4>
 <p>The available memory regions of EM Starter Kit are shown below.</p>
-<table border="1" class="colwidths-auto docutils" id="id7">
-<caption><span class="caption-text">Memory Map of EM Starter Kit</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<table border="1" class="colwidths-auto docutils" id="id5">
+<caption><span class="caption-text">Memory Map of EM Starter Kit</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Name</th>
 <th class="head">Start address</th>
@@ -255,8 +255,8 @@ simple bootloader, other memory regions are available for application.</p>
 <div class="section" id="iotdk">
 <h4>IoT Development Kit<a class="headerlink" href="#iotdk" title="Permalink to this headline">¶</a></h4>
 <p>The available memory regions of IoT Development Kit are shown below.</p>
-<table border="1" class="colwidths-auto docutils" id="id8">
-<caption><span class="caption-text">Memory Map of IoT Development Kit</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<table border="1" class="colwidths-auto docutils" id="id6">
+<caption><span class="caption-text">Memory Map of IoT Development Kit</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Name</th>
 <th class="head">Start address</th>
@@ -420,7 +420,7 @@ from the TF card. The startup sequence for IoT Development Kit is listed below:<
 </div>
 <ul>
 <li><dl class="first docutils">
-<dt>Then use ntshell command <em>flash</em> to program the <em>simple_bootloader.bin</em> into both flash.</dt>
+<dt>Then use ntshell command <em>flash</em> to program the <code class="docutils literal notranslate"><span class="pre">simple_bootloader.bin</span></code> into both flash.</dt>
 <dd><ul class="first simple">
 <li>Firstly, run <em>flash -h</em> to show help.</li>
 <li>Secondly, run <em>flash -eflsh simple_bootloader.bin</em> to program eflash.</li>
@@ -431,7 +431,7 @@ from the TF card. The startup sequence for IoT Development Kit is listed below:<
 </dd>
 </dl>
 </li>
-<li><p class="first">If the SD card already contains the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> and <a href="#id5"><span class="problematic" id="id6">``</span></a>boot.json``in it, the bootloader will automatically load it from SD card, if not, it will enter to ntshell mode.</p>
+<li><p class="first">If the SD card already contains the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> and <code class="docutils literal notranslate"><span class="pre">boot.json</span></code> in it, the bootloader will automatically load it from SD card, if not, it will enter to ntshell mode.</p>
 </li>
 <li><p class="first">You can goto the next step to generate the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> for proper application you want to be auto-loaded in SD card.</p>
 </li>
