@@ -218,7 +218,7 @@ How to flash the ARC board
         $ gmake distclean
         $ gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw run
 
-    + Then use ntshell command *flash* to program the *simple_bootloader.bin* into both flash.
+    + Then use ntshell command *flash* to program the ``simple_bootloader.bin`` into both flash.
         - Firstly, run *flash -h* to show help.
         - Secondly, run *flash -eflsh simple_bootloader.bin* to program eflash.
         - Thirdly, run *flash -bootspi simple_bootloader.bin* to program bootspi flash.
@@ -226,7 +226,7 @@ How to flash the ARC board
 
         .. image:: /img/lab6_iotdk_bootloader_program2spiflash.jpg
 
-    + If the SD card already contains the ``boot.bin`` and ``boot.json``in it, the bootloader will automatically load it from SD card, if not, it will enter to ntshell mode.
+    + If the SD card already contains the ``boot.bin`` and ``boot.json`` in it, the bootloader will automatically load it from SD card, if not, it will enter to ntshell mode.
 
     + You can goto the next step to generate the ``boot.bin`` for proper application you want to be auto-loaded in SD card.
 

@@ -181,4 +181,6 @@ rst_epilog =  u"""
 .. |embarc| replace:: embARC OSP
 .. |iotdk| replace:: IoT Development Kit
 .. |emsk| replace:: EM Starter Kit
+.. |mwdt| replace:: MetaWare Development Toolkit
+.. |arcgnu| replace:: GNU Toolchain for ARC Processors
 """
