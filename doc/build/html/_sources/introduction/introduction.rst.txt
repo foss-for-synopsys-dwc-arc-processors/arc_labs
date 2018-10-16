@@ -8,7 +8,7 @@ Introduction
 
 This is a handbook for ARC labs which is a part of ARC university courses. It's written
 to help students who attend the ARC university courses and anyone who is interested in |arc| to
-get started in |arc| processor development. It describes all the basic elements of ARC labs and
+get started in |arc| development. It describes all the basic elements of ARC labs and
 how to finish the labs with step by step approach.
 
 This handbook can be used as a Lab teaching material for ARC university courses at
@@ -21,17 +21,18 @@ classified into 3 levels:
 * :ref:`Level 1: ARC basic <level1_labs>`
 
 The labs in this level cover the basic topics about |arc|, e.g., the
-installation of tools, hello world, interrupts, timers and so on.
+installation and usage of hardware and software tools, software/hardware
+development kits, hello world, interrupts, internal timers and so on.
 
 * :ref:`Level 2: ARC advance <level2_labs>`
 
-The labs in this level cover the advanced topics about |arc|, e.g., RTOS,
-customized linkage, ARC DSP and so on.
+The labs in this level cover the advanced topics about |arc|, e.g., Real-Time
+Operating System(RTOS), customized linkage, basic applicaitons, ARC DSP feature and so on.
 
 * :ref:`Level 3: ARC exploration <level3_labs>`
 
-The labs in this level will cover some complex applications about |arc|, e.g., IoT
-application, embedded machine learning and so on.
+The labs in this level will cover some complex applications about |arc|, e.g.,
+Internet of Thinggs (IoT) application, embedded machine learning and so on.
 
 Most of labs are based on the `embARC Open Software Platform (OSP) <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp>`__ which is an open
 software platform to facilitate the development of embedded systems based on
