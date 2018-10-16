@@ -197,12 +197,25 @@
 <li><code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code></li>
 </ul>
 </div>
+<div class="section" id="simple-bootloader">
+<h2>Simple bootloader<a class="headerlink" href="#simple-bootloader" title="Permalink to this headline">¶</a></h2>
+<p>This simple bootloader is designed to work as a secondary/simple bootloader
+for embARC, it will load boot.hex or boot.bin on SDCard and run that program.
+And this example itself can be used as ntshell application.</p>
+<p>The following features are provided in this simple bootloader:</p>
+<ul class="simple">
+<li>Boot application from SD card</li>
+<li>File operations on SD card</li>
+<li>UART Y-modem protocol to update application</li>
+<li>Operations on ARC processors</li>
+</ul>
+</div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>Build and run the  <code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code></li>
 <li>Download the generated <code class="docutils literal notranslate"><span class="pre">bootloader.bin</span></code> into flash</li>
-<li>Build a self-boot applicaiton and boot it from SD card</li>
+<li>Build a self-boot application and boot it from SD card</li>
 <li>Use the ntshell commands</li>
 </ol>
 </div>
@@ -213,8 +226,8 @@
 <div class="section" id="emsk">
 <h4>EM Starter Kit<a class="headerlink" href="#emsk" title="Permalink to this headline">¶</a></h4>
 <p>The available memory regions of EM Starter Kit are shown below.</p>
-<table border="1" class="colwidths-auto docutils" id="id5">
-<caption><span class="caption-text">Memory Map of EM Starter Kit</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<table border="1" class="colwidths-auto docutils" id="id7">
+<caption><span class="caption-text">Memory Map of EM Starter Kit</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Name</th>
 <th class="head">Start address</th>
@@ -242,8 +255,8 @@ other memory regions are available for application.</p>
 <div class="section" id="iotdk">
 <h4>IoT Development Kit<a class="headerlink" href="#iotdk" title="Permalink to this headline">¶</a></h4>
 <p>The available memory regions of IoT Development Kit are shown below.</p>
-<table border="1" class="colwidths-auto docutils" id="id6">
-<caption><span class="caption-text">Memory Map of IoT Development Kit</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<table border="1" class="colwidths-auto docutils" id="id8">
+<caption><span class="caption-text">Memory Map of IoT Development Kit</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Name</th>
 <th class="head">Start address</th>
@@ -312,44 +325,128 @@ is listed below:</p>
 </div>
 <div class="section" id="id2">
 <h4>IoT Development Kit<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<p>IoT Development Kit can boot from on-chip eflash and extern boot SPI eflash, which is decided by
+<p>IoT Development Kit can boot from on-chip eflash and extern boot SPI flash, which is decided by
 the FWU switch of IOTDK. When this switch is set of “off”, the processor
 starts executing the program stored in on-chip eflash; When this switch is set
 of “on”, the processor starts executing the program stored in external boot
-SPI eflash;</p>
+SPI eflash. The simple bootloader can be written to both flash to load an application
+from the TF card. The startup sequence for iotdk is listed below:</p>
+<ol class="arabic simple">
+<li>Power on or reset event</li>
+<li>Boot from on-chip eflash or extern boot SPI flash decided by the FWU switch</li>
+<li>Run simple bootloader to load application from the TF card into ICCM.</li>
+<li>Run the application from ICCM memory.</li>
+</ol>
 </div>
 </div>
 <div class="section" id="how-to-flash-the-arc-board">
 <h3>How to flash the ARC board<a class="headerlink" href="#how-to-flash-the-arc-board" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id3">
 <h4>EM Starter Kit<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Generate a secondary bootloader binary file</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/example/baremetal/bootloader
+<span class="gp">$</span> gmake <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">22</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem7d <span class="nv">TOOLCHAIN</span><span class="o">=</span>mw bin
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Program generated secondary bootloader binary file into SPIFlash</dt>
+<dd><ul class="first">
+<li><p class="first">Insert SDCard to your PC, and copy the binary file <em>obj_emsk_23/gnu_arcem7d/emsk_bootloader_gnu_arcem7d.bin</em> to SDCard Root, and rename it to <em>em7d_2bt.bin</em></p>
+</li>
+<li><p class="first">Insert the SDCard to EMSK Board, please choose the right core configuration, build and run the <em>&lt;embARC&gt;/example/baremetal/bootloader</em> example, then press any button to stop auto boot process, and enter to ntshell command mode.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Then use ntshell command <em>spirw</em> to program the <em>em7d_2bt.bin</em> into spiflash.</dt>
+<dd><ul class="first simple">
+<li>Firstly, run <em>spirw</em> to show help</li>
+<li>Secondly, run <em>spirw -i</em> to check SPIFlash ID, it should be <strong>Device ID = ef4018</strong></li>
+<li>Thirdly, run <em>spirw -w em7d_2bt.bin 0x17f00000 0x17f00004</em> to program spiflash</li>
+<li>Check the output message to see if it was programmed successfully.</li>
+</ul>
+<img alt="../../_images/lab6_emsk_bootloader_program2spiflash.jpg" class="last" src="../../_images/lab6_emsk_bootloader_program2spiflash.jpg" />
+</dd>
+</dl>
+</li>
+<li><p class="first">If programmed successfully, when the board is reset, make sure Bit 4 of the onboard DIP switch is ON to enable secondary bootloader run.</p>
+</li>
+<li><p class="first">If the sdcard already contains the <em>boot.bin</em> in it, the bootloader will automatically load it from sdcard, if not, it will enter to ntshell mode.</p>
+</li>
+<li><p class="first">You can goto the next step to generate the <em>boot.bin</em> for proper application you want to be auto-loaded in sdcard.</p>
+</li>
+</ul>
+<img alt="../../_images/lab6_emsk_bootloader_onspiflash.jpg" class="last" src="../../_images/lab6_emsk_bootloader_onspiflash.jpg" />
+</dd>
+</dl>
+</li>
+<li><p class="first">Generate <em>boot.bin</em> using any embARC example which ram start address should be 0x10000000 and use bootloader to run it</p>
+</li>
+<li><dl class="first docutils">
+<dt>Know Issues</dt>
+<dd><ul class="first last simple">
+<li>Bootrom of EMSK1.x is not able to load secondary bootloader on SPIFlash, you need a modified EMSK1.x mcs file to enable this function, please send request in forum about this mcs file.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 <div class="section" id="id4">
 <h4>IoT Development Kit<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
-</div>
-</div>
-<div class="section" id="simple-bootloader">
-<h3>Simple bootloader<a class="headerlink" href="#simple-bootloader" title="Permalink to this headline">¶</a></h3>
-<p>This simple bootloader is designed to work as a secondary/simple bootloader
-for embARC, it will load boot.hex or boot.bin on SDCard and run that program.
-And this example itself can be used as ntshell application.</p>
-<p>The following features are provided in this simple bootloader:</p>
 <ul class="simple">
-<li>Boot application from SD card</li>
-<li>File operations on SD card</li>
-<li>UART Y-modem protocol to update application</li>
-<li>Operations on ARC processors</li>
+<li>Generate a secondary bootloader binary file</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/example/baremetal/bootloader
+<span class="gp">$</span> gmake <span class="nv">BOARD</span><span class="o">=</span>iotdk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">10</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem9d <span class="nv">TOOLCHAIN</span><span class="o">=</span>mw <span class="nv">LOCATION</span><span class="o">=</span>eflash bin
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Program generated secondary bootloader binary file into SPIFlash</dt>
+<dd><ul class="first simple">
+<li>Insert SDCard to your PC, and copy the binary file <em>obj_iotdk_10/mw_arcem9d/simple_bootloader_mw_arcem9d.bin</em> to SDCard Root, and rename it to <em>simple_bootloader.bin</em></li>
+<li>copy the file <em>example/bootloader/boot.json</em> to SDCard Root, and change the boot_file value to “boot.bin”, and change the ram_startaddress to 536870912(0x20000000).</li>
+</ul>
+<img alt="../../_images/lab6_iotdk_bootloader_bootjson.jpg" src="../../_images/lab6_iotdk_bootloader_bootjson.jpg" />
+<ul class="simple">
+<li>Insert the SDCard to iotdk Board, build and run the <em>&lt;embARC&gt;/example/baremetal/bootloader</em> example, and enter to ntshell command mode.</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/example/baremetal/bootloader
+<span class="gp">$</span> gmake distclean
+<span class="gp">$</span> gmake <span class="nv">BOARD</span><span class="o">=</span>iotdk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">10</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem9d <span class="nv">TOOLCHAIN</span><span class="o">=</span>mw run
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>Then use ntshell command <em>flash</em> to program the <em>simple_bootloader.bin</em> into both flash.</dt>
+<dd><ul class="first simple">
+<li>Firstly, run <em>flash -h</em> to show help.</li>
+<li>Secondly, run <em>spirw -eflsh simple_bootloader.bin</em> to program eflash.</li>
+<li>Thirdly, run <em>spirw -bootspi simple_bootloader.bin</em> to program bootspi flash.</li>
+<li>Check the output message to see if it was programmed successfully.</li>
+</ul>
+<img alt="../../_images/lab6_iotdk_bootloader_program2spiflash.jpg" class="last" src="../../_images/lab6_iotdk_bootloader_program2spiflash.jpg" />
+</dd>
+</dl>
+</li>
+<li><p class="first">If programmed successfully, when the board is reset, make sure Bit 4 of the onboard DIP switch is ON to enable secondary bootloader run.</p>
+</li>
+<li><p class="first">If the sdcard already contains the <em>boot.bin</em> and <a href="#id5"><span class="problematic" id="id6">*</span></a>boot.json*in it, the bootloader will automatically load it from sdcard, if not, it will enter to ntshell mode.</p>
+</li>
+<li><p class="first">You can goto the next step to generate the <em>boot.bin</em> for proper application you want to be auto-loaded in sdcard.</p>
+</li>
+</ul>
+<img alt="../../_images/lab6_iotdk_bootloader_onspiflash.jpg" class="last" src="../../_images/lab6_iotdk_bootloader_onspiflash.jpg" />
+</dd>
+</dl>
+</li>
+<li><p class="first">Generate <em>boot.bin</em> using any embARC example which ram start address should be 0x20000000 and use bootloader to run it</p>
+</li>
 </ul>
 </div>
 </div>
-<div class="section" id="steps">
-<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Build and run the  <code class="docutils literal notranslate"><span class="pre">example/baremetal/bootloader</span></code></li>
-<li>Download the generated <code class="docutils literal notranslate"><span class="pre">bootloader.bin</span></code> into flash</li>
-<li>Build a self-boot applicaiton and boot it from SD card</li>
-<li>Use the ntshell commands</li>
-</ol>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
