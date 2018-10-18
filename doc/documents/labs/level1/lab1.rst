@@ -113,7 +113,7 @@ Open the |mwdt|, create an empty project called ``demo``, and select the ARC EM 
 In the Project Explorer on the left side of the |mwdt| main interface, click
 the icon |icon1| and select Import from the pop-up menu.
 
-At this point, a dialog called Import appears, select the File System item in the General tab, and then click next. As shown in the figure below, add the file directory where the source code CoreTest.c is located. The dialog box will automatically display the name of the directory and the file name of the file contained in the directory. Select the file to be added, CoreTest.c, and click Finish to complete the entire import process (figure2).
+At this point, a dialog called Import appears, select the File System item in the General tab, and then click next. As shown in the figure below, add the file directory where the source code CoreTest.c is located. The dialog box will automatically display the name of the directory and the file name of the file contained in the directory. Select the file to be added, CoreTest.c, and click Finish to complete the entire import process (figure 2).
 
 |figure2|
 
@@ -123,7 +123,7 @@ After the import is complete, you can see the code file ``CoreTest.c`` you just 
 
 Right click on the current project demo and select Properties in the popup
 tab. Click C/C++ Build, settings, Tool Settings to open the compile option
-settings page, as shown below (figure3).
+settings page, as shown below (figure 3).
 
 |figure3|
 
@@ -137,7 +137,7 @@ options corresponding to the target processor hardware properties, such as the
 version of the processor, whether to support extended instructions such as
 shift, multiplication, floating-point operations, etc., whether to include
 Timer0/1. As shown in the figure below, this setting indicates that the target
-processor supports normal extended instructions (figure4).
+processor supports normal extended instructions (figure 4).
 
 |figure4|
 
@@ -153,7 +153,7 @@ the Console tab to view the logs during compilation. When the message
 'Finished building target: demo.elf' appears, the compilation is successful,
 and the compiled executable file demo.elf can be seen in the Project Explorer
 on the left side of the |mwdt| main interface, as shown in the following
-figure (figure5).
+figure (figure 5).
 
 |figure5|
 
@@ -161,7 +161,7 @@ figure (figure5).
 
 Select Debug Configurations from the Run drop-down menu in the |mwdt| main
 menu. Then double-click on C/C++ Application or right-click on New to get a
-dialog similar to the one below (figure6).
+dialog similar to the one below (figure 6).
 
 |figure6|
 
@@ -172,7 +172,7 @@ Click Debugger in the right tab, generally do not need to make any changes, fina
 First, select the required debug window in the pull-down menu Debugger in the
 main menu of the debug interface, such as source code window, assembly code
 window, register window, global variable window, breakpoint window, function
-window, etc., as shown in the following figure (figure7).
+window, etc., as shown in the following figure (figure 7).
 
 |figure7|
 
@@ -204,7 +204,7 @@ interface, select Disassembly in the pop-up drop-down menu, open the
 disassembly code window, and you can see that the program is paused at the
 entrance of the main() function. In the same way, select Profiling in the
 Debugger drop-down menu, open the performance analysis window and click the
-icon |icon10| in the window, as shown below (figure8).
+icon |icon10| in the window, as shown below (figure 8).
 
 |figure8|
 
@@ -234,7 +234,7 @@ interface to let the program execute to the breakpoint. Next, click on the
 icon |icon14| in the Profiling window again, and only the information related
 to the main() function will be displayed, as shown below. Therefore, flexible
 setting of breakpoints, combined with the clear function, can perform
-performance analysis on the concerned blocks (figure9).
+performance analysis on the concerned blocks (figure 9).
 
 |figure9|
 
@@ -296,7 +296,7 @@ Steps
 
 1. Establishing a project
 
-Open the |arcgnu|, create an empty project called core_test, and select the ARC EM series processor, as shown below (figure10).
+Open the |arcgnu|, create an empty project called core_test, and select the ARC EM series processor, as shown below (figure 10).
 
 |figure10|
 
@@ -306,7 +306,7 @@ Right click on the icon |icon15| in the Project Explorer on the left side of
 the |arcgnu| main interface, then select Import from the popup menu.
 
 At this point, a dialog called Import appears, select the File System item in
-the General tab, and then click next. As shown in the figure below (figure11),
+the General tab, and then click next. As shown in the figure below (figure 11),
 add the file directory where the source code CoreTest.c is located. The dialog
 box will automatically display the name of the directory and the file name of
 the file contained in the directory. Select the file to be added, CoreTest.c,
@@ -320,7 +320,7 @@ interface.
 
 3. Set compilation options
 
-Right click on the current project core_test and select Properties in the popup tab. Click C/C++ Build, settings, Tool Settings to open the compile option settings page, as shown below (figure12).
+Right click on the current project core_test and select Properties in the popup tab. Click C/C++ Build, settings, Tool Settings to open the compile option settings page, as shown below (figure 12).
 
 |figure12|
 
@@ -346,7 +346,7 @@ select the Console tab to view the logs during the compilation process. When
 the message 'Finished building target: Core_test.elf' appears, the compilation
 is successful, and the compiled executable file Core_test.elf can be seen in
 the Project Explorer on the left side of the main interface of the |arcgnu|, as
-shown in the following figure (figure13).
+shown in the following figure (figure 13).
 
 |figure13|
 
@@ -354,7 +354,7 @@ shown in the following figure (figure13).
 
 Select Debug Configurations from the Run drop-down menu in the main menu. Then
 double-click on C/C++ Application or right-click on New to get a dialog
-similar to the one below (figure14).
+similar to the one below (figure 14).
 
 |figure14|
 
@@ -368,15 +368,15 @@ calls). The specific settings are as follows:
 
 |figure15|
 
-As shown in the above figure (figure15), the ARC GDB Server should select nSIM. At this time, the port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF boot file is under *nSIM/nSIM/etc/tcf/templates* (the default installation path). If you have downloaded the Metaware IDE, its own nSIM path is *C:/ARC/nSIM/nSIM/etc/tcf/templates*, and you can select a TCF file in this folder (depending on the version of the board you are simulating and the kernel model), as shown above.
+As shown in the above figure (figure 15), the ARC GDB Server should select nSIM. At this time, the port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF boot file is under *nSIM/nSIM/etc/tcf/templates* (the default installation path). If you have downloaded the Metaware IDE, its own nSIM path is *C:/ARC/nSIM/nSIM/etc/tcf/templates*, and you can select a TCF file in this folder (depending on the version of the board you are simulating and the kernel model), as shown above.
 
-* Pay attention to Debug in Common (figure16)
+* Pay attention to Debug in Common (figure 16)
 
 |figure16|
 
 * Terminal settings
 
-If you are using the EMSK development board, the terminal will automatically select the correct port number, and we are using the emulator without a port, so uncheck it, as show bellow (figure17).
+If you are using the EMSK development board, the terminal will automatically select the correct port number, and we are using the emulator without a port, so uncheck it, as show bellow (figure 17).
 
 |figure17|
 
@@ -387,7 +387,7 @@ After all settings are completed, click Debug to enter the debugging interface.
 First, select the required debug window in the pull-down menu Debugger in the
 main menu of the debug interface, such as source code window, assembly code
 window, register window, global variable window, breakpoint window, function
-window, etc., as shown in the following figure (figure18).
+window, etc., as shown in the following figure (figure 18).
 
 |figure18|
 

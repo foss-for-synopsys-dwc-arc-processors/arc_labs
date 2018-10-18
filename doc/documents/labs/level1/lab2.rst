@@ -26,9 +26,9 @@ c_osp/doc/build/html/getting_started/software_requirement.html>`__
 Content
 ========
 
-First, a brief introduction of |embarc| will be made and also how to get it.
-Then, you will get to how to run the provided examples and debug them. Finally, you
-can try to create your own embARC applications.
+First, this document will give you a brief introduction of |embarc|, and also show you how to get it.
+Then, you will learn how to run the provided examples and debug them.
+Finally, you can try to create your own embARC applications.
 
 
 Principles
@@ -36,8 +36,11 @@ Principles
 
 1. IoT OS/Platform
 
-As more and more devices are connected and become more complex, the software
-running in them are becoming more and more complex.
+In the field of Internet of Things (IoT), more and more devices are connected to form a complex network.
+Along with it, the programs within devices are becoming complex too.
+Many of them also require real-time responses.
+That urges a better way to manage tasks rather than running them in a main loop.
+A solution for this is to use IoT OS.
 
 An IoT OS is an operating system that is designed to perform within the
 constraints that are particular to Internet of Things devices, including
@@ -55,7 +58,7 @@ consistent and simple software interfaces to the processor and peripherals,
 together with ports of several well known FOSS embedded software stacks to
 |arc|.
 
-For more details, please go to |embarc| `on-line documentation <http://embar
+For more details, please refer |embarc| `on-line documentation <http://embar
 c.org/embarc_osp/doc/build/html/introduction/introduction.html>`__
 
 
@@ -92,8 +95,8 @@ Then you will have checked out a copy of the source code to your local machine.
 
 * http download
 
-If you are not familiar with git, you can also try to get the latest release of embarc as a zip from
-the repository, see `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/releases>`__.
+You may also try to get the latest release of embarc as a zip from the repository,
+see `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/releases>`__.
 
 Run the examples
 ****************
