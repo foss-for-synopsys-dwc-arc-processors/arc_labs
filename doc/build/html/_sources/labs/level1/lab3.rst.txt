@@ -14,14 +14,14 @@ Equipment
 The following hardware and software tools are required:
 
 * PC host
-* ARC GNU toolchain/MetaWare Development Toolkit
+* ARC GNU toolchain / MetaWare Development Toolkit
 * ARC board (EM Starter kit/IoT Development Kit)
 * |embarc| package
 * ``embarc_osp/arc_labs/labs/lab3_timer``
 
 Content
 ========
-Read the auxiliary registers of ARC EM to get the version and  other setting information of the timer resource. As all the EM processors have **Timer0**, we use the **Timer0** in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.
+Read the auxiliary registers of ARC EM to get the version and other setting information of the timer resource. As all the EM processors have **Timer0**, we use the **Timer0** in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.
 
 Principles
 ==========
@@ -31,7 +31,7 @@ Introduction of timer and auxiliary registers
 The timers in ARC EM processor
 
 - Two 32-bits programmable timers **Timer0** and **Timer1**
-- One 64-bits **RTC**\ (Real-Time Counter)
+- One 64-bits **RTC** \ (Real-Time Counter)
 
 All the times are configurable, for example, there are four EM processor cores in **ARC EMSK1.1**, the configuration information are as follow.
 
@@ -50,7 +50,8 @@ The auxiliary register Timer BCR storaged the timer resource information of an E
 .. image:: /img/lab3_register_TIMER_BUILD.png
     :alt: register bit
 
-As we know the timer resources the EM processor configured, we can get the timer's configuration information and control the timers by writing and reading the auxiliary register of that timer. For example, there are the related auxiliary registers of the **Timer0**.
+As we know the timer resources the EM processor configured, we can get the timer's configuration information and control the timers by writing and reading the auxiliary register of that timer.
+For example, there are the related auxiliary registers of the **Timer0**.
 
 ==================== ========== ============ =======================
  Auxiliary Register   Name       Permission   Description

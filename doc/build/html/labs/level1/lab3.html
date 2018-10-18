@@ -189,7 +189,7 @@
 <p>The following hardware and software tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
-<li>ARC GNU toolchain/MetaWare Development Toolkit</li>
+<li>ARC GNU toolchain / MetaWare Development Toolkit</li>
 <li>ARC board (EM Starter kit/IoT Development Kit)</li>
 <li>embARC OSP package</li>
 <li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab3_timer</span></code></li>
@@ -197,7 +197,7 @@
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>Read the auxiliary registers of ARC EM to get the version and  other setting information of the timer resource. As all the EM processors have <strong>Timer0</strong>, we use the <strong>Timer0</strong> in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.</p>
+<p>Read the auxiliary registers of ARC EM to get the version and other setting information of the timer resource. As all the EM processors have <strong>Timer0</strong>, we use the <strong>Timer0</strong> in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
@@ -206,7 +206,7 @@
 <p>The timers in ARC EM processor</p>
 <ul class="simple">
 <li>Two 32-bits programmable timers <strong>Timer0</strong> and <strong>Timer1</strong></li>
-<li>One 64-bits <strong>RTC</strong>(Real-Time Counter)</li>
+<li>One 64-bits <strong>RTC</strong> (Real-Time Counter)</li>
 </ul>
 <p>All the times are configurable, for example, there are four EM processor cores in <strong>ARC EMSK1.1</strong>, the configuration information are as follow.</p>
 <table border="1" class="docutils">
@@ -249,7 +249,8 @@
 <p>The auxiliary register Timer BCR storaged the timer resource information of an EM processor core, the register address of <strong>TIMER_BUILD</strong> is <em>0x75</em>.</p>
 <p><strong>TIMER_BUILD</strong></p>
 <img alt="register bit" src="../../_images/lab3_register_TIMER_BUILD.png" />
-<p>As we know the timer resources the EM processor configured, we can get the timer’s configuration information and control the timers by writing and reading the auxiliary register of that timer. For example, there are the related auxiliary registers of the <strong>Timer0</strong>.</p>
+<p>As we know the timer resources the EM processor configured, we can get the timer’s configuration information and control the timers by writing and reading the auxiliary register of that timer.
+For example, there are the related auxiliary registers of the <strong>Timer0</strong>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="27%" />
