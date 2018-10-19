@@ -21,20 +21,20 @@ The following hardware and software tools are required:
 
 Content
 ========
-This lab utilizes FreeRTOS v9.0.0, and will create 3 tasks based on embARC_osp. You should apply inter-task communicating methods such as semaphore and message queue in order to get running LEDs result. We should go though basic functions of FreeRTOS first.
+This lab utilizes FreeRTOS v9.0.0, and will create 3 tasks based on embARC_osp. You should apply inter-task communicating methods such as semaphore and message queue in order to get running LEDs. We should go though basic functions of FreeRTOS first.
 
 Principles
 ==========
 
 Background
 ----------
-A Real Time Operating System (RTOS) is an operating system intended to serve real-time applications that process data in limited time as it comes in. Being within time bound and highly reliable are two important characters of RTOS.
+A Real Time Operating System (RTOS) is an operating system intended to serve real-time applications that process data in within a predefined time period. 
 
-As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. These are the reasons of why we choose to learn FreeRTOS in this lab.
+With more resources on modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. These are the reasons of why we choose to learn FreeRTOS in this lab.
 
 Design
 ------
-This lab implements a running LED light with 3 tasks on FreeRTOS. Despite using 3 tasks is an overkill for a running LED, but it's beneficial for the understanding of FreeRTOS itself and inter-task communication as well.
+This lab implements a running LED program with 3 tasks using FreeRTOS. Despite using 3 tasks is an overkill for a running LED, but it's beneficial for the understanding of FreeRTOS itself and inter-task communication as well.
 
 The flow chat of the program is shown below:
 
@@ -43,7 +43,7 @@ The flow chat of the program is shown below:
 
 Realization
 -----------
-The code of system is shown below, including various Initialization and task time delay.
+The code of system is shown below, including various Initialization and time delay tasks.
 
 .. code-block:: c
 

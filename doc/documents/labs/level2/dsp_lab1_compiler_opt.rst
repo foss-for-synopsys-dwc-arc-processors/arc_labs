@@ -27,7 +27,8 @@ The following needs to be tested before starting this lab:
 Part 2. Lab Objectives
 -----------------------------
 
-Use MetaWare compiler options to optimize regular C code to use DSP extensions as well as try direct usage of DSP extensions through intrinsic etc.
+Use MetaWare compiler options to optimize regular C code employing DSP extensions.
+Try direct usage of DSP extensions through intrinsic.
 
 Part 3. Lab principle and method
 ------------------------------------
@@ -39,7 +40,7 @@ To optimize code to use DSP extensions two sets of compiler options will be used
 DSP Extensions Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We will use EMBAC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.
+We will use EMBARC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.
 
 ``gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hfxapi -Xdsp2" OLEVEL=O2``
 
@@ -79,19 +80,19 @@ Options that are used in the lab are:
 
 .. note::
 
-    Because ARC is configurable processor, different cores can contain different extensions on hardware level. Thus options set for compiler should match underlying hardware. On the other hand if specific hardware future is present in the core but compiler option is not set, it won't be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.
+    Because ARC cores are configurable, different cores can contain different extensions on hardware level. Thus options set for compiler should match underlying hardware. On the other hand if specific hardware future is present in the core but compiler option is not set, it won't be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.
 
 Optimization level
 ^^^^^^^^^^^^^^^^^^^^
 
-MetaWare compiler enables to set optimization level, which enables or disables different optimization techniques include in the compiler. You pass the optimization option to gmake by "OLEVEL=O2".
+MetaWare compiler has different optimization levels, which enables or disables various optimization techniques included in the compiler. You can pass the optimization option to gmake by "OLEVEL=O2".
 
-The lowest level is the default -O0, which does little optimization to the compiled assembly code, which can be used for debugging, because in un-optimized assembly code all source code commands will have 1:1 representation. On the other hand -O3 highest level optimization highly modifies output assembly code to make it smaller and fast, but debugging such a code is harder, because it is not close match with source code. Also, high level of optimization requires longer compilation time, which for large project can be significant, if many compilation iterations are to be made.
+The lowest level is the default -O0, which does little optimization to the compiled assembly code and easy for debugging because in un-optimized assembly code all source code commands will have 1:1 representation. On the other hand -O3 highest level optimization highly modifies output assembly code to make it small and fast, but harder for debugging since it's heavily optimized. Also, high level of optimization requires longer compilation time, which is costly in time for large projects where many compilation iterations are to be made.
 
 Optimization for DSP extensions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever applicable, which compiler can do automatically with DSP extension options corresponding to hardware are set and high level of optimization is selected.
+A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever compiler finds suitable to employ DSP extensions.
 
 Checking options
 ^^^^^^^^^^^^^^^^^^
@@ -101,7 +102,7 @@ Options are specified in the makefile or command line, as shown in the previous 
 Part 4. Optimizing code
 --------------------------
 
-An example code below contains a function called "test"  which contains a 20 step for loop and a multiply accumulate operation done manually.
+An example code below contains a function called "test"  which contains a for loop and a multiply accumulate operation done manually.
 
 .. code-block:: c
 
@@ -183,13 +184,13 @@ Appendix A.IOTDK Default Core Configurations
 
 **ARC_EM5D**
 
-This is an ARC EM core with 32 bits of address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).
+This is an ARC EM core with 32 bits address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).
 
 ``-arcv2em -core1 -HL -Xcode_density -Xswap -Xnorm -Xmpy16 -Xmpy -Xmpyd -Xshift_assist -Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xtimer0 -Xtimer1``
 
 **ARC_EM7D**
 
-This is an ARC EM core with 32 bits of address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:
+This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:
 
 ``-arcv2em -core2 -HL -Xcode_density -Xdiv_rem=radix2 -Xswap``
 
@@ -199,7 +200,7 @@ This is an ARC EM core with 32 bits of address space, 256 KB of code memory (ICC
 
 **ARC_EM9D**
 
-This is an ARC EM core with 32 bits of address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). The corresponding MetaWare compiler options for this configuration are:
+This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). The corresponding MetaWare compiler options for this configuration are:
 
 ``-arcv2em -core2 -Hrgf_banked_regs=32 -HL -Xcode_density``
 
@@ -215,7 +216,7 @@ This is an ARC EM core with 32 bits of address space, 256 KB of code memory (ICC
 
 **ARC_EM11D Configuration**
 
-This is an ARC EM core with 32 bits of address space, 64 KB of code memory (ICCM) and 64 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:
+This is an ARC EM core with 32 bits address space, 64 KB of code memory (ICCM) and 64 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:
 
 ``-arcv2em -core2 -Hrgf_banked_regs=32 -HL -Xcode_density``
 

@@ -23,7 +23,7 @@ The following hardware and software tools are required:
 Content
 ========
 Complete the communication between smartphone and IoTDK board through RN4020 BLE module.
-At first, setup RN4020 BLE module by using API of RN4020 driver.
+First, setup RN4020 BLE module by using API of RN4020 driver.
 Then connect mobile phone and RN4020 by BLE, and check the data send by IoTDK in smartphone.
 Finally, send data from smartphone to IoTDK board, and print this data value in terminal.
 
@@ -36,7 +36,7 @@ The UART Interface supports ASCII commands to control/configure the RN4020 modul
 
 Setup
 -----
-Before connecting an RN4020 module to a smartphone device, user may need to set up the RN4020 module as follows.
+Before connecting an RN4020 module to a smartphone device, users may need to set up the RN4020 module as follows.
 
 1. Configure UART which connected to RN4020 with these parameters: **Baud rate - 115200, Data bits - 8, Parity - None, Stop bits - 1**
 
@@ -150,11 +150,11 @@ And the device information in BLE browser APP.
 
 Communication
 -------------
-Read the data of Battery services in BLE browser APP. Check whether the data decrease gradually.
+Read the data of Battery services in BLE browser APP. Check whether the data decreases gradually.
 
 |figure4|
 
-Write data to in BLE browser APP. Check the received data in BLE browser APP.
+Write data in BLE browser APP. Check the received data in PC serial terminal.
 
 |figure5|
 

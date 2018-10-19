@@ -12,7 +12,7 @@ Before starting using ARC DSP the following prerequisites are required:
 
   `<https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
 
-* Known how to create, edit, build and debug projects in MetaWare IDE
+* Knowledge as to how to create, edit, build and debug projects in MetaWare IDE
 
 * Have ARC EM Starter Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested
 
@@ -20,7 +20,7 @@ Before starting using ARC DSP the following prerequisites are required:
 
 * IOTDK board configured with DSP-enabled core configuration EM9D
 
-The following needs to be tested before starting this lab:
+The following procedures need to be tested before starting this lab:
 
 * Connecting IOTDK board to computer
 
@@ -36,9 +36,9 @@ Use DSP Library and compare program run speed with and without DSP library, i.e.
 Part 3.	Lab principle and method
 -------------------------------------
 
-This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions as well as write shorter code.
+This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions with shorter code.
 
-In this lab two implementations of matrix multiplication are shown: done manually and with the use of DSP library.
+In this lab two implementations of matrix multiplication are shown: one piece of manually drafted plain code and one with the use of DSP library.
 
 Matrix multiplication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -47,7 +47,7 @@ Multiplication of two matrices A and B of sizes [M*N] and [N*K] respectively is 
 
 |dsp_icon_3.1|
 
-Where i= 0...(M-1) and j = 0..(K-1) are row and column indexes of output matrix, with size [M*N].
+Where i= 0...(M-1) and j = 0..(K-1) are row and column indexes of output matrix, with size [M*K].
 
 Implementation without DSP
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -268,7 +268,7 @@ DSP library contains matrix multiplication function so doing matrix multiplicati
 Part 4.	Test
 -----------------
 
-To test the example below an example program needs to be created that has two loops of matrix multiplications with and without DSP library.
+To test the example below an example program that has two loops of matrix multiplications with and without DSP library needs to be created.
 
 Both examples are to be compiled with DSP extensions, with the following options set:
 
@@ -280,7 +280,7 @@ Both examples are to be compiled with DSP extensions, with the following options
 
 .. note::
 
-    Note that DSPLIB is  statically linked with the project when  -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program won't affect DSPLIB performance. On the other hand even with highest optimization level a function utilizing simple instructions on "short" type (even converted to MACs if possible) will be less efficient that direct use of DSPLIB.
+    Note that DSPLIB is  statically linked with the project when  -Hdsplib is set, and as the DSPLIB itself is pre-compiled with certain level of optimization, changes of optimization option for example application code alone won't affect DSPLIB performance. Nevertheless, a function utilizing simple instructions on "short" type (even converted to MACs if possible) will be less efficient than one that directly uses DSPLIB.
 
 .. |dsp_icon_3.1| image:: /img/dsp_icon_3.1.png
 .. |dsp_icon_3.2| image:: /img/dsp_icon_3.2.png
