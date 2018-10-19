@@ -39,7 +39,7 @@ To optimize code to use DSP extensions two sets of compiler options will be used
 DSP Extensions Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We will use EMBAC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.
+We will use EMBAC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/linker options by ADT_COPT/ADT_LOPT.
 
 ``gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hfxapi -Xdsp2" OLEVEL=O2``
 
@@ -79,7 +79,7 @@ Options that are used in the lab are:
 
 .. note::
 
-    Because ARC is configurable processor, different cores can contain different extensions on hardware level. Thus options set for compiler should match underlying hardware. On the other hand if specific hardware future is present in the core but compiler option is not set, it won't be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.
+    Because ARC is configurable processor, different cores can contain different extensions on hardware level. Thus options set for compiler should match underlying hardware. On the other hand if specific hardware feature is present in the core but compiler option is not set, it won't be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.
 
 Optimization level
 ^^^^^^^^^^^^^^^^^^^^
@@ -101,7 +101,7 @@ Options are specified in the makefile or command line, as shown in the previous 
 Part 4. Optimizing code
 --------------------------
 
-An example code below contains a function called "test"  which contains a 20 step for loop and a multiply accumulate operation done manually.
+An example code below contains a function called "test"  which contains a 10 step for loop and a multiply accumulate operation done manually.
 
 .. code-block:: c
 
@@ -138,13 +138,11 @@ After compilation open disassembly window and check assembly code for function "
 
 Below is the list options used when launching gmake:
 
-``OLEVE=O0  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1"``
+``OLEVEL=O0  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1"``
 
 You can use the following command to generate disassembly code:
 
-``elfdump -T -S``
-
-``<your_working_director>/obj_iotdk_10/mw_arcem9d/lab1_mw_arcem9d.elf``
+``elfdump -T -S <your_working_directory>/obj_iotdk_10/mw_arcem9d/dsp_lab1_mw_arcem9d.elf``
 
 Notice assembly code in the disassembled output. See how many assembly instruction are used for each line, for example for loop spends several instruction to calculate loop variable value and check whether to stop.
 
@@ -155,7 +153,7 @@ Step 2. Compiling without DSP extensions, with -O2
 
 Compile with:
 
-``OLEVE=O2  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1"``
+``OLEVEL=O2  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1"``
 
 Adding optimization level -O2, optimizes out many of the instructions:
 
@@ -168,7 +166,7 @@ Step 3. Compiling with DSP extensions
 
 Compile with:
 
-``OLEVE=O3  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1 -Xdsp1"``
+``OLEVEL=O3  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1 -Xdsp1"``
 
 Adding -Xdsp1 (optimization level changed to -O3) helps compiler to optimize away "mpyw_s" and "add1_s" instructions and replace them with hardware dual-16bit SIMD multilication "vmpy2h". Notice the loop count is now 5.
 
