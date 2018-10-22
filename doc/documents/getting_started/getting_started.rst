@@ -35,7 +35,7 @@ Install Metaware Toolkit
 
 Here we will start install MetaWare Development Toolkit (2017.09).
 
-1. Double click the ``mw_dekit_arc_i_2017_09_win_install.exe``, it will show
+1. Double-click the ``mw_dekit_arc_i_2017_09_win_install.exe``, it shows
 
 .. image:: /img/mwdt_1.png
 
