@@ -6,9 +6,9 @@ How to use |embarc|
 Purpose
 =======
 * To know what |embarc| is
-* To know how to run the provided examples in |embarc|
-* To know how to debug the provided examples in |embarc|
-* To know how to do application development in |embarc|
+* To know how to run  examples in |embarc|
+* To know how to debug the examples in |embarc|
+* To know how to write application code in |embarc|
 
 Equipment
 =========
@@ -17,7 +17,7 @@ The following hardware and software tools are required:
 
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
-* ARC board (EM Starter kit/IoT Development Kit)
+* ARC board (EM Starter Kit/IoT Development Kit)
 * |embarc| packages
 
 The detailed software requirements of |embarc| can be found `here <http://embarc.org/embar
@@ -26,9 +26,9 @@ c_osp/doc/build/html/getting_started/software_requirement.html>`__
 Content
 ========
 
-First, this document will give you a brief introduction of |embarc|, and also show you how to get it.
-Then, you will learn how to run the provided examples and debug them.
-Finally, you can try to create your own embARC applications.
+First, this document will give you a brief introduction of |embarc|, and also show you how to get the package.
+Then, you will learn how to run the provided examples and debug.
+Finally, you will be presented the steps to create your own embARC applications.
 
 
 Principles
@@ -36,11 +36,11 @@ Principles
 
 1. IoT OS/Platform
 
-In the field of Internet of Things (IoT), more and more devices are connected to form a complex network.
+In the field of Internet of Things (IoT), numberous devices are connected to form a complex network.
 Along with it, the programs within devices are becoming complex too.
 Many of them also require real-time responses.
 That urges a better way to manage tasks rather than running them in a main loop.
-A solution for this is to use IoT OS.
+One solution for this is to use IoT OS.
 
 An IoT OS is an operating system that is designed to perform within the
 constraints that are particular to Internet of Things devices, including

@@ -184,7 +184,7 @@
 <li><p class="first">Have MetaWare tools for Windows installed</p>
 <p><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware</a></p>
 </li>
-<li><p class="first">Known how to create, edit, build and debug projects in MetaWare IDE</p>
+<li><p class="first">Knowledge as to how to create, edit, build and debug projects in MetaWare IDE</p>
 </li>
 <li><p class="first">Have ARC EM Starter Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
 <p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
@@ -192,7 +192,7 @@
 <li><p class="first">IOTDK board configured with DSP-enabled core configuration EM9D</p>
 </li>
 </ul>
-<p>The following needs to be tested before starting this lab:</p>
+<p>The following procedures need to be tested before starting this lab:</p>
 <ul class="simple">
 <li>Connecting IOTDK board to computer</li>
 <li>Configuring IOTDK board to use ARC core with DSP extensions (these labs use EM5D core configuration)</li>
@@ -205,13 +205,13 @@
 </div>
 <div class="section" id="part-3-lab-principle-and-method">
 <h2>Part 3. Lab principle and method<a class="headerlink" href="#part-3-lab-principle-and-method" title="Permalink to this headline">¶</a></h2>
-<p>This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions as well as write shorter code.</p>
-<p>In this lab two implementations of matrix multiplication are shown: done manually and with the use of DSP library.</p>
+<p>This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions with shorter code.</p>
+<p>In this lab two implementations of matrix multiplication are shown: one piece of manually drafted plain code and one with the use of DSP library.</p>
 <div class="section" id="matrix-multiplication">
 <h3>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Permalink to this headline">¶</a></h3>
 <p>Multiplication of two matrices A and B of sizes [M*N] and [N*K] respectively is done using the following formula:</p>
 <p><img alt="dsp_icon_3.1" src="../../_images/dsp_icon_3.1.png" /></p>
-<p>Where i= 0…(M-1) and j = 0..(K-1) are row and column indexes of output matrix, with size [M*N].</p>
+<p>Where i= 0…(M-1) and j = 0..(K-1) are row and column indexes of output matrix, with size [M*K].</p>
 </div>
 <div class="section" id="implementation-without-dsp">
 <h3>Implementation without DSP<a class="headerlink" href="#implementation-without-dsp" title="Permalink to this headline">¶</a></h3>
@@ -427,7 +427,7 @@
 </div>
 <div class="section" id="part-4-test">
 <h2>Part 4. Test<a class="headerlink" href="#part-4-test" title="Permalink to this headline">¶</a></h2>
-<p>To test the example below an example program needs to be created that has two loops of matrix multiplications with and without DSP library.</p>
+<p>To test the example below an example program that has two loops of matrix multiplications with and without DSP library needs to be created.</p>
 <p>Both examples are to be compiled with DSP extensions, with the following options set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-O2</span>&#160; <span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-Xlib</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xdsp1</span> <span class="pre">-Hdsplib</span></code></p>
 <div class="admonition note">
@@ -436,7 +436,7 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Note that DSPLIB is  statically linked with the project when  -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program won’t affect DSPLIB performance. On the other hand even with highest optimization level a function utilizing simple instructions on “short” type (even converted to MACs if possible) will be less efficient that direct use of DSPLIB.</p>
+<p class="last">Note that DSPLIB is  statically linked with the project when  -Hdsplib is set, and as the DSPLIB itself is pre-compiled with certain level of optimization, changes of optimization option for example application code alone won’t affect DSPLIB performance. Nevertheless, a function utilizing simple instructions on “short” type (even converted to MACs if possible) will be less efficient than one that directly uses DSPLIB.</p>
 </div>
 </div>
 </div>

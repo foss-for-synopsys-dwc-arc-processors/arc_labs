@@ -180,8 +180,8 @@
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>To get familiar with the memory mapping in the compile process</li>
-<li>To learn how to use the linker</li>
+<li>To get familiar with memory layout in compilation process</li>
+<li>To learn how to use linker</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -196,20 +196,20 @@
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>Customizing your program with <strong>compiler pragmas</strong>.
+<p>Customize your program with <strong>compiler pragmas</strong>.
 At first, using “pragma code” to specify a new name of section in which the code of function reside.
 Then mapping this code section into specified memory location with linker.
 Finally, checking the location of this code section after build process.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
-<p>By default, compiler-generated code is placed in the <em>.text</em> section. The default code section name can be overridden by using the <em>code pragma</em>. After compile process, the linker will automatically map all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a linker command file.</p>
+<p>By default, compiler-generated code is placed in the <em>.text</em> section. The default code section name can be overridden by using <em>code pragma</em>. After compilation, linker will automatically map all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a user specific linker command file.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="create-a-project-and-overriding-code-section-name">
 <h3>Create a project and overriding code section name<a class="headerlink" href="#create-a-project-and-overriding-code-section-name" title="Permalink to this headline">¶</a></h3>
-<p>Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under <em>embarc_osp/arc_labs/labs/lab8_linker</em> directory into the project.</p>
+<p>Open MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under <em>embarc_osp/arc_labs/labs/lab8_linker</em> directory into the project.</p>
 <p>Open main.c file in MetaWare IDE, using “pragma code” to change the section in which function <code class="docutils literal notranslate"><span class="pre">modify</span></code> reside from <em>.text</em> to a new name “<em>modify_seg</em>”.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma Code (&quot;modify_seg&quot;)</span>
 <span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
@@ -266,7 +266,7 @@ Add one new block named “<em>MyBlock</em>” in MEMORY, the start address is 0
 <h3>Add the linker command file into the project<a class="headerlink" href="#add-the-linker-command-file-into-the-project" title="Permalink to this headline">¶</a></h3>
 <p>Right click the current project lab_linker and select Properties in the popup tab. Click C/C++ build <strong>&gt;&gt;</strong> settings <strong>&gt;&gt;</strong> Tool Settings to open the linker option settings page.</p>
 <p><img alt="figure1" src="../../_images/lab8_figure1.png" /></p>
-<p>In the current page, select Command files to add linker.cmd file into this project.</p>
+<p>In current page, select Command files to add linker.cmd file into this project.</p>
 </div>
 <div class="section" id="check-the-result">
 <h3>Check the result<a class="headerlink" href="#check-the-result" title="Permalink to this headline">¶</a></h3>

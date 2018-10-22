@@ -249,7 +249,7 @@ And this example itself can be used as ntshell application.</p>
 </tr>
 </tbody>
 </table>
-<p>In this lab, the last 1 MB of DDR (starts from 0x17f00000) is reserved for the
+<p>In this lab, the last 1 MB of DDR (starting from 0x17f00000) is reserved for the
 simple bootloader, other memory regions are available for application.</p>
 </div>
 <div class="section" id="iotdk">
@@ -302,8 +302,8 @@ bootloader, CCMs are reserved for application.</p>
 <h3>Boot of ARC board<a class="headerlink" href="#boot-of-arc-board" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id1">
 <h4>EM Starter Kit<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<p>The EM Starter Kit uses a Xilinx SPARTAN-6 FPGA part which can be configured to run
-different members of the ARCv2 EM Processor family.  The EMSK includes a SPI
+<p>EM Starter Kit uses a Xilinx SPARTAN-6 FPGA part which can be configured to run
+different members of the ARCv2 EM Processor family. It includes a SPI
 flash pre-programmed with four FPGA configurations of ARC EM cores.</p>
 <p>When a “power on” or reset/configure is issued, the FPGA will auto-load one of
 the pre-installed FPGA configurations from SPI flash. After the FPGA

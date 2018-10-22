@@ -179,8 +179,8 @@
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>To learn the timer resource of ARC EM processor</li>
-<li>To learn how to use the auxiliary registers to control the timer</li>
+<li>To know about builtin timer of ARC EM processor</li>
+<li>To learn how to program auxiliary registers to control the timer</li>
 <li>Read the count value of the timer, and implement a time clock by the timer</li>
 </ul>
 </div>
@@ -190,25 +190,25 @@
 <ul class="simple">
 <li>PC host</li>
 <li>ARC GNU toolchain / MetaWare Development Toolkit</li>
-<li>ARC board (EM Starter kit/IoT Development Kit)</li>
+<li>ARC board (EM Starter Kit/IoT Development Kit)</li>
 <li>embARC OSP package</li>
 <li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab3_timer</span></code></li>
 </ul>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>Read the auxiliary registers of ARC EM to get the version and other setting information of the timer resource. As all the EM processors have <strong>Timer0</strong>, we use the <strong>Timer0</strong> in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.</p>
+<p>Read the auxiliary registers of ARC EM to get the version and other setting information of the timer resource. As all ARC EM processors have <strong>Timer0</strong>, we use <strong>Timer0</strong> in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="introduction-of-timer-and-auxiliary-registers">
 <h3>Introduction of timer and auxiliary registers<a class="headerlink" href="#introduction-of-timer-and-auxiliary-registers" title="Permalink to this headline">¶</a></h3>
-<p>The timers in ARC EM processor</p>
+<p>Timers in ARC EM processor</p>
 <ul class="simple">
 <li>Two 32-bits programmable timers <strong>Timer0</strong> and <strong>Timer1</strong></li>
 <li>One 64-bits <strong>RTC</strong> (Real-Time Counter)</li>
 </ul>
-<p>All the times are configurable, for example, there are four EM processor cores in <strong>ARC EMSK1.1</strong>, the configuration information are as follow.</p>
+<p>All the times are configurable, for example, there are four EM processor cores in <strong>ARC EMSK1.1</strong>, their configuration information are as follows.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="26%" />
@@ -246,11 +246,11 @@
 </tr>
 </tbody>
 </table>
-<p>The auxiliary register Timer BCR storaged the timer resource information of an EM processor core, the register address of <strong>TIMER_BUILD</strong> is <em>0x75</em>.</p>
+<p>The auxiliary register Timer BCR holds the timer resource information of the processor core, the register address of <strong>TIMER_BUILD</strong> is <em>0x75</em>.</p>
 <p><strong>TIMER_BUILD</strong></p>
 <img alt="register bit" src="../../_images/lab3_register_TIMER_BUILD.png" />
-<p>As we know the timer resources the EM processor configured, we can get the timer’s configuration information and control the timers by writing and reading the auxiliary register of that timer.
-For example, there are the related auxiliary registers of the <strong>Timer0</strong>.</p>
+<p>Once we know that an EM processor has a timer, we can get the timer’s configuration information and control the timers by writing and reading the auxiliary register of that timer.
+For example, these are the related auxiliary registers for <strong>Timer0</strong>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="27%" />
@@ -293,12 +293,12 @@ For example, there are the related auxiliary registers of the <strong>Timer0</st
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="makefile-configuration">
 <h3>Makefile configuration<a class="headerlink" href="#makefile-configuration" title="Permalink to this headline">¶</a></h3>
-<p>There are two ways to do the configuration.</p>
-<p><strong>First</strong>, configured by compile command, for example:</p>
+<p>There are two ways to configure the builtin timers.</p>
+<p><strong>First</strong>, configure by compiling command, for example:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d -j4 TOOLCHAIN=gnu run</span>
 </pre></div>
 </div>
-<p><strong>Second</strong>, configured by modifying the makefile. At here, the compile command will be very simple, for example:</p>
+<p><strong>Second</strong>, configure by modifying the makefile. The compiling command will be very simple, for example:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make -j4 run</span>
 </pre></div>
 </div>
@@ -367,8 +367,8 @@ For example, there are the related auxiliary registers of the <strong>Timer0</st
 <h3>Main code<a class="headerlink" href="#main-code" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="read-auxiliary-register-bcr-build">
 <h4>Read auxiliary register BCR_BUILD<a class="headerlink" href="#read-auxiliary-register-bcr-build" title="Permalink to this headline">¶</a></h4>
-<p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_read()</span></code> to read the auxiliary register for the timer resource information.</p>
-<p>Read auxiliary register <strong>TIMER_BUILD</strong>. In the register <strong>TIMER_BUILD</strong> The lower 8 bits indicate the core version information, the bit 9 indicate the <strong>Timer0</strong>, the bit 10 indicate the <strong>Timer1</strong>, the bit 11 indicate the <strong>RTC</strong>. Here is the code:</p>
+<p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_read()</span></code> to read the auxiliary register for the builtin timer.</p>
+<p>Read auxiliary register <strong>TIMER_BUILD</strong>. In the register <strong>TIMER_BUILD</strong> The lower 8 bits indicate the core version information, bit 9 for <strong>Timer0</strong>, bit 10 for <strong>Timer1</strong>, and bit 11 for <strong>RTC</strong>. Here is the code:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span> <span class="n">bcr</span> <span class="o">=</span> <span class="n">_arc_aux_read</span><span class="p">(</span><span class="n">AUX_BCR_TIMERS</span><span class="p">);</span>
 <span class="kt">int</span> <span class="n">timer0_flag</span><span class="o">=</span><span class="p">(</span><span class="n">bcr</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">timer1_flag</span><span class="o">=</span><span class="p">(</span><span class="n">bcr</span> <span class="o">&gt;&gt;</span> <span class="mi">9</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
@@ -387,13 +387,13 @@ For example, there are the related auxiliary registers of the <strong>Timer0</st
 <div class="section" id="stop-set-start-the-timer0">
 <h4>Stop-Set-Start the Timer0<a class="headerlink" href="#stop-set-start-the-timer0" title="Permalink to this headline">¶</a></h4>
 <p>We can use the function <code class="docutils literal notranslate"><span class="pre">_arc_aux_write()</span></code> to write the auxiliary register.</p>
-<p>To control the <strong>Timer0</strong> with the related auxiliary registers.</p>
+<p>To control <strong>Timer0</strong> with the related auxiliary registers.</p>
 <ul class="simple">
-<li><strong>COUNT0</strong>: write this register to set the initial value of the <strong>Timer0</strong>. It will increase from the set value at anytime you write this register.</li>
-<li><strong>CONTROL0</strong>: write this register to update the control modes of the <strong>Timer0</strong>.</li>
-<li><strong>LIMIT0</strong>: write this register to set the limit value of the <strong>Timer0</strong>, the limit value is the value after which an interrupt or a reset must be generated.</li>
+<li><strong>COUNT0</strong>: write this register to set the initial value of <strong>Timer0</strong>. It will increase from the set value at anytime you write this register.</li>
+<li><strong>CONTROL0</strong>: write this register to update the control modes of <strong>Timer0</strong>.</li>
+<li><strong>LIMIT0</strong>: write this register to set the limit value of <strong>Timer0</strong>, the limit value is the value after which an interrupt or a reset must be generated.</li>
 </ul>
-<p>In this lab, we should stop timer before setting and starting it, the function <code class="docutils literal notranslate"><span class="pre">timer_stop()</span></code> is already encapsulated in embARC OSP, you can  use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:</p>
+<p>In this lab, we should stop timer before setting and starting it, the function <code class="docutils literal notranslate"><span class="pre">timer_stop()</span></code> is already encapsulated in embARC OSP, you can use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Stop it first since it might be enabled before */</span>
 <span class="n">_arc_aux_write</span><span class="p">(</span><span class="n">AUX_TIMER0_CTRL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="n">_arc_aux_write</span><span class="p">(</span><span class="n">AUX_TIMER0_LIMIT</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>

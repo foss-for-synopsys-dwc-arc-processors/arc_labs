@@ -186,21 +186,22 @@
 </li>
 <li><p class="first">Known how to create, edit, build and debug projects in MetaWare IDE</p>
 </li>
-<li><p class="first">Have IOT Design Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
+<li><p class="first">Have IoT Development Kit board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
 <p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
 </li>
-<li><p class="first">IOTDK board is EM9D based</p>
+<li><p class="first">IoT Development Kit board is EM9D based</p>
 </li>
 </ul>
 <p>The following needs to be tested before starting this lab:</p>
 <ul class="simple">
-<li>Connecting IOTDK board to computer</li>
+<li>Connecting IoT Development Kit board to computer</li>
 <li>Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IOTDK  board).</li>
 </ul>
 </div>
 <div class="section" id="part-2-lab-objectives">
 <h2>Part 2. Lab Objectives<a class="headerlink" href="#part-2-lab-objectives" title="Permalink to this headline">¶</a></h2>
-<p>Use MetaWare compiler options to optimize regular C code to use DSP extensions as well as try direct usage of DSP extensions through intrinsic etc.</p>
+<p>Use MetaWare compiler options to optimize regular C code employing DSP extensions.
+Try direct usage of DSP extensions through intrinsic.</p>
 </div>
 <div class="section" id="part-3-lab-principle-and-method">
 <h2>Part 3. Lab principle and method<a class="headerlink" href="#part-3-lab-principle-and-method" title="Permalink to this headline">¶</a></h2>
@@ -208,7 +209,7 @@
 <p>To optimize code to use DSP extensions two sets of compiler options will be used throughout the lab, DSP Extensions options and optimization level.</p>
 <div class="section" id="dsp-extensions-options">
 <h3>DSP Extensions Options<a class="headerlink" href="#dsp-extensions-options" title="Permalink to this headline">¶</a></h3>
-<p>We will use EMBAC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/linker options by ADT_COPT/ADT_LOPT.</p>
+<p>We will use EMBARC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.</p>
 <p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=emsk</span> <span class="pre">BD_VER=23</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hfxapi</span> <span class="pre">-Xdsp2&quot;</span> <span class="pre">OLEVEL=O2</span></code></p>
 <p>Options that are used in the lab are:</p>
 <ul>
@@ -238,17 +239,17 @@
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Because ARC is configurable processor, different cores can contain different extensions on hardware level. Thus options set for compiler should match underlying hardware. On the other hand if specific hardware feature is present in the core but compiler option is not set, it won’t be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.</p>
+<p class="last">Because ARC cores are configurable, different cores can contain different extensions on hardware level. Thus options set for compiler should match underlying hardware. On the other hand if specific hardware future is present in the core but compiler option is not set, it won’t be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.</p>
 </div>
 </div>
 <div class="section" id="optimization-level">
 <h3>Optimization level<a class="headerlink" href="#optimization-level" title="Permalink to this headline">¶</a></h3>
-<p>MetaWare compiler enables to set optimization level, which enables or disables different optimization techniques include in the compiler. You pass the optimization option to gmake by “OLEVEL=O2”.</p>
-<p>The lowest level is the default -O0, which does little optimization to the compiled assembly code, which can be used for debugging, because in un-optimized assembly code all source code commands will have 1:1 representation. On the other hand -O3 highest level optimization highly modifies output assembly code to make it smaller and fast, but debugging such a code is harder, because it is not close match with source code. Also, high level of optimization requires longer compilation time, which for large project can be significant, if many compilation iterations are to be made.</p>
+<p>MetaWare compiler has different optimization levels, which enables or disables various optimization techniques included in the compiler. You can pass the optimization option to gmake by “OLEVEL=O2”.</p>
+<p>The lowest level is the default -O0, which does little optimization to the compiled assembly code and easy for debugging because in un-optimized assembly code all source code commands will have 1:1 representation. On the other hand -O3 highest level optimization highly modifies output assembly code to make it small and fast, but harder for debugging since it’s heavily optimized. Also, high level of optimization requires longer compilation time, which is costly in time for large projects where many compilation iterations are to be made.</p>
 </div>
 <div class="section" id="optimization-for-dsp-extensions">
 <h3>Optimization for DSP extensions<a class="headerlink" href="#optimization-for-dsp-extensions" title="Permalink to this headline">¶</a></h3>
-<p>A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever applicable, which compiler can do automatically with DSP extension options corresponding to hardware are set and high level of optimization is selected.</p>
+<p>A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever compiler finds suitable to employ DSP extensions.</p>
 </div>
 <div class="section" id="checking-options">
 <h3>Checking options<a class="headerlink" href="#checking-options" title="Permalink to this headline">¶</a></h3>
@@ -257,7 +258,7 @@
 </div>
 <div class="section" id="part-4-optimizing-code">
 <h2>Part 4. Optimizing code<a class="headerlink" href="#part-4-optimizing-code" title="Permalink to this headline">¶</a></h2>
-<p>An example code below contains a function called “test”  which contains a 10 step for loop and a multiply accumulate operation done manually.</p>
+<p>An example code below contains a function called “test”  which contains a for loop and a multiply accumulate operation done manually.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
 <span class="kt">short</span> <span class="nf">test</span><span class="p">(</span><span class="kt">short</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">short</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
@@ -317,15 +318,15 @@
 <div class="section" id="appendix-a-iotdk-default-core-configurations">
 <h2>Appendix A.IOTDK Default Core Configurations<a class="headerlink" href="#appendix-a-iotdk-default-core-configurations" title="Permalink to this headline">¶</a></h2>
 <p><strong>ARC_EM5D</strong></p>
-<p>This is an ARC EM core with 32 bits of address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).</p>
+<p>This is an ARC EM core with 32 bits address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).</p>
 <p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span> <span class="pre">-Xswap</span> <span class="pre">-Xnorm</span> <span class="pre">-Xmpy16</span> <span class="pre">-Xmpy</span> <span class="pre">-Xmpyd</span> <span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span></code></p>
 <p><strong>ARC_EM7D</strong></p>
-<p>This is an ARC EM core with 32 bits of address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:</p>
+<p>This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core2</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span> <span class="pre">-Xdiv_rem=radix2</span> <span class="pre">-Xswap</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xbitscan</span> <span class="pre">-Xmpy_option=mpyd</span> <span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span> <span class="pre">-Xdsp_divsqrt=radix2</span> <span class="pre">-Xdsp_accshift=limited</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xstack_check</span> <span class="pre">-Hccm</span> <span class="pre">-Xdmac</span></code></p>
 <p><strong>ARC_EM9D</strong></p>
-<p>This is an ARC EM core with 32 bits of address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). The corresponding MetaWare compiler options for this configuration are:</p>
+<p>This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). The corresponding MetaWare compiler options for this configuration are:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core2</span> <span class="pre">-Hrgf_banked_regs=32</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xdiv_rem=radix2</span> <span class="pre">-Xswap</span> <span class="pre">-Xbitscan</span> <span class="pre">-Xmpy_option=mpyd</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span></code></p>
@@ -333,7 +334,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">-Xxy</span> <span class="pre">-Xbitstream</span> <span class="pre">-Xfpus_div</span> <span class="pre">-Xfpu_mac</span> <span class="pre">-Xfpus_mpy_slow</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xfpus_div_slow</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xstack_check</span> <span class="pre">-Hccm</span> <span class="pre">-Xdmac</span></code></p>
 <p><strong>ARC_EM11D Configuration</strong></p>
-<p>This is an ARC EM core with 32 bits of address space, 64 KB of code memory (ICCM) and 64 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:</p>
+<p>This is an ARC EM core with 32 bits address space, 64 KB of code memory (ICCM) and 64 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core2</span> <span class="pre">-Hrgf_banked_regs=32</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xdiv_rem=radix2</span> <span class="pre">-Xswap</span> <span class="pre">-Xbitscan</span> <span class="pre">-Xmpy_option=mpyd</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span> <span class="pre">-Xdsp_divsqrt=radix2</span> <span class="pre">-Xdsp_itu</span> <span class="pre">-Xdsp_accshift=full</span> <span class="pre">-Xagu_large</span> <span class="pre">-Xxy</span> <span class="pre">-Xbitstream</span> <span class="pre">-Xfpus_div</span> <span class="pre">-Xfpu_mac</span> <span class="pre">-Xfpuda</span> <span class="pre">-Xfpus_mpy_slow</span> <span class="pre">-Xfpus_div_slow</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xstack_check</span> <span class="pre">-Hccm</span> <span class="pre">-Xdmac</span></code></p>

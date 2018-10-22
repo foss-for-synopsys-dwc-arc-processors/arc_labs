@@ -184,18 +184,18 @@
 <li><p class="first">Have MetaWare tools for Windows installed</p>
 <p><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware</a></p>
 </li>
-<li><p class="first">Known how to create, edit, build and debug projects in MetaWare IDE</p>
+<li><p class="first">Knowledge as to how to create, edit, build and debug projects in MetaWare IDE</p>
 </li>
-<li><p class="first">Have ARC IOT Design Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
+<li><p class="first">Have IoT Development Kit board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
 <p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
 </li>
-<li><p class="first">IOTDK board is based on DSP-enabled core configurationEM9D</p>
+<li><p class="first">IoT Development Kit is based on DSP-enabled core configuration EM9D</p>
 </li>
 </ul>
-<p>The following needs to be tested before starting this lab:</p>
+<p>The following procedures need to be tested before this lab:</p>
 <ul class="simple">
 <li>Connecting IOTDK board to computer</li>
-<li>Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to  <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IOTDK  board).</li>
+<li>Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to  <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IoT Development Kit board).</li>
 </ul>
 </div>
 <div class="section" id="part-2-lab-objectives">
@@ -214,14 +214,14 @@ and
 <img alt="dsp_icon_2.2" src="../../_images/dsp_icon_2.2.png" /></p>
 <p>Is done using formula:</p>
 <p><img alt="dsp_icon_2.3" src="../../_images/dsp_icon_2.3.png" /></p>
-<p>In this lab example multiplication and accumulation of two arrays of complex numbers will be used as a way to compare performance of ARC DSP extensions when used effectively.</p>
+<p>In this example multiplication and accumulation of two arrays of complex numbers will be measured as a way to demonstrate ARC DSP extension performance when used effectively.</p>
 <p>The sum of element wise products of two arrays of complex numbers is calculated according to the following formula:</p>
 <p><img alt="dsp_icon_2.4" src="../../_images/dsp_icon_2.4.png" /></p>
 <p>where a and b are arrays of N complex numbers.</p>
 </div>
 <div class="section" id="implementation-without-dsp">
 <h3>Implementation without DSP<a class="headerlink" href="#implementation-without-dsp" title="Permalink to this headline">¶</a></h3>
-<p>In order to calculate element wise products of two arrays of complex numbers a struct cat be defined that stores real and imaginary parts of the complex number, thus the calculation process receives an array of structures and works on it. The code is shown below:</p>
+<p>In order to calculate element wise products of two arrays of complex numbers a struct can be defined that stores real and imaginary parts of the complex number, thus the calculation process receives an array of structures and works on it. The code is shown below:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> <span class="kt">short</span> <span class="n">real</span><span class="p">;</span> <span class="kt">short</span> <span class="n">imag</span><span class="p">;</span> <span class="p">}</span> <span class="n">complex_short</span><span class="p">;</span>
 
 <span class="n">complex_short</span> <span class="nf">short_complex_array_mult</span> <span class="p">(</span><span class="n">complex_short</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">complex_short</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
@@ -263,8 +263,8 @@ and
 <p>As with previous implementation <code class="docutils literal notranslate"><span class="pre">q15_t</span></code> is of similar size as <code class="docutils literal notranslate"><span class="pre">short</span></code> type thus multiplication result needs larger storage. Here 40b vector accumulator is used directly to store intermediate results of MAC, and is casted to <code class="docutils literal notranslate"><span class="pre">cq15_t</span></code> on return.</p>
 </div>
 <div class="section" id="using-iotdk-board-for-performance-comparison">
-<h3>Using IOTDK board for performance comparison<a class="headerlink" href="#using-iotdk-board-for-performance-comparison" title="Permalink to this headline">¶</a></h3>
-<p>To compare performance of these two functions a simple IOTDK application is created that performance complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop  (1 000 000-10 000 000 times) to make calculation delay measurable in seconds, this is done 8 times, and after each loop a LED on board is turn on. In the result LED strip on board works as a “progress bar” showing the process of looped multiplicaitons.</p>
+<h3>Using IoT Development Kit board for performance comparison<a class="headerlink" href="#using-iotdk-board-for-performance-comparison" title="Permalink to this headline">¶</a></h3>
+<p>To compare performance of these two functions a simple IoT Development Kit application that performs complex array multiplication using either of the implementations above is created. The program initializes two arrays of complex numbers with random values and calls functions above in a loop  (1 000 000-10 000 000 times) to make calculation delay measurable in seconds, this is done 8 times, and after each loop a LED on board is turnned on. As a result LED line on the board looks like a “progress bar” showing the process of looped multiplicaitons.</p>
 <p>The main performance check loop is shown below, the outer loop runs 8 times (number of LEDs on LED strip) the inner loop makes “LOOPS/8” calls to complex multiplication function, LOOPS macro is configurable to change the total delay. The example below uses DSP types, and can be changed to use short-based struct type.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;fxarc.h&quot;</span><span class="cp"></span>
 <span class="cp">#define LOOPS 10000000</span>
@@ -307,12 +307,12 @@ and
 </div>
 <div class="section" id="part-4-test">
 <h2>Part 4. Test<a class="headerlink" href="#part-4-test" title="Permalink to this headline">¶</a></h2>
-<p>To test the example above some modification of the code will be required to have two loops with and without DSP. First you must re-build libraries for this particular configuration of IOTDK:</p>
+<p>To test the example below some modifications of the code will be required to make two loops with and without DSP. First you must re-build libraries for this particular configuration of IoT Development Kit:</p>
 <p><code class="docutils literal notranslate"><span class="pre">buildlib</span> <span class="pre">my_dsp</span> <span class="pre">-tcf=&lt;IOTDK</span> <span class="pre">tcf</span> <span class="pre">file&gt;</span> <span class="pre">-bd</span> <span class="pre">.</span> <span class="pre">-f</span></code></p>
-<p>IOTDK tcf file can be found in <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/tree/feature/iotdk/board/iotdk/configs/10/tcf/arcem9d.tcf">https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/tree/feature/iotdk/board/iotdk/configs/10/tcf/arcem9d.tcf</a></p>
+<p>IoT Development Kit tcf file can be found in <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/tree/feature/iotdk/board/iotdk/configs/10/tcf/arcem9d.tcf">https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/tree/feature/iotdk/board/iotdk/configs/10/tcf/arcem9d.tcf</a></p>
 <p>Both examples are to be compiled with DSP extensions, with the following options set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></p>
-<p>With high optimization level set high function using “short” type is compiled to use DSP MAC operation, enabling significant speedup.</p>
+<p>With high optimization level functions using “short” type is compiled to use DSP MAC operation, enabling significant speedup.</p>
 <p><img alt="dsp_figure_2.1" src="../../_images/dsp_figure_2.1.png" /></p>
 <p>However, using FXAPI enables compiler to directly use complex MAC instruction “cmachfr”.</p>
 <p><img alt="dsp_figure_2.2" src="../../_images/dsp_figure_2.2.png" /></p>

@@ -4,8 +4,8 @@ Memory map and linker
 #####################
 Purpose
 =======
-- To get familiar with the memory mapping in the compile process
-- To learn how to use the linker
+- To get familiar with memory layout in compilation process
+- To learn how to use linker
 
 Equipment
 =========
@@ -18,14 +18,14 @@ The following hardware and software tools are required:
 
 Content
 ========
-Customizing your program with **compiler pragmas**.
+Customize your program with **compiler pragmas**.
 At first, using "pragma code" to specify a new name of section in which the code of function reside.
 Then mapping this code section into specified memory location with linker.
 Finally, checking the location of this code section after build process.
 
 Principles
 ==========
-By default, compiler-generated code is placed in the *.text* section. The default code section name can be overridden by using the *code pragma*. After compile process, the linker will automatically map all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a linker command file.
+By default, compiler-generated code is placed in the *.text* section. The default code section name can be overridden by using *code pragma*. After compilation, linker will automatically map all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a user specific linker command file.
 
 Steps
 =====
@@ -33,7 +33,7 @@ Steps
 Create a project and overriding code section name
 ---------------------------------------------------
 
-Open the MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under *embarc_osp/arc_labs/labs/lab8_linker* directory into the project.
+Open MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under *embarc_osp/arc_labs/labs/lab8_linker* directory into the project.
 
 Open main.c file in MetaWare IDE, using "pragma code" to change the section in which function ``modify`` reside from *.text* to a new name "*modify_seg*".
 
@@ -98,7 +98,7 @@ Right click the current project lab_linker and select Properties in the popup ta
 
 |figure1|
 
-In the current page, select Command files to add linker.cmd file into this project.
+In current page, select Command files to add linker.cmd file into this project.
 
 Check the result
 ----------------
