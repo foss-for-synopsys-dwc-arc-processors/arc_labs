@@ -68,7 +68,7 @@ The available memory regions of |emsk| are shown below.
    | on-board DDR RAM       | 0x10000000           |  128 MB       |
    +------------------------+----------------------+---------------+
 
-In this lab, the last 1 MB of DDR (starts from 0x17f00000) is reserved for the
+In this lab, the last 1 MB of DDR (starting from 0x17f00000) is reserved for the
 simple bootloader, other memory regions are available for application.
 
 |iotdk|
@@ -106,8 +106,8 @@ Boot of ARC board
 |emsk|
 **************
 
-The |emsk| uses a Xilinx SPARTAN-6 FPGA part which can be configured to run
-different members of the ARCv2 EM Processor family.  The EMSK includes a SPI
+|emsk| uses a Xilinx SPARTAN-6 FPGA part which can be configured to run
+different members of the ARCv2 EM Processor family. It includes a SPI
 flash pre-programmed with four FPGA configurations of ARC EM cores.
 
 When a “power on” or reset/configure is issued, the FPGA will auto-load one of

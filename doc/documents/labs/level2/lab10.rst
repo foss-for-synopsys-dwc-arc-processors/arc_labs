@@ -178,7 +178,7 @@ Steps
 
 **Compile and download**
 
-Compile and download the program, after downloading successfully, you will see the relevant download information in the cmd window(as shown bellow).
+Compile and download the program, after downloading successfully, you will see the relevant download information in the cmd window(shown bellow).
 
 .. code-block:: guess
 
