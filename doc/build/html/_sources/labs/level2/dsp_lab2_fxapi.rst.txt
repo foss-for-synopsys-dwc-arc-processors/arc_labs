@@ -110,9 +110,9 @@ As with previous implementation ``q15_t`` is of similar size as ``short`` type t
 Using IOTDK board for performance comparison
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To compare performance of these two functions a simple ESMK application is created that performance complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop  (1 000 000-10 000 000 times) to make calculation delay measurable in seconds, this is done 8 times, and after each loop a LED on board is turn on. In the result LED strip on board works as a "progress bar" showing the process of looped multiplicaitons.
+To compare performance of these two functions a simple IOTDK application is created that performance complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop  (1 000 000-10 000 000 times) to make calculation delay measurable in seconds, this is done 8 times, and after each loop a LED on board is turn on. In the result LED strip on board works as a "progress bar" showing the process of looped multiplicaitons.
 
-The main performance check loop is shown below, the outer loop runs 8 times (number of LEDs on LED strip) the inner loop makes "LOOPS/8" calls to complex multiplication function, LOOPS variable is configurable to change the total delay. The example below uses DSP types, and can be changed to use short-based struct type.
+The main performance check loop is shown below, the outer loop runs 8 times (number of LEDs on LED strip) the inner loop makes "LOOPS/8" calls to complex multiplication function, LOOPS macro is configurable to change the total delay. The example below uses DSP types, and can be changed to use short-based struct type.
 
 .. code-block:: c
 
@@ -155,7 +155,7 @@ The main performance check loop is shown below, the outer loop runs 8 times (num
 Part 4.	Test
 ------------
 
-To test the example below some modification of the code will be required to make have two loops with and without DSP. First you must re-build libraries for this particular configuration of IOTDK:
+To test the example above some modification of the code will be required to have two loops with and without DSP. First you must re-build libraries for this particular configuration of IOTDK:
 
 ``buildlib my_dsp -tcf=<IOTDK tcf file> -bd . -f``
 
@@ -165,7 +165,7 @@ Both examples are to be compiled with DSP extensions, with the following options
 
 ``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
 
-With high optimization level set high function using "short" type is compiled to us DSP MAC operation, enabling significant speedup.
+With high optimization level set high function using "short" type is compiled to use DSP MAC operation, enabling significant speedup.
 
 |dsp_figure_2.1|
 
