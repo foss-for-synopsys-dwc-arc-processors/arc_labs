@@ -172,72 +172,72 @@
 <ul>
 <li><dl class="first docutils">
 <dt><a class="reference external" href="https://www.synopsys.com/designware-ip/processor-solutions/arc-processors/arc-development-tools.html">ARC Development Tools</a></dt>
-<dd><p class="first last">Choose <strong>MetaWare Toolkit</strong> or <strong>ARC GNU Toolchain</strong> from the following list according to your requirement.</p>
+<dd><p class="first last">Select <strong>MetaWare Toolkit</strong> or <strong>ARC GNU Toolchain</strong> from the following list according to your requirement.</p>
 </dd>
 </dl>
 <ul class="simple">
 <li>MetaWare Toolkit<ul>
 <li><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">Premium MetaWare Development Toolkit (2018.06)</a>
-The DesignWare ARC MetaWare Development Toolkit builds upon a 25-year legacy of industry-leading compiler and debugger products. It is a complete solution that contains all the components needed to support the development, debugging and tuning of embedded applications for the DesignWare ARC processors.</li>
+The DesignWare ARC MetaWare Development Toolkit builds upon a 25-year legacy of industry-leading compiler and debugger products. It is a complete solution that contains all the components needed to support the development, debugging, and tuning of embedded applications for the DesignWare ARC processors.</li>
 <li><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">DesignWare ARC MetaWare Toolkit Lite (2018.06)</a>
-A demonstration/evaluation version of the MetaWare Development Toolkit is available for free from the Synopsys website. MetaWare Lite is a functioning demonstration of the MetaWare Development Toolkit, but has a number of restrictions, including a code-size limit of 32 Kilobytes and no runtime library sources. It is available for Microsoft Windows only.</li>
+A demonstration or evaluation version of the MetaWare Development Toolkit is available for free from the Synopsys website. MetaWare Lite is a functioning demonstration of the MetaWare Development Toolkit with restrictions such as code-size limit of 32 Kilobytes and no runtime library sources. It is available for Microsoft Windows only.</li>
 </ul>
 </li>
 <li>ARC GNU Toolchain<ul>
 <li><a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">Open Source ARC GNU IDE (2018.03)</a>
-The ARC GNU Toolchain offers all of the benefits of open source tools, including complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases">ARC GNU plugin for Eclipse</a>, <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">ARC GNU prebuilt toolchain</a> and <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/openocd">OpenOCD for ARC</a></li>
+The ARC GNU Toolchain offers all of the benefits of open source tools such as complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases">ARC GNU plugin for Eclipse</a>, <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">ARC GNU prebuilt toolchain</a>, and <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/openocd">OpenOCD for ARC</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p class="first"><a class="reference external" href="https://store.digilentinc.com/digilent-adept-2-download-only/">Digilent Adept Software</a> for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger, so just one USB cable is required, no need for external debugger.</p>
+<li><p class="first"><a class="reference external" href="https://store.digilentinc.com/digilent-adept-2-download-only/">Digilent Adept Software</a> for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger. One USB cable is required and external debugger is not required.</p>
 </li>
-<li><p class="first"><a class="reference external" href="http://ttssh2.osdn.jp/">Tera Term</a> or <a class="reference external" href="https://www.putty.org/">PuTTY</a> for serial terminal connection, 115200 baud, 8 bits data, 1 stop bit and no parity (115200-8-N-1) by default.</p>
+<li><p class="first"><a class="reference external" href="http://ttssh2.osdn.jp/">Tera Term</a> or <a class="reference external" href="https://www.putty.org/">PuTTY</a> for serial terminal connection, 115200 baud, 8 bits data, 1 stop bit, and no parity (115200-8-N-1) by default.</p>
 </li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If using embARC with GNU toolchain on Windows, install <a class="reference external" href="http://zadig.akeo.ie">Zadig</a> to replace FTDI driver with WinUSB driver. See <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows">How to Use OpenOCD on Windows</a> for more information. If you wanto switch back to Metaware toolchain,  you should also switch back the usb-jtag driver from WinUSB to FTDI driver.</p>
+<p class="last">If using embARC with GNU toolchain on Windows, install <a class="reference external" href="http://zadig.akeo.ie">Zadig</a> to replace FTDI driver with WinUSB driver. See <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows">How to Use OpenOCD on Windows</a> for more information. If you want too switch back to Metaware toolchain, make sure you switch back the usb-jtag driver from WinUSB to FTDI driver.</p>
 </div>
 </div>
 <div class="section" id="install-software-tools">
 <h2>Install Software Tools<a class="headerlink" href="#install-software-tools" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="install-metaware-toolkit">
 <h3>Install Metaware Toolkit<a class="headerlink" href="#install-metaware-toolkit" title="Permalink to this headline">¶</a></h3>
-<p>Here we will start install MetaWare Development Toolkit (2017.09).</p>
+<p>Installing MetaWare Development Toolkit (2017.09).</p>
 <ol class="arabic simple">
-<li>Double click the <code class="docutils literal notranslate"><span class="pre">mw_dekit_arc_i_2017_09_win_install.exe</span></code>, it will show</li>
+<li>Double click the <code class="docutils literal notranslate"><span class="pre">mw_dekit_arc_i_2017_09_win_install.exe</span></code> and click <strong>Next</strong>.</li>
 </ol>
 <img alt="../_images/mwdt_1.png" src="../_images/mwdt_1.png" />
 <ol class="arabic simple" start="2">
-<li>Click next, choose I accept, continue to click next</li>
+<li>Select I accept and click <strong>Next</strong>.</li>
 </ol>
 <img alt="../_images/mwdt_2.png" src="../_images/mwdt_2.png" />
 <ol class="arabic simple" start="3">
-<li>Choose Typical installation, then click next</li>
+<li>Select Typical installation and click <strong>Next</strong>.</li>
 </ol>
 <img alt="../_images/mwdt_3.png" src="../_images/mwdt_3.png" />
 <ol class="arabic simple" start="4">
-<li>Set the install path (please use English letters only and no space), then
-click next until the installation is finished</li>
+<li>Set the install path (make sure you use English letters withoout any space) and
+click <strong>Next</strong> until the installation is complete.</li>
 </ol>
 <img alt="../_images/mwdt_4.png" src="../_images/mwdt_4.png" />
 <ol class="arabic simple" start="5">
 <li>Set the license file (SNPSLMD_LICENSE_FILE) for MetaWare Development
-Toolkit. It can be a real file containing license, also can be a license server</li>
+Toolkit. It can be a real file containing license or a license server.</li>
 </ol>
 <ul class="simple">
-<li>For Windows, go to Computer-&gt;property-&gt;Advanced-&gt;Environment Variables-&gt;System Variables-&gt;New to  Set</li>
+<li>For Windows, go to <strong>Computer</strong> &gt; <strong>Properties</strong> &gt; <strong>Advanced</strong> &gt; <strong>Environment Variables</strong> &gt; <strong>System Variables</strong> &gt; <strong>New</strong>.</li>
 </ul>
 <img alt="../_images/mwdt_5.png" src="../_images/mwdt_5.png" />
 <ul class="simple">
-<li>For Linux, please add SNPSLMD_LICENSE_FILE into your system variables</li>
+<li>For Linux, add SNPSLMD_LICENSE_FILE into your system variables.</li>
 </ul>
 <ol class="arabic simple" start="6">
-<li>Test the MetaWare Development Toolkit and its license</li>
+<li>Test the MetaWare Development Toolkit and the license</li>
 </ol>
-<p>Open cmd.exe in Windows and find the queens.c in the installation folder of
-MetaWare Development Toolkit, e.g., <strong>C:/ARC/MetaWare/arc/demos/queen.c</strong>. Type the following commands in cmd</p>
+<p>At the command prompt, compile and link in one step.</p>
+<p>For example, find the queens.c in the demos folder of MetaWare Development Toolkit installation directory.</p>
 <blockquote>
 <div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> On Windows
 <span class="go">cd  C:\ARC\MetaWare\arc\demos</span>
@@ -245,8 +245,7 @@ MetaWare Development Toolkit, e.g., <strong>C:/ARC/MetaWare/arc/demos/queen.c</s
 </pre></div>
 </div>
 </div></blockquote>
-<p>If you get the following message and no error, it means MetaWare Development
-Toolkit is successfully installed and  license is ok.</p>
+<p>If you get the following message without any error, then the MetaWare Development Toolkit is successfully installed.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">MetaWare C Compiler N-2017.09 (build 005)       Serial 1-799999.</span>
 <span class="go">(c) Copyright 1987-2017, Synopsys, Inc.</span>
 <span class="go">MetaWare ARC Assembler N-2017.09 (build 005)</span>
@@ -258,16 +257,16 @@ Toolkit is successfully installed and  license is ok.</p>
 </div>
 <div class="section" id="install-arc-gnu-toolchain">
 <h3>Install ARC GNU Toolchain<a class="headerlink" href="#install-arc-gnu-toolchain" title="Permalink to this headline">¶</a></h3>
-<p>Please go <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">here</a> (<a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases</a>) to get the latest version of
+<p>Click (<a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases</a>) to get the latest version of
 ARC GNU toolchain.</p>
-<p>To use and install ARC GNU toolchain, you can refer <a class="reference external" href="http://embarc.org/toolchain/ide/index.html">this</a> (<a class="reference external" href="http://embarc.org/toolchain/ide/index.html">http://embarc.org/toolchain/ide/index.html</a>), where has detailed instructions.</p>
-<p>It’s recommended to install ARC GNU toolchain in the path (windows: <code class="docutils literal notranslate"><span class="pre">C:\arc_gnu\</span></code>, linux: <code class="docutils literal notranslate"><span class="pre">~/arc_gnu/</span></code>) and add <code class="docutils literal notranslate"><span class="pre">arc_gnu/bin</span></code> into $PATH variable.</p>
+<p>To use and install ARC GNU toolchain, see (<a class="reference external" href="http://embarc.org/toolchain/ide/index.html">http://embarc.org/toolchain/ide/index.html</a>).</p>
+<p>It is recommended to install ARC GNU toolchain in the path (windows: <code class="docutils literal notranslate"><span class="pre">C:\arc_gnu\</span></code>, linux: <code class="docutils literal notranslate"><span class="pre">~/arc_gnu/</span></code>) and add <code class="docutils literal notranslate"><span class="pre">arc_gnu/bin</span></code> into $PATH variable.</p>
 </div>
 <div class="section" id="install-embarc-osp">
 <h3>Install embARC OSP<a class="headerlink" href="#install-embarc-osp" title="Permalink to this headline">¶</a></h3>
 <p>The embARC OSP source code is hosted in a GitHub repository that supports
-cloning via git. There are scripts and such in this repo that you’ll need to set up your development environment, and we’ll be using Git to get this repo. If you don’t have Git installed, see the beginning of the OS-specific instructions below for help.</p>
-<p>We’ll begin by using Git to clone the repository anonymously.</p>
+cloning through git. There are scripts in this repo that you are need to set up your development environment, and Git is used to get this repo. If you do not have Git installed, see the beginning of the OS-specific instructions below for help.</p>
+<p>Using Git to clone the repository anonymously</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> On Windows
 <span class="go">cd %userprofile%</span>
 <span class="gp">#</span> On Linux
@@ -280,7 +279,7 @@ cloning via git. There are scripts and such in this repo that you’ll need to s
 </div>
 <div class="section" id="install-arc-labs-code">
 <h3>Install ARC labs code<a class="headerlink" href="#install-arc-labs-code" title="Permalink to this headline">¶</a></h3>
-<p>The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs to the root folder of embARC OSP. If everything is ok, you will get the following folder structure:</p>
+<p>The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs to the root folder of embARC OSP. If the download is successful, the following folder structure is displayed:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd path/to/embarc_osp</span>
 <span class="go">git clone https://github.com/foss-for-synopsys-dwc-arc-processors/arc_labs.git arc_labs</span>
 </pre></div>
@@ -306,15 +305,15 @@ cloning via git. There are scripts and such in this repo that you’ll need to s
 <p>Check the following items and set development environment.</p>
 <ul class="simple">
 <li>Make sure the paths of the above required tools for the MetaWare toolkit and ARC GNU toolchain are added to the system variable <strong>PATH</strong> in your environment variables.</li>
-<li>We recommend users to install ARC GNU IDE to default location. Otherwise you need to make additional changes as below.<ul>
-<li>If running and debugging embARC applications using <strong>arc-elf32-gdb</strong> and <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/openocd">OpenOCD for ARC</a>, make sure 1) the path of <strong>OpenOCD</strong> is added to the <strong>PATH</strong> in your environment variables, and 2) modify <strong>OPENOCD_SCRIPT_ROOT variable</strong> in <em>&lt;embARC&gt;/options/toolchain/toolchain_gnu.mk</em> according to your <strong>OpenOCD</strong> root path.</li>
+<li>It is recommended to install ARC GNU IDE to default location. Otherwise, you need to make additional changes as described.<ul>
+<li>If running and debugging embARC applications using <strong>arc-elf32-gdb</strong> and <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/openocd">OpenOCD for ARC</a>, make sure the path of <strong>OpenOCD</strong> is added to the <strong>PATH</strong> in your environment variables and modify <strong>OPENOCD_SCRIPT_ROOT variable</strong> in <em>&lt;embARC&gt;/options/toolchain/toolchain_gnu.mk</em> to your <strong>OpenOCD</strong> root path.</li>
 <li>If running GNU program with using the GNU toolchain on Linux, modify the <strong>OpenOCD</strong> configuration file as Linux format with LF line terminators. <strong>dos2unix</strong> can be used to convert it.</li>
 </ul>
 </li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Check the version of your toolchain. The embARC OSP software build system is purely makefile-based. <em>make/gmake</em> is provided in the MetaWare toolkit (gmake) and ARC GNU toolchain (make)</p>
+<p class="last">Check the version of your toolchain. The embARC OSP software build system is makefile-based. <em>make/gmake</em> is provided in the MetaWare toolkit (gmake) and ARC GNU toolchain (make)</p>
 </div>
 </div>
 </div>
