@@ -10,7 +10,7 @@ Purpose
 
 Equipment
 ==========
-The following hardware and software tools are required:
+The following hardware and tools are required:
 
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
@@ -20,13 +20,13 @@ The following hardware and software tools are required:
 
 Content
 =========
-This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through ``embarc_osp/arc_labs/labs/lab4_interrupt`` in the |embarc| package. The two routines give you a preliminary understanding of the ARC interrupt resources.
+This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through ``embarc_osp/arc_labs/labs/lab4_interrupt`` in the |embarc| package. The two routines gives you a preliminary understanding of the ARC interrupt resources.
 
 Principles
 ===========
-The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, return to the interrupted program and complete the response of the interrupt event.
+The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, returns to the interrupted program and complete the response of the interrupt event.
 
-In embARC OSP, we use the ``int_handler_install()`` function to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then we can achieve the above functions.
+In embARC OSP, the ``int_handler_install()`` function is used to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then the above functions are achieved.
 
 Steps
 ======
@@ -34,10 +34,10 @@ Steps
 Open and browse lab one
 ------------------------
 
-Go to the ``embarc_osp/arc_labs/labs/lab4_interrupt``, where there are two folders, ``lab_4_1`` and ``lab_4_2``.
+Go to the ``embarc_osp/arc_labs/labs/lab4_interrupt``.
 
-The ``lab_4_1`` is more fundamental compared to ``lab_4_2``. So we first enter
-folder ``lab_4_1``, in which the precise timing function is implemented
+The ``lab_4_1`` is more fundamental compared to ``lab_4_2``. Go to 
+folder ``lab_4_1`` in which the precise timing function is implemented
 through the timer interrupt.
 
 Open main.c and browse the entire program.
@@ -90,12 +90,12 @@ Open main.c and browse the entire program.
 	  return E_SYS;
     }
 
-Sub-module analysis lab one code
+Sub-module Analysis Lab One Code
 ---------------------------------
 
 The code can be roughly divided into three parts: interrupt service function, main function, and delay function.
 
-Let's analyze each one below:
+Each part is analyzed:
 
 - Interrupt service function:
 
@@ -109,7 +109,7 @@ Let's analyze each one below:
 
 This code is a standard example of an interrupt service function, enters the service function, clears the interrupt flag bit, and then performs the processing that needs to be done in the interrupt service function. Other interrupt service functions can also be written using this template.
 
-In this function, we incremented the count variable t0 by one.
+In this function, the count variable t0 is incremented by one.
 
 - Main function
 
@@ -142,21 +142,21 @@ The ``EMBARC_PRINTF`` function in this code is only used to send information to 
 
 This code is divided into two parts: initialization and looping.
 
-In the initialization section, we configured the timer and timer interrupts.
+In the initialization section, the timer and timer interrupts are configured.
 
 Unlike Lab 3, this code uses the embARC OSP API to implement it. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.
 
-**First**, in order to configure **Timer0** and its interrupts, we need to turn them off first. This work is done by the functions ``int_disable`` and ``timer_stop``.
+**First**, in order to configure **Timer0** and it's interrupts, turn them off first. This work is done by the functions ``int_disable`` and ``timer_stop``.
 
-**Then** we configure the interrupt service function and priority for our interrupts. This work is done by the functions ``int_handler_install`` and ``int_pri_set``.
+**Then** configure the interrupt service function and priority for our interrupts. This work is done by the functions ``int_handler_install`` and ``int_pri_set``.
 
-**Finally**, after the interrupt configuration is complete, we need to enable the **Timer0** and interrupts that we previously turned off. This work is done by the functions ``int_enable`` and ``timer_start``.
-The implementation of the ``timer_start`` function is basically the same as the reading and writing of the auxiliary registers in our lab_3. Interested students can view them in the file arc_timer.c. One point to note in this step is the configuration of ``timer_limit`` (the last parameter of ``timer_start``). We need to configure the interrupt time to 1ms , so we need to do a simple calculation (the formula is the expression after COUNT).
+**Finally**, after the interrupt configuration is complete, enable the **Timer0** and interrupts that are previously turned off. This work is done by the functions ``int_enable`` and ``timer_start``.
+The implementation of the ``timer_start`` function is the same as the reading and writing of the auxiliary registers in our lab_3. Interested students can view them in the file arc_timer.c. One point to note in this step is the configuration of ``timer_limit`` (the last parameter of ``timer_start``). Configure the interrupt time to 1ms , do a simple calculation (the formula is the expression after COUNT).
 
-In this example, the loop body only serves as an effect display. We call our own delay function in the loop body to print the time per second.
+In this example, the loop body only serves as an effect display. Our own delay function in the loop body to print the time per second is called.
 
 .. note::
-    Since nSIM is only simulated by computer, there may be time inaccuracy when using this function. Interested students can use the EMSK to program the program in the development board. In this case, the time will be much higher than that in nSIM.
+    Since nSIM is only simulated by computer, there may be time inaccuracy when using this function. Interested students can use the EMSK to program the program in the development board. In this case, the time is much higher than that in nSIM.
 
 - Delay function
 
@@ -168,9 +168,9 @@ In this example, the loop body only serves as an effect display. We call our own
 	  while(t0<ms);
 	}
 
-This code is very simple and the idea is clear. When we enter the function, we clear the global variable t0. Since we have set the interrupt interval to 1ms in the above timer_start, we can think that every time t0 is incremented, the time has passed 1ms.
+This code is very simple and the idea is clear. When the function entered, clear the global variable t0. The interrupt interval is set to 1ms in the above timer_start, assume that every time t0 is incremented, the time has passed 1ms.
 
-Then, we wait through the while(t0<ms) sentence, so that we can get the full ms delay with higher precision.
+Wait through the while(t0<ms) sentence, so that the full ms delay with higher precision is received.
 
 Lab one Labal phenomenon
 -------------------------
@@ -201,7 +201,7 @@ After the lab one program is successfully downloaded, the serial output is as fo
 Open and browse the lab two
 ----------------------------
 
-We then enter ``lab_4_2``, which mainly shows the working state of priority
+Enter ``lab_4_2``, which shows the working state of priority
 and interrupt nesting.
 
 Open main.c and browse through the entire program.
@@ -352,17 +352,17 @@ Lab two seems complicated, but it is very simple. The code for Lab two only need
 	  timer_flag = 1;
 	}
 
-First, in order to analyze the code, we first ignore the extraneous parts (such as EMBARC_PRINTF, delay and hits in if).
+First, in order to analyze the code, ignore the extraneous parts (such as EMBARC_PRINTF, delay, and hits in if).
 
 In this case, we can find that for the interrupt service function timer0_isr, it is impossible to have the timer_flag of 1 only when it is itself. The only way to do this is to have another higher priority interrupt between timer_flag=0 and if statement set it.
 
-Following this line of thought, let's look at timer1_isr again, and sure enough.
+Following this line of thought, see timer1_isr.
 
 Regarding EMBARC_PRINTF, it is used to indicate the status.
 
-Regarding the delay, its role is to lengthen this period of time, making nesting more likely.
+Regarding the delay, it's role is to lengthen this period of time, making nesting more likely.
 
-Regarding hits, it will be mentioned in the main function module.
+Regarding hits, it is mentioned in the main function module.
 
 - main function
 
@@ -436,20 +436,20 @@ Regarding hits, it will be mentioned in the main function module.
 	return E_SYS;
 	}
 
-The main function looks very long, but in fact there is a considerable part of it that is repetitive (we can also build a small function to make the code look more concise).
+The main function looks very long, there is a considerable part of it that is repetitive (you can also build a small function to make the code look more concise).
 
-In the first lab, we have already discussed the configuration of the timer and the creation of the interrupt, we will not repeat them here.
+In the first lab, the configuration of the timer and the creation of the interrupt is discussed and it is not repeated here.
 
 The main function is simple: when the interrupt of timer0 occurs 5 times, change the priority relationship of the two interrupts. The hits mentioned earlier are count variables to assist in the above functions.
 
-Lab two Labal phenomenon
+Lab two Label phenomenon
 -------------------------
 
-The labal phenomenon of Lab two is shown in the figure.
+The label phenomenon of Lab two is shown in the follogin figure.
 
 "Interrupt nesting!" indicates that interrupt nesting has occurred, and "Interrupt" indicates that it has not occurred.
 
-For a better understanding, let's go back and look at the priority settings in the main function.
+For a better understanding, go back and look at the priority settings in the main function.
 
 It is easy to see that when the timer0 interrupt priority is low (INT_PRI_MAX is low priority, this setting is contrary to most people's intuition), the timer1 interrupt can be embedded therein; when the timer0 interrupt priority is high, the timer1 interrupt cannot be embedded.
 

@@ -29,7 +29,7 @@ Reguired Hardware
 Required Software
 -----------------
 
-- Metaware or ARC GNU Toolset
+- MetaWare or ARC GNU Toolset
 
 - Serial port terminal (e.g. putty, tera-term or minicom)
 
@@ -112,7 +112,7 @@ Creating and setting smart home node
    certificate.
 
    .. note::
-      for more details `[Using a Smart Home Iot Application with EMSK] <http://embarc.org/pdf/embARC_appnote_how_to_use_smart_home_iot.pdf>`_
+      for more details, see `[Using a Smart Home Iot Application with EMSK] <http://embarc.org/pdf/embARC_appnote_how_to_use_smart_home_iot.pdf>`_
 
    .. image:: /img/lab11_steps_3.png
         :alt: smarthome system
@@ -131,7 +131,7 @@ Creating and setting smart home node
    .. image:: /img/lab11_steps_5.png
         :alt: smarthome system
 
-7. Click "ADD" to go to DATASOURCE page and fill up the forms.
+7. Click "ADD" to go to DATASOURCE page and fill the forms.
 
   a) TYPE: Choose AWS IoT.
   b) NAME: Name is aws.
@@ -162,16 +162,16 @@ Creating and setting smart home node
      .. image:: /img/lab11_steps_9.png
            :alt: smarthome system
 
-     Go to User page and click "AWSIoTUser". Click "Attach Policy" to attach "AWSIoTDataAccess" to "AWSIoTUser".
+     Go to user page and click "AWSIoTUser". Click "Attach Policy" to attach "AWSIoTDataAccess" to "AWSIoTUser".
 
   g) THINGS: AWS IoT thing name "SmartHome".
 
      .. image:: /img/lab11_steps_10.png
            :alt: smarthome system
 
-  h) Click "Save" to finish the setting.
+  h) Click **Save** to finish the setting.
 
-Building and running AWS IoT smart home example
+Building and Running AWS IoT Smart Home Example
 -----------------------------------------------
 
 1. The AWS IoT thing SDK for C has been ported to embARC. Check the above steps in
@@ -187,7 +187,7 @@ Building and running AWS IoT smart home example
 2. Use USB cable to connect the EMSK board. Set the baud rate of the terminal emulator to 115200.
 
 3. Insert the SD Card into the EMSK board SD Card slot. Run the AWS IoT application using JTAG.
-   Go to *embARC/example/freertos/iot/aws/smarthome_demo* in command line, input the compile command as follow:
+   Go to *embARC/example/freertos/iot/aws/smarthome_demo* in command-line, input the compile command as follow:
 
    .. code-block:: console
 
@@ -195,7 +195,7 @@ Building and running AWS IoT smart home example
 
 4. FreeRTOS-based runtime environment can be loaded automatically. Wait for WiFi initialization and
    connection establishment (30 seconds or less) until the "WiFi connected" message is shown in the
-   terminal emulator. "Network is ok" will be shown after the certificate files cert.crt, privateKey.pem
+   terminal emulator. "Network is ok" is shown after the certificate files cert.crt, privateKey.pem,
    and rootCA.crt are validated. The information in "reported": {} is the state of the EMSK-based
    smart home node. "Updated Accepted !!" means the connection works between the smart home node and AWS IoT cloud.
 

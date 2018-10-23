@@ -6,15 +6,15 @@ Programming ARC DSP Using FXAPI
 Part 1.	Prerequisites
 ---------------------
 
-Before starting using ARC DSP the following prerequisites are required:
+Before starting to use the ARC DSP, the following prerequisites are required:
 
-* Have MetaWare tools for Windows installed
+* Make sure that the MetaWare tools for Windows installed
 
   `<https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
 
-* Known how to create, edit, build and debug projects in MetaWare IDE
+* Lean how to create, edit, build, and debug projects in MetaWare IDE
 
-* Have ARC IOT Design Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested
+* Make sure that the ARC IOT Design Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested
 
   `<http://store.digilentinc.com/digilent-adept-2-download-only>`_
 
@@ -24,7 +24,7 @@ The following needs to be tested before starting this lab:
 
 * Connecting IOTDK board to computer
 
-* Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to  *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board).
+* Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration, see *Getting Started* chapter of *ARC IOT Design Kit User Guide*).
 
 Part 2.	Lab Objectives
 ----------------------------
@@ -50,7 +50,7 @@ Is done using formula:
 
 |dsp_icon_2.3|
 
-In this lab example multiplication and accumulation of two arrays of complex numbers will be used as a way to compare performance of ARC DSP extensions when used effectively.
+In this lab example multiplication and accumulation of two arrays of complex numbers are used as a way to compare performance of ARC DSP extensions when used effectively.
 
 The sum of element wise products of two arrays of complex numbers is calculated according to the following formula:
 
@@ -61,7 +61,7 @@ where a and b are arrays of N complex numbers.
 Implementation without DSP
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to calculate element wise products of two arrays of complex numbers a struct cat be defined that stores real and imaginary parts of the complex number, thus the calculation process receives an array of structures and works on it. The code is shown below:
+In order to calculate element wise products of two arrays of complex numbers, a struct can be defined that stores real and imaginary parts of the complex number. Therefore, the calculation process receives an array of structures and works on it. The code is shown below:
 
 .. code-block:: c
 
@@ -86,12 +86,12 @@ In order to calculate element wise products of two arrays of complex numbers a s
     	return result;
     }
 
-The example keep real and imaginary values in variables of type "short", while multiplication results are kept in "int" integer to avoid truncation. Final result is casted to short to return complex number as a result.
+The example keeps real and imaginary values in variables of type "short", while multiplication results are kept in "int" integer to avoid truncation. Final result is casted to short to return complex number as a result.
 
 Implementation with FXAPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-FXAPI makes it possible to directly access complex number instructions (like MAC)  available in ARC DSP Extensions. This is done through complex number type cq15_t, and various fx_* functions. Here ``fx_v2a40_cmac_cq15`` FXAPI function is called which performs MAC of two cq15_t complex numbers.
+FXAPI makes it possible to directly access complex number instructions (like MAC) available in ARC DSP Extensions. This is done through complex number type cq15_t, and various fx_* functions. Here ``fx_v2a40_cmac_cq15`` FXAPI function is called which performs MAC of two cq15_t complex numbers.
 
 .. code-block:: c
 
@@ -105,14 +105,14 @@ FXAPI makes it possible to directly access complex number instructions (like MAC
     	return fx_cq15_cast_v2a40( acc );
     }
 
-As with previous implementation ``q15_t`` is of similar size as ``short`` type thus multiplication result needs larger storage. Here 40b vector accumulator is used directly to store intermediate results of MAC, and is casted to ``cq15_t`` on return.
+As with previous implementation ``q15_t`` is of similar size as ``short`` type, therefore, multiplication result needs larger storage. Here 40b vector accumulator is used directly to store intermediate results of MAC, and is casted to ``cq15_t`` on return.
 
 Using IOTDK board for performance comparison
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To compare performance of these two functions a simple ESMK application is created that performance complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop  (1 000 000-10 000 000 times) to make calculation delay measurable in seconds, this is done 8 times, and after each loop a LED on board is turn on. In the result LED strip on board works as a "progress bar" showing the process of looped multiplicaitons.
+To compare performance of these two functions a simple ESMK application is created that performs complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop (1 000 000-10 000 000 times) to make calculation delay measurable in seconds. This is done 8 times, and after each loop a LED on board turns-on. In the result, LED strip on board works as a "progress bar" showing the process of looped multiplicaitons.
 
-The main performance check loop is shown below, the outer loop runs 8 times (number of LEDs on LED strip) the inner loop makes "LOOPS/8" calls to complex multiplication function, LOOPS variable is configurable to change the total delay. The example below uses DSP types, and can be changed to use short-based struct type.
+The main performance check loop is shown in the following example. Rhe outer loop runs 8 times (number of LEDs on LED strip), the inner loop makes "LOOPS/8" calls to complex multiplication function. LOOPS variable is configurable to change the total delay. The following example uses DSP types, and can be changed to use short-based struct type.
 
 .. code-block:: c
 
@@ -155,7 +155,7 @@ The main performance check loop is shown below, the outer loop runs 8 times (num
 Part 4.	Test
 ------------
 
-To test the example below some modification of the code will be required to make have two loops with and without DSP. First you must re-build libraries for this particular configuration of IOTDK:
+To test the following example, some modification of the code is required to have two loops with and without DSP. You must re-build libraries for this particular configuration of IOTDK:
 
 ``buildlib my_dsp -tcf=<IOTDK tcf file> -bd . -f``
 
