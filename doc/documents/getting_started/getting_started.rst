@@ -14,7 +14,7 @@ Software Requirement
 
     * `Premium MetaWare Development Toolkit (2018.06) <https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_.
       The DesignWare ARC MetaWare Development Toolkit builds upon a 25-year legacy of industry-leading compiler and debugger products. It is a complete solution that contains all the components needed to support the development, debugging, and tuning of embedded applications for the DesignWare ARC processors.
-    * `DesignWare ARC MetaWare Toolkit Lite (2018.06) <https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
+    * `DesignWare ARC MetaWare Toolkit Lite (2018.06) <https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_.
       A demonstration or evaluation version of the MetaWare Development Toolkit is available for free from the Synopsys website. MetaWare Lite is a functioning demonstration of the MetaWare Development Toolkit with restrictions such as code-size limit of 32 Kilobytes and no runtime library sources. It is available for Microsoft Windows only.
 
   * |arcgnu|
@@ -23,7 +23,7 @@ Software Requirement
       The |arggnu| offers all of the benefits of open source tools such as complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with `ARC GNU plugin for Eclipse <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases>`_, `ARC GNU prebuilt toolchain <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_, and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_
 * `Digilent Adept Software <https://store.digilentinc.com/digilent-adept-2-download-only/>`_ for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger. One USB cable is required and external debugger is not required.
 
-* `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection, the serial configuration is 115200 baud, 8 bits data, 1 stop bit, and no parity (115200-8-N-1) by default.
+* `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection. The serial configurations are 115200 baud, 8 bits data, 1 stop bit, and no parity (115200-8-N-1) by default.
 
 .. note:: If using embARC with GNU toolchain on Windows, install `Zadig <http://zadig.akeo.ie>`_ to replace FTDI driver with WinUSB driver. See `How to Use OpenOCD on Windows <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows>`_ for more information. If you want to switch back to Metaware toolchain, make sure you switch back the usb-jtag driver from WinUSB to FTDI driver.
 
@@ -160,3 +160,11 @@ Check the following items and set development environment.
   * If running GNU program with using the GNU toolchain on Linux, modify the **OpenOCD** configuration file as Linux format with LF line terminators. **dos2unix** can be used to convert it.
 
 .. note:: Check the version of your toolchain. The embARC OSP software build system is makefile-based. *make/gmake* is provided in the |mwdt| (gmake) and |arcgnu| (make)
+
+
+Learn More
+##########
+
+For more details about |embarc|, see
+`online docs <http://embarc.org/embarc_osp/>`__
+
