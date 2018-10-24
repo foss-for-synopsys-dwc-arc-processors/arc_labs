@@ -40,9 +40,11 @@ To optimize code to use DSP extensions two sets of compiler options will be used
 DSP Extensions Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We will use EMBARC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.
+We will use EMBARC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/linker options by ADT_COPT/ADT_LOPT.
 
-``gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hfxapi -Xdsp2" OLEVEL=O2``
+.. code-block:: console
+
+  gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hfxapi -Xdsp2" OLEVEL=O2
 
 Options that are used in the lab are:
 
@@ -178,7 +180,7 @@ Adding -Xdsp1 (optimization level changed to -O3) helps compiler to optimize awa
 
     **Assignment:** Remove "<<1" from test function, see what changes in output instructions.
 
-Appendix A.IOTDK Default Core Configurations
+Appendix A. IOTDK Default Core Configurations
 -----------------------------------------------
 
 **ARC_EM5D**

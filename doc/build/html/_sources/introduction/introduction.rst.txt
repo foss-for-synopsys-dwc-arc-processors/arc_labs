@@ -23,10 +23,10 @@ The labs in this level cover the basic topics about |arc|, for example, the
 installation and usage of hardware and software tools, software or hardware
 development kits, first hello world example, interrupt hanlding and internal timers of |arc|, and so on.
 
-* :ref:`Level 2: ARC advance <level2_labs>`
+* :ref:`Level 2: ARC advanced <level2_labs>`
 
 The labs in this level cover the advanced topics about |arc|, for example,
-Real-Time Operating System(RTOS), customized linkage, compiler optimization,
+Real-Time Operating System (RTOS), customized linkage, compiler optimization,
 basic applicaitons, |arc| DSP feature, and so on.
 
 * :ref:`Level 3: ARC exploration <level3_labs>`

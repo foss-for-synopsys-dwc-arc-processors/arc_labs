@@ -209,8 +209,10 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <p>To optimize code to use DSP extensions two sets of compiler options will be used throughout the lab, DSP Extensions options and optimization level.</p>
 <div class="section" id="dsp-extensions-options">
 <h3>DSP Extensions Options<a class="headerlink" href="#dsp-extensions-options" title="Permalink to this headline">¶</a></h3>
-<p>We will use EMBARC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.</p>
-<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=emsk</span> <span class="pre">BD_VER=23</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hfxapi</span> <span class="pre">-Xdsp2&quot;</span> <span class="pre">OLEVEL=O2</span></code></p>
+<p>We will use EMBARC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/linker options by ADT_COPT/ADT_LOPT.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT=&quot;-Hfxapi -Xdsp2&quot; OLEVEL=O2</span>
+</pre></div>
+</div>
 <p>Options that are used in the lab are:</p>
 <ul>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">-Xdsp[1/2]</span></code>:</p>
@@ -316,7 +318,7 @@ Try direct usage of DSP extensions through intrinsic.</p>
 </div>
 </div>
 <div class="section" id="appendix-a-iotdk-default-core-configurations">
-<h2>Appendix A.IOTDK Default Core Configurations<a class="headerlink" href="#appendix-a-iotdk-default-core-configurations" title="Permalink to this headline">¶</a></h2>
+<h2>Appendix A. IOTDK Default Core Configurations<a class="headerlink" href="#appendix-a-iotdk-default-core-configurations" title="Permalink to this headline">¶</a></h2>
 <p><strong>ARC_EM5D</strong></p>
 <p>This is an ARC EM core with 32 bits address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).</p>
 <p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span> <span class="pre">-Xswap</span> <span class="pre">-Xnorm</span> <span class="pre">-Xmpy16</span> <span class="pre">-Xmpy</span> <span class="pre">-Xmpyd</span> <span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span></code></p>
