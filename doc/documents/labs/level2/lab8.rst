@@ -9,7 +9,7 @@ Purpose
 
 Equipment
 =========
-The following hardware and software tools are required:
+The following hardware and tools are required:
 
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
@@ -18,14 +18,14 @@ The following hardware and software tools are required:
 
 Content
 ========
-Customize your program with **compiler pragmas**.
-At first, using "pragma code" to specify a new name of section in which the code of function reside.
-Then mapping this code section into specified memory location with linker.
-Finally, checking the location of this code section after build process.
+- Customizing your program with **compiler pragmas**.
+- Using "pragma code" to specify a new name of section in which the code of function reside.
+- Mapping this code section into specified memory location with linker.
+- Checking the location of this code section after build process.
 
 Principles
 ==========
-By default, compiler-generated code is placed in the *.text* section. The default code section name can be overridden by using *code pragma*. After compilation, linker will automatically map all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a user specific linker command file.
+By default, compiler-generated code is placed in the *.text* section. The default code section name can be overridden by using the *code pragma*. After compile process, the linker automatically maps all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a linker command file.
 
 Steps
 =====
@@ -33,9 +33,9 @@ Steps
 Create a project and overriding code section name
 ---------------------------------------------------
 
-Open MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under *embarc_osp/arc_labs/labs/lab8_linker* directory into the project.
+Open MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Import the main.c and link.cmd files from the *embarc_osp/arc_labs/labs/lab8_linker* directory into the project.
 
-Open main.c file in MetaWare IDE, using "pragma code" to change the section in which function ``modify`` reside from *.text* to a new name "*modify_seg*".
+Open main.c file in MetaWare IDE, use "pragma code" to change the section in which function ``modify`` reside from *.text* to a new name "*modify_seg*".
 
 .. code-block:: c
 
@@ -64,13 +64,13 @@ Pragma code has two forms that must be used in pairs to bracket the affected fun
 Section_name is a constant string expression that denotes the name of the section
 
 .. note::
-	About detailed usage of the compiler pragmas, please refer to the document "MetaWare C/C++ Programmer's Guide for the ccac Compiler"
+	About detailed usage of the compiler pragmas, see MetaWare C/C++ Programmer's Guide for the ccac Compiler
 
 Edit the linker command file
 ----------------------------
 
-Open the link.cmd file, there are two parts, one is for memory blocks location, the other is for sections mapping.
-Add one new block named "*MyBlock*" in MEMORY, the start address is 0x00002000, and the size is 32KB. Then add one new GROUP in SECTIONS, and mapping section "*modify_seg*" into *MyBlock*.
+Open link.cmd file, there are two parts, one is for memory blocks location, the other is for sections mapping.
+Add one new block named "*MyBlock*" in MEMORY, the start address is 0x00002000, and the size is 32KB. Add one new GROUP in SECTIONS, and mapping section "*modify_seg*" into *MyBlock*.
 
 .. code-block:: c
 
@@ -94,29 +94,29 @@ Add one new block named "*MyBlock*" in MEMORY, the start address is 0x00002000, 
 Add the linker command file into the project
 --------------------------------------------
 
-Right click the current project lab_linker and select Properties in the popup tab. Click C/C++ build **>>** settings **>>** Tool Settings to open the linker option settings page.
+Right click the current project lab_linker and select Properties. Click **C/C++ build** > **Settings** > **Tool Settings** to open the linker option settings page.
 
 |figure1|
 
-In current page, select Command files to add linker.cmd file into this project.
+Select Command files to add linker.cmd file into this project.
 
 Check the result
 ----------------
 
-In linker option settings page, select Map listing to check Generate listing file(=.map)
+In the linker option settings window, select Map listing to check Generate listing file(=.map)
 
 |figure2|
 
-Build the lab_linker project, then open the lab_linker.map file under Debug directory.
+Build the lab_linker project, then open the lab_linker.map file.
 
 |figure3|
 
-In this file, search SECTIONS SUMMARY, then you can check the size and location of *modify_seg* section, it resides in *MyBlock*, same as you set in the linker cmd file.
+Search SECTIONS SUMMARY, then you can check the size and location of *modify_seg* section, it resides in *MyBlock*, similar to you setting in the linker command file.
 
 Exercises
 =========
 
-Try to check the memory mapping info of *modify_seg* section by using elfdump tool.
+Check the memory mapping info of *modify_seg* section by using elfdump tool.
 
 
 .. |figure1| image:: /img/lab8_figure1.png
