@@ -8,24 +8,24 @@ Use this guide to get started with your ARC labs development.
 Software Requirement
 ####################
 * `ARC Development Tools <https://www.synopsys.com/designware-ip/processor-solutions/arc-processors/arc-development-tools.html>`_
-    Select **MetaWare Toolkit** or **ARC GNU Toolchain** from the following list according to your requirement.
+    Select **|mwdt|** or **|arcgnu|** from the following list according to your requirement.
 
-  * MetaWare Toolkit
+  * |mwdt|
 
-    * `Premium MetaWare Development Toolkit (2018.06) <https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
+    * `Premium MetaWare Development Toolkit (2018.06) <https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_.
       The DesignWare ARC MetaWare Development Toolkit builds upon a 25-year legacy of industry-leading compiler and debugger products. It is a complete solution that contains all the components needed to support the development, debugging, and tuning of embedded applications for the DesignWare ARC processors.
     * `DesignWare ARC MetaWare Toolkit Lite (2018.06) <https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
       A demonstration or evaluation version of the MetaWare Development Toolkit is available for free from the Synopsys website. MetaWare Lite is a functioning demonstration of the MetaWare Development Toolkit with restrictions such as code-size limit of 32 Kilobytes and no runtime library sources. It is available for Microsoft Windows only.
 
-  * ARC GNU Toolchain
+  * |arcgnu|
 
-    * `Open Source ARC GNU IDE (2018.03) <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_
-      The ARC GNU Toolchain offers all of the benefits of open source tools such as complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with `ARC GNU plugin for Eclipse <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases>`_, `ARC GNU prebuilt toolchain <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_, and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_
+    * `Open Source ARC GNU IDE (2018.03) <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_.
+      The |arggnu| offers all of the benefits of open source tools such as complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with `ARC GNU plugin for Eclipse <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases>`_, `ARC GNU prebuilt toolchain <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_, and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_
 * `Digilent Adept Software <https://store.digilentinc.com/digilent-adept-2-download-only/>`_ for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger. One USB cable is required and external debugger is not required.
 
-* `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection, 115200 baud, 8 bits data, 1 stop bit, and no parity (115200-8-N-1) by default.
+* `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection, the serial configuration is 115200 baud, 8 bits data, 1 stop bit, and no parity (115200-8-N-1) by default.
 
-.. note:: If using embARC with GNU toolchain on Windows, install `Zadig <http://zadig.akeo.ie>`_ to replace FTDI driver with WinUSB driver. See `How to Use OpenOCD on Windows <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows>`_ for more information. If you want too switch back to Metaware toolchain, make sure you switch back the usb-jtag driver from WinUSB to FTDI driver.
+.. note:: If using embARC with GNU toolchain on Windows, install `Zadig <http://zadig.akeo.ie>`_ to replace FTDI driver with WinUSB driver. See `How to Use OpenOCD on Windows <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows>`_ for more information. If you want to switch back to Metaware toolchain, make sure you switch back the usb-jtag driver from WinUSB to FTDI driver.
 
 Install Software Tools
 ######################
@@ -47,7 +47,7 @@ Installing MetaWare Development Toolkit (2017.09).
 
 .. image:: /img/mwdt_3.png
 
-4. Set the install path (make sure you use English letters withoout any space) and 
+4. Set the install path (make sure you use English letters withoout any space) and
    click **Next** until the installation is complete.
 
 .. image:: /img/mwdt_4.png
@@ -89,17 +89,20 @@ Install ARC GNU Toolchain
 *************************
 
 Click (https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases) to get the latest version of
-ARC GNU toolchain.
+|arcgnu|.
 
-To use and install ARC GNU toolchain, see (http://embarc.org/toolchain/ide/index.html).
+To use and install |arcgnu|, see (http://embarc.org/toolchain/ide/index.html).
 
-It is recommended to install ARC GNU toolchain in the path (windows: ``C:\arc_gnu\``, linux: ``~/arc_gnu/``) and add ``arc_gnu/bin`` into $PATH variable.
+It is recommended to install |arcgnu| in the path (windows: ``C:\arc_gnu\``, linux: ``~/arc_gnu/``) and add ``arc_gnu/bin`` into $PATH variable.
 
 Install embARC OSP
 ******************
 
 The embARC OSP source code is hosted in a GitHub repository that supports
-cloning through git. There are scripts in this repo that you are need to set up your development environment, and Git is used to get this repo. If you do not have Git installed, see the beginning of the OS-specific instructions below for help.
+cloning through git. There are scripts in this repo that you are need to set
+up your development environment, and Git is used to get this repo. If you do
+not have Git installed, see the beginning of the OS-specific instructions
+below for help.
 
 Using Git to clone the repository anonymously
 
@@ -117,7 +120,9 @@ You have successfully checked out a copy of the source code to your local machin
 Install ARC labs code
 *********************
 
-The source codes of ARC labs are assumed to work with embARC OSP. You need to use git to clone or download the ARC labs to the root folder of embARC OSP. If the download is successful, the following folder structure is displayed:
+The source codes of ARC labs are assumed to work with embARC OSP. You need to
+use git to clone or download the ARC labs to the root folder of embARC OSP. If
+the download is successful, the following folder structure is displayed:
 
 .. code-block:: console
 
@@ -147,11 +152,11 @@ Final Check
 
 Check the following items and set development environment.
 
-* Make sure the paths of the above required tools for the MetaWare toolkit and ARC GNU toolchain are added to the system variable **PATH** in your environment variables.
+* Make sure the paths of |mwdt| or |arcgnu| are added to the system variable **PATH** in your environment variables.
 
-* It is recommended to install ARC GNU IDE to default location. Otherwise, you need to make additional changes as described.
+* It is recommended to install |arcgnu| to default location. Otherwise, you need to make additional changes as described.
 
   * If running and debugging embARC applications using **arc-elf32-gdb** and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_, make sure the path of **OpenOCD** is added to the **PATH** in your environment variables and modify **OPENOCD_SCRIPT_ROOT variable** in *<embARC>/options/toolchain/toolchain_gnu.mk* to your **OpenOCD** root path.
   * If running GNU program with using the GNU toolchain on Linux, modify the **OpenOCD** configuration file as Linux format with LF line terminators. **dos2unix** can be used to convert it.
 
-.. note:: Check the version of your toolchain. The embARC OSP software build system is makefile-based. *make/gmake* is provided in the MetaWare toolkit (gmake) and ARC GNU toolchain (make)
+.. note:: Check the version of your toolchain. The embARC OSP software build system is makefile-based. *make/gmake* is provided in the |mwdt| (gmake) and |arcgnu| (make)

@@ -8,7 +8,7 @@ Purpose
 * To know what |embarc| is
 * To know how to run  examples in |embarc|
 * To know how to debug the examples in |embarc|
-* To know how to write application code in |embarc|
+* To know how to create applicatio in |embarc|
 
 Equipment
 =========
@@ -16,8 +16,8 @@ Equipment
 The following hardware and software tools are required:
 
 * PC host
-* ARC GNU toolchain/MetaWare Development Toolkit
-* ARC board (EM Starter Kit/IoT Development Kit)
+* |arcgnu| / |mwdt|
+* ARC board (|emsk| / |iotdk|)
 * |embarc| packages
 
 The detailed software requirements of |embarc| can be found `here <http://embarc.org/embar
@@ -26,9 +26,9 @@ c_osp/doc/build/html/getting_started/software_requirement.html>`__
 Content
 ========
 
-First, this document will give you a brief introduction of |embarc|, and also show you how to get the package.
-Then, you will learn how to run the provided examples and debug.
-Finally, you will be presented the steps to create your own embARC applications.
+* First, this lab will give you a brief introduction of |embarc|, and also show you how to get the package.
+* Then, you will learn how to run the provided examples and debug.
+* Finally, you will be presented the steps to create your own embARC applications.
 
 
 Principles
@@ -36,10 +36,10 @@ Principles
 
 1. IoT OS/Platform
 
-In the field of Internet of Things (IoT), numberous devices are connected to form a complex network.
-Along with it, the programs within devices are becoming complex too.
-Many of them also require real-time responses.
-That urges a better way to manage tasks rather than running them in a main loop.
+In the field of Internet of Things (IoT), numerous devices are connected to
+form a complex network. Along with it, the programs within devices are
+becoming complex too. Many of them also require real-time responses. That
+urges a better way to manage tasks rather than running them in a main loop.
 One solution for this is to use IoT OS.
 
 An IoT OS is an operating system that is designed to perform within the
@@ -50,7 +50,7 @@ data transfer over the internet and more other features.
 
 2. |embarc|
 
-The embARC Open Software Platform (OSP) is an open software platform to
+The |embarc| is an open software platform to
 facilitate the development of embedded systems based on |arc|.
 
 It is designed to provide a unified platform for |arc| users by defining
@@ -77,8 +77,11 @@ Get |embarc|
 
 * git
 
-The |embarc| source code is hosted in a `GitHub repository <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp>`__.
-There are scripts and such in this repo that you'll need to set up your development environment, and we'll be using Git to get this repo. If you don't have Git installed, see the beginning of the OS-specific instructions below for help.
+The |embarc| source code is hosted in a `GitHub repository <https://github.com
+/foss-for-synopsys-dwc-arc-processors/embarc_osp>`__. There are scripts and
+such in this repo that you'll need to set up your development environment, and
+we'll be using Git to get this repo. If you don't have Git installed, see the
+beginning of the OS-specific instructions below for help.
 
 We'll begin by using Git to clone the repository anonymously.
 
@@ -101,8 +104,9 @@ see `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embar
 Run the examples
 ****************
 
-The command line interface is the default interface to use |embarc|. After getting the |embarc|
-package, you need to open a **cmd** console in Winodws / a **terminal** in Linux and cd to the root of embARC osp.
+The command line interface is the default interface to use |embarc|. After
+getting the |embarc| package, you need to open a **cmd** console in Winodws /
+a **terminal** in Linux and cd to the root of embARC osp.
 
 Here, take the **blinky** as an example.
 
@@ -125,8 +129,8 @@ Here, take the **blinky** as an example.
    # For IoTDK
    make TOOLCHAIN=gnu BOARD=iotdk run
 
-.. note:: for EMSK, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
-  You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board infomation will be sent by uart and shown on your uart terminal.
+.. note:: for |emsk|, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
+  You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board information will be sent by uart and shown on your uart terminal.
 
 
 4. Get the results
@@ -168,11 +172,11 @@ Still take the **blinky** as example, to debug it, you need to run the following
    # For IoTDK
    make TOOLCHAIN=gnu BOARD=iotdk gui
 
-For Metaware toolchain, the mdb (MetaWare debugger) is used and it's a GUI interface.
-You can refer the Metaware toolchain use manual for details.
+For |mwdt|, the mdb (MetaWare debugger) is used and has a more user friendly graphical interface.
+You can refer the |mwdt| use manual for details.
 
-For ARC GNU toolchain,  the command line based gdb is used. You need to have some basic knowledge of gdb
-debug.
+For ARC GNU toolchain,  the command line based gdb is used. You need to have
+some basic knowledge of gdb debug.
 
 
 Create your own application
@@ -245,7 +249,7 @@ well-known simple ``hello world`` as an example.
 
         * For example, if define ``APPLICATION=1``, set APPL_DEFINES to ``-DAPPLICATION=1``.
 
-   Then makefile for ``hello world`` application will be like this
+Then makefile for ``hello world`` application will be like this
 
     .. code-block:: makefile
 
@@ -347,7 +351,7 @@ well-known simple ``hello world`` as an example.
 
  4.  run
 
-    * Set your EMSK 2.2 hardware configuration to ARC EM7D (no need to set for iotdk), and connect it to
+    * Set your |emsk| 2.2 hardware configuration to ARC EM7D (no need to set for |iotdk|), and connect it to
       your PC. Open ``PuTTY`` or ``Tera-term``, and connect to the right COM
       port. Set the baudrate to **115200 bps**.
 

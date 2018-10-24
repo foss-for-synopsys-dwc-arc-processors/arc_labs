@@ -16,17 +16,16 @@ Equipment
 The following hardware and software tools are required:
 
 * PC host
-* ARC GNU toolchain/MetaWare Development Toolkit
-* ARC board (EM Starter kit/IoT Development Kit)
+* |arcgnu| / |mwdt|
+* ARC board (|emsk| / |iotdk|)
 * SD card
-* |embarc| package
 * ``example/baremetal/bootloader``
 
 Simple bootloader
 ==================
 
 This simple bootloader is designed to work as a secondary/simple bootloader
-for embARC, it will load ``boot.hex`` or ``boot.bin`` on SD Card and run that program.
+for |embarc|, it will load ``boot.hex`` or ``boot.bin`` on SD card and run that program.
 And this example itself can be used as ntshell application.
 
 The following features are provided in this simple bootloader:
