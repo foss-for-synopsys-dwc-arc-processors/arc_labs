@@ -23,7 +23,7 @@ Before starting to use the ARC DSP, the following prerequisites are required:
 
 The following procedures need to be tested before this lab:
 
-* Connecting |iotdk|to computer
+* Connecting |iotdk| to computer
 
 * Connecting serial console (PuTTY) to |iotdk| COM port (For information on how to do initial board setup and configuration, see *Getting Started* chapter of *ARC IOT Design Kit User Guide*).
 
@@ -109,7 +109,7 @@ FXAPI makes it possible to directly access complex number instructions (like MAC
 As with previous implementation ``q15_t`` is of similar size as ``short`` type, therefore, multiplication result needs larger storage. Here 40b vector accumulator is used directly to store intermediate results of MAC, and is casted to ``cq15_t`` on return.
 
 Using |iotdk| board for performance comparison
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To compare performance of these two functions a simple ESMK application is created that performs complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop (1 000 000-10 000 000 times) to make calculation delay measurable in seconds. This is done 8 times, and after each loop a LED on board turns-on. In the result, LED strip on board works as a "progress bar" showing the process of looped multiplicaitons.
 

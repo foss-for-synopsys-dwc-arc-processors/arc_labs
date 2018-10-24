@@ -27,14 +27,14 @@ Principles
 
 1. |emsk|
 
-For the basic introduciton of |emsk|, please go `here <http://embarc.org/embarc_osp/doc/build/html/board/emsk.html>`_
+For the basic introduciton of |emsk|, please go `here <http://embarc.org/embarc_osp/doc/build/html/board/emsk.html>`__
 
 There are on board LEDs, DIP switchs and button on |emsk|, this lab will show
 how to program theses on-board peripherals of |emsk|.
 
 2. |iotdk|
 
-For the basic introduction of |iotdk|, please go `here <http://embarc.org/embarc_osp/doc/build/html/board/iotdk.html>`_
+For the basic introduction of |iotdk|, please go `here <http://embarc.org/embarc_osp/doc/build/html/board/iotdk.html>`__
 
 As there are no easy-to-use on board peripherals like LEDs on |emsk|, this lab will show how to control a LED through the arduino inteface of |iotdk|.
 

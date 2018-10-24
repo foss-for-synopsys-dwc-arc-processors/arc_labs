@@ -29,7 +29,7 @@ Principles
 ==========
 
 Introduction of internal Timer and Auxiliary registers
------------------------------------------------------
+------------------------------------------------------
 
 Timers in |arc|
 
