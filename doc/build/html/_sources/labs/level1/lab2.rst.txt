@@ -193,7 +193,7 @@ Create your own application in |embarc|.
 
     * Change the board name: change the value of ``BOARD`` to ``emsk`` / ``iotdk``. This
       option can also be given in command-line. If not specified, the default value
-     is ``emsk``
+      is ``emsk``
 
     * Change the board version: change the value of ``BD_VER`` to ``22`` (for emsk) or ``10`` (for iotdk). This
       option can also be given in command-line. If not specified, the default value
