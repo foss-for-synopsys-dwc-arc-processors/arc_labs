@@ -5,7 +5,7 @@ ARC features: timer and auxiliary registers
 
 Purpose
 =======
-- To know about builtin timer of ARC EM processor
+- To know about internal timer of |arc|
 - To learn how to program auxiliary registers to control the timer
 - Read the count value of the timer, and implement a time clock by the timer
 
@@ -14,26 +14,30 @@ Equipment
 The following hardware and software tools are required:
 
 * PC host
-* ARC GNU toolchain / MetaWare Development Toolkit
-* ARC board (EM Starter Kit/IoT Development Kit)
-* |embarc| package
+* |arcgnu| / |mwdt|
+* ARC board (|emsk| / |iotdk|)
 * ``embarc_osp/arc_labs/labs/lab3_timer``
 
 Content
 ========
-Read the auxiliary registers of ARC EM to get the version and other setting information of the timer resource. As all ARC EM processors have **Timer0**, we use **Timer0** in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.
+
+* Read the auxiliary registers of |arc to get the version and other setting information of internal timer.
+* As all |arc|  have **Timer0**, **Timer0** is used in this lab, and write the auxiliary registers to initialize, start and stop **Timer0**.
+* By reading the count value of the timer, calculate the execution time of a code block with the count value and the clock frequency.
 
 Principles
 ==========
 
-Introduction of timer and auxiliary registers
-----------------------------------------------
-Timers in ARC EM processor
+Introduction of internal timer and auxiliary registers
+-----------------------------------------------------
+
+Timers in |arc|
 
 - Two 32-bits programmable timers **Timer0** and **Timer1**
 - One 64-bits **RTC** \ (Real-Time Counter)
 
-All the times are configurable, for example, there are four EM processor cores in **ARC EMSK1.1**, their configuration information are as follows.
+All the times are configurable, for example, there are four EM processor cores
+in **ARC EMSK1.1**, their configuration information are as follows.
 
 =========== ===== =========== ===== ===========
  Timer       EM4   EM4_16CR    EM4   EM4_16CR
@@ -43,15 +47,20 @@ HAS_TIMER1    1       0         1        0
 RTC_OPTION    0       0         0        0
 =========== ===== =========== ===== ===========
 
-The auxiliary register Timer BCR holds the timer resource information of the processor core, the register address of **TIMER_BUILD** is *0x75*.
+The auxiliary register Timer BCR holds the timer resource information of the
+processor core, the register address of **TIMER_BUILD** is *0x75*.
 
 **TIMER_BUILD**
 
 .. image:: /img/lab3_register_TIMER_BUILD.png
     :alt: register bit
 
-Once we know that an EM processor has a timer, we can get the timer's configuration information and control the timers by writing and reading the auxiliary register of that timer.
-For example, these are the related auxiliary registers for **Timer0**.
+Once know that |arc| has a timer, we can get the timer's configuration
+information and control the timers by writing and reading the auxiliary
+register of that timer.
+
+For example, these are the related auxiliary registers
+for **Timer0**.
 
 ==================== ========== ============ =======================
  Auxiliary Register   Name       Permission   Description
@@ -73,7 +82,7 @@ Steps
 Makefile configuration
 ----------------------
 
-There are two ways to configure the builtin timers.
+There are two ways to configure the internal timers.
 
 **First**, configure by compiling command, for example:
 

@@ -15,22 +15,23 @@ This handbook can be used as a Lab teaching material for ARC university courses 
 undergraduate or graduate level with majors in Commuter Science, Computer
 Engineering, Electrical Engineering, or for professional engineers.
 
-This handbook includes 12 labs (more labs are added in the future), which is classified into 3 levels:
+This handbook includes 12 labs (more labs are added in the future), which are classified into 3 levels:
 
 * :ref:`Level 1: ARC basic <level1_labs>`
 
-The labs in this level covers the basic topics about |arc|, for example, the
+The labs in this level cover the basic topics about |arc|, for example, the
 installation and usage of hardware and software tools, software or hardware
-development kits, hello world, interrupts, internal timers, and so on.
+development kits, first hello world example, interrupt hanlding and internal timers of |arc|, and so on.
 
 * :ref:`Level 2: ARC advance <level2_labs>`
 
-The labs in this level covers the advanced topics about |arc|, for example, Real-Time
-Operating System(RTOS), customized linkage, basic applicaitons, ARC DSP feature, and so on.
+The labs in this level cover the advanced topics about |arc|, for example,
+Real-Time Operating System(RTOS), customized linkage, compiler optimization,
+basic applicaitons, |arc| DSP feature, and so on.
 
 * :ref:`Level 3: ARC exploration <level3_labs>`
 
-The labs in this level covers some complex applications about |arc|, for example,
+The labs in this level cover some complex applications about |arc|, for example,
 Internet of Thinggs (IoT) application, embedded machine learning, and so on.
 
 Most of the labs are based on the `embARC Open Software Platform (OSP) <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp>`__ which is an open
@@ -38,8 +39,9 @@ software platform to facilitate the development of embedded systems based on
 |arc|.
 
 It is designed to provide a unified platform for |arc| users by defining
-consistent and simple software interfaces to the processor and peripherals together with ports of several well known FOSS embedded software stacks to
-|arc|.
+consistent and simple software interfaces to the processor and peripherals
+together with ports of several well known Free and open-source software (FOSS)
+embedded software stacks to |arc|.
 
 For more details about |embarc|, see
 `online docs <http://embarc.org/embarc_osp/>`__

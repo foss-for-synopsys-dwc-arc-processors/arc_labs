@@ -5,28 +5,27 @@ ARC features: interrupts
 
 Purpose
 ========
-- To introduce the interrupt module in the ARC embedded processor
-- To demonstrate how to use the interrupt and timer APIs already defined in the embARC processor in the program
+- To introduce the interrupt handling of |arc|
+- To know how to use the interrupt and timer APIs already defined in |embarc|
 
 Equipment
 ==========
 The following hardware and software tools are required:
 
 * PC host
-* ARC GNU toolchain/MetaWare Development Toolkit
-* ARC board (EM Starter Kit/IoT Development Kit)
-* |embarc| package
+* |arcgnu| / |mwdt|
+* ARC board (|emsk| / |iotdk|)
 * ``embarc_osp/arc_labs/labs/lab4_interrupt``
 
 Content
 =========
-This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab intends to introduce the interrupt of embARC through ``embarc_osp/arc_labs/labs/lab4_interrupt`` in the |embarc| package. The two routines combined could give you a preliminary understanding of the ARC interrupt resources.
+This lab and lab 3 are both introductions to the basic features of |arc|. Lab 3 introduces the internal timer. This lab intends to introduce the interrupt handling of |arc| through ``embarc_osp/arc_labs/labs/lab4_interrupt`` in the |embarc| package. The two routines combined could give you a preliminary understanding of the ARC interrupt resources.
 
 Principles
 ===========
 The ARC EM processor uses vector interrupts to handle interrupt events. When an interrupt occurs, the processor stops the execution of current program, and queries the corresponding interrupt vector in the predefined interrupt vector table based on the firing interrupt number. In other words, to find the entry address of the interrupt service routine(ISR). Then processor jumps to this address to execute the interrupt service routine. After ISR execution is completed, return to the interrupted program and complete the response of the interrupt event.
 
-In embARC OSP, we use the ``int_handler_install()`` function to bind our interrupt function name to the interrupt vector of the corresponding interrupt.
+In |embarc|, we use the ``int_handler_install()`` function to bind our interrupt function name to the interrupt vector of the corresponding interrupt.
 
 Steps
 ======
@@ -144,7 +143,7 @@ This code is divided into two parts: initialization and looping.
 
 In the initialization section, we configure the timer and timer interrupts.
 
-Unlike Lab 3, this code uses the embARC OSP API to program timer0. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.
+Unlike Lab 3, this code uses the |embarc| API to program timer0. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.
 
 **First**, in order to configure **Timer0** and its interrupts, we need to turn them off first. This work is done by the functions ``int_disable`` and ``timer_stop``.
 

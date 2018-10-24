@@ -182,7 +182,7 @@
 <li>To know what embARC OSP is</li>
 <li>To know how to run  examples in embARC OSP</li>
 <li>To know how to debug the examples in embARC OSP</li>
-<li>To know how to write application code in embARC OSP</li>
+<li>To know how to create applicatio in embARC OSP</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -190,27 +190,29 @@
 <p>The following hardware and software tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
-<li>ARC GNU toolchain/MetaWare Development Toolkit</li>
-<li>ARC board (EM Starter Kit/IoT Development Kit)</li>
+<li>GNU Toolchain for ARC Processors / MetaWare Development Toolkit</li>
+<li>ARC board (EM Starter Kit / IoT Development Kit)</li>
 <li>embARC OSP packages</li>
 </ul>
 <p>The detailed software requirements of embARC OSP can be found <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/getting_started/software_requirement.html">here</a></p>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>First, this document will give you a brief introduction of embARC OSP, and also show you how to get the package.
-Then, you will learn how to run the provided examples and debug.
-Finally, you will be presented the steps to create your own embARC applications.</p>
+<ul class="simple">
+<li>First, this lab will give you a brief introduction of embARC OSP, and also show you how to get the package.</li>
+<li>Then, you will learn how to run the provided examples and debug.</li>
+<li>Finally, you will be presented the steps to create your own embARC applications.</li>
+</ul>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>IoT OS/Platform</li>
 </ol>
-<p>In the field of Internet of Things (IoT), numberous devices are connected to form a complex network.
-Along with it, the programs within devices are becoming complex too.
-Many of them also require real-time responses.
-That urges a better way to manage tasks rather than running them in a main loop.
+<p>In the field of Internet of Things (IoT), numerous devices are connected to
+form a complex network. Along with it, the programs within devices are
+becoming complex too. Many of them also require real-time responses. That
+urges a better way to manage tasks rather than running them in a main loop.
 One solution for this is to use IoT OS.</p>
 <p>An IoT OS is an operating system that is designed to perform within the
 constraints that are particular to Internet of Things devices, including
@@ -220,7 +222,7 @@ data transfer over the internet and more other features.</p>
 <ol class="arabic simple" start="2">
 <li>embARC OSP</li>
 </ol>
-<p>The embARC Open Software Platform (OSP) is an open software platform to
+<p>The embARC OSP is an open software platform to
 facilitate the development of embedded systems based on DesignWare® ARC® processors.</p>
 <p>It is designed to provide a unified platform for DesignWare® ARC® processors users by defining
 consistent and simple software interfaces to the processor and peripherals,
@@ -243,8 +245,10 @@ DesignWare® ARC® processors.</p>
 <ul class="simple">
 <li>git</li>
 </ul>
-<p>The embARC OSP source code is hosted in a <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp">GitHub repository</a>.
-There are scripts and such in this repo that you’ll need to set up your development environment, and we’ll be using Git to get this repo. If you don’t have Git installed, see the beginning of the OS-specific instructions below for help.</p>
+<p>The embARC OSP source code is hosted in a <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp">GitHub repository</a>. There are scripts and
+such in this repo that you’ll need to set up your development environment, and
+we’ll be using Git to get this repo. If you don’t have Git installed, see the
+beginning of the OS-specific instructions below for help.</p>
 <p>We’ll begin by using Git to clone the repository anonymously.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> On Windows
 <span class="go">cd %userprofile%</span>
@@ -263,8 +267,9 @@ see <a class="reference external" href="https://github.com/foss-for-synopsys-dwc
 </div>
 <div class="section" id="run-the-examples">
 <h3>Run the examples<a class="headerlink" href="#run-the-examples" title="Permalink to this headline">¶</a></h3>
-<p>The command line interface is the default interface to use embARC OSP. After getting the embARC OSP
-package, you need to open a <strong>cmd</strong> console in Winodws / a <strong>terminal</strong> in Linux and cd to the root of embARC osp.</p>
+<p>The command line interface is the default interface to use embARC OSP. After
+getting the embARC OSP package, you need to open a <strong>cmd</strong> console in Winodws /
+a <strong>terminal</strong> in Linux and cd to the root of embARC osp.</p>
 <p>Here, take the <strong>blinky</strong> as an example.</p>
 <ol class="arabic simple">
 <li>go to the <strong>blinky</strong> example folder</li>
@@ -286,8 +291,8 @@ package, you need to open a <strong>cmd</strong> console in Winodws / a <strong>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">for EMSK, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
-You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board infomation will be sent by uart and shown on your uart terminal.</p>
+<p class="last">for EM Starter Kit, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
+You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board information will be sent by uart and shown on your uart terminal.</p>
 </div>
 <ol class="arabic simple" start="4">
 <li>Get the results</li>
@@ -326,10 +331,10 @@ You could press configure button (located above the letter “C” of the ARC lo
 <span class="go">make TOOLCHAIN=gnu BOARD=iotdk gui</span>
 </pre></div>
 </div>
-<p>For Metaware toolchain, the mdb (MetaWare debugger) is used and it’s a GUI interface.
-You can refer the Metaware toolchain use manual for details.</p>
-<p>For ARC GNU toolchain,  the command line based gdb is used. You need to have some basic knowledge of gdb
-debug.</p>
+<p>For MetaWare Development Toolkit, the mdb (MetaWare debugger) is used and has a more user friendly graphical interface.
+You can refer the MetaWare Development Toolkit use manual for details.</p>
+<p>For ARC GNU toolchain,  the command line based gdb is used. You need to have
+some basic knowledge of gdb debug.</p>
 </div>
 <div class="section" id="create-your-own-application">
 <h3>Create your own application<a class="headerlink" href="#create-your-own-application" title="Permalink to this headline">¶</a></h3>
@@ -412,8 +417,11 @@ application folder (-I).</li>
 </li>
 </ul>
 </div></blockquote>
+</li>
+</ol>
 <p>Then makefile for <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code> application will be like this</p>
 <blockquote>
+<div><blockquote>
 <div><div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">## embARC application makefile template ##</span>
 <span class="c">### You can copy this file to your application folder</span>
 <span class="c">### and rename it to makefile.</span>
@@ -511,15 +519,12 @@ application folder (-I).</li>
 </pre></div>
 </div>
 </div></blockquote>
-</li>
-</ol>
-<blockquote>
-<div><ol class="arabic simple" start="4">
+<ol class="arabic simple" start="4">
 <li>run</li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li>Set your EMSK 2.2 hardware configuration to ARC EM7D (no need to set for iotdk), and connect it to
+<li>Set your EM Starter Kit 2.2 hardware configuration to ARC EM7D (no need to set for IoT Development Kit), and connect it to
 your PC. Open <code class="docutils literal notranslate"><span class="pre">PuTTY</span></code> or <code class="docutils literal notranslate"><span class="pre">Tera-term</span></code>, and connect to the right COM
 port. Set the baudrate to <strong>115200 bps</strong>.</li>
 <li>Enter <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> in the command line to run this application.</li>
