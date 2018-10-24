@@ -186,7 +186,7 @@
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
-<p>The following hardware and software tools are required:</p>
+<p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
 <li>ARC GNU toolchain/MetaWare Development Toolkit</li>
@@ -196,21 +196,23 @@
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>Customize your program with <strong>compiler pragmas</strong>.
-At first, using “pragma code” to specify a new name of section in which the code of function reside.
-Then mapping this code section into specified memory location with linker.
-Finally, checking the location of this code section after build process.</p>
+<ul class="simple">
+<li>Customizing your program with <strong>compiler pragmas</strong>.</li>
+<li>Using “pragma code” to specify a new name of section in which the code of function reside.</li>
+<li>Mapping this code section into specified memory location with linker.</li>
+<li>Checking the location of this code section after build process.</li>
+</ul>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
-<p>By default, compiler-generated code is placed in the <em>.text</em> section. The default code section name can be overridden by using <em>code pragma</em>. After compilation, linker will automatically map all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a user specific linker command file.</p>
+<p>By default, compiler-generated code is placed in the <em>.text</em> section. The default code section name can be overridden by using the <em>code pragma</em>. After compile process, the linker automatically maps all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a linker command file.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="create-a-project-and-overriding-code-section-name">
 <h3>Create a project and overriding code section name<a class="headerlink" href="#create-a-project-and-overriding-code-section-name" title="Permalink to this headline">¶</a></h3>
-<p>Open MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Then import the main.c and link.cmd files under <em>embarc_osp/arc_labs/labs/lab8_linker</em> directory into the project.</p>
-<p>Open main.c file in MetaWare IDE, using “pragma code” to change the section in which function <code class="docutils literal notranslate"><span class="pre">modify</span></code> reside from <em>.text</em> to a new name “<em>modify_seg</em>”.</p>
+<p>Open MetaWare IDE, create an empty C project called lab_linker and select ARC EM series processor. Import the main.c and link.cmd files from the <em>embarc_osp/arc_labs/labs/lab8_linker</em> directory into the project.</p>
+<p>Open main.c file in MetaWare IDE, use “pragma code” to change the section in which function <code class="docutils literal notranslate"><span class="pre">modify</span></code> reside from <em>.text</em> to a new name “<em>modify_seg</em>”.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma Code (&quot;modify_seg&quot;)</span>
 <span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="p">,</span> <span class="n">temp</span><span class="p">;</span>
@@ -235,13 +237,13 @@ Finally, checking the location of this code section after build process.</p>
 <p>Section_name is a constant string expression that denotes the name of the section</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">About detailed usage of the compiler pragmas, please refer to the document “MetaWare C/C++ Programmer’s Guide for the ccac Compiler”</p>
+<p class="last">About detailed usage of the compiler pragmas, see MetaWare C/C++ Programmer’s Guide for the ccac Compiler</p>
 </div>
 </div>
 <div class="section" id="edit-the-linker-command-file">
 <h3>Edit the linker command file<a class="headerlink" href="#edit-the-linker-command-file" title="Permalink to this headline">¶</a></h3>
-<p>Open the link.cmd file, there are two parts, one is for memory blocks location, the other is for sections mapping.
-Add one new block named “<em>MyBlock</em>” in MEMORY, the start address is 0x00002000, and the size is 32KB. Then add one new GROUP in SECTIONS, and mapping section “<em>modify_seg</em>” into <em>MyBlock</em>.</p>
+<p>Open link.cmd file, there are two parts, one is for memory blocks location, the other is for sections mapping.
+Add one new block named “<em>MyBlock</em>” in MEMORY, the start address is 0x00002000, and the size is 32KB. Add one new GROUP in SECTIONS, and mapping section “<em>modify_seg</em>” into <em>MyBlock</em>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">MEMORY</span> <span class="p">{</span>
     <span class="c1">// Note: overlap of code and data spaces is not recommended since it makes</span>
     <span class="c1">//       Address validity checking impossible with the debugger and simulator</span>
@@ -264,22 +266,22 @@ Add one new block named “<em>MyBlock</em>” in MEMORY, the start address is 0
 </div>
 <div class="section" id="add-the-linker-command-file-into-the-project">
 <h3>Add the linker command file into the project<a class="headerlink" href="#add-the-linker-command-file-into-the-project" title="Permalink to this headline">¶</a></h3>
-<p>Right click the current project lab_linker and select Properties in the popup tab. Click C/C++ build <strong>&gt;&gt;</strong> settings <strong>&gt;&gt;</strong> Tool Settings to open the linker option settings page.</p>
+<p>Right click the current project lab_linker and select Properties. Click <strong>C/C++ build</strong> &gt; <strong>Settings</strong> &gt; <strong>Tool Settings</strong> to open the linker option settings page.</p>
 <p><img alt="figure1" src="../../_images/lab8_figure1.png" /></p>
-<p>In current page, select Command files to add linker.cmd file into this project.</p>
+<p>Select Command files to add linker.cmd file into this project.</p>
 </div>
 <div class="section" id="check-the-result">
 <h3>Check the result<a class="headerlink" href="#check-the-result" title="Permalink to this headline">¶</a></h3>
-<p>In linker option settings page, select Map listing to check Generate listing file(=.map)</p>
+<p>In the linker option settings window, select Map listing to check Generate listing file(=.map)</p>
 <p><img alt="figure2" src="../../_images/lab8_figure2.png" /></p>
-<p>Build the lab_linker project, then open the lab_linker.map file under Debug directory.</p>
+<p>Build the lab_linker project, then open the lab_linker.map file.</p>
 <p><img alt="figure3" src="../../_images/lab8_figure3.png" /></p>
-<p>In this file, search SECTIONS SUMMARY, then you can check the size and location of <em>modify_seg</em> section, it resides in <em>MyBlock</em>, same as you set in the linker cmd file.</p>
+<p>Search SECTIONS SUMMARY, then you can check the size and location of <em>modify_seg</em> section, it resides in <em>MyBlock</em>, similar to you setting in the linker command file.</p>
 </div>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
-<p>Try to check the memory mapping info of <em>modify_seg</em> section by using elfdump tool.</p>
+<p>Check the memory mapping info of <em>modify_seg</em> section by using elfdump tool.</p>
 </div>
 </div>
 

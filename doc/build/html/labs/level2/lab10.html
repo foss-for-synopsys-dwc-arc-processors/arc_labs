@@ -189,7 +189,7 @@
 </div>
 <div class="section" id="equipment">
 <h3>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h3>
-<p>The following hardware and software tools are required:</p>
+<p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
 <li>ARC GNU toolchain/MetaWare Development Toolkit</li>
@@ -200,16 +200,16 @@
 </div>
 <div class="section" id="content">
 <h3>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h3>
-<p>This experiment is based on the embARC_osp package extension to support the popular esp8266 WIFI module, use the AT command to set the esp8266 to the server mode, and then use the PC or mobile phone under the same LAN to access its IP address, based on the TCP protocol to achieve static page display of the client.</p>
-<p>Through this experiment, we will have a preliminary understanding of the use of the esp8266 WIFI module and the AT command.</p>
+<p>This experiment is based on the embARC_osp package extension to support the popular esp8266 WIFI module, use the AT command to set the esp8266 to the server mode, and then use the PC or mobile phone in the same LAN to access it’s IP address, based on the TCP protocol to achieve static page display of the client.</p>
+<p>Through this experiment, you get a preliminary understanding of the use of the esp8266 WIFI module and the AT command.</p>
 </div>
 <div class="section" id="principles">
 <h3>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h3>
 <p><strong>Esp8266</strong></p>
-<p>The ESP8266 is an ultra-low-power Wi-Fi chip with industry-leading package size and ultra-low power technology designed for mobile devices and IoT applications, connecting users’ physical devices to Wi-Fi wireless On the network, Internet or LAN communication is implemented to implement networking functions.</p>
-<p>The ESP8266 is available in a variety of encapsulation. The antenna supports the onboard PCB antenna, IPEX interface and stamp hole interface.</p>
-<p>ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handheld devices, industrial control and other fields.</p>
-<p>Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as its core(The Wi-Fi modules are shown below).</p>
+<p>The ESP8266 is an ultra-low-power Wi-Fi chip with industry-leading package size and ultra-low power technology designed for mobile devices and IoT applications, connecting users’ physical devices to Wi-Fi wireless on the network, Internet, or LAN communication is implemented to implement networking functions.</p>
+<p>The ESP8266 is available in a variety of encapsulation. The antenna supports the onboard PCB antenna, IPEX interface, and stamp hole interface.</p>
+<p>ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handheld devices, industrial control, and other fields.</p>
+<p>Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as it’s core(The Wi-Fi modules are described later).</p>
 <p><img alt="figure1" src="../../_images/lab10.2_figure1.png" /></p>
 <p><strong>Program structure</strong>
 (as shown bellow)</p>
@@ -336,7 +336,11 @@
 (as shown bellow)</p>
 <p><img alt="figure3" src="../../_images/lab10.2_figure3.png" /></p>
 <p><strong>Compile and download</strong></p>
-<p>Compile and download the program, after downloading successfully, you will see the relevant download information in the cmd window(shown bellow).</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Compile and download the program, after downloading successfully, you will see the relevant download information in the cmd window(shown bellow).
+=======
+Compile and download the program, after downloading successfully, the relevant download information is displayed in the command window(as shown in the following example).
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; pavan</p>
 <div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>0x00000004 in ?? ()
 Loading section .init, size 0x1b0 lma 0x10000000
 Loading section .vector, size 0x400 lma 0x10000400
@@ -348,7 +352,7 @@ Transfer rate: 602 KB/sec, 9497 bytes/write.
 Continuing.
 </pre></div>
 </div>
-<p>At this point, the serial port debugging tool will see the serial port feedback information, reflecting the process of the EMSK development board using the AT command to establish the http server(as shown bellow).</p>
+<p>At this point, the serial port debugging tool sees the serial port feedback information, reflecting the process of the EMSK development board using the AT command to establish the http server(as shown bellow).</p>
 <div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>embARC Build Time: Mar 21 2018, 17:53:27
 Compiler Version: ARC GNU, 7.1.1 20170710
 ============================ Init ============================
@@ -402,7 +406,7 @@ Send Finish
 </pre></div>
 </div>
 <p><strong>Access server</strong></p>
-<p>It can be seen from the serial port feedback information in above <em>Compile and download</em> that the EMSK development board has successfully connected to the target WIFI through esp8266, and is set to the server mode by using the AT command, and the IP address of the server is given.</p>
+<p>It can be seen from the serial port feedback information in above <em>Compile and download</em> that the EMSK development board has successfully connected to the target WI-FI through esp8266, and is set to the server mode by using the AT command, and the IP address of the server is given.</p>
 <p>At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page.</p>
 </div>
 <div class="section" id="exercises">

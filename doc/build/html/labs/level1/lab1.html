@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How to use ARC IDE &mdash; ARC Labs 2018.09 documentation</title>
+  <title>How to Use ARC IDE &mdash; ARC Labs 2018.09 documentation</title>
   
 
   
@@ -91,7 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../labs.html#overview">Overview</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../labs.html#id2">Labs</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../level1.html">Level 1 Labs</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">How to use ARC IDE</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to Use ARC IDE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab2.html">How to use embARC OSP</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab3.html">ARC features: timer and auxiliary registers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab4.html">ARC features: interrupts</a></li>
@@ -155,7 +155,7 @@
         
           <li><a href="../level1.html">Level 1 Labs</a> &raquo;</li>
         
-      <li>How to use ARC IDE</li>
+      <li>How to Use ARC IDE</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -175,20 +175,20 @@
            <div itemprop="articleBody">
             
   <div class="section" id="how-to-use-arc-ide">
-<span id="lab1"></span><h1>How to use ARC IDE<a class="headerlink" href="#how-to-use-arc-ide" title="Permalink to this headline">¶</a></h1>
+<span id="lab1"></span><h1>How to Use ARC IDE<a class="headerlink" href="#how-to-use-arc-ide" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="metaware-toolkit">
 <h2>MetaWare ToolKit<a class="headerlink" href="#metaware-toolkit" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="purpose">
 <h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>To learn the MetaWare Development Toolkit</li>
-<li>To get familiar with the basic useage of the MetaWare Development Toolkit</li>
+<li>To learn MetaWare Development Toolkit</li>
+<li>To get familiar with the basic usage of the MetaWare Development Toolkit</li>
 <li>To get familiar with the features and usage of the MetaWare Debugger (mdb)</li>
 </ul>
 </div>
 <div class="section" id="equipment">
 <h3>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h3>
-<p>The following hardware and software tools are required:</p>
+<p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
 <li>MetaWare Development Toolkit</li>
@@ -204,11 +204,11 @@
 <li>Configure compilation options to compile, and generate executable files.</li>
 <li>Start the debugger of MetaWare Development Toolkit and enter debug mode.</li>
 </ul>
-<p>From the different angles of C language and assembly language, use the functions of setting breakpoint, single step execution, full speed execution, etc., combined with observing PC address, register status, global variable status and Profiling performance to analyze the debug target program.</p>
+<p>From the different angles of C language and assembly language, use the functions of setting breakpoint, single step execution, full speed execution, and so on combined with observing PC address, register status, global variable status, and profiling performance to analyze the debug target program.</p>
 </div>
 <div class="section" id="principles">
 <h3>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h3>
-<p>Use the MetaWare Development Toolkit to create projects and load code. In the engineering unit, configure the compile option to compilation code, debug and analyze the compiled executable file.</p>
+<p>Use the MetaWare Development Toolkit to create projects and load code. In the engineering unit, configure the compile option to compile code, debug, and analyze the compiled executable file.</p>
 <p>Routine code CoreTest.c:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">/////////////////////////////////////////////////////////////////////////</span>
 <span class="c1">// This small demo program finds the data point that is the</span>
@@ -272,94 +272,79 @@
 <ol class="arabic simple">
 <li>Establishing a project</li>
 </ol>
-<p>Open the MetaWare Development Toolkit, create an empty project called <code class="docutils literal notranslate"><span class="pre">demo</span></code>, and select the ARC EM series processor, as shown below (figure 1).</p>
+<p>Open the MetaWare Development Toolkit, create an empty project called <code class="docutils literal notranslate"><span class="pre">demo</span></code>, and select the <strong>ARC EM Generic</strong> processor.</p>
 <p><img alt="figure1" src="../../_images/lab1_figure1.png" /></p>
 <ol class="arabic simple" start="2">
 <li>Import the code file CoreTest.c to the project <code class="docutils literal notranslate"><span class="pre">demo</span></code>.</li>
 </ol>
-<p>In the Project Explorer on the left side of the MetaWare Development Toolkit main interface, click
-the icon <img alt="icon1" src="../../_images/lab1_icon1.png" /> and select Import from the pop-up menu.</p>
-<p>At this point, a dialog called Import appears, select the File System item in the General tab, and then click next. As shown in the figure below, add the file directory where the source code CoreTest.c is located. The dialog box will automatically display the name of the directory and the file name of the file contained in the directory. Select the file to be added, CoreTest.c, and click Finish to complete the entire import process (figure 2).</p>
+<p>In the Project Explorer, click <img alt="icon1" src="../../_images/lab1_icon1.png" /> and select <strong>Import</strong>.</p>
+<p>Import dialog box is displayed. Select the File System item from the <strong>General</strong> tab, and click <strong>Next</strong>. As shown in the following figure, add the file directory where the source code CoreTest.c is located. The dialog box is automatically displays the name of the directory and the file name of the file contained in the directory. Select CoreTest.c and click <strong>Finish</strong> to complete the import process.</p>
 <p><img alt="figure2" src="../../_images/lab1_figure2.png" /></p>
 <p>After the import is complete, you can see the code file <code class="docutils literal notranslate"><span class="pre">CoreTest.c</span></code> you just added in the Project Explorer on the left side of the MetaWare Development Toolkit main interface.</p>
 <ol class="arabic simple" start="3">
 <li>Set compilation options</li>
 </ol>
-<p>Right click on the current project demo and select Properties in the popup
-tab. Click C/C++ Build, settings, Tool Settings to open the compile option
-settings page, as shown below (figure 3).</p>
+<p>Right-click in the current project demo and select Properties. Click <strong>C/C++ Build</strong> &gt; <strong>Settings</strong> &gt; <strong>Tool Settings</strong> to open the compile option settings window.</p>
 <p><img alt="figure3" src="../../_images/lab1_figure3.png" /></p>
-<p>In current pespective , select Optimization/Debugging to set the compiler
+<p>Select <strong>Optimization/Debugging</strong> to set the compiler
 optimization and debugging level. For example, set the optimization level to
 turn off optimization, and set the debugging level to load all debugging
 information.</p>
-<p>Select Processor/Extensions on the current interface to set the compiler
-options to match the target processor hardware properties, such as processor
-versions, extended instructions supporting shift, multiplication, floating-point
-operations, etc. and Timer0/1 extension in the core. Figure below indicates
-that this target processor supports normal extended instructions (figure 4).</p>
+<p>Select Processor/Extensions to set the compile options corresponding to the target processor hardware properties, such as the
+version of the processor, whether to support extended instructions such as
+shift, multiplication, floating-point operations, and so on whether to include
+Timer0/1. As shown in the following figure, this setting indicates that the target
+processor supports normal extended instructions.</p>
 <p><img alt="figure4" src="../../_images/lab1_figure4.png" /></p>
-<p>Finally select MetaWare ARC EM C/C++ and check the compiler/assembler and
-linker options in the All options column on the right. Then click OK to
-close the Properties dialog.</p>
+<p>Select <strong>MetaWare ARC EM C/C++</strong> and check the settings compile options and click <strong>OK</strong>.</p>
 <ol class="arabic simple" start="4">
 <li>Compile project demo</li>
 </ol>
 <p>Select Build Project from the Project drop-down menu in the MetaWare Development Toolkit main menu
-or click the icon <img alt="icon2" src="../../_images/lab1_icon2.png" /> . In the middle of the MetaWare Development Toolkit main interface, select
-the Console tab to view the logs during compilation. When the message
-‘Finished building target: demo.elf’ appears, the compilation is successful,
-and the compiled executable file demo.elf can be seen in the Project Explorer
-on the left side of the MetaWare Development Toolkit main interface, as shown in the following
-figure (figure 5).</p>
+or click the icon <img alt="icon2" src="../../_images/lab1_icon2.png" /> . In the MetaWare Development Toolkit main interface, select <strong>Console</strong>
+to view the logs during compilation. When the message ‘Finished building
+target: demo.elf’ is displayed, the compilation is successful, and the
+compiled executable file demo.elf can be seen in the Project Explorer.</p>
 <p><img alt="figure5" src="../../_images/lab1_figure5.png" /></p>
 <ol class="arabic simple" start="5">
 <li>Set debug options</li>
 </ol>
-<p>Select Debug Configurations from the Run drop-down menu in the MetaWare Development Toolkit main
-menu. Then double-click on C/C++ Application or click on New icon to navigate
-to a dialog similar to the one below (figure 6).</p>
+<p>Select Debug Configurations from the <strong>Run</strong> drop-down menu and double-click <strong>C/C++ Application</strong> or right-click <strong>New</strong></p>
 <p><img alt="figure6" src="../../_images/lab1_figure6.png" /></p>
-<p>Click Debugger tab on the right, generally no changes are needed, proceed to check the contents of the Debugger Options and click Debug to enter the debugging interface.</p>
+<p>Click <strong>Debugger</strong>. You do not need to make any changes. Check the contents of the Debugger Options, click <strong>Debug</strong> to enter the debugging interface.</p>
 <ol class="arabic simple" start="6">
 <li>Debug executable file demo.elf</li>
 </ol>
-<p>First, select the needed debug window from the drop-down menu of Debugger icon in the
-toolbar of the debugger pespective, such as source code window, assembly code
+<p>Select the required debug window from the main menu of the debug interface, such as source code window, assembly code
 window, register window, global variable window, breakpoint window, function
-window, etc., as shown in the following figure (figure 7).</p>
+window, and so on.</p>
 <p><img alt="figure7" src="../../_images/lab1_figure7.png" /></p>
-<p>In the C source code window, right-click the code line number on the left side of the
-window, select Toggle Breakpoint in the pop-up menu or double-click the line
+<p>In the C code window, right-click the code line number on the left side of the
+window, select <strong>Toggle Breakpoint</strong> or double-click the line
 number to set a breakpoint on the current line. In the assembly code window,
 double-click a line of code to set a breakpoint on the current line.</p>
-<p>Once the breakpoint is set, click the icon <img alt="icon3" src="../../_images/lab1_icon3.png" /> to run the program. After
-that, the program will run directly to the nearest breakpoint. At this point,
-you can observe the current program execution and the relevant status
-information of the processor through the various windows called in the
-previous step. If you want to know more about the details of program execution
+<p>After the breakpoint is set, click <img alt="icon3" src="../../_images/lab1_icon3.png" /> to run the program. The program runs directly to the nearest breakpoint. You can observe the current program execution and the relevant status
+information of the processor through the various windows as described in previous step. If you want to know more about the details of program execution
 and the instruction behavior of the processor, you can use the following three
 execution commands <img alt="icon4" src="../../_images/lab1_icon4.png" /> to perform single-step debugging. The icon <img alt="icon5" src="../../_images/lab1_icon5.png" />
 can choose to step through a C language statement or an assembly instruction
-to match the status information of each window. It’s very convenient for
-program debugging. If you want to end the current debugging process, click the
-icon <img alt="icon6" src="../../_images/lab1_icon6.png" /> . And if you want to return to the main MetaWare Development Toolkit page, click C/C++
-in the upper right corner icon <img alt="icon7" src="../../_images/lab1_icon7.png" /> .</p>
+to match the status information of each window. It can be very convenient for
+program debugging. If you want to end the current debugging process, click <img alt="icon6" src="../../_images/lab1_icon6.png" /> . If you want to return to the main MetaWare Development Toolkit page, click C/C++
+<img alt="icon7" src="../../_images/lab1_icon7.png" />.</p>
 <ol class="arabic simple" start="7">
 <li>Code performance analysis using the debugger</li>
 </ol>
-<p>Based on the previous project demo, open the Compile Options dialog in step 3
-and set the Optimization Level to -O0 in the Optimization/Debugging column.
-Then click <img alt="icon8" src="../../_images/lab1_icon8.png" /> to recompile the project, then click <img alt="icon9" src="../../_images/lab1_icon9.png" /> to enter the
-debugging interface. Click Debugger in the main menu of the debugging
-interface, select Disassembly in the pop-up drop-down menu, open the
+<p>Based on the previous project demo, open the <strong>Compile Options</strong> dialog box in step 3
+and set the Optimization Level to -O0 in the <strong>Optimization/Debugging</strong> column.
+Then click <img alt="icon8" src="../../_images/lab1_icon8.png" /> to recompile the project, and click <img alt="icon9" src="../../_images/lab1_icon9.png" /> to enter the
+debugging interface. Click <strong>Debugger</strong> in the main menu of the debugging
+interface, select <strong>Disassembly</strong> from the menu drop-down menu, open the
 disassembly code window, and you can see that the program is paused at the
-entrance of the main() function. In the same way, select Profiling in the
-Debugger drop-down menu, open the performance analysis window and click the
-icon <img alt="icon10" src="../../_images/lab1_icon10.png" /> in the window, as shown below (figure 8).</p>
+entrance of the main() function. In the same way, select <strong>Profiling</strong> in the
+<strong>Debugger</strong> drop-down menu, open the performance analysis window and click <img alt="icon10" src="../../_images/lab1_icon10.png" />.</p>
 <p><img alt="figure8" src="../../_images/lab1_figure8.png" /></p>
-<p>The Profiling window displays the number of executed
-instructions of the program with each function in current debug window.
+<p>The <strong>Profiling</strong> window displays the corresponding of the number of executed
+instructions of the program with each function under the current debug window.
 From left to right, the total number of executions of function instructions in
 the total number of executions of the entire program instruction, the total
 number of executions of the accumulated instructions, the total number of
@@ -368,33 +353,32 @@ number of including functions, the address of the function, and the name of
 the function. Through the relationship between the instruction information and
 the function in the Profiling window, it is very convenient to analyze the
 program efficiency and find the shortcoming of the program performance.</p>
-<p>Let’s take this project as an example to continue our introducion for the use of the
-Profiling window. At this point, the program is paused at the entrance of the
-main() function and the Profiling window opens as shown above. The main()
-function is the primary object of performance analysis optimization. At this
-time, the content displayed in the Profiling window is actually some function
+<p>Use this project as an example to continue to introduce the use of the
+Profiling window. The program is paused at the entrance of the
+main() function and the Profiling window opens. The main()
+function is the main object of performance analysis optimization. The content displayed in the Profiling window is some function
 information initialized by the processor before the main() function is
-executed. Click the icon <img alt="icon11" src="../../_images/lab1_icon11.png" /> in the Profiling window to clear the current
-information. If you click the icon <img alt="icon12" src="../../_images/lab1_icon12.png" /> again, nothing will be displayed,
-And it indicate that the cleaning is successful. Then, set a breakpoint at the
+executed. Click <img alt="icon11" src="../../_images/lab1_icon11.png" /> in the Profiling window to clear the current
+information. If you click <img alt="icon12" src="../../_images/lab1_icon12.png" />, nothing is displayed,
+and it indicates that the cleaning is successful. Set a breakpoint at the
 last statement of the main() function (either C statement or assembly
-statement), and click the icon <img alt="icon13" src="../../_images/lab1_icon13.png" /> in the toolbar above the debug
-interface to let the program execute to the breakpoint. Next, click on the
-icon <img alt="icon14" src="../../_images/lab1_icon14.png" /> in the Profiling window again, and only the information related
-to the main() function will be displayed, as shown below. Therefore, flexible
+statement), and click <img alt="icon13" src="../../_images/lab1_icon13.png" /> in the toolbar above the debug
+interface to let the program execute to the breakpoint. Click <img alt="icon14" src="../../_images/lab1_icon14.png" /> in the Profiling window, and only the information related
+to the main() function is displayed. Therefore, flexible
 setting of breakpoints, combined with the clear function, can perform
 performance analysis on the concerned blocks (figure 9).</p>
 <p><img alt="figure9" src="../../_images/lab1_figure9.png" /></p>
 <p>It can be seen that the multiplication library function _mw_mpy_32x32y32 in
 the main() function is called 20 times, and a total of 2064 instructions are
 executed, while the main() function itself executes only 326 instructions, and
-the memcpy function executes 86 instructions.It can be seen that the
+the memcpy function executes 86 instructions. It can be seen that the
 implementation of the multiplication function of the program consumes a large
-number of instructions, and a large number of instructions means that the
-processor will spend  many computation cycles to perform multiplication
-operations. Therefore, multiplication is the hotspot for the example program.
-So to get better performance, first step to consider is how you can use
-fewer instructions and implement multiplication more efficiently.</p>
+number of instructions, and the large number of instructions means that the
+processor spends a large number of computation cycles to perform
+multiplication operations. Therefore, multiplication is the shortcoming of
+current program performance. If you want to improve the performance of the
+program, you should consider how you can use fewer instructions and
+implement multiplication more efficiently.</p>
 </div>
 <div class="section" id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
@@ -413,7 +397,7 @@ fewer instructions and implement multiplication more efficiently.</p>
 </div>
 <div class="section" id="id2">
 <h3>Equipment<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>The following hardware and software tools are required:</p>
+<p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
 <li>GNU Toolchain for ARC Processors</li>
@@ -440,106 +424,98 @@ fewer instructions and implement multiplication more efficiently.</p>
 <ol class="arabic simple">
 <li>Establishing a project</li>
 </ol>
-<p>Open the GNU Toolchain for ARC Processors, create an empty project called core_test, and select the ARC EM series processor, as shown below (figure 10).</p>
+<p>Open the GNU Toolchain for ARC Processors, create an empty project called core_test, and select <strong>ARC EM series processor</strong>.</p>
 <p><img alt="figure10" src="../../_images/lab1_figure10.png" /></p>
 <ol class="arabic simple" start="2">
 <li>Import the code file CoreTest.c to the project demo</li>
 </ol>
-<p>Right click on the icon <img alt="icon15" src="../../_images/lab1_icon15.png" /> in the Project Explorer on the left side of
-the GNU Toolchain for ARC Processors main interface, then select Import from the popup menu.</p>
-<p>At this point, a dialog window called Import appears, select the File System item in
-the General tab, and then click next. As shown in the figure below (figure 11),
+<p>Right-click <img alt="icon15" src="../../_images/lab1_icon15.png" />, and then select <strong>Import</strong>.</p>
+<p>Import dialog box is displayed. Select <strong>File System</strong> from the
+the <strong>General</strong> tab, and click <strong>Next</strong>. As shown in the following figure,
 add the file directory where the source code CoreTest.c is located. The dialog
-box will automatically display the name of the directory and the file name of
+box automatically displays the name of the directory and the file name of
 the file contained in the directory. Select the file to be added, CoreTest.c,
 and click Finish to complete the entire import process.</p>
 <p><img alt="figure11" src="../../_images/lab1_figure11.png" /></p>
 <p>After the import is complete, you can see the code file CoreTest.c that you
-just added in the Project Explorer on the left side of the GNU Toolchain for ARC Processors main
-interface.</p>
+just added in the Project Explorer.</p>
 <ol class="arabic simple" start="3">
 <li>Set compilation options</li>
 </ol>
-<p>Right click on the current project core_test and select Properties in the popup tab. Click C/C++ Build, settings, Tool Settings to open the compile option settings page, as shown below (figure 12).</p>
+<p>Right-click in the current project core_test and select <strong>Properties</strong>. Click <strong>C/C++ Build</strong> &gt; <strong>Settings</strong> &gt; <strong>Tool Settings</strong> to view the compile option settings page.</p>
 <p><img alt="figure12" src="../../_images/lab1_figure12.png" /></p>
-<p>In the current interface, select Debugging to set the compiler optimization
+<p>Select <strong>Debugging</strong> to set the compiler optimization
 and debugging level. For example, set the optimization level to off
 optimization, and the debugging level is to load all debugging information.</p>
 <p>Select Processor in the current interface to set the compile options
 corresponding to the target processor hardware attributes, such as the version
 of the processor, whether to support extended instructions such as shift,
-multiplication, floating-point operations, etc., whether to include Timer0/1.</p>
-<p>In step 1, we have already built the project using the engineering template of
-EMSK, so the corresponding necessary options have been set by default. If
+multiplication, floating-point operations, and so on whether to include Timer0/1.</p>
+<p>In step 1, you already built the project using the engineering template of
+EMSK, the corresponding necessary options have been set by default. If
 there is no special requirement, check the setting compile options in the All
-options column on the right. Then click OK to close the Properties dialog.</p>
+options column and click <strong>OK</strong> to close the Properties dialog box.</p>
 <ol class="arabic simple" start="4">
 <li>Compile the project core_test**</li>
 </ol>
-<p>Select Build Project from the Project drop-down menu in the GNU Toolchain for ARC Processors main menu
-or click the icon <img alt="icon16" src="../../_images/lab1_icon16.png" /> . In the middle of the GNU Toolchain for ARC Processors main interface,
-select the Console tab to view the logs during the compilation process. When
-the message ‘Finished building target: Core_test.elf’ appears, the compilation
+<p>Select <strong>Build Project</strong> from the Project drop-down menu in the GNU Toolchain for ARC Processors main menu
+or click <img alt="icon16" src="../../_images/lab1_icon16.png" />. In the middle of the GNU Toolchain for ARC Processors main interface,
+select Console to view the logs during the compilation process. When
+the message ‘Finished building target: Core_test.elf’ is displayed, the compilation
 is successful, and the compiled executable file Core_test.elf can be seen in
-the Project Explorer on the left side of the main interface of the GNU Toolchain for ARC Processors, as
-shown in the following figure (figure 13).</p>
+the <strong>Project Explorer</strong> as shown in the following figure.</p>
 <p><img alt="figure13" src="../../_images/lab1_figure13.png" /></p>
 <ol class="arabic simple" start="5">
 <li>Set debugger options</li>
 </ol>
-<p>Select Debug Configurations from the Run drop-down menu in the toolbar. Then
-double-click on C/C++ Application or click on New to get a dialog
-similar to the one below (figure 14).</p>
+<p>Select Debug Configurations from the Run drop-down menu in the main menu. Then
+double-click in C/C++ Application or right-click <strong>New</strong> to get a dialog box
+similar to the one shown in the following figure.</p>
 <p><img alt="figure14" src="../../_images/lab1_figure14.png" /></p>
-<p>In the figure above, please check if the information in Main tab is correct.
-Since we use nSIM simulator to simulate EMSK, we need to modify the settings
-in tabs of Debugger, Common, and Terminal (this is because nSIM
+<p>Check if the information in Main is correct. As you use nSIM simulator to simulate EMSK development board, you need to
+modify the settings of Debugger, Common, and Terminal (this is because nSIM
 cannot be called directly in GNU IDE. Still need GDB Server for indirect
 calls). The specific settings are as follows:</p>
 <ul class="simple">
 <li>Set Debugger-&gt;Gdbsrever Settings</li>
 </ul>
 <p><img alt="figure15" src="../../_images/lab1_figure15.png" /></p>
-<p>As shown in the above figure (figure 15), ARC GDB Server should select nSIM. At this time, the port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF boot file is under <em>nSIM/nSIM/etc/tcf/templates</em> (the default installation path). If you have downloaded the Metaware IDE, its own nSIM path is <em>C:/ARC/nSIM/nSIM/etc/tcf/templates</em>, and you can select a TCF file in this folder (depending on the version of the board you are simulating and the kernel model), as shown above.</p>
+<p>The ARC GDB Server should select nSIM. The port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF start file is under <em>nSIM/nSIM/etc/tcf/templates</em> (the default installation path). If you have downloaded the MetaWare IDE, the default nSIM path is <em>C:/ARC/nSIM/nSIM/etc/tcf/templates</em>, and you can select a TCF file from this folder (depending on the version of the board you are simulating and the kernel model), as shown earlier.</p>
 <ul class="simple">
-<li>Pay attention to Debug in Common (figure 16)</li>
+<li>Pay attention to Debug in Common</li>
 </ul>
 <p><img alt="figure16" src="../../_images/lab1_figure16.png" /></p>
 <ul class="simple">
 <li>Terminal settings</li>
 </ul>
-<p>If you are using the EMSK, the terminal will automatically select the correct port number, and we are using the emulator without a port, so uncheck it, as show below (figure 17).</p>
+<p>If you are using the EM Starter Kit, the terminal automatically selects the correct port number, and you are using the emulator without a port, uncheck it, as show in the following figure.</p>
 <p><img alt="figure17" src="../../_images/lab1_figure17.png" /></p>
-<p>After all settings are complete, click Debug to enter the debugging pespective.</p>
+<p>After all settings are completed, click <strong>Debug</strong> to enter the debugging interface.</p>
 <ol class="arabic simple" start="6">
 <li>Debug executable file core_test.elf</li>
 </ol>
-<p>First, select the needed debug window in the pull-down menu Debugger in the
-toolbar in this debugger view, such as source code window, assembly code
+<p>Select the required debug window from the Debugger menu in the
+main menu of the debug interface, such as source code window, assembly code
 window, register window, global variable window, breakpoint window, function
-window, etc., as shown in the following figure (figure 18).</p>
+window, and so on as shown in the following figure.</p>
 <p><img alt="figure18" src="../../_images/lab1_figure18.png" /></p>
-<p>In C source code window, right-click the code line number on the left side of the
-window, select Toggle Breakpoint in the pop-up menu or double-click the line
+<p>In the C code window, right-click the code line number on the left side of the
+window, select <strong>Toggle Breakpoint</strong> or double-click the line
 number to set a breakpoint on the current line. In the assembly code window,
 double-click a line of code to set a breakpoint on the current line.</p>
-<p>Once the breakpoint is set, click the icon <img alt="icon17" src="../../_images/lab1_icon17.png" /> to run the program. After
-that, the program will run directly to the nearest breakpoint. At this point,
-you can observe the current program execution and the relevant status
-information of the processor through the various windows called in the
-previous step. If you want to know more about the details of program execution
+<p>After the breakpoint is set, click <img alt="icon3" src="../../_images/lab1_icon3.png" /> to run the program. The program runs directly to the nearest breakpoint. You can observe the current program execution and the relevant status
+information of the processor through the various windows as described in previous step. If you want to know more about the details of program execution
 and the instruction behavior of the processor, you can use the following three
-execution commands <img alt="icon18" src="../../_images/lab1_icon18.png" /> to perform single-step debugging. The icon
-<img alt="icon19" src="../../_images/lab1_icon19.png" /> can choose to step through a C language statement or an assembly
-instruction to match the status information of each window and it is very
-convenient for program debugging. If you want to end the current debugging
-process, click the icon <img alt="icon20" src="../../_images/lab1_icon20.png" /> . If you want to return to the IDE main page,
-click C/C++ in the upper right corner icon <img alt="icon21" src="../../_images/lab1_icon21.png" /> .</p>
+execution commands <img alt="icon4" src="../../_images/lab1_icon4.png" /> to perform single-step debugging. The icon <img alt="icon5" src="../../_images/lab1_icon5.png" />
+can choose to step through a C language statement or an assembly instruction
+to match the status information of each window. It can be very convenient for
+program debugging. If you want to end the current debugging process, click <img alt="icon6" src="../../_images/lab1_icon6.png" /> . If you want to return to the main MetaWare Development Toolkit page, click C/C++
+<img alt="icon7" src="../../_images/lab1_icon7.png" />.</p>
 <ol class="arabic simple" start="7">
 <li>Code performance analysis using the debugger</li>
 </ol>
-<p>Same as the code performance analysis method of MetaWare Development Toolkit. For details, please refer to the first part of Lab 1.</p>
-<p>For the use of these two IDEs, you can refer to the Help documentation in the respective IDE, or you can view the on-line documentation provided by Synopsys.</p>
+<p>Same as the code performance analysis method of MetaWare Development Toolkit. For details, see first part of Lab 1.</p>
+<p>For the use of these two IDEs, you can refer to the Help documentation in the respective IDE, or you can view the online documentation provided by Synopsys.</p>
 </div>
 </div>
 </div>

@@ -194,7 +194,7 @@
 <div class="section" id="required-software">
 <h3>Required Software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Metaware or ARC GNU Toolset</li>
+<li>MetaWare or ARC GNU Toolset</li>
 <li>Serial port terminal (e.g. putty, tera-term or minicom)</li>
 </ul>
 </div>
@@ -294,7 +294,7 @@ node. Create an AWS IoT policy. Then attach your smart home node and policy to t
 certificate.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">for more details <a class="reference external" href="http://embarc.org/pdf/embARC_appnote_how_to_use_smart_home_iot.pdf">[Using a Smart Home Iot Application with EMSK]</a></p>
+<p class="last">for more details, see <a class="reference external" href="http://embarc.org/pdf/embARC_appnote_how_to_use_smart_home_iot.pdf">[Using a Smart Home Iot Application with EMSK]</a></p>
 </div>
 <img alt="smarthome system" src="../../_images/lab11_steps_3.png" />
 </li>
@@ -308,7 +308,7 @@ Insert the SD card to your PC, and copy the certificate folder cert to the SD Ca
 obtained from <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome">[embARC/example/freertos/iot/aws/smarthome_demo]</a>. The dashboard can be loaded automatically</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_5.png" />
 </li>
-<li><p class="first">Click “ADD” to go to DATASOURCE page and fill up the forms.</p>
+<li><p class="first">Click “ADD” to go to DATASOURCE page and fill the forms.</p>
 </li>
 </ol>
 <blockquote>
@@ -333,18 +333,18 @@ obtained from <a class="reference external" href="https://github.com/foss-for-sy
 download user security credentials, Access Key ID and Secret Access Key. Copy Access
 Key ID to ACCESS KEY and Secret Access Key to SECRET KEY.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_9.png" />
-<p>Go to User page and click “AWSIoTUser”. Click “Attach Policy” to attach “AWSIoTDataAccess” to “AWSIoTUser”.</p>
+<p>Go to user page and click “AWSIoTUser”. Click “Attach Policy” to attach “AWSIoTDataAccess” to “AWSIoTUser”.</p>
 </li>
 <li><p class="first">THINGS: AWS IoT thing name “SmartHome”.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_10.png" />
 </li>
-<li><p class="first">Click “Save” to finish the setting.</p>
+<li><p class="first">Click <strong>Save</strong> to finish the setting.</p>
 </li>
 </ol>
 </div></blockquote>
 </div>
 <div class="section" id="building-and-running-aws-iot-smart-home-example">
-<h3>Building and running AWS IoT smart home example<a class="headerlink" href="#building-and-running-aws-iot-smart-home-example" title="Permalink to this headline">¶</a></h3>
+<h3>Building and Running AWS IoT Smart Home Example<a class="headerlink" href="#building-and-running-aws-iot-smart-home-example" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li>The AWS IoT thing SDK for C has been ported to embARC. Check the above steps in
 order for your IoT application to work smoothly. Go to <em>embARC/example/freertos/iot/aws/smarthome_demo</em>.
@@ -360,14 +360,14 @@ from the REST API endpoint in AWS IoT console. For example,
 <li><p class="first">Use USB cable to connect the EMSK board. Set the baud rate of the terminal emulator to 115200.</p>
 </li>
 <li><p class="first">Insert the SD Card into the EMSK board SD Card slot. Run the AWS IoT application using JTAG.
-Go to <em>embARC/example/freertos/iot/aws/smarthome_demo</em> in command line, input the compile command as follow:</p>
+Go to <em>embARC/example/freertos/iot/aws/smarthome_demo</em> in command-line, input the compile command as follow:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make TOOLCHAIN=gnu BD_VER=22 CUR_CORE=arcem7d run</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">FreeRTOS-based runtime environment can be loaded automatically. Wait for WiFi initialization and
 connection establishment (30 seconds or less) until the “WiFi connected” message is shown in the
-terminal emulator. “Network is ok” will be shown after the certificate files cert.crt, privateKey.pem
+terminal emulator. “Network is ok” is shown after the certificate files cert.crt, privateKey.pem,
 and rootCA.crt are validated. The information in “reported”: {} is the state of the EMSK-based
 smart home node. “Updated Accepted !!” means the connection works between the smart home node and AWS IoT cloud.</p>
 </li>

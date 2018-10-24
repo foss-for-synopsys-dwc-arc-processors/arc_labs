@@ -13,38 +13,33 @@ Purpose
 Equipment
 =========
 
-The following hardware and software tools are required:
+The following hardware and tools are required:
 
 * PC host
 * |arcgnu| / |mwdt|
 * ARC board (|emsk| / |iotdk|)
 * |embarc| packages
 
-The detailed software requirements of |embarc| can be found `here <http://embarc.org/embar
+For the detailed tool requirements of |embarc|, see`here <http://embarc.org/embar
 c_osp/doc/build/html/getting_started/software_requirement.html>`__
 
 Content
 ========
 
-* First, this lab will give you a brief introduction of |embarc|, and also show you how to get the package.
-* Then, you will learn how to run the provided examples and debug.
-* Finally, you will be presented the steps to create your own embARC applications.
-
+A brief introduction of |embarc|, downloading, running, and debugging the provided examples is explained. You
+can try to create your own embARC applications.
 
 Principles
 ==========
 
 1. IoT OS/Platform
 
-In the field of Internet of Things (IoT), numerous devices are connected to
-form a complex network. Along with it, the programs within devices are
-becoming complex too. Many of them also require real-time responses. That
-urges a better way to manage tasks rather than running them in a main loop.
-One solution for this is to use IoT OS.
+As more and more devices are connected and become more complex, the tools
+running in them are becoming more and more complex.
 
 An IoT OS is an operating system that is designed to perform within the
 constraints that are particular to Internet of Things devices, including
-restrictions on memory, size, power and processing capacity. IoT operating
+restrictions on memory, size, power, and processing capacity. IoT operating
 systems are a type of embedded OS but by definition are designed to enable
 data transfer over the internet and more other features.
 
@@ -58,7 +53,7 @@ consistent and simple software interfaces to the processor and peripherals,
 together with ports of several well known FOSS embedded software stacks to
 |arc|.
 
-For more details, please refer |embarc| `on-line documentation <http://embar
+For more details, see |embarc| `online documentation <http://embar
 c.org/embarc_osp/doc/build/html/introduction/introduction.html>`__
 
 
@@ -77,13 +72,10 @@ Get |embarc|
 
 * git
 
-The |embarc| source code is hosted in a `GitHub repository <https://github.com
-/foss-for-synopsys-dwc-arc-processors/embarc_osp>`__. There are scripts and
-such in this repo that you'll need to set up your development environment, and
-we'll be using Git to get this repo. If you don't have Git installed, see the
-beginning of the OS-specific instructions below for help.
+The |embarc| source code is hosted in a `GitHub repository <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp>`__.
+The repository consists of scripts and other things to you need to setup your development environment, and use Git to get this repo. If you do not have Git installed, see the beginning of the OS-specific instructions for help.
 
-We'll begin by using Git to clone the repository anonymously.
+Using Git to clone the repository anonymously.
 
 .. code-block:: console
 
@@ -94,7 +86,7 @@ We'll begin by using Git to clone the repository anonymously.
 
    git clone https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp.git embarc_osp
 
-Then you will have checked out a copy of the source code to your local machine.
+You have checked out a copy of the source code to your local machine.
 
 * http download
 
@@ -104,21 +96,20 @@ see `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embar
 Run the examples
 ****************
 
-The command line interface is the default interface to use |embarc|. After
-getting the |embarc| package, you need to open a **cmd** console in Winodws /
-a **terminal** in Linux and cd to the root of embARC osp.
+The command-line interface is the default interface to use |embarc|. After getting the |embarc|
+package, you need to open a **cmd** console in Windows / a **terminal** in Linux and change directory to the root of embARC osp.
 
-Here, take the **blinky** as an example.
+Use the **blinky** as an example.
 
-1. go to the **blinky** example folder
+1. Go to the **blinky** example folder
 
 .. code-block:: console
 
    cd example\baremetal\blinky
 
-2. connect your board to PC host, and open the UART terminal with putty/tera term/minicom
+2. Connect your board to PC host, and open the UART terminal with putty/tera term/minicom
 
-3. build and run it with command showing below, here ARC GNU toolchain is selected
+3. Build and run it with command, here ARC GNU toolchain is selected
 
 .. code-block:: console
 
@@ -129,15 +120,14 @@ Here, take the **blinky** as an example.
    # For IoTDK
    make TOOLCHAIN=gnu BOARD=iotdk run
 
-.. note:: for |emsk|, please make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
-  You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board information will be sent by uart and shown on your uart terminal.
-
+.. Note:: for |emsk|, make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
+  You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board infomation is sent by UART and displayed on your UART terminal.
 
 4. Get the results
 
-* For EMSK, you can see the on-board leds start to blink when the download is successful.
+* For EMSK, you can see the on-board LEDs start to blink when the download is successful.
 
-* For IoTDK, as it doesn't have usable leds except some status leds, you will the output log from UART instead.
+* For IoTDK, as it does not have usable LEDs except some status leds, tje outoput log is displayed from the UART.
 
 .. code-block:: console
 
@@ -161,7 +151,7 @@ Here, take the **blinky** as an example.
 Debug the examples
 ******************
 
-Still take the **blinky** as example, to debug it, you need to run the following commands:
+Use the **blinky** as example, to debug it, you need to run the following commands:
 
 .. code-block:: console
 
@@ -172,18 +162,17 @@ Still take the **blinky** as example, to debug it, you need to run the following
    # For IoTDK
    make TOOLCHAIN=gnu BOARD=iotdk gui
 
-For |mwdt|, the mdb (MetaWare debugger) is used and has a more user friendly graphical interface.
-You can refer the |mwdt| use manual for details.
+For |mwdt|, the mdb (MetaWare debugger) is used and it is a GUI interface.
+You can refer the MetaWare toolchain user manual for details.
 
-For ARC GNU toolchain,  the command line based gdb is used. You need to have
-some basic knowledge of gdb debug.
+For |arcgnu|, the command-line based gdb is used. You need to have some basic knowledge of gdb
+debug.
 
 
 Create your own application
 ***************************
 
-Here, it's your turn to create your own application in |embarc|, taking a
-well-known simple ``hello world`` as an example.
+Create your own application in |embarc|.
 
 * Goals
 
@@ -192,7 +181,7 @@ well-known simple ``hello world`` as an example.
     * Print "Hello world from embARC" through UART at 115200 bps
     * Use GNU toolchain to running and debugging in the command line
 
-1. Creat a folder named ``hello_world`` under ``embarc/example/baremetal``.
+1. Create a folder named ``hello_world`` under ``embarc/example/baremetal``.
 
 2. Copy the makefile template ``example/example.makefile`` and ``main.c.tmpl``
    into ``hello_world`` folder and rename ``example.makefile`` to ``makefile``,
@@ -203,16 +192,16 @@ well-known simple ``hello world`` as an example.
     * Change the application name: change the value of ``APPL`` to ``helloworld``.
 
     * Change the board name: change the value of ``BOARD`` to ``emsk`` / ``iotdk``. This
-      option can also be given in cmd line. If not specified, the default value
-      will be ``emsk``
+      option can also be given in command-line. If not specified, the default value
+     is ``emsk``
 
-    * Change the board version: change the value of ``BD_VER`` to ``22`` (for emsk) or ``10`` (for iotdk).This
-      option can also be given in cmd line. If not specified, the default value
-      will be ``22`` for board ``emsk``.
+    * Change the board version: change the value of ``BD_VER`` to ``22`` (for emsk) or ``10`` (for iotdk). This
+      option can also be given in command-line. If not specified, the default value
+      is ``22`` for board ``emsk``.
 
     * Change the core configuration: change the value of **CUR_CORE** to
-      **arcem7d** This option can also be given in cmd line. If not specified,
-      the default value will ``arcem7d`` for board ``emsk`` and version ``22``.
+      **arcem7d** This option can also be given in command-line. If not specified,
+      the default is ``arcem7d`` for board ``emsk`` and version ``22``.
       For iotdk, **CUR_CORE** can be bypassed as iotdk only has one core configuration.
 
     * Change the |embarc| root: change the value of ``EMBARC_ROOT`` to
@@ -349,13 +338,13 @@ Then makefile for ``hello world`` application will be like this
             include $(EMBARC_ROOT)/options/options.mk
 
 
- 4.  run
+ 4.  Run
 
-    * Set your |emsk| 2.2 hardware configuration to ARC EM7D (no need to set for |iotdk|), and connect it to
+    * Set your |emsk| 2.2 hardware configuration to ARC EM7D (no need to set to |iotdk|), and connect it to
       your PC. Open ``PuTTY`` or ``Tera-term``, and connect to the right COM
       port. Set the baudrate to **115200 bps**.
 
-    * Enter ``make run`` in the command line to run this application.
+    * Enter ``make run`` in the command-line to run this application.
 
 Exercises
 =========

@@ -91,7 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../labs.html#overview">Overview</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../labs.html#id2">Labs</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../level1.html">Level 1 Labs</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="lab1.html">How to use ARC IDE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab1.html">How to Use ARC IDE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab2.html">How to use embARC OSP</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab3.html">ARC features: timer and auxiliary registers</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">ARC features: interrupts</a></li>
@@ -185,7 +185,7 @@
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
-<p>The following hardware and software tools are required:</p>
+<p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
 <li>GNU Toolchain for ARC Processors / MetaWare Development Toolkit</li>
@@ -195,20 +195,20 @@
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>This lab and lab 3 are both introductions to the basic features of DesignWare® ARC® processors. Lab 3 introduces the internal timer. This lab intends to introduce the interrupt handling of DesignWare® ARC® processors through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt</span></code> in the embARC OSP package. The two routines combined could give you a preliminary understanding of the ARC interrupt resources.</p>
+<p>This lab and lab 3 are both introductions to the internal characteristics of the ARC processor. Lab 3 introduces the timer. This lab aims to introduce the interrupt of embARC through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt</span></code> in the embARC OSP package. The two routines gives you a preliminary understanding of the ARC interrupt resources.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
-<p>The ARC EM processor uses vector interrupts to handle interrupt events. When an interrupt occurs, the processor stops the execution of current program, and queries the corresponding interrupt vector in the predefined interrupt vector table based on the firing interrupt number. In other words, to find the entry address of the interrupt service routine(ISR). Then processor jumps to this address to execute the interrupt service routine. After ISR execution is completed, return to the interrupted program and complete the response of the interrupt event.</p>
-<p>In embARC OSP, we use the <code class="docutils literal notranslate"><span class="pre">int_handler_install()</span></code> function to bind our interrupt function name to the interrupt vector of the corresponding interrupt.</p>
+<p>The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, returns to the interrupted program and complete the response of the interrupt event.</p>
+<p>In embARC OSP, the <code class="docutils literal notranslate"><span class="pre">int_handler_install()</span></code> function is used to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then the above functions are achieved.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="open-and-browse-lab-one">
 <h3>Open and browse lab one<a class="headerlink" href="#open-and-browse-lab-one" title="Permalink to this headline">¶</a></h3>
-<p>Go to <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt</span></code>, where there are two folders, <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code> and <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code> is more basic compared to <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>. So we first enter
-folder <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code>, in which the precise timing function is implemented
+<p>Go to the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code> is more fundamental compared to <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>. Go to
+folder <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code> in which the precise timing function is implemented
 through the timer interrupt.</p>
 <p>Open main.c and browse the entire program.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
@@ -260,9 +260,9 @@ through the timer interrupt.</p>
 </div>
 </div>
 <div class="section" id="sub-module-analysis-lab-one-code">
-<h3>Sub-module analysis lab one code<a class="headerlink" href="#sub-module-analysis-lab-one-code" title="Permalink to this headline">¶</a></h3>
+<h3>Sub-module Analysis Lab One Code<a class="headerlink" href="#sub-module-analysis-lab-one-code" title="Permalink to this headline">¶</a></h3>
 <p>The code can be roughly divided into three parts: interrupt service function, main function, and delay function.</p>
-<p>Let’s analyze each one below:</p>
+<p>Each part is analyzed:</p>
 <ul class="simple">
 <li>Interrupt service function:</li>
 </ul>
@@ -274,7 +274,7 @@ through the timer interrupt.</p>
 </pre></div>
 </div>
 <p>This code is a standard example of an interrupt service routine: enters the service function, clears the interrupt flag bit, and then performs the processing that needs to be done in the interrupt service function. Other interrupt service functions can also be written using this template.</p>
-<p>In this function, we incremente the count variable t0 by one.</p>
+<p>In this function, the count variable t0 is incremented by one.</p>
 <ul class="simple">
 <li>Main function</li>
 </ul>
@@ -304,16 +304,16 @@ through the timer interrupt.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">EMBARC_PRINTF</span></code> function in this code is only used to send information to the computer, which can be ignored during analysis.</p>
 <p>This code is divided into two parts: initialization and looping.</p>
-<p>In the initialization section, we configure the timer and timer interrupts.</p>
+<p>In the initialization section, the timer and timer interrupts are configured.</p>
 <p>Unlike Lab 3, this code uses the embARC OSP API to program timer0. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.</p>
-<p><strong>First</strong>, in order to configure <strong>Timer0</strong> and its interrupts, we need to turn them off first. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_disable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_stop</span></code>.</p>
-<p><strong>Then</strong> we configure the interrupt service function and priority for our interrupts. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_handler_install</span></code> and <code class="docutils literal notranslate"><span class="pre">int_pri_set</span></code>.</p>
-<p><strong>Finally</strong>, after the interrupt configuration is complete, we need to enable the <strong>Timer0</strong> and interrupts that we previously turned off. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_enable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>.
-The implementation of <code class="docutils literal notranslate"><span class="pre">timer_start</span></code> function is basically the same as the reading and writing of the auxiliary registers in lab_3. Source code for the APIs are in file arc_timer.c. One point to note at this step is the configuration of <code class="docutils literal notranslate"><span class="pre">timer_limit</span></code> (the last parameter of <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>). We need to configure the interrupt time to 1ms , so we need to do a simple calculation (the formula is the expression after COUNT).</p>
-<p>In this example, the indefinite loop helps to show reoccurance of timer interrupts. We call our own delay function in the loop body to print the time per second.</p>
+<p><strong>First</strong>, in order to configure <strong>Timer0</strong> and it’s interrupts, turn them off first. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_disable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_stop</span></code>.</p>
+<p><strong>Then</strong> configure the interrupt service function and priority for our interrupts. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_handler_install</span></code> and <code class="docutils literal notranslate"><span class="pre">int_pri_set</span></code>.</p>
+<p><strong>Finally</strong>, after the interrupt configuration is complete, enable the <strong>Timer0</strong> and interrupts that are previously turned off. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_enable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>.
+The implementation of the <code class="docutils literal notranslate"><span class="pre">timer_start</span></code> function is the same as the reading and writing of the auxiliary registers in our lab_3. Interested students can view them in the file arc_timer.c. One point to note in this step is the configuration of <code class="docutils literal notranslate"><span class="pre">timer_limit</span></code> (the last parameter of <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>). Configure the interrupt time to 1ms , do a simple calculation (the formula is the expression after COUNT).</p>
+<p>In this example, the loop body only serves as an effect display. Our own delay function in the loop body to print the time per second is called.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Since nSIM is only simulated by computer, there may be time inaccuracy when using this function. Interested students can use the EMSK to program the program in the development board. In this case, the time will be much higher than that in nSIM.</p>
+<p class="last">Since nSIM is only simulated by computer, there may be time inaccuracy when using this function. Interested students can use the EMSK to program the program in the development board. In this case, the time is much higher than that in nSIM.</p>
 </div>
 <ul class="simple">
 <li>Delay function</li>
@@ -325,8 +325,8 @@ The implementation of <code class="docutils literal notranslate"><span class="pr
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>This code is very simple and straight forward. When we enter the function, we clear the global variable t0. Since we have set the interrupt interval to 1ms in the above timer_start, we can assume that every time t0 is incremented, time has elapsed by 1ms.</p>
-<p>Then, we wait till the while(t0&lt;ms); statement goes false.</p>
+<p>This code is very simple and the idea is clear. When the function entered, clear the global variable t0. The interrupt interval is set to 1ms in the above timer_start, assume that every time t0 is incremented, the time has passed 1ms.</p>
+<p>Wait through the while(t0&lt;ms) sentence, so that the full ms delay with higher precision is received.</p>
 </div>
 <div class="section" id="lab-one-labal-phenomenon">
 <h3>Lab one Labal phenomenon<a class="headerlink" href="#lab-one-labal-phenomenon" title="Permalink to this headline">¶</a></h3>
@@ -354,7 +354,7 @@ The implementation of <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="open-and-browse-the-lab-two">
 <h3>Open and browse the lab two<a class="headerlink" href="#open-and-browse-the-lab-two" title="Permalink to this headline">¶</a></h3>
-<p>We then enter <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>, which mainly shows the working state of priority
+<p>Enter <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>, which shows the working state of priority
 and interrupt nesting.</p>
 <p>Open main.c and browse through the entire program.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
@@ -501,12 +501,12 @@ and interrupt nesting.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>First, in order to analyze the code, we first ignore the extraneous parts (such as EMBARC_PRINTF, delay and hits in if).</p>
+<p>First, in order to analyze the code, ignore the extraneous parts (such as EMBARC_PRINTF, delay, and hits in if).</p>
 <p>In this case, we can find that for the interrupt service function timer0_isr, it is impossible to have the timer_flag of 1 only when it is itself. The only way to do this is to have another higher priority interrupt between timer_flag=0 and if statement set it.</p>
-<p>Following this line of thought, let’s look at timer1_isr again, and sure enough.</p>
+<p>Following this line of thought, see timer1_isr.</p>
 <p>Regarding EMBARC_PRINTF, it is used to indicate the status.</p>
-<p>Regarding the delay, its role is to lengthen this period of time, making nesting more likely.</p>
-<p>Regarding hits, it will be mentioned in the main function module.</p>
+<p>Regarding the delay, it’s role is to lengthen this period of time, making nesting more likely.</p>
+<p>Regarding hits, it is mentioned in the main function module.</p>
 <ul class="simple">
 <li>main function</li>
 </ul>
@@ -579,15 +579,15 @@ and interrupt nesting.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The main function looks very long, but in fact a considerable part of it is repetitive (we can also build a small function to make the code look more concise).</p>
-<p>In the first lab, we have already discussed the configuration of the timer and the creation of the interrupt, we will not repeat them here.</p>
+<p>The main function looks very long, there is a considerable part of it that is repetitive (you can also build a small function to make the code look more concise).</p>
+<p>In the first lab, the configuration of the timer and the creation of the interrupt is discussed and it is not repeated here.</p>
 <p>The main function is simple: when the interrupt of timer0 occurs 5 times, change the priority relationship of the two interrupts. The hits mentioned earlier are count variables in the above functions.</p>
 </div>
-<div class="section" id="lab-two-labal-phenomenon">
-<h3>Lab two Labal phenomenon<a class="headerlink" href="#lab-two-labal-phenomenon" title="Permalink to this headline">¶</a></h3>
-<p>The labal phenomenon of Lab two is shown in the figure.</p>
+<div class="section" id="lab-two-label-phenomenon">
+<h3>Lab two Label phenomenon<a class="headerlink" href="#lab-two-label-phenomenon" title="Permalink to this headline">¶</a></h3>
+<p>The label phenomenon of Lab two is shown in the follogin figure.</p>
 <p>“Interrupt nesting!” indicates that interrupt nesting has occurred, and “Interrupt” indicates that it has not occurred.</p>
-<p>For a better understanding, let’s go back and look at the priority settings in the main function.</p>
+<p>For a better understanding, go back and look at the priority settings in the main function.</p>
 <p>It is easy to see that when timer0 interrupt priority is low (INT_PRI_MAX is low priority, a lager numbes means a lower priority in ARC), timer1 interrupt can preempt timer0 interrupt; when timer0 interrupt priority is high, timer1 interrupt cannot interrupt/preempty its ISR execution.</p>
 <p>To summarize, high-priority interrupts can interrupt low-priority interrupts, and low-priority interrupts can be preempted by high-priority interrupts.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar 16 2018, 09:58:46</span>

@@ -179,14 +179,14 @@
 <span id="dsp-lab1-compiler-opt"></span><h1>Compiler Optimizations<a class="headerlink" href="#compiler-optimizations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="part-1-prerequisites">
 <h2>Part 1. Prerequisites<a class="headerlink" href="#part-1-prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>Before starting using ARC DSP the following prerequisites are required:</p>
+<p>Before starting to use the ARC DSP, the following prerequisites are required:</p>
 <ul>
-<li><p class="first">Have MetaWare tools for Windows installed</p>
+<li><p class="first">Make sure that the MetaWare tools for Windows is installed</p>
 <p><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware</a></p>
 </li>
-<li><p class="first">Known how to create, edit, build and debug projects in MetaWare IDE</p>
+<li><p class="first">Learn how to create, edit, build, and debug projects in MetaWare IDE</p>
 </li>
-<li><p class="first">Have IoT Development Kit board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
+<li><p class="first">Make sure that the IoT Development Kit and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
 <p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
 </li>
 <li><p class="first">IoT Development Kit board is EM9D based</p>
@@ -194,8 +194,8 @@
 </ul>
 <p>The following needs to be tested before starting this lab:</p>
 <ul class="simple">
-<li>Connecting IoT Development Kit board to computer</li>
-<li>Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IOTDK  board).</li>
+<li>Connecting IoT Development Kit to computer</li>
+<li>Connecting serial console (PuTTY) to IoT Development Kit COM port (For information on how to do initial board setup and configuration, see <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em>).</li>
 </ul>
 </div>
 <div class="section" id="part-2-lab-objectives">
@@ -206,10 +206,10 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <div class="section" id="part-3-lab-principle-and-method">
 <h2>Part 3. Lab principle and method<a class="headerlink" href="#part-3-lab-principle-and-method" title="Permalink to this headline">¶</a></h2>
 <p>This section describes compiler options in MetaWare used in this lab.</p>
-<p>To optimize code to use DSP extensions two sets of compiler options will be used throughout the lab, DSP Extensions options and optimization level.</p>
+<p>To optimize code to use DSP extensions two sets of compiler options are used throughout the lab, DSP Extensions options and optimization level.</p>
 <div class="section" id="dsp-extensions-options">
 <h3>DSP Extensions Options<a class="headerlink" href="#dsp-extensions-options" title="Permalink to this headline">¶</a></h3>
-<p>We will use EMBARC OSP build system to build software. The details can be found in EMBARC OSP document page. Here is the example command. You can pass extra compiler/linker options by ADT_COPT/ADT_LOPT.</p>
+<p>Use embARC OSP build system to build tool. The details can be found in embARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT=&quot;-Hfxapi -Xdsp2&quot; OLEVEL=O2</span>
 </pre></div>
 </div>
@@ -219,39 +219,39 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <p>Enable DSP instructions</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex,</span> <span class="pre">-Xdsp_divsqrt</span></code>:</p>
-<p>Enable complex arithmetic DSP, divide &amp; sqrt instructions</p>
+<p>Enable complex arithmetic DSP, divide, and sqrt instructions</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">-Xdsp_ctrl[=up|convergent,noguard|guard,</span> <span class="pre">preshift|postshift]</span></code>:</p>
-<p>Fine-tune the compiler’s assumptions about the rounding, guard bit and fractional product shift behavior</p>
+<p>Fine-tune the compiler’s assumptions about the rounding, guard-bit, and fractional product shift behavior</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">-Hdsplib</span></code>: Link in the DSP library</p>
 <p>For programming ARC fixed-point DSP in C and C++</p>
-<p>Contains functions to carry out DSP algorithms such as filtering &amp; transforms</p>
+<p>Contains functions to carry out DSP algorithms such as filtering and transforms</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">-Hfxapi</span></code>: Use the Fixed Point API support library</p>
-<p>Used with <code class="docutils literal notranslate"><span class="pre">-Xdsp</span></code>. Provides low level intrinsic support for EM DSP instructions.</p>
+<p>Used with <code class="docutils literal notranslate"><span class="pre">-Xdsp</span></code>. Provides low level intrinsic support for ARC EM DSP instructions.</p>
 <p>Programs written using this API execute natively on an ARC EM processor with DSP extensions and can also be emulated on x86 Windows hosts.</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">-Xxy</span></code>: Specifies that XY memory is available</p>
 <p>Used with <code class="docutils literal notranslate"><span class="pre">-Xdsp2</span></code>. Enables optimization for XY memory</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">-Xagu_small,</span> <span class="pre">-Xagu_medium,</span> <span class="pre">-Xagu_large</span></code>:</p>
-<p>Enables AGU, and specifies its size. Note IOTDK has small AGU</p>
+<p>Enables AGU, and specifies its size. Note, IOTDK has small AGU</p>
 </li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Because ARC cores are configurable, different cores can contain different extensions on hardware level. Thus options set for compiler should match underlying hardware. On the other hand if specific hardware future is present in the core but compiler option is not set, it won’t be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.</p>
+<p class="last">Because ARC is configurable processor, different cores can contain different extensions on hardware level. Therefore, options set for compiler should match underlying hardware. On the other hand, if specific hardware feature is present in the core but compiler option is not set, it cannot be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.</p>
 </div>
 </div>
 <div class="section" id="optimization-level">
 <h3>Optimization level<a class="headerlink" href="#optimization-level" title="Permalink to this headline">¶</a></h3>
 <p>MetaWare compiler has different optimization levels, which enables or disables various optimization techniques included in the compiler. You can pass the optimization option to gmake by “OLEVEL=O2”.</p>
-<p>The lowest level is the default -O0, which does little optimization to the compiled assembly code and easy for debugging because in un-optimized assembly code all source code commands will have 1:1 representation. On the other hand -O3 highest level optimization highly modifies output assembly code to make it small and fast, but harder for debugging since it’s heavily optimized. Also, high level of optimization requires longer compilation time, which is costly in time for large projects where many compilation iterations are to be made.</p>
+<p>The lowest level is the default -O0, which does little optimization to the compiled assembly code, which can be used for debugging, because in un-optimized assembly code all source code commands have 1:1 representation. On the other hand, -O3 highest level optimization highly modifies output assembly code to make it smaller and fast, but debugging such a code is harder, because it is not close match with source code. Also, high level of optimization requires longer compilation time, which for large project can be significant, if many compilation iterations are to be made.</p>
 </div>
 <div class="section" id="optimization-for-dsp-extensions">
 <h3>Optimization for DSP extensions<a class="headerlink" href="#optimization-for-dsp-extensions" title="Permalink to this headline">¶</a></h3>
-<p>A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever compiler finds suitable to employ DSP extensions.</p>
+<p>A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever applicable, which compiler can do automatically with DSP extension options corresponding to hardware are set and high-level of optimization is selected.</p>
 </div>
 <div class="section" id="checking-options">
 <h3>Checking options<a class="headerlink" href="#checking-options" title="Permalink to this headline">¶</a></h3>
@@ -260,7 +260,7 @@ Try direct usage of DSP extensions through intrinsic.</p>
 </div>
 <div class="section" id="part-4-optimizing-code">
 <h2>Part 4. Optimizing code<a class="headerlink" href="#part-4-optimizing-code" title="Permalink to this headline">¶</a></h2>
-<p>An example code below contains a function called “test”  which contains a for loop and a multiply accumulate operation done manually.</p>
+<p>An example code below contains a function “test” which contains a 20 step for loop and a multiply accumulate operation done manually.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
 <span class="kt">short</span> <span class="nf">test</span><span class="p">(</span><span class="kt">short</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">short</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
@@ -289,12 +289,12 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <div class="section" id="step-1-compiling-without-dsp-extensions">
 <h3>Step 1. Compiling without DSP extensions<a class="headerlink" href="#step-1-compiling-without-dsp-extensions" title="Permalink to this headline">¶</a></h3>
 <p>Set optimization level “-O0”, and no DSP extensions (unchecking -Xdsp1, -Xdsp2).</p>
-<p>After compilation open disassembly window and check assembly code for function “test”.</p>
-<p>Below is the list options used when launching gmake:</p>
+<p>After compilation, open disassembly window and check assembly code for function “test”.</p>
+<p>Below is the list of options used when launching gmake:</p>
 <p><code class="docutils literal notranslate"><span class="pre">OLEVEL=O0</span>&#160; <span class="pre">ADT_COPT=&quot;-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-Xlib</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1&quot;</span></code></p>
 <p>You can use the following command to generate disassembly code:</p>
 <p><code class="docutils literal notranslate"><span class="pre">elfdump</span> <span class="pre">-T</span> <span class="pre">-S</span> <span class="pre">&lt;your_working_directory&gt;/obj_iotdk_10/mw_arcem9d/dsp_lab1_mw_arcem9d.elf</span></code></p>
-<p>Notice assembly code in the disassembled output. See how many assembly instruction are used for each line, for example for loop spends several instruction to calculate loop variable value and check whether to stop.</p>
+<p>Notice assembly code in the disassembled output. See how many assembly instruction are used for each lin. For example, for loop spends several instruction to calculate loop variable value and check whether to stop.</p>
 <p><img alt="dsp_figure_1.1" src="../../_images/dsp_figure_1.1.png" /></p>
 </div>
 <div class="section" id="step-2-compiling-without-dsp-extensions-with-o2">
@@ -313,7 +313,7 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <p><img alt="dsp_figure_1.3" src="../../_images/dsp_figure_1.3.png" /></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>Assignment:</strong> Remove “&lt;&lt;1” from test function, see what changes in output instructions.</p>
+<p class="last"><strong>Assignment:</strong> Remove “&lt;&lt;1” from test function and see changes in the output instructions.</p>
 </div>
 </div>
 </div>

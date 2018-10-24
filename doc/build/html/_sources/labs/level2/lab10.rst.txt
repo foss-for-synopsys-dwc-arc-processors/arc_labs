@@ -15,7 +15,7 @@ Purpose
 
 Equipment
 ^^^^^^^^^^
-The following hardware and software tools are required:
+The following hardware and tools are required:
 
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
@@ -26,22 +26,22 @@ The following hardware and software tools are required:
 Content
 ^^^^^^^^
 
-This experiment is based on the embARC_osp package extension to support the popular esp8266 WIFI module, use the AT command to set the esp8266 to the server mode, and then use the PC or mobile phone under the same LAN to access its IP address, based on the TCP protocol to achieve static page display of the client.
+This experiment is based on the embARC_osp package extension to support the popular esp8266 WIFI module, use the AT command to set the esp8266 to the server mode, and then use the PC or mobile phone in the same LAN to access it's IP address, based on the TCP protocol to achieve static page display of the client.
 
-Through this experiment, we will have a preliminary understanding of the use of the esp8266 WIFI module and the AT command.
+Through this experiment, you get a preliminary understanding of the use of the esp8266 WIFI module and the AT command.
 
 Principles
 ^^^^^^^^^^^^
 
 **Esp8266**
 
-The ESP8266 is an ultra-low-power Wi-Fi chip with industry-leading package size and ultra-low power technology designed for mobile devices and IoT applications, connecting users' physical devices to Wi-Fi wireless On the network, Internet or LAN communication is implemented to implement networking functions.
+The ESP8266 is an ultra-low-power Wi-Fi chip with industry-leading package size and ultra-low power technology designed for mobile devices and IoT applications, connecting users' physical devices to Wi-Fi wireless on the network, Internet, or LAN communication is implemented to implement networking functions.
 
-The ESP8266 is available in a variety of encapsulation. The antenna supports the onboard PCB antenna, IPEX interface and stamp hole interface.
+The ESP8266 is available in a variety of encapsulation. The antenna supports the onboard PCB antenna, IPEX interface, and stamp hole interface.
 
-ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handheld devices, industrial control and other fields.
+ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handheld devices, industrial control, and other fields.
 
-Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as its core(The Wi-Fi modules are shown below).
+Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as it's core(The Wi-Fi modules are described later).
 
 |figure1|
 
@@ -178,7 +178,11 @@ Steps
 
 **Compile and download**
 
+<<<<<<< HEAD
 Compile and download the program, after downloading successfully, you will see the relevant download information in the cmd window(shown bellow).
+=======
+Compile and download the program, after downloading successfully, the relevant download information is displayed in the command window(as shown in the following example).
+>>>>>>> pavan
 
 .. code-block:: guess
 
@@ -192,7 +196,7 @@ Compile and download the program, after downloading successfully, you will see t
     Transfer rate: 602 KB/sec, 9497 bytes/write.
     Continuing.
 
-At this point, the serial port debugging tool will see the serial port feedback information, reflecting the process of the EMSK development board using the AT command to establish the http server(as shown bellow).
+At this point, the serial port debugging tool sees the serial port feedback information, reflecting the process of the EMSK development board using the AT command to establish the http server(as shown bellow).
 
 .. code-block:: guess
 
@@ -249,7 +253,7 @@ At this point, the serial port debugging tool will see the serial port feedback 
 
 **Access server**
 
-It can be seen from the serial port feedback information in above *Compile and download* that the EMSK development board has successfully connected to the target WIFI through esp8266, and is set to the server mode by using the AT command, and the IP address of the server is given.
+It can be seen from the serial port feedback information in above *Compile and download* that the EMSK development board has successfully connected to the target WI-FI through esp8266, and is set to the server mode by using the AT command, and the IP address of the server is given.
 
 At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page.
 

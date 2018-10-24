@@ -187,7 +187,7 @@
 </div>
 <div class="section" id="equipment">
 <h2>Equipment<a class="headerlink" href="#equipment" title="Permalink to this headline">¶</a></h2>
-<p>The following hardware and software tools are required:</p>
+<p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
 <li>ARC GNU toolchain/MetaWare Development Toolkit</li>
@@ -198,24 +198,24 @@
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>This lab utilizes FreeRTOS v9.0.0, and will create 3 tasks based on embARC_osp. You should apply inter-task communicating methods such as semaphore and message queue in order to get running LEDs. We should go though basic functions of FreeRTOS first.</p>
+<p>This lab utilizes FreeRTOS v9.0.0, and creates 3 tasks based on embARC OSP. You should apply inter-task communicating methods such as semaphore and message queue in order to get running LEDs result. You should know the basic functions of FreeRTOS.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="background">
 <h3>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
 <p>A Real Time Operating System (RTOS) is an operating system intended to serve real-time applications that process data in within a predefined time period.</p>
-<p>With more resources on modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. These are the reasons of why we choose to learn FreeRTOS in this lab.</p>
+<p>As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. This is why FreeRTOS is selected.</p>
 </div>
 <div class="section" id="design">
 <h3>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h3>
-<p>This lab implements a running LED program with 3 tasks using FreeRTOS. Despite using 3 tasks is an overkill for a running LED, but it’s beneficial for the understanding of FreeRTOS itself and inter-task communication as well.</p>
-<p>The flow chat of the program is shown below:</p>
+<p>This lab implements a running LED light with 3 tasks on FreeRTOS. Despite using 3 tasks overkill for a running LED, but it is beneficial for the understanding of FreeRTOS itself and inter-task communication as well.</p>
+<p>The followin is the flow chart of the program:</p>
 <img alt="program flow chart" src="../../_images/lab9_program_flow_chart.png" />
 </div>
 <div class="section" id="realization">
 <h3>Realization<a class="headerlink" href="#realization" title="Permalink to this headline">¶</a></h3>
-<p>The code of system is shown below, including various Initialization and time delay tasks.</p>
+<p>The following is the example code of system , including various initialization and task time delay.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
@@ -342,7 +342,7 @@
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="build-and-run-the-incompleted-code">
 <h3>Build and run the incompleted code<a class="headerlink" href="#build-and-run-the-incompleted-code" title="Permalink to this headline">¶</a></h3>
-<p>the code is at <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab9_freertos</span></code>, use an uart terminal console and run the code, you will see a message from program like the one shown below:</p>
+<p>The code is at <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab9_freertos</span></code>, uses an UART terminal console and run the code, the followine message from program is displayed:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar  9 2018, 17:57:50</span>
 <span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1 (branches/release_40)</span>
 <span class="go">Create task1 Successfully</span>
@@ -354,18 +354,18 @@
 </div>
 <div class="section" id="implement-task-3">
 <h3>Implement task 3<a class="headerlink" href="#implement-task-3" title="Permalink to this headline">¶</a></h3>
-<p>It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, so the only new function to learn is <code class="docutils literal notranslate"><span class="pre">xQueueReceive()</span></code>. This is a FreeRTOS API to pop and read an item from queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
+<p>It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, the new function to learn is <code class="docutils literal notranslate"><span class="pre">xQueueReceive()</span></code>. This is a FreeRTOS API to pop and read an item from queue. See FreeRTOS documentation and complete the code for this task. (An example is in ‘complete’ folder)</p>
 </div>
 <div class="section" id="implement-task-1">
 <h3>Implement task 1<a class="headerlink" href="#implement-task-1" title="Permalink to this headline">¶</a></h3>
 <p>It is required for task 1 to check if value from queue is legal. If not, a reset signal is needed to be sent.</p>
-<p>Two new functions might be helpful for this task: <code class="docutils literal notranslate"><span class="pre">xSemaphoreGive()</span></code> for release a signal and <code class="docutils literal notranslate"><span class="pre">xQueuePeek()</span></code> for read item but not pop from a queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
+<p>Two new functions might be helpful for this task: <code class="docutils literal notranslate"><span class="pre">xSemaphoreGive()</span></code> for release a signal and <code class="docutils literal notranslate"><span class="pre">xQueuePeek()</span></code> for read item but not pop from a queue. See FreeRTOS documentation and complete the code for this task. (An example is in ‘complete’ folder)</p>
 <p>Do notice the difference between <code class="docutils literal notranslate"><span class="pre">xQueueReceive()</span></code> and <code class="docutils literal notranslate"><span class="pre">xQueuePeek()</span></code>.</p>
 </div>
 <div class="section" id="implement-task-2">
 <h3>Implement task 2<a class="headerlink" href="#implement-task-2" title="Permalink to this headline">¶</a></h3>
 <p>There are two different works for task 2 to complete: to shift led_val and queue it, and to reset both led_val and queue when illegal led_val is detected.</p>
-<p>Three functions can be helpful: <code class="docutils literal notranslate"><span class="pre">xQueueSend()</span></code>, <code class="docutils literal notranslate"><span class="pre">xSemaphoreTake()</span></code>, <code class="docutils literal notranslate"><span class="pre">xQueueReset()</span></code>. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in ‘complete’ folder)</p>
+<p>Three functions can be helpful: <code class="docutils literal notranslate"><span class="pre">xQueueSend()</span></code>, <code class="docutils literal notranslate"><span class="pre">xSemaphoreTake()</span></code>, <code class="docutils literal notranslate"><span class="pre">xQueueReset()</span></code>. See FreeRTOS documentation and complete the code for this task. (An example is in ‘complete’ folder)</p>
 </div>
 <div class="section" id="build-and-run-the-completed-code">
 <h3>Build and run the completed code<a class="headerlink" href="#build-and-run-the-completed-code" title="Permalink to this headline">¶</a></h3>
@@ -375,8 +375,8 @@
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p>The problem of philosophers having meal:</p>
-<p>Five philosophers sitting at a round dining table. Suppose they are either thinking or eating, but they can’t do these two things at same time. So each time when they are having food, they stop thinking and vice versa. There are five forks on the table for eating noddle, each fork is placed between two adjacent philosophers  It’s hard to eat noddle with one fork, so all philosophers need two forks in order to eat.</p>
-<p>Please write a program with proper console output to simulate this process.</p>
+<p>Five philosophers sitting at a round dining table. Suppose they are either thinking or eating, but they cannot do these two things at same time. So each time when they are having food, they stop thinking and vice versa. There are five forks on the table for eating noddle, each fork is placed between two adjacent philosophers  It is hard to eat noddle with one fork, so all philosophers need two forks in order to eat.</p>
+<p>Write a program with proper console output to simulate this process.</p>
 </div>
 </div>
 

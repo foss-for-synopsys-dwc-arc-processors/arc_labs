@@ -179,43 +179,43 @@
 <span id="dsp-lab3-dsp-lib"></span><h1>ARC DSP Using DSP Library<a class="headerlink" href="#arc-dsp-using-dsp-library" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="part-1-prerequisites">
 <h2>Part 1. Prerequisites<a class="headerlink" href="#part-1-prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>Before starting using ARC DSP the following prerequisites are required:</p>
+<p>Before starting to use the ARC DSP, the following prerequisites are required:</p>
 <ul>
-<li><p class="first">Have MetaWare tools for Windows installed</p>
+<li><p class="first">Make sure that the MetaWare tools for Windows installed</p>
 <p><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware</a></p>
 </li>
-<li><p class="first">Knowledge as to how to create, edit, build and debug projects in MetaWare IDE</p>
+<li><p class="first">Learn how to create, edit, build and debug projects in MetaWare IDE</p>
 </li>
-<li><p class="first">Have ARC EM Starter Kit (IOTDK) board and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
+<li><p class="first">Make sure that the IoT Development Kit and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
 <p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
 </li>
-<li><p class="first">IOTDK board configured with DSP-enabled core configuration EM9D</p>
+<li><p class="first">IoT Development Kit configured with DSP-enabled core configuration EM9D</p>
 </li>
 </ul>
 <p>The following procedures need to be tested before starting this lab:</p>
 <ul class="simple">
-<li>Connecting IOTDK board to computer</li>
-<li>Configuring IOTDK board to use ARC core with DSP extensions (these labs use EM5D core configuration)</li>
-<li>Connecting serial console (PuTTY) to IOTDK COM port (For information on how to do initial board setup and configuration please refer to  <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IOTDK  board).</li>
+<li>Connecting IoT Development Kit to computer</li>
+<li>Configuring IoT Development Kit to use ARC core with DSP extensions (these labs use EM5D core configuration)</li>
+<li>Connecting serial console (PuTTY) to IoT Development Kit COM port (For information on how to do initial board setup and configuration please refer to  <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IOTDK  board).</li>
 </ul>
 </div>
 <div class="section" id="part-2-lab-objectives">
 <h2>Part 2. Lab Objectives<a class="headerlink" href="#part-2-lab-objectives" title="Permalink to this headline">¶</a></h2>
-<p>Use DSP Library and compare program run speed with and without DSP library, i.e. DSP extension usage.</p>
+<p>Use DSP Library and compare program run speed with and without DSP library, that is, DSP extension usage.</p>
 </div>
 <div class="section" id="part-3-lab-principle-and-method">
 <h2>Part 3. Lab principle and method<a class="headerlink" href="#part-3-lab-principle-and-method" title="Permalink to this headline">¶</a></h2>
 <p>This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions with shorter code.</p>
-<p>In this lab two implementations of matrix multiplication are shown: one piece of manually drafted plain code and one with the use of DSP library.</p>
+<p>In this lab two implementations of matrix multiplication are shown: implemented manually and with the use of DSP library.</p>
 <div class="section" id="matrix-multiplication">
 <h3>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Permalink to this headline">¶</a></h3>
-<p>Multiplication of two matrices A and B of sizes [M*N] and [N*K] respectively is done using the following formula:</p>
+<p>Multiplication of two matrices A and B of sizes [M*N] and [N*K] respectively is implemented using the following formula:</p>
 <p><img alt="dsp_icon_3.1" src="../../_images/dsp_icon_3.1.png" /></p>
 <p>Where i= 0…(M-1) and j = 0..(K-1) are row and column indexes of output matrix, with size [M*K].</p>
 </div>
 <div class="section" id="implementation-without-dsp">
 <h3>Implementation without DSP<a class="headerlink" href="#implementation-without-dsp" title="Permalink to this headline">¶</a></h3>
-<p>An implementation of matrix multiplication of two matrices containing “short” values is shown below. By convention matrices here are implemented as 1D arrays with row-first indexing, where element a_ik is indexed as
+<p>The following example shows the implementation of matrix multiplication of two matrices containing “short” values. By convention, matrices here are implemented as 1D arrays with row-first indexing, where element a_ik is indexed as
 <img alt="dsp_icon_3.2" src="../../_images/dsp_icon_3.2.png" />
 . Build with the command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></p>
@@ -314,7 +314,7 @@
 </div>
 <div class="section" id="implementation-with-dsplib">
 <h3>Implementation with DSPLIB<a class="headerlink" href="#implementation-with-dsplib" title="Permalink to this headline">¶</a></h3>
-<p>DSP library contains matrix multiplication function so doing matrix multiplication using DSP library requires just initialization of matrix arrays (1D) and call to <code class="docutils literal notranslate"><span class="pre">dsp_mat_mult_q15</span></code>. The overall code is just 4 lines, as highlighted in the following code. Note that dsplib.h must be included, and matrix a, b and c must be declared as global variable. As the numbers are in q15 type, it is better to make elements of a and b between 32767 (~0.99) and 16384 (0.5), or 32768(-1) and 49152 (-0.5) so that the result in c is not round to zero. Note as IOTDK is configured to have small AGU, the DSP library routine is not significantly faster.</p>
+<p>DSP library contains matrix multiplication function, implementing matrix multiplication using DSP library requires initialization of matrix arrays (1D) and call to <code class="docutils literal notranslate"><span class="pre">dsp_mat_mult_q15</span></code>. The overall code is 4 lines, as highlighted in the following code. Note that dsplib.h must be included, and matrix a, b, and c must be declared as global variable. As the numbers are in q15 type, it is better to make elements of a and b between 32767 (~0.99) and 16384 (0.5), or 32768(-1) and 49152 (-0.5) that the result in c is not rounded to zero. Note as IOTDK is configured to have small AGU, the DSP library routine is not significantly faster.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
@@ -421,13 +421,13 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>Assignment 1:</strong> Use example in previous lab to create an IOTDK board application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library. Adjust number of loops made to achieve measurable delay.</p>
+<p class="last"><strong>Assignment 1:</strong> Use example in previous lab to create an IoT Development Kit application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library. Adjust number of loops made to achieve measurable delay.</p>
 </div>
 </div>
 </div>
 <div class="section" id="part-4-test">
 <h2>Part 4. Test<a class="headerlink" href="#part-4-test" title="Permalink to this headline">¶</a></h2>
-<p>To test the example below an example program that has two loops of matrix multiplications with and without DSP library needs to be created.</p>
+<p>To test the example below, an example program needs to be created that has two loops of matrix multiplications with and without DSP library.</p>
 <p>Both examples are to be compiled with DSP extensions, with the following options set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-O2</span>&#160; <span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-Xlib</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xdsp1</span> <span class="pre">-Hdsplib</span></code></p>
 <div class="admonition note">
@@ -436,7 +436,7 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Note that DSPLIB is  statically linked with the project when  -Hdsplib is set, and as the DSPLIB itself is pre-compiled with certain level of optimization, changes of optimization option for example application code alone won’t affect DSPLIB performance. Nevertheless, a function utilizing simple instructions on “short” type (even converted to MACs if possible) will be less efficient than one that directly uses DSPLIB.</p>
+<p class="last">Note that DSPLIB is statically linked with the project when -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program does not affect DSPLIB performance. On the other hand, even with highest optimization level a function utilizing simple instructions on “short” type (even converted to MACs if possible) is less efficient that direct use of DSPLIB.</p>
 </div>
 </div>
 </div>

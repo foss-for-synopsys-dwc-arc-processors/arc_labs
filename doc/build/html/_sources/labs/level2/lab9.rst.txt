@@ -11,7 +11,7 @@ Purpose
 
 Equipment
 =========
-The following hardware and software tools are required:
+The following hardware and tools are required:
 
 * PC host
 * ARC GNU toolchain/MetaWare Development Toolkit
@@ -21,29 +21,29 @@ The following hardware and software tools are required:
 
 Content
 ========
-This lab utilizes FreeRTOS v9.0.0, and will create 3 tasks based on embARC_osp. You should apply inter-task communicating methods such as semaphore and message queue in order to get running LEDs. We should go though basic functions of FreeRTOS first.
+This lab utilizes FreeRTOS v9.0.0, and creates 3 tasks based on |embarc|. You should apply inter-task communicating methods such as semaphore and message queue in order to get running LEDs result. You should know the basic functions of FreeRTOS.
 
 Principles
 ==========
 
 Background
 ----------
-A Real Time Operating System (RTOS) is an operating system intended to serve real-time applications that process data in within a predefined time period. 
+A Real Time Operating System (RTOS) is an operating system intended to serve real-time applications that process data in within a predefined time period.
 
-With more resources on modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. These are the reasons of why we choose to learn FreeRTOS in this lab.
+As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. This is why FreeRTOS is selected.
 
 Design
 ------
-This lab implements a running LED program with 3 tasks using FreeRTOS. Despite using 3 tasks is an overkill for a running LED, but it's beneficial for the understanding of FreeRTOS itself and inter-task communication as well.
+This lab implements a running LED light with 3 tasks on FreeRTOS. Despite using 3 tasks overkill for a running LED, but it is beneficial for the understanding of FreeRTOS itself and inter-task communication as well.
 
-The flow chat of the program is shown below:
+The followin is the flow chart of the program:
 
 .. image:: /img/lab9_program_flow_chart.png
     :alt: program flow chart
 
 Realization
 -----------
-The code of system is shown below, including various Initialization and time delay tasks.
+The following is the example code of system , including various initialization and task time delay.
 
 .. code-block:: c
 
@@ -172,7 +172,7 @@ Steps
 
 Build and run the incompleted code
 ----------------------------------
-the code is at ``embarc_osp/arc_labs/labs/lab9_freertos``, use an uart terminal console and run the code, you will see a message from program like the one shown below:
+The code is at ``embarc_osp/arc_labs/labs/lab9_freertos``, uses an UART terminal console and run the code, the followine message from program is displayed:
 
 .. code-block:: console
 
@@ -186,13 +186,13 @@ This message implys that three tasks are working correctly.
 
 Implement task 3
 ----------------
-It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, so the only new function to learn is ``xQueueReceive()``. This is a FreeRTOS API to pop and read an item from queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
+It is required for task 3 to retrieve new value from the queue and assign the value to led_val. The LED controls are already implemented in previous labs, the new function to learn is ``xQueueReceive()``. This is a FreeRTOS API to pop and read an item from queue. See FreeRTOS documentation and complete the code for this task. (An example is in 'complete' folder)
 
 Implement task 1
 ----------------
 It is required for task 1 to check if value from queue is legal. If not, a reset signal is needed to be sent.
 
-Two new functions might be helpful for this task: ``xSemaphoreGive()`` for release a signal and ``xQueuePeek()`` for read item but not pop from a queue. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
+Two new functions might be helpful for this task: ``xSemaphoreGive()`` for release a signal and ``xQueuePeek()`` for read item but not pop from a queue. See FreeRTOS documentation and complete the code for this task. (An example is in 'complete' folder)
 
 Do notice the difference between ``xQueueReceive()`` and ``xQueuePeek()``.
 
@@ -200,7 +200,7 @@ Implement task 2
 ----------------
 There are two different works for task 2 to complete: to shift led_val and queue it, and to reset both led_val and queue when illegal led_val is detected.
 
-Three functions can be helpful: ``xQueueSend()``, ``xSemaphoreTake()``, ``xQueueReset()``. Please take reference from FreeRTOS documents and complete the code for this task. (An example is in 'complete' folder)
+Three functions can be helpful: ``xQueueSend()``, ``xSemaphoreTake()``, ``xQueueReset()``. See FreeRTOS documentation and complete the code for this task. (An example is in 'complete' folder)
 
 Build and run the completed code
 --------------------------------
@@ -210,6 +210,6 @@ Exercises
 =========
 The problem of philosophers having meal:
 
-Five philosophers sitting at a round dining table. Suppose they are either thinking or eating, but they can't do these two things at same time. So each time when they are having food, they stop thinking and vice versa. There are five forks on the table for eating noddle, each fork is placed between two adjacent philosophers  It's hard to eat noddle with one fork, so all philosophers need two forks in order to eat.
+Five philosophers sitting at a round dining table. Suppose they are either thinking or eating, but they cannot do these two things at same time. So each time when they are having food, they stop thinking and vice versa. There are five forks on the table for eating noddle, each fork is placed between two adjacent philosophers  It is hard to eat noddle with one fork, so all philosophers need two forks in order to eat.
 
-Please write a program with proper console output to simulate this process.
+Write a program with proper console output to simulate this process.
