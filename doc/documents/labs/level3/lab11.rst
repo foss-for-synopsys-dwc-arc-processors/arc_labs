@@ -24,14 +24,14 @@ Reguired Hardware
 
 - SD Card
 
-- WiFi Hotspot (default SSID:**embARC**, Password:**qazwsxedc**, WPA/WPA2 encypted)
+- WiFi Hotspot (default SSID: **embARC**, Password: **qazwsxedc**, WPA/WPA2 encypted)
 
 Required Software
 -----------------
 
-- MetaWare or ARC GNU Toolset
+- MetaWare or ARC GNU Toolchain
 
-- Serial port terminal (e.g. putty, tera-term or minicom)
+- Serial port terminal (e.g. Putty, Tera-term or Minicom)
 
 Hardware Connection (EMSK Board)
 --------------------------------
@@ -43,7 +43,7 @@ Hardware Connection (EMSK Board)
 
 - Configure your hardware with proper core configuration.
 
-- The hardware resources are described as per the table below.
+- The hardware resources are described at the table below.
 
 ==================== ==========================================================
  Hardware Resources  Represent
@@ -54,8 +54,8 @@ BUTTON L             Kitchen Lights Control
 LED 2-3              Kitchen Lights Status (On or Off)
 BUTTON X             Front Door Lock Control
 LED 4-5              Front Door Lock Status (On or Off)
-LED 7                WiFi connection status (On for connected, Off for not)
-LED X                Node working status (toggling in 2s period if working well)
+LED 7                WiFi Connection Status (On for connected, Off for not)
+LED X                Node Working Status (toggling in 2s period if working well)
 PMOD TMP2            Temperature Sensor
 PMOD WiFi            Provide WiFi Connection
 ==================== ==========================================================
@@ -64,8 +64,8 @@ Content
 ========
 This lab provides instructions on how to establish connection between the EMSK and
 Amazon Web Services Internet of Things (AWS IoT) cloud with a simulated smart home application.
-With the help of AWS IoT as a intermediate cloud platform, devices can securely interact with cloud
-applications and other devices. AWS IoT also supports Message Queue Telemetry Transport (MQTT) and
+With the help of AWS IoT as a cloud platform, devices can securely interact with cloud
+applications and other devices. AWS IoT also supports MQ Telemetry Transport (MQTT) and
 provides authentication and end-to-end encryption.
 
 
@@ -84,8 +84,8 @@ embedded platform has been optimized and ported for embARC.
 
 In this lab application, the peripheral modules and onboard resources of EMSK board are used
 to simulate the objects which are controlled and monitored in smart home scenario. The AWS IoT
-Cloud is used as the Cloud host and control platform that communicate with the EMSK
-Board using MQTT protocol. A HTML5 Web APP is designed to provide
+Cloud is used as the cloud host and a controlling platform that communicates with the EMSK
+Board with MQTT protocol. A HTML5 Web APP is designed to provide
 a dash board in order to monitor and control smart home nodes.
 
 Steps
@@ -94,7 +94,7 @@ Steps
 Creating and setting smart home node
 ------------------------------------
 
-1. Create an AWS account in `[here] <https://aws.amazon.com/>`__. Amazon offers various account levels,
+1. Create an AWS account at `[Amazon AWS Website] <https://aws.amazon.com/>`__. Amazon offers various account levels,
    including a free tier for AWS IoT.
 
 2. Login AWS console and choose AWS IoT.
@@ -102,7 +102,7 @@ Creating and setting smart home node
    .. image:: /img/lab11_steps_1.png
         :alt: smarthome system
 
-3. Choose an appropriate IoT server in the top right corner of the AWS IoT console page.
+3. Choose an appropriate IoT server in the top right corner of the AWS IoT console page. As an example we choose US East (N. Virginia) server, you may choose other server as you see fit.
 
    .. image:: /img/lab11_steps_2.png
         :alt: smarthome system
@@ -187,7 +187,7 @@ Building and Running AWS IoT Smart Home Example
 2. Use USB cable to connect the EMSK board. Set the baud rate of the terminal emulator to 115200.
 
 3. Insert the SD Card into the EMSK board SD Card slot. Run the AWS IoT application using JTAG.
-   Go to *embARC/example/freertos/iot/aws/smarthome_demo* in command-line, input the compile command as follow:
+   Go to *embARC/example/freertos/iot/aws/smarthome_demo* in command-line, run the following command:
 
    .. code-block:: console
 
@@ -202,8 +202,8 @@ Building and Running AWS IoT Smart Home Example
   .. image:: /img/lab11_builds_2.png
         :alt: smarthome system
 
-4. Interact using EMSK and Dashboard. You can press the button L/R/X to see the led changes on board and also on dashboard web app.
-   You can also click the lights of DESIRED STATUS pane on the dashboard app, and see the led changes on board and dashboard web app.
+5. Try out functions of EMSK and Dashboard. You can press the button L/R/X to see LED toggling on board, and the status of LEDs also changes on dashboard web app.
+   You can also click the lights of *DESIRED STATUS* pane on the dashboard app, and check the reactions of LEDs status on board and dashboard web app.
 
   .. image:: /img/lab11_builds_3.png
         :alt: smarthome system
@@ -215,4 +215,4 @@ This application is designed to show how to connect only 1 EMSK and AWS IoT Clou
 Try to add more nodes and implement a Multi-nodes AWS IoT Smarthome Demo.
 
 .. note::
-    Related demo codes you can find `[here] <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome>`__
+    You could find related demo codes `[here] <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome>`__
