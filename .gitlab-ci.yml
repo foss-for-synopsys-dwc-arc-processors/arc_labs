@@ -1,0 +1,135 @@
+image: python:2.7
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache"
+  OSP_ROOT: "."
+  TOOLCHAIN: "gnu"
+  TOOLCHAIN_VER: "latest"
+  EXAMPLES: "arc_labs/labs"
+  EXPECTED: "arc_labs/.travis/expected.ini"
+
+
+cache:
+  paths:
+    - .cache/pip
+    - .cache/result
+
+
+before_script:
+  - bash .travis/before_install.sh
+
+stages:
+  - build
+  - deploy
+
+labs-emsk-gnu-latest:
+  stage: build
+  variables:
+    BOARD: "emsk"
+  script:
+  - bash .travis/script.sh
+  except:
+  - gh-pages
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - .cache/result
+
+labs-emsk-gnu-201803:
+  stage: build
+  variables:
+    TOOLCHAIN_VER: "2018.03"
+    BOARD: "emsk"
+  script:
+  - bash .travis/script.sh
+  except:
+  - gh-pages
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - .cache/result
+
+labs-iotdk-gnu-latest:
+  stage: build
+  variables:
+    BOARD: "iotdk"
+  script:
+  - bash .travis/script.sh
+  except:
+  - gh-pages
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - .cache/result
+
+labs-iotdk-gnu-201803:
+  stage: build
+  variables:
+    TOOLCHAIN_VER: "2018.03"
+    BOARD: "iotdk"
+  script:
+  - bash .travis/script.sh
+  except:
+  - gh-pages
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - .cache/result
+
+labs-emsk-mw-latest:
+  stage: build
+  variables:
+    BOARD: "emsk"
+    TOOLCHAIN: "mw"
+  script:
+  - bash .travis/script.sh
+  except:
+  - gh-pages
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - .cache/result
+
+labs-emsk-mw-201806:
+  stage: build
+  variables:
+    TOOLCHAIN_VER: "2018.06"
+    BOARD: "emsk"
+    TOOLCHAIN: "mw"
+  script:
+  - bash .travis/script.sh
+  except:
+  - gh-pages
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - .cache/result
+
+labs-iotdk-mw-latest:
+  stage: build
+  variables:
+    BOARD: "iotdk"
+    TOOLCHAIN: "mw"
+  script:
+  - bash .travis/script.sh
+  except:
+  - gh-pages
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - .cache/result
+
+labs-iotdk-mw-201806:
+  stage: build
+  variables:
+    TOOLCHAIN: "mw"
+    TOOLCHAIN_VER: "2018.06"
+    BOARD: "iotdk"
+  script:
+  - bash .travis/script.sh
+  except:
+  - gh-pages
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - .cache/result
