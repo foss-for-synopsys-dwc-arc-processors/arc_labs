@@ -188,14 +188,14 @@
 <li><a class="reference external" href="https://store.digilentinc.com/pmodwifi-wifi-interface-802-11g/">[Digilent PMOD WiFi (MRF24WG0MA)]</a></li>
 <li><a class="reference external" href="https://store.digilentinc.com/pmod-tmp2-temperature-sensor/">[Digilent PMOD TMP2]</a></li>
 <li>SD Card</li>
-<li>WiFi Hotspot (default SSID:<strong>embARC</strong>, Password:<strong>qazwsxedc</strong>, WPA/WPA2 encypted)</li>
+<li>WiFi Hotspot (default SSID: <strong>embARC</strong>, Password: <strong>qazwsxedc</strong>, WPA/WPA2 encypted)</li>
 </ul>
 </div>
 <div class="section" id="required-software">
 <h3>Required Software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>MetaWare or ARC GNU Toolset</li>
-<li>Serial port terminal (e.g. putty, tera-term or minicom)</li>
+<li>MetaWare or ARC GNU Toolchain</li>
+<li>Serial port terminal (e.g. Putty, Tera-term or Minicom)</li>
 </ul>
 </div>
 <div class="section" id="hardware-connection-emsk-board">
@@ -206,7 +206,7 @@
 <img alt="hardware connection" src="../../_images/lab11_emsk_connections.png" />
 <ul class="simple">
 <li>Configure your hardware with proper core configuration.</li>
-<li>The hardware resources are described as per the table below.</li>
+<li>The hardware resources are described at the table below.</li>
 </ul>
 <table border="1" class="docutils">
 <colgroup>
@@ -238,10 +238,10 @@
 <td>Front Door Lock Status (On or Off)</td>
 </tr>
 <tr class="row-even"><td>LED 7</td>
-<td>WiFi connection status (On for connected, Off for not)</td>
+<td>WiFi Connection Status (On for connected, Off for not)</td>
 </tr>
 <tr class="row-odd"><td>LED X</td>
-<td>Node working status (toggling in 2s period if working well)</td>
+<td>Node Working Status (toggling in 2s period if working well)</td>
 </tr>
 <tr class="row-even"><td>PMOD TMP2</td>
 <td>Temperature Sensor</td>
@@ -257,8 +257,8 @@
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <p>This lab provides instructions on how to establish connection between the EMSK and
 Amazon Web Services Internet of Things (AWS IoT) cloud with a simulated smart home application.
-With the help of AWS IoT as a intermediate cloud platform, devices can securely interact with cloud
-applications and other devices. AWS IoT also supports Message Queue Telemetry Transport (MQTT) and
+With the help of AWS IoT as a cloud platform, devices can securely interact with cloud
+applications and other devices. AWS IoT also supports MQ Telemetry Transport (MQTT) and
 provides authentication and end-to-end encryption.</p>
 <img alt="smarthome system" src="../../_images/lab11_smarthome_system.png" />
 <p>This application is designed to show how to connect only 1 EMSK and AWS IoT Cloud
@@ -271,8 +271,8 @@ the connection between EMSK Board and AWS IoT Cloud. The AWS IoT Device C SDK fo
 embedded platform has been optimized and ported for embARC.</p>
 <p>In this lab application, the peripheral modules and onboard resources of EMSK board are used
 to simulate the objects which are controlled and monitored in smart home scenario. The AWS IoT
-Cloud is used as the Cloud host and control platform that communicate with the EMSK
-Board using MQTT protocol. A HTML5 Web APP is designed to provide
+Cloud is used as the cloud host and a controlling platform that communicates with the EMSK
+Board with MQTT protocol. A HTML5 Web APP is designed to provide
 a dash board in order to monitor and control smart home nodes.</p>
 </div>
 <div class="section" id="steps">
@@ -280,13 +280,13 @@ a dash board in order to monitor and control smart home nodes.</p>
 <div class="section" id="creating-and-setting-smart-home-node">
 <h3>Creating and setting smart home node<a class="headerlink" href="#creating-and-setting-smart-home-node" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
-<li><p class="first">Create an AWS account in <a class="reference external" href="https://aws.amazon.com/">[here]</a>. Amazon offers various account levels,
+<li><p class="first">Create an AWS account at <a class="reference external" href="https://aws.amazon.com/">[Amazon AWS Website]</a>. Amazon offers various account levels,
 including a free tier for AWS IoT.</p>
 </li>
 <li><p class="first">Login AWS console and choose AWS IoT.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_1.png" />
 </li>
-<li><p class="first">Choose an appropriate IoT server in the top right corner of the AWS IoT console page.</p>
+<li><p class="first">Choose an appropriate IoT server in the top right corner of the AWS IoT console page. As an example we choose US East (N. Virginia) server, you may choose other server as you see fit.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_2.png" />
 </li>
 <li><p class="first">Create your smart home node in the thing registry and generate X.509 certificate for the
@@ -360,7 +360,7 @@ from the REST API endpoint in AWS IoT console. For example,
 <li><p class="first">Use USB cable to connect the EMSK board. Set the baud rate of the terminal emulator to 115200.</p>
 </li>
 <li><p class="first">Insert the SD Card into the EMSK board SD Card slot. Run the AWS IoT application using JTAG.
-Go to <em>embARC/example/freertos/iot/aws/smarthome_demo</em> in command-line, input the compile command as follow:</p>
+Go to <em>embARC/example/freertos/iot/aws/smarthome_demo</em> in command-line, run the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make TOOLCHAIN=gnu BD_VER=22 CUR_CORE=arcem7d run</span>
 </pre></div>
 </div>
@@ -375,9 +375,9 @@ smart home node. “Updated Accepted !!” means the connection works between th
 <blockquote>
 <div><img alt="smarthome system" src="../../_images/lab11_builds_2.png" />
 </div></blockquote>
-<ol class="arabic simple" start="4">
-<li>Interact using EMSK and Dashboard. You can press the button L/R/X to see the led changes on board and also on dashboard web app.
-You can also click the lights of DESIRED STATUS pane on the dashboard app, and see the led changes on board and dashboard web app.</li>
+<ol class="arabic simple" start="5">
+<li>Try out functions of EMSK and Dashboard. You can press the button L/R/X to see LED toggling on board, and the status of LEDs also changes on dashboard web app.
+You can also click the lights of <em>DESIRED STATUS</em> pane on the dashboard app, and check the reactions of LEDs status on board and dashboard web app.</li>
 </ol>
 <blockquote>
 <div><img alt="smarthome system" src="../../_images/lab11_builds_3.png" />
@@ -390,7 +390,7 @@ You can also click the lights of DESIRED STATUS pane on the dashboard app, and s
 Try to add more nodes and implement a Multi-nodes AWS IoT Smarthome Demo.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Related demo codes you can find <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome">[here]</a></p>
+<p class="last">You could find related demo codes <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome">[here]</a></p>
 </div>
 </div>
 </div>
