@@ -216,6 +216,17 @@ how to program theses on-board peripherals of EM Starter Kit.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<p>iotdk board has a arduino inteface, wo choose arduino digital pinout D0(iotdk gpio4b_2[0]) to control LED.</p>
+<ol class="arabic simple">
+<li>find a led, connect the led anode pin to D0, connect the led cathode pin to iotdk onboard gnd.</li>
+<li>compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_iotdk</span></code> example.</li>
+</ol>
+<img alt="lab5_iotdk_pin_connect" src="../../_images/lab5_iotdk_pin_connect.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the connect between led and iotdk board is just for test.
+a 1kΩ resistor should be added to limited the electric current.</p>
+</div>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
