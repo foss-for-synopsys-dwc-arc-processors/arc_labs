@@ -27,7 +27,7 @@ Principles
 
 1. |emsk|
 
-For the basic introduciton of |emsk|, please go `here <http://embarc.org/embarc_osp/doc/build/html/board/emsk.html>`__
+For the basic introduction of |emsk|, please go `here <http://embarc.org/embarc_osp/doc/build/html/board/emsk.html>`__
 
 There are on board LEDs, DIP switchs and button on |emsk|, this lab will show
 how to program theses on-board peripherals of |emsk|.
