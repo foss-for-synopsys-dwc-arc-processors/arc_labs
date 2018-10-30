@@ -190,8 +190,8 @@
 <p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
-<li>ARC GNU toolchain/MetaWare Development Toolkit</li>
-<li>ARC board (EM Starter kit/IoT Development Kit)</li>
+<li>GNU Toolchain for ARC Processors / MetaWare Development Toolkit</li>
+<li>ARC board (EM Starter Kit / IoT Development Kit)</li>
 <li>embARC OSP package</li>
 <li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab9_freertos</span></code></li>
 </ul>
@@ -205,12 +205,12 @@
 <div class="section" id="background">
 <h3>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
 <p>A Real Time Operating System (RTOS) is an operating system intended to serve real-time applications that process data in within a predefined time period.</p>
-<p>As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. This is why FreeRTOS is selected.</p>
+<p>As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly insignificant. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, open-sourced RTOS with complete documents. This is why FreeRTOS is selected.</p>
 </div>
 <div class="section" id="design">
 <h3>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h3>
 <p>This lab implements a running LED light with 3 tasks on FreeRTOS. Despite using 3 tasks overkill for a running LED, but it is beneficial for the understanding of FreeRTOS itself and inter-task communication as well.</p>
-<p>The followin is the flow chart of the program:</p>
+<p>The following is the flow chart of the program:</p>
 <img alt="program flow chart" src="../../_images/lab9_program_flow_chart.png" />
 </div>
 <div class="section" id="realization">
@@ -340,9 +340,9 @@
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="build-and-run-the-incompleted-code">
-<h3>Build and run the incompleted code<a class="headerlink" href="#build-and-run-the-incompleted-code" title="Permalink to this headline">¶</a></h3>
-<p>The code is at <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab9_freertos</span></code>, uses an UART terminal console and run the code, the followine message from program is displayed:</p>
+<div class="section" id="build-and-run-the-uncompleted-code">
+<h3>Build and run the uncompleted code<a class="headerlink" href="#build-and-run-the-uncompleted-code" title="Permalink to this headline">¶</a></h3>
+<p>The code is at <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab9_freertos</span></code>, uses an UART terminal console and run the code, the following message from program is displayed:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar  9 2018, 17:57:50</span>
 <span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1 (branches/release_40)</span>
 <span class="go">Create task1 Successfully</span>
@@ -350,7 +350,7 @@
 <span class="go">Create task3 Successfully</span>
 </pre></div>
 </div>
-<p>This message implys that three tasks are working correctly.</p>
+<p>This message implies that three tasks are working correctly.</p>
 </div>
 <div class="section" id="implement-task-3">
 <h3>Implement task 3<a class="headerlink" href="#implement-task-3" title="Permalink to this headline">¶</a></h3>

@@ -14,8 +14,8 @@ Equipment
 The following hardware and tools are required:
 
 * PC host
-* ARC GNU toolchain/MetaWare Development Toolkit
-* ARC board (EM Starter kit/IoT Development Kit)
+* |arcgnu| / |mwdt|
+* ARC board (|emsk| / |iotdk|)
 * |embarc| package
 * ``embarc_osp/arc_labs/labs/lab9_freertos``
 
@@ -30,13 +30,13 @@ Background
 ----------
 A Real Time Operating System (RTOS) is an operating system intended to serve real-time applications that process data in within a predefined time period.
 
-As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly neglectable. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, opensourced RTOS with complete documents. This is why FreeRTOS is selected.
+As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly insignificant. RTOS also provides event-driven mode for better utilization of CPU with efficiency. Among RTOSs for micro processors, FreeRTOS stands out as a free for use, open-sourced RTOS with complete documents. This is why FreeRTOS is selected.
 
 Design
 ------
 This lab implements a running LED light with 3 tasks on FreeRTOS. Despite using 3 tasks overkill for a running LED, but it is beneficial for the understanding of FreeRTOS itself and inter-task communication as well.
 
-The followin is the flow chart of the program:
+The following is the flow chart of the program:
 
 .. image:: /img/lab9_program_flow_chart.png
     :alt: program flow chart
@@ -170,9 +170,9 @@ The following is the example code of system , including various initialization a
 Steps
 =====
 
-Build and run the incompleted code
+Build and run the uncompleted code
 ----------------------------------
-The code is at ``embarc_osp/arc_labs/labs/lab9_freertos``, uses an UART terminal console and run the code, the followine message from program is displayed:
+The code is at ``embarc_osp/arc_labs/labs/lab9_freertos``, uses an UART terminal console and run the code, the following message from program is displayed:
 
 .. code-block:: console
 
@@ -182,7 +182,7 @@ The code is at ``embarc_osp/arc_labs/labs/lab9_freertos``, uses an UART terminal
 	Create task2 Successfully
 	Create task3 Successfully
 
-This message implys that three tasks are working correctly.
+This message implies that three tasks are working correctly.
 
 Implement task 3
 ----------------

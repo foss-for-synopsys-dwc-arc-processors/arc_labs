@@ -182,9 +182,9 @@
 <div class="section" id="purpose">
 <h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Learn how to build a wireless sensor terminal based on the embARC_osp package</li>
-<li>Further familiarity with the use of the FreeRTOS operating system</li>
-<li>Learn about the use of the esp8266 module and AT command</li>
+<li>To learn how to build a wireless sensor terminal based on the embARC OSP package</li>
+<li>To know how to use ESP8266 module and AT commands</li>
+<li>To learn more about the usage of FreeRTOS operating system</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -192,30 +192,36 @@
 <p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
-<li>ARC GNU toolchain/MetaWare Development Toolkit</li>
-<li>ARC board (EM Starter kit/IoT Development Kit)</li>
+<li>GNU Toolchain for ARC Processors / MetaWare Development Toolkit</li>
+<li>ARC board (EM Starter Kit / IoT Development Kit)</li>
 <li>embARC OSP package</li>
 <li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab10_esp8266_wifi</span></code></li>
 </ul>
 </div>
 <div class="section" id="content">
 <h3>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h3>
-<p>This experiment is based on the embARC_osp package extension to support the popular esp8266 WIFI module, use the AT command to set the esp8266 to the server mode, and then use the PC or mobile phone in the same LAN to access it’s IP address, based on the TCP protocol to achieve static page display of the client.</p>
-<p>Through this experiment, you get a preliminary understanding of the use of the esp8266 WIFI module and the AT command.</p>
+<p>Through this lab, you get a preliminary understanding of ESP8266 WIFI module and the AT command.</p>
+<p>The lab is based on the embARC OSP package and on the supports of the popular WIFI module, ESP8266.
+During the lab, you will first use the AT command to set the ESP8266 to the server mode.
+Then you can use your labtop or mobile phone to access ESP8266 by IP address.
+You will get a static webpage transmitted via TCP protocol.</p>
 </div>
 <div class="section" id="principles">
 <h3>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h3>
-<p><strong>Esp8266</strong></p>
-<p>The ESP8266 is an ultra-low-power Wi-Fi chip with industry-leading package size and ultra-low power technology designed for mobile devices and IoT applications, connecting users’ physical devices to Wi-Fi wireless on the network, Internet, or LAN communication is implemented to implement networking functions.</p>
-<p>The ESP8266 is available in a variety of encapsulation. The antenna supports the onboard PCB antenna, IPEX interface, and stamp hole interface.</p>
-<p>ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handheld devices, industrial control, and other fields.</p>
-<p>Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as it’s core(The Wi-Fi modules are described later).</p>
+<p><strong>ESP8266</strong></p>
+<p>The ESP8266 is an ultra-low-power WIFI chip with industry-leading package size and ultra-low power technology.
+It is designed for mobile devices and IoT applications, facilitating the connection between user devices to IoT environments.</p>
+<p>The ESP8266 is available with various encapsulations. Onboard PCB antenna, IPEX interface, and stamp hole interface are supported.</p>
+<p>ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handhold devices, industrial control, and other IoT fields.</p>
+<p>Ai-Thinker company has developed several WIFI modules based on ESP8266, including ESP01 and ESP01S which will be used in this lab.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/getting_started/peripheral_preparation.html#other-pmod-or-compatible-modules">embARC doc</a> to learn how to connect it with your board.</p>
+</div>
 <p><img alt="figure1" src="../../_images/lab10.2_figure1.png" /></p>
-<p><strong>Program structure</strong>
-(as shown bellow)</p>
+<p><strong>Program structure</strong> is shown below</p>
 <p><img alt="figure2" src="../../_images/lab10.2_figure2.png" /></p>
-<p><strong>Code</strong>
-(as shown bellow)</p>
+<p><strong>Code</strong> is shown below</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 
@@ -226,7 +232,7 @@
 <span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
 
-<span class="cp">#define WIFI_SSID   &quot;\&quot;liu\&quot;&quot;</span>
+<span class="cp">#define WIFI_SSID   &quot;\&quot;embARC\&quot;&quot;</span>
 <span class="cp">#define WIFI_PWD    &quot;\&quot;12345678\&quot;&quot;</span>
 
 <span class="k">static</span> <span class="kt">char</span> <span class="n">http_get</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;GET /&quot;</span><span class="p">;</span>
@@ -333,85 +339,81 @@
 <div class="section" id="steps">
 <h3>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
 <p><strong>Hardware connection</strong>
-(as shown bellow)</p>
+(as shown below)</p>
 <p><img alt="figure3" src="../../_images/lab10.2_figure3.png" /></p>
 <p><strong>Compile and download</strong></p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Compile and download the program, after downloading successfully, you will see the relevant download information in the cmd window(shown bellow).
-=======
-Compile and download the program, after downloading successfully, the relevant download information is displayed in the command window(as shown in the following example).
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; pavan</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>0x00000004 in ?? ()
-Loading section .init, size 0x1b0 lma 0x10000000
-Loading section .vector, size 0x400 lma 0x10000400
-Loading section .text, size 0x1446c lma 0x10000800
-Loading section .rodata, size 0x1cb4 lma 0x10014c6c
-Loading section .data, size 0xc2c lma 0x10016920
-Start address 0x10000004, load size 94972
-Transfer rate: 602 KB/sec, 9497 bytes/write.
-Continuing.
+<p>Compile and download the program, after downloading successfully, the relevant download information is displayed in the command window(as shown in the following example).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">0x00000004 in ?? ()</span>
+<span class="go">Loading section .init, size 0x1b0 lma 0x10000000</span>
+<span class="go">Loading section .vector, size 0x400 lma 0x10000400</span>
+<span class="go">Loading section .text, size 0x1446c lma 0x10000800</span>
+<span class="go">Loading section .rodata, size 0x1cb4 lma 0x10014c6c</span>
+<span class="go">Loading section .data, size 0xc2c lma 0x10016920</span>
+<span class="go">Start address 0x10000004, load size 94972</span>
+<span class="go">Transfer rate: 602 KB/sec, 9497 bytes/write.</span>
+<span class="go">Continuing.</span>
 </pre></div>
 </div>
-<p>At this point, the serial port debugging tool sees the serial port feedback information, reflecting the process of the EMSK development board using the AT command to establish the http server(as shown bellow).</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>embARC Build Time: Mar 21 2018, 17:53:27
-Compiler Version: ARC GNU, 7.1.1 20170710
-============================ Init ============================
-[at_parser_init]56: obj-&gt;psio 0x1006ba30 -&gt; 0x10057948
+<p>At this point, feedback information will be shown on your serial port console, representing the process of the board establishing connection with http server with AT command (showing below).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar 21 2018, 17:53:27</span>
+<span class="go">Compiler Version: ARC GNU, 7.1.1 20170710</span>
+<span class="go">============================ Init ============================</span>
+<span class="go">[at_parser_init]56: obj-&gt;psio 0x1006ba30 -&gt; 0x10057948</span>
 
-.............
+<span class="go">.............</span>
 
-OK&quot; (9)
-============================ Set Mode ============================
-[at_send_cmd]117: at_out: &quot;AT+CWMODE_CUR?
-&quot; (16)
+<span class="go">OK&quot; (9)</span>
+<span class="go">============================ Set Mode ============================</span>
+<span class="go">[at_send_cmd]117: at_out: &quot;AT+CWMODE_CUR?</span>
+<span class="go">&quot; (16)</span>
 
-.................
+<span class="go">.................</span>
 
-OK&quot; (24)
-============================ Connect WiFi ============================
-[at_send_cmd]117: at_out: &quot;AT+CWLAP
-&quot; (10)
+<span class="go">OK&quot; (24)</span>
+<span class="go">============================ Connect WiFi ============================</span>
+<span class="go">[at_send_cmd]117: at_out: &quot;AT+CWLAP</span>
+<span class="go">&quot; (10)</span>
 
-..................
+<span class="go">..................</span>
 
-OK&quot; (24)
-[at_send_cmd]117: at_out: &quot;AT+CWJAP_CUR=&quot;liusongwei&quot;,&quot;632139751&quot;
+<span class="go">OK&quot; (24)</span>
+<span class="go">[at_send_cmd]117: at_out: &quot;AT+CWJAP_CUR=&quot;embARC_test&quot;,&quot;123456789&quot;</span>
 
-..........
+<span class="go">..........</span>
 
-WIFI &quot;liusongwei&quot; connect succeed
-============================ Connect Server ============================
-[at_send_cmd]117: at_out: &quot;AT+CIPMUX=1
-&quot; (13)
+<span class="go">WIFI &quot;embARC_test&quot; connect succeed</span>
+<span class="go">============================ Connect Server ============================</span>
+<span class="go">[at_send_cmd]117: at_out: &quot;AT+CIPMUX=1</span>
+<span class="go">&quot; (13)</span>
 
-........
+<span class="go">........</span>
 
-OK&quot; (26)
-============================ Show IP ============================
-[at_send_cmd]117: at_out: &quot;AT+CIFSR
-&quot; (10)
-[at_get_reply]137: &quot;
-AT+CIFSR
-+CIFSR:STAIP,&quot;192.168.137.81&quot;
-+CIFSR:STAMAC,&quot;5c:cf:7f:0b:5c:d1&quot;
+<span class="go">OK&quot; (26)</span>
+<span class="go">============================ Show IP ============================</span>
+<span class="go">[at_send_cmd]117: at_out: &quot;AT+CIFSR</span>
+<span class="go">&quot; (10)</span>
+<span class="go">[at_get_reply]137: &quot;</span>
+<span class="go">AT+CIFSR</span>
+<span class="go">+CIFSR:STAIP,&quot;192.168.137.81&quot;</span>
+<span class="go">+CIFSR:STAMAC,&quot;5c:cf:7f:0b:5c:d1&quot;</span>
 
-OK&quot; (83)
-============================ while ============================
-.............
-============================ send  ============================
-..............
+<span class="go">OK&quot; (83)</span>
+<span class="go">============================ while ============================</span>
+<span class="go">.............</span>
+<span class="go">============================ send  ============================</span>
+<span class="go">..............</span>
 
-Send Start
-Send Finish
+<span class="go">Send Start</span>
+<span class="go">Send Finish</span>
 </pre></div>
 </div>
 <p><strong>Access server</strong></p>
-<p>It can be seen from the serial port feedback information in above <em>Compile and download</em> that the EMSK development board has successfully connected to the target WI-FI through esp8266, and is set to the server mode by using the AT command, and the IP address of the server is given.</p>
-<p>At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page.</p>
+<p>The serial port feedback information above shows that the board has successfully connected to the target WIFI through ESP8266. It is set to the server mode by using the AT command, and the IP address of the server is also given.</p>
+<p>At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page. Notice the IP address that you enter should be the same IP address shown in <em>Show IP</em> section at your serial port console.</p>
 </div>
 <div class="section" id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
-<p>Referring to the experiment of MRF24G WIFI module, using esp8266 and TCN75 temperature sensor to build http server to make the page display the sensor temperature in real time.</p>
+<p>Referring to the embARC documents, using ESP8266 and TCN75 temperature sensor to build http server to make the page display the sensor temperature in real time.</p>
 </div>
 </div>
 </div>
