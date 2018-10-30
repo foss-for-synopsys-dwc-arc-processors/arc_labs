@@ -160,7 +160,7 @@ To test the following example, some modification of the code is required to have
 
 ``buildlib my_dsp -tcf=<IOTDK tcf file> -bd . -f``
 
-|iotdk| tcf file can be found in `<https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/tree/feature/iotdk/board/iotdk/configs/10/tcf/arcem9d.tcf>`_
+|iotdk| tcf file can be found in ``embarc_osp/board/iotdk/configs/10/tcf/arcem9d.tcf``
 
 Both examples are to be compiled with DSP extensions, with the following options set:
 
