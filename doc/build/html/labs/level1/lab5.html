@@ -196,9 +196,13 @@
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Board introduction</li>
-<li>Board programming</li>
+<li>Board introduction.</li>
 </ol>
+<p>Through the user manual, get a brief knowLEDge of ARC board and what peripherals are on it.</p>
+<ol class="arabic simple" start="2">
+<li>Board programming.</li>
+</ol>
+<p>Based on embARC OSP, program the on board peripherals.</p>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
@@ -208,28 +212,48 @@
 <p>For the basic introduction of EM Starter Kit, please go <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/board/emsk.html">here</a></p>
 <p>There are on board LEDs, DIP switchs and button on EM Starter Kit, this lab will show
 how to program theses on-board peripherals of EM Starter Kit.</p>
+<p>The code for EM Starter Kit is located in <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab5_emsk</span></code>. In the code, the button and DIP switch values
+of EM Starter Kit are read and LED blinks periodically.</p>
 <ol class="arabic simple" start="2">
 <li>IoT Development Kit</li>
 </ol>
 <p>For the basic introduction of IoT Development Kit, please go <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/board/iotdk.html">here</a></p>
-<p>As there are no easy-to-use on board peripherals like LEDs on EM Starter Kit, this lab will show how to control a LED through the arduino inteface of IoT Development Kit.</p>
+<p>As there are no easy-to-use on board peripherals like LEDs on EM Starter Kit, this lab will show how to control a LED through the arduino interface of IoT Development Kit.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
-<p>iotdk board has a arduino inteface, wo choose arduino digital pinout ARDUINO_PIN_0(iotdk gpio4b_2[0]) to control LED.</p>
+<div class="section" id="emsk">
+<h3>EM Starter Kit<a class="headerlink" href="#emsk" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>find a led, connect the led anode pin to ARDUINO_PIN_0, connect the led cathode pin to iotdk onboard gnd.</li>
+<li>Connect EM Starter Kit to PC, select <strong>em7d</strong> configuration and open UART terminal.</li>
+<li>Compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_emsk</span></code> example with the following cmds.</li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd /arc_labs/lab5_emsk</span>
+<span class="go">make TOOLCHAIN=gnu BOARD=emsk BD_VER=22 CUR_CORE=em7d run</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Watch the changes of LED, press the button or operate the DIP switch, then watch the result in UART terminal.</li>
+</ol>
+</div>
+<div class="section" id="iotdk">
+<h3>IoT Development Kit<a class="headerlink" href="#iotdk" title="Permalink to this headline">¶</a></h3>
+<p><a href="#id1"><span class="problematic" id="id2">|</span></a>iotdk has a arduino interface, here select arduino digital pinout ARDUINO_PIN_0(iotdk gpio4b_2[0]) to control LED.</p>
+<ol class="arabic simple">
+<li>find a LED, connect the LED anode pin to ARDUINO_PIN_0, connect the LED cathode pin to GND of IoT Development Kit.</li>
 <li>compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_iotdk</span></code> example.</li>
 </ol>
 <img alt="lab5_iotdk_pin_connect" src="../../_images/lab5_iotdk_pin_connect.png" />
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">the connect between led and iotdk board is just for test.
-a 1kΩ resistor should be added to limited the electric current.</p>
+<p class="last">the connect between LED and IoT Development Kit is just for test.
+a 1kΩ resistor should be added to limited the current.</p>
+</div>
 </div>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>Try to create you own application to program the peripherals of ARC board</p>
 </div>
 </div>
 

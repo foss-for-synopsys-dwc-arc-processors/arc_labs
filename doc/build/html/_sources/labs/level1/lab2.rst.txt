@@ -89,7 +89,7 @@ You have checked out a copy of the source code to your local machine.
 
 * http download
 
-You may also try to get the latest release of embarc as a zip from the repository,
+You may also try to get the latest release of |embarc| as a zip from the repository,
 see `release page <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp/releases>`__.
 
 Run the examples
@@ -126,7 +126,7 @@ Use the **blinky** as an example.
 
 * For EMSK, you can see the on-board LEDs start to blink when the download is successful.
 
-* For IoTDK, as it does not have usable LEDs except some status leds, tje outoput log is displayed from the UART.
+* For IoTDK, as it does not have usable LEDs except some status LEDs, the following outoput log is displayed through UART.
 
 .. code-block:: console
 
