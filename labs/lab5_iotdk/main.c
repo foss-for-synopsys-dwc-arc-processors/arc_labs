@@ -46,7 +46,7 @@ int main(void)
 {
 	DEV_GPIO_PTR gpio_led;
 
-	arduino_pin_mux(ARDUINO_D0, ARDUINO_FUNC_GPIO);
+	io_arduino_config(ARDUINO_PIN_0, ARDUINO_GPIO, IO_PINMUX_ENABLE);
 
 	gpio_led = gpio_get_dev(IOTDK_LED_ID);
 	if (gpio_led->gpio_open((1 << IOTDK_LED_PIN)) == E_OPNED)
