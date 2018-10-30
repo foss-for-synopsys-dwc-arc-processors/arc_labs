@@ -9,49 +9,54 @@ ESPB266 WIFI module
 Purpose
 ^^^^^^^^
 
-* Learn how to build a wireless sensor terminal based on the embARC_osp package
-* Further familiarity with the use of the FreeRTOS operating system
-* Learn about the use of the esp8266 module and AT command
+* To learn how to build a wireless sensor terminal based on the |embarc| package
+* To know how to use ESP8266 module and AT commands
+* To learn more about the usage of FreeRTOS operating system
 
 Equipment
 ^^^^^^^^^^
 The following hardware and tools are required:
 
 * PC host
-* ARC GNU toolchain/MetaWare Development Toolkit
-* ARC board (EM Starter kit/IoT Development Kit)
+* |arcgnu| / |mwdt|
+* ARC board (|emsk| / |iotdk|)
 * |embarc| package
 * ``embarc_osp/arc_labs/labs/lab10_esp8266_wifi``
 
 Content
 ^^^^^^^^
 
-This experiment is based on the embARC_osp package extension to support the popular esp8266 WIFI module, use the AT command to set the esp8266 to the server mode, and then use the PC or mobile phone in the same LAN to access it's IP address, based on the TCP protocol to achieve static page display of the client.
+Through this lab, you get a preliminary understanding of ESP8266 WIFI module and the AT command.
 
-Through this experiment, you get a preliminary understanding of the use of the esp8266 WIFI module and the AT command.
+The lab is based on the |embarc| package and on the supports of the popular WIFI module, ESP8266.
+During the lab, you will first use the AT command to set the ESP8266 to the server mode.
+Then you can use your labtop or mobile phone to access ESP8266 by IP address.
+You will get a static webpage transmitted via TCP protocol.
+
 
 Principles
 ^^^^^^^^^^^^
 
-**Esp8266**
+**ESP8266**
 
-The ESP8266 is an ultra-low-power Wi-Fi chip with industry-leading package size and ultra-low power technology designed for mobile devices and IoT applications, connecting users' physical devices to Wi-Fi wireless on the network, Internet, or LAN communication is implemented to implement networking functions.
+The ESP8266 is an ultra-low-power WIFI chip with industry-leading package size and ultra-low power technology.
+It is designed for mobile devices and IoT applications, facilitating the connection between user devices to IoT environments.
 
-The ESP8266 is available in a variety of encapsulation. The antenna supports the onboard PCB antenna, IPEX interface, and stamp hole interface.
+The ESP8266 is available with various encapsulations. Onboard PCB antenna, IPEX interface, and stamp hole interface are supported.
 
-ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handheld devices, industrial control, and other fields.
+ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handhold devices, industrial control, and other IoT fields.
 
-Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as it's core(The Wi-Fi modules are described later).
+Ai-Thinker company has developed several WIFI modules based on ESP8266, including ESP01 and ESP01S which will be used in this lab.
+
+.. note::  See `embARC doc <http://embarc.org/embarc_osp/doc/build/html/getting_started/peripheral_preparation.html#other-pmod-or-compatible-modules>`_ to learn how to connect it with your board.
 
 |figure1|
 
-**Program structure**
-(as shown bellow)
+**Program structure** is shown below
 
 |figure2|
 
-**Code**
-(as shown bellow)
+**Code** is shown below
 
 .. code-block:: c
 
@@ -65,7 +70,7 @@ Ai-Thinker company has developed several Wi-Fi modules with ESP8266 as it's core
     #include <stdio.h>
     #include <string.h>
 
-    #define WIFI_SSID	"\"liu\""
+    #define WIFI_SSID	"\"embARC\""
     #define WIFI_PWD	"\"12345678\""
 
     static char http_get[] = "GET /";
@@ -172,19 +177,15 @@ Steps
 ^^^^^^^
 
 **Hardware connection**
-(as shown bellow)
+(as shown below)
 
 |figure3|
 
 **Compile and download**
 
-<<<<<<< HEAD
-Compile and download the program, after downloading successfully, you will see the relevant download information in the cmd window(shown bellow).
-=======
 Compile and download the program, after downloading successfully, the relevant download information is displayed in the command window(as shown in the following example).
->>>>>>> pavan
 
-.. code-block:: guess
+.. code-block:: console
 
     0x00000004 in ?? ()
     Loading section .init, size 0x1b0 lma 0x10000000
@@ -196,9 +197,9 @@ Compile and download the program, after downloading successfully, the relevant d
     Transfer rate: 602 KB/sec, 9497 bytes/write.
     Continuing.
 
-At this point, the serial port debugging tool sees the serial port feedback information, reflecting the process of the EMSK development board using the AT command to establish the http server(as shown bellow).
+At this point, feedback information will be shown on your serial port console, representing the process of the board establishing connection with http server with AT command (showing below).
 
-.. code-block:: guess
+.. code-block:: console
 
     embARC Build Time: Mar 21 2018, 17:53:27
     Compiler Version: ARC GNU, 7.1.1 20170710
@@ -222,11 +223,11 @@ At this point, the serial port debugging tool sees the serial port feedback info
     ..................
 
     OK" (24)
-    [at_send_cmd]117: at_out: "AT+CWJAP_CUR="liusongwei","632139751"
+    [at_send_cmd]117: at_out: "AT+CWJAP_CUR="embARC_test","123456789"
 
     ..........
 
-    WIFI "liusongwei" connect succeed
+    WIFI "embARC_test" connect succeed
     ============================ Connect Server ============================
     [at_send_cmd]117: at_out: "AT+CIPMUX=1
     " (13)
@@ -253,14 +254,14 @@ At this point, the serial port debugging tool sees the serial port feedback info
 
 **Access server**
 
-It can be seen from the serial port feedback information in above *Compile and download* that the EMSK development board has successfully connected to the target WI-FI through esp8266, and is set to the server mode by using the AT command, and the IP address of the server is given.
+The serial port feedback information above shows that the board has successfully connected to the target WIFI through ESP8266. It is set to the server mode by using the AT command, and the IP address of the server is also given.
 
-At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page.
+At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page. Notice the IP address that you enter should be the same IP address shown in *Show IP* section at your serial port console.
 
 Exercises
 ^^^^^^^^^^
 
-Referring to the experiment of MRF24G WIFI module, using esp8266 and TCN75 temperature sensor to build http server to make the page display the sensor temperature in real time.
+Referring to the embARC documents, using ESP8266 and TCN75 temperature sensor to build http server to make the page display the sensor temperature in real time.
 
 .. |figure1| image:: /img/lab10.2_figure1.png
 .. |figure2| image:: /img/lab10.2_figure2.png
