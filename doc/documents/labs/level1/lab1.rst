@@ -3,8 +3,8 @@
 How to Use ARC IDE
 ======================
 
-MetaWare ToolKit
------------------
+|mwdt|
+------
 
 Purpose
 ^^^^^^^^
@@ -27,7 +27,7 @@ Content
 ^^^^^^^^^
 
 * Create a C project using the |mwdt|
-* Import the code ``CoreTest.c``
+* Import the code ``CoreTest.c`` from ``embarc_osp/arc_labs/labs/lab1_core_test``
 * Configure compilation options to compile, and generate executable files.
 * Start the debugger of |mwdt| and enter debug mode.
 
@@ -262,7 +262,7 @@ Content
 ^^^^^^^^^^^
 
 * Create a C project using |arcgnu|
-* Import the routine code ``CoreTest.c``
+* Import the code ``CoreTest.c`` from ``embarc_osp/arc_labs/labs/lab1_core_test``
 * Configure compilation options to compile, and generate executable files.
 * Start the |arcgnu| debugger to enter the debug mode
 
