@@ -19,7 +19,7 @@ Equipment
 Content
 ========
 
-1. Board introduciton
+1. Board introduction
 2. Board programming
 
 Principles
@@ -41,9 +41,9 @@ As there are no easy-to-use on board peripherals like LEDs on |emsk|, this lab w
 Steps
 =====
 
-iotdk board has a arduino inteface, wo choose arduino digital pinout D0(iotdk gpio4b_2[0]) to control LED.
+iotdk board has a arduino inteface, wo choose arduino digital pinout ARDUINO_PIN_0(iotdk gpio4b_2[0]) to control LED.
 
-1. find a led, connect the led anode pin to D0, connect the led cathode pin to iotdk onboard gnd.
+1. find a led, connect the led anode pin to ARDUINO_PIN_0, connect the led cathode pin to iotdk onboard gnd.
 
 2. compile and run the ``embarc_osp/arc_labs/lab5_iotdk`` example.
 
