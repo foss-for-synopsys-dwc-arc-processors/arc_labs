@@ -305,7 +305,7 @@ through the timer interrupt.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">EMBARC_PRINTF</span></code> function in this code is only used to send information to the computer, which can be ignored during analysis.</p>
 <p>This code is divided into two parts: initialization and looping.</p>
 <p>In the initialization section, the timer and timer interrupts are configured.</p>
-<p>Unlike Lab 3, this code uses the embARC OSP API to program timer0. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.</p>
+<p>Unlike Lab 3, this code uses the embARC OSP API to program <strong>Timer0</strong>. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.</p>
 <p><strong>First</strong>, in order to configure <strong>Timer0</strong> and it’s interrupts, turn them off first. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_disable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_stop</span></code>.</p>
 <p><strong>Then</strong> configure the interrupt service function and priority for our interrupts. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_handler_install</span></code> and <code class="docutils literal notranslate"><span class="pre">int_pri_set</span></code>.</p>
 <p><strong>Finally</strong>, after the interrupt configuration is complete, enable the <strong>Timer0</strong> and interrupts that are previously turned off. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_enable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>.
@@ -328,8 +328,8 @@ The implementation of the <code class="docutils literal notranslate"><span class
 <p>This code is very simple and the idea is clear. When the function entered, clear the global variable t0. The interrupt interval is set to 1ms in the above timer_start, assume that every time t0 is incremented, the time has passed 1ms.</p>
 <p>Wait through the while(t0&lt;ms) sentence, so that the full ms delay with higher precision is received.</p>
 </div>
-<div class="section" id="lab-one-labal-phenomenon">
-<h3>Lab one Labal phenomenon<a class="headerlink" href="#lab-one-labal-phenomenon" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="lab-one-output">
+<h3>Lab one output<a class="headerlink" href="#lab-one-output" title="Permalink to this headline">¶</a></h3>
 <p>After the lab one program is successfully downloaded, the serial output is as follows:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar 16 2018, 09:58:46</span>
 <span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1</span>
@@ -581,14 +581,14 @@ and interrupt nesting.</p>
 </div>
 <p>The main function looks very long, there is a considerable part of it that is repetitive (you can also build a small function to make the code look more concise).</p>
 <p>In the first lab, the configuration of the timer and the creation of the interrupt is discussed and it is not repeated here.</p>
-<p>The main function is simple: when the interrupt of timer0 occurs 5 times, change the priority relationship of the two interrupts. The hits mentioned earlier are count variables in the above functions.</p>
+<p>The main function is simple: when the interrupt of <strong>Timer0</strong> occurs 5 times, change the priority relationship of the two interrupts. The hits mentioned earlier are count variables in the above functions.</p>
 </div>
-<div class="section" id="lab-two-label-phenomenon">
-<h3>Lab two Label phenomenon<a class="headerlink" href="#lab-two-label-phenomenon" title="Permalink to this headline">¶</a></h3>
-<p>The label phenomenon of Lab two is shown in the follogin figure.</p>
+<div class="section" id="lab-two-output">
+<h3>Lab two output<a class="headerlink" href="#lab-two-output" title="Permalink to this headline">¶</a></h3>
+<p>The label phenomenon of Lab two is shown in the following figure.</p>
 <p>“Interrupt nesting!” indicates that interrupt nesting has occurred, and “Interrupt” indicates that it has not occurred.</p>
 <p>For a better understanding, go back and look at the priority settings in the main function.</p>
-<p>It is easy to see that when timer0 interrupt priority is low (INT_PRI_MAX is low priority, a lager numbes means a lower priority in ARC), timer1 interrupt can preempt timer0 interrupt; when timer0 interrupt priority is high, timer1 interrupt cannot interrupt/preempty its ISR execution.</p>
+<p>It is easy to see that when <strong>Timer0</strong> interrupt priority is low (INT_PRI_MAX is low priority, a lager number means a lower priority in ARC), <strong>Timer1</strong> interrupt can preempt <strong>Timer0</strong> interrupt; when <strong>Timer0</strong> interrupt priority is higher, <strong>Timer1</strong> interrupt cannot interrupt/preempt its ISR execution.</p>
 <p>To summarize, high-priority interrupts can interrupt low-priority interrupts, and low-priority interrupts can be preempted by high-priority interrupts.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar 16 2018, 09:58:46</span>
 <span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1</span>
@@ -621,7 +621,7 @@ and interrupt nesting.</p>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
-<p>Try using an interrupt other than a timer to write a small program. (For example, try to implement a button controled LED using GPIO interrupt)</p>
+<p>Try using an interrupt other than a timer to write a small program. (For example, try to implement a button controlled LED using GPIO interrupt)</p>
 </div>
 </div>
 

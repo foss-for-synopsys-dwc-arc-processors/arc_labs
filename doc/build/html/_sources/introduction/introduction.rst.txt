@@ -21,18 +21,18 @@ This handbook includes 12 labs (more labs are added in the future), which are cl
 
 The labs in this level cover the basic topics about |arc|, for example, the
 installation and usage of hardware and software tools, software or hardware
-development kits, first hello world example, interrupt hanlding and internal timers of |arc|, and so on.
+development kits, first hello world example, interrupt handling and internal timers of |arc|, and so on.
 
 * :ref:`Level 2: ARC advanced <level2_labs>`
 
 The labs in this level cover the advanced topics about |arc|, for example,
 Real-Time Operating System (RTOS), customized linkage, compiler optimization,
-basic applicaitons, |arc| DSP feature, and so on.
+basic applications, |arc| DSP feature, and so on.
 
 * :ref:`Level 3: ARC exploration <level3_labs>`
 
 The labs in this level cover some complex applications about |arc|, for example,
-Internet of Thinggs (IoT) application, embedded machine learning, and so on.
+Internet of Things (IoT) application, embedded machine learning, and so on.
 
 Most of the labs are based on the `embARC Open Software Platform (OSP) <https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_osp>`__ which is an open
 software platform to facilitate the development of embedded systems based on

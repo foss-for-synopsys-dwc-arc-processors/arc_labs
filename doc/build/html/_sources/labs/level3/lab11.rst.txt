@@ -13,7 +13,7 @@ Purpose
 Equipment
 =========
 
-Reguired Hardware
+Required Hardware
 -----------------
 
 - `[DesignWare ARC EM Starter Kit (EMSK)] <https://www.synopsys.com/dw/ipdir.php?ds=arc_em_starter_kit>`_
@@ -24,7 +24,7 @@ Reguired Hardware
 
 - SD Card
 
-- WiFi Hotspot (default SSID: **embARC**, Password: **qazwsxedc**, WPA/WPA2 encypted)
+- WiFi Hotspot (default SSID: **embARC**, Password: **qazwsxedc**, WPA/WPA2 encrypted)
 
 Required Software
 -----------------
@@ -82,7 +82,7 @@ This lab demonstrates the smart home solution based on EMSK by establishing
 the connection between EMSK Board and AWS IoT Cloud. The AWS IoT Device C SDK for the
 embedded platform has been optimized and ported for embARC.
 
-In this lab application, the peripheral modules and onboard resources of EMSK board are used
+In this lab application, the peripheral modules and on-board resources of EMSK board are used
 to simulate the objects which are controlled and monitored in smart home scenario. The AWS IoT
 Cloud is used as the cloud host and a controlling platform that communicates with the EMSK
 Board with MQTT protocol. A HTML5 Web APP is designed to provide

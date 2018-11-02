@@ -25,7 +25,7 @@ Simple Bootloader
 ==================
 
 This simple bootloader is designed to work as a secondary/simple bootloader
-for |embarc|, it loads ``boot.hex`` or ``boot.bin`` on SD Card and run that irogram.
+for |embarc|, it loads ``boot.hex`` or ``boot.bin`` on SD Card and run that program.
 The example can be used as ntshell application.
 
 The following features are provided in this simple bootloader:
@@ -189,7 +189,7 @@ How to flash the ARC board
 
 - Generate ``boot.bin`` using any embARC example which ram start address should be 0x10000000 and use bootloader to run it
 
-- Know Issues
+- Known Issues
     + Boot rom of EMSK1.x is not able to load secondary bootloader on SPIFlash, you need a modified EMSK1.x mcs file to enable this function, send request in forum about this mcs file.
 
 |iotdk|

@@ -143,7 +143,7 @@ This code is divided into two parts: initialization and looping.
 
 In the initialization section, the timer and timer interrupts are configured.
 
-Unlike Lab 3, this code uses the |embarc| API to program timer0. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.
+Unlike Lab 3, this code uses the |embarc| API to program **Timer0**. In fact, in essence, these two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.
 
 **First**, in order to configure **Timer0** and it's interrupts, turn them off first. This work is done by the functions ``int_disable`` and ``timer_stop``.
 
@@ -171,8 +171,8 @@ This code is very simple and the idea is clear. When the function entered, clear
 
 Wait through the while(t0<ms) sentence, so that the full ms delay with higher precision is received.
 
-Lab one Labal phenomenon
--------------------------
+Lab one output
+---------------
 
 After the lab one program is successfully downloaded, the serial output is as follows:
 
@@ -439,20 +439,20 @@ The main function looks very long, there is a considerable part of it that is re
 
 In the first lab, the configuration of the timer and the creation of the interrupt is discussed and it is not repeated here.
 
-The main function is simple: when the interrupt of timer0 occurs 5 times, change the priority relationship of the two interrupts. The hits mentioned earlier are count variables in the above functions.
+The main function is simple: when the interrupt of **Timer0** occurs 5 times, change the priority relationship of the two interrupts. The hits mentioned earlier are count variables in the above functions.
 
-Lab two Label phenomenon
--------------------------
+Lab two output
+---------------
 
-The label phenomenon of Lab two is shown in the follogin figure.
+The label phenomenon of Lab two is shown in the following figure.
 
 "Interrupt nesting!" indicates that interrupt nesting has occurred, and "Interrupt" indicates that it has not occurred.
 
 For a better understanding, go back and look at the priority settings in the main function.
 
-It is easy to see that when timer0 interrupt priority is low (INT_PRI_MAX is low priority, a lager numbes means a lower priority in ARC), timer1 interrupt can preempt timer0 interrupt; when timer0 interrupt priority is high, timer1 interrupt cannot interrupt/preempty its ISR execution.
+It is easy to see that when **Timer0** interrupt priority is low (INT_PRI_MAX is low priority, a lager number means a lower priority in ARC), **Timer1** interrupt can preempt **Timer0** interrupt; when **Timer0** interrupt priority is higher, **Timer1** interrupt cannot interrupt/preempt its ISR execution.
 
-To summarize, high-priority interrupts can interrupt low-priority interrupts, and low-priority interrupts can be preempted by high-priority interrupts. 
+To summarize, high-priority interrupts can interrupt low-priority interrupts, and low-priority interrupts can be preempted by high-priority interrupts.
 
 .. code-block:: console
 
@@ -485,5 +485,5 @@ To summarize, high-priority interrupts can interrupt low-priority interrupts, an
 Exercises
 ==========
 
-Try using an interrupt other than a timer to write a small program. (For example, try to implement a button controled LED using GPIO interrupt)
+Try using an interrupt other than a timer to write a small program. (For example, try to implement a button controlled LED using GPIO interrupt)
 

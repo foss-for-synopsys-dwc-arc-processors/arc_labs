@@ -182,7 +182,7 @@
 <li>To know what embARC OSP is</li>
 <li>To know how to run  examples in embARC OSP</li>
 <li>To know how to debug the examples in embARC OSP</li>
-<li>To know how to create applicatio in embARC OSP</li>
+<li>To know how to create application in embARC OSP</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -212,7 +212,7 @@ running in them are becoming more and more complex.</p>
 constraints that are particular to Internet of Things devices, including
 restrictions on memory, size, power, and processing capacity. IoT operating
 systems are a type of embedded OS but by definition are designed to enable
-data transfer over the internet and more other features.</p>
+data transfer over the Internet and more other features.</p>
 <ol class="arabic simple" start="2">
 <li>embARC OSP</li>
 </ol>
@@ -260,7 +260,7 @@ see <a class="reference external" href="https://github.com/foss-for-synopsys-dwc
 <div class="section" id="run-the-examples">
 <h3>Run the examples<a class="headerlink" href="#run-the-examples" title="Permalink to this headline">¶</a></h3>
 <p>The command-line interface is the default interface to use embARC OSP. After getting the embARC OSP
-package, you need to open a <strong>cmd</strong> console in Windows / a <strong>terminal</strong> in Linux and change directory to the root of embARC osp.</p>
+package, you need to open a <strong>cmd</strong> console in Windows / a <strong>terminal</strong> in Linux and change directory to the root of embARC OSP.</p>
 <p>Use the <strong>blinky</strong> as an example.</p>
 <ol class="arabic simple">
 <li>Go to the <strong>blinky</strong> example folder</li>
@@ -283,14 +283,14 @@ package, you need to open a <strong>cmd</strong> console in Windows / a <strong>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">for EM Starter Kit, make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
-You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board infomation is sent by UART and displayed on your UART terminal.</p>
+You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board information is sent by UART and displayed on your UART terminal.</p>
 </div>
 <ol class="arabic simple" start="4">
 <li>Get the results</li>
 </ol>
 <ul class="simple">
 <li>For EMSK, you can see the on-board LEDs start to blink when the download is successful.</li>
-<li>For IoTDK, as it does not have usable LEDs except some status LEDs, the following outoput log is displayed through UART.</li>
+<li>For IoTDK, as it does not have usable LEDs except some status LEDs, the following output log is displayed through UART.</li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">led out: ff, ff</span>
 <span class="go">led out: ff00, ff</span>
@@ -334,7 +334,7 @@ debug.</p>
 <li><p class="first">Goals</p>
 <blockquote>
 <div><ul class="simple">
-<li>Baremetal application based on embARC OSP</li>
+<li>Bare-metal application based on embARC OSP</li>
 <li>Hardware: EMSK 2.2 - ARC EM7D Configuration / IoTDK</li>
 <li>Print “Hello world from embARC” through UART at 115200 bps</li>
 <li>Use GNU toolchain to running and debugging in the command line</li>
@@ -516,7 +516,7 @@ application folder (-I).</li>
 <div><ul class="simple">
 <li>Set your EM Starter Kit 2.2 hardware configuration to ARC EM7D (no need to set to IoT Development Kit), and connect it to
 your PC. Open <code class="docutils literal notranslate"><span class="pre">PuTTY</span></code> or <code class="docutils literal notranslate"><span class="pre">Tera-term</span></code>, and connect to the right COM
-port. Set the baudrate to <strong>115200 bps</strong>.</li>
+port. Set the baud rate to <strong>115200 bps</strong>.</li>
 <li>Enter <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> in the command-line to run this application.</li>
 </ul>
 </div></blockquote>

@@ -55,7 +55,7 @@ Before connecting an RN4020 module to a smartphone device, you might need to set
 
 8. Run the command **PS, 11223344556677889900AABBCCDDEEFF** to set the UUID of user-defined private service to be 0x11223344556677889900AABBCCDDEEFF
 
-9. Run the command **PC, 010203040506070809000A0B0C0D0E0F, 18, 06** to add private characteristic 0x010203040506070809000A0B0C0D0E0F to current private service. The property of this characteristic is 0x18 (writable and could notify) and has a maximum data size of 6bytes.
+9. Run the command **PC, 010203040506070809000A0B0C0D0E0F, 18, 06** to add private characteristic 0x010203040506070809000A0B0C0D0E0F to current private service. The property of this characteristic is 0x18 (writable and could notify) and has a maximum data size of 6 bytes.
 
 10. Run the command **R, 1** to reboot the RN4020 module and to make the new settings effective
 

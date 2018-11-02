@@ -199,7 +199,7 @@
 <div class="section" id="simple-bootloader">
 <h2>Simple Bootloader<a class="headerlink" href="#simple-bootloader" title="Permalink to this headline">¶</a></h2>
 <p>This simple bootloader is designed to work as a secondary/simple bootloader
-for embARC OSP, it loads <code class="docutils literal notranslate"><span class="pre">boot.hex</span></code> or <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> on SD Card and run that irogram.
+for embARC OSP, it loads <code class="docutils literal notranslate"><span class="pre">boot.hex</span></code> or <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> on SD Card and run that program.
 The example can be used as ntshell application.</p>
 <p>The following features are provided in this simple bootloader:</p>
 <ul class="simple">
@@ -383,7 +383,7 @@ from the TF card. The startup sequence for IoT Development Kit is listed below:<
 <li><p class="first">Generate <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> using any embARC example which ram start address should be 0x10000000 and use bootloader to run it</p>
 </li>
 <li><dl class="first docutils">
-<dt>Know Issues</dt>
+<dt>Known Issues</dt>
 <dd><ul class="first last simple">
 <li>Boot rom of EMSK1.x is not able to load secondary bootloader on SPIFlash, you need a modified EMSK1.x mcs file to enable this function, send request in forum about this mcs file.</li>
 </ul>
