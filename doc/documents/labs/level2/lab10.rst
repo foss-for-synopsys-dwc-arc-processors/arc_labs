@@ -30,7 +30,7 @@ Through this lab, you get a preliminary understanding of ESP8266 WIFI module and
 
 The lab is based on the |embarc| package and on the supports of the popular WIFI module, ESP8266.
 During the lab, you will first use the AT command to set the ESP8266 to the server mode.
-Then you can use your labtop or mobile phone to access ESP8266 by IP address.
+Then you can use your laptop or mobile phone to access ESP8266 by IP address.
 You will get a static webpage transmitted via TCP protocol.
 
 
@@ -42,7 +42,7 @@ Principles
 The ESP8266 is an ultra-low-power WIFI chip with industry-leading package size and ultra-low power technology.
 It is designed for mobile devices and IoT applications, facilitating the connection between user devices to IoT environments.
 
-The ESP8266 is available with various encapsulations. Onboard PCB antenna, IPEX interface, and stamp hole interface are supported.
+The ESP8266 is available with various encapsulations. On-board PCB antenna, IPEX interface, and stamp hole interface are supported.
 
 ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handhold devices, industrial control, and other IoT fields.
 
