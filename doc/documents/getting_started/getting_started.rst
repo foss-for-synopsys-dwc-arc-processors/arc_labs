@@ -47,7 +47,7 @@ Installing MetaWare Development Toolkit (2017.09).
 
 .. image:: /img/mwdt_3.png
 
-4. Set the install path (make sure you use English letters withoout any space) and
+4. Set the install path (make sure you use English letters without any space) and
    click **Next** until the installation is complete.
 
 .. image:: /img/mwdt_4.png
