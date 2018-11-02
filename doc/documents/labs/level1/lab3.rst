@@ -291,7 +291,7 @@ Open ``cmd`` from the folder *embarc_osp/arc_labs/labs/lab3_timer*, input the co
     :alt: debug view 2
 
 
-The debug view popsup automatically, the variables and registers can be seen.
+The debug view pops up automatically, the variables and registers can be seen.
 
 
 Exercises

@@ -34,7 +34,7 @@ Principles
 
 For the basic introduction of |emsk|, please go `here <http://embarc.org/embarc_osp/doc/build/html/board/emsk.html>`__
 
-There are on board LEDs, DIP switchs and button on |emsk|, this lab will show
+There are on board LEDs, DIP switch and button on |emsk|, this lab will show
 how to program theses on-board peripherals of |emsk|.
 
 The code for |emsk| is located in ``embarc_osp/arc_labs/labs/lab5_emsk``. In the code, the button and DIP switch values
@@ -70,7 +70,7 @@ Steps
 |iotdk|
 *******
 
-|iotdk has a arduino interface, here select arduino digital pinout ARDUINO_PIN_0(iotdk gpio4b_2[0]) to control LED.
+|iotdk| has a arduino interface, here select arduino digital pinout ARDUINO_PIN_0(iotdk gpio4b_2[0]) to control LED.
 
 1. find a LED, connect the LED anode pin to ARDUINO_PIN_0, connect the LED cathode pin to GND of |iotdk|.
 

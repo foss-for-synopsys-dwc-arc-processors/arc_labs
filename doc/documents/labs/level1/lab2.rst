@@ -8,7 +8,7 @@ Purpose
 * To know what |embarc| is
 * To know how to run  examples in |embarc|
 * To know how to debug the examples in |embarc|
-* To know how to create applicatio in |embarc|
+* To know how to create application in |embarc|
 
 Equipment
 =========
@@ -40,7 +40,7 @@ An IoT OS is an operating system that is designed to perform within the
 constraints that are particular to Internet of Things devices, including
 restrictions on memory, size, power, and processing capacity. IoT operating
 systems are a type of embedded OS but by definition are designed to enable
-data transfer over the internet and more other features.
+data transfer over the Internet and more other features.
 
 2. |embarc|
 
@@ -96,7 +96,7 @@ Run the examples
 ****************
 
 The command-line interface is the default interface to use |embarc|. After getting the |embarc|
-package, you need to open a **cmd** console in Windows / a **terminal** in Linux and change directory to the root of embARC osp.
+package, you need to open a **cmd** console in Windows / a **terminal** in Linux and change directory to the root of |embarc|.
 
 Use the **blinky** as an example.
 
@@ -120,13 +120,13 @@ Use the **blinky** as an example.
    make TOOLCHAIN=gnu BOARD=iotdk run
 
 .. Note:: for |emsk|, make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
-  You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board infomation is sent by UART and displayed on your UART terminal.
+  You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board information is sent by UART and displayed on your UART terminal.
 
 4. Get the results
 
 * For EMSK, you can see the on-board LEDs start to blink when the download is successful.
 
-* For IoTDK, as it does not have usable LEDs except some status LEDs, the following outoput log is displayed through UART.
+* For IoTDK, as it does not have usable LEDs except some status LEDs, the following output log is displayed through UART.
 
 .. code-block:: console
 
@@ -175,7 +175,7 @@ Create your own application in |embarc|.
 
 * Goals
 
-    * Baremetal application based on |embarc|
+    * Bare-metal application based on |embarc|
     * Hardware: EMSK 2.2 - ARC EM7D Configuration / IoTDK
     * Print "Hello world from embARC" through UART at 115200 bps
     * Use GNU toolchain to running and debugging in the command line
@@ -341,7 +341,7 @@ Then makefile for ``hello world`` application will be like this
 
     * Set your |emsk| 2.2 hardware configuration to ARC EM7D (no need to set to |iotdk|), and connect it to
       your PC. Open ``PuTTY`` or ``Tera-term``, and connect to the right COM
-      port. Set the baudrate to **115200 bps**.
+      port. Set the baud rate to **115200 bps**.
 
     * Enter ``make run`` in the command-line to run this application.
 

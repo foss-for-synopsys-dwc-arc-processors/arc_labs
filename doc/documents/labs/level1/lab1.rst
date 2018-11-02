@@ -387,7 +387,7 @@ program debugging. If you want to end the current debugging process, click |icon
 
 Same as the code performance analysis method of |mwdt|. For details, see first part of Lab 1.
 
-For the use of these two IDEs, you can refer to the Help documentation in the respective IDE, or you can view the online documentation provided by Synopsys.
+For the use of these two IDEs, you can refer to the Help documentation in the respective IDE, or you can view the on-line documentation provided by Synopsys.
 
 .. |figure1| image:: /img/lab1_figure1.png
 .. |figure2| image:: /img/lab1_figure2.png
