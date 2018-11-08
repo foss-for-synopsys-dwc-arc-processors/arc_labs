@@ -5,8 +5,8 @@ How to use |embarc|
 
 Purpose
 =======
-* To know what |embarc| is
-* To know how to run  examples in |embarc|
+* To know the concept of |embarc|
+* To know how to run examples in |embarc|
 * To know how to debug the examples in |embarc|
 * To know how to create application in |embarc|
 
@@ -20,7 +20,7 @@ The following hardware and tools are required:
 * ARC board (|emsk| / |iotdk|)
 * |embarc| packages
 
-For the detailed tool requirements of |embarc|, see`here <http://embarc.org/embarc_osp/doc/build/html/getting_started/software_requirement.html>`__
+For the detailed tool requirements of |embarc|, see `Software Requirement <http://embarc.org/embarc_osp/doc/build/html/getting_started/software_requirement.html>`__.
 
 Content
 ========
