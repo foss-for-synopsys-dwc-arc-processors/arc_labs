@@ -5,9 +5,9 @@ BLE Communication
 
 Purpose
 =======
-- Familiar with the wireless communication in IoT
-- Familiar with the usage of RN4020 BLE module on |iotdk|
-- Learn to use the API of RN4020 driver in |embarc|
+- To get familiar with the wireless communication in IoT
+- To get familiar with the usage of RN4020 BLE module on |iotdk|
+- To learn the usage of APIs of RN4020 driver in |embarc|
 
 
 Equipment
@@ -15,6 +15,7 @@ Equipment
 The following hardware and tools are required:
 
 * PC host
+* A smartphone which supports BLE
 * ARC GNU toolchain/MetaWare Development Toolkit
 * ARC board (|iotdk|)
 * |embarc| package
@@ -22,11 +23,11 @@ The following hardware and tools are required:
 
 Content
 ========
-Complete the communication between smartphone and IoTDK board through RN4020 BLE module.
+The Communication between smartphone and |iotdk| board with RN4020 BLE module.
 
 - Setup RN4020 BLE module by using API of RN4020 driver.
-- Connect mobile phone and RN4020 by BLE, and check the data send by IoTDK in smartphone.
-- Send data from smartphone to IoTDK board, and print this data value in terminal.
+- Connect smartphone and RN4020 by BLE, and check the data send by |iotdk| in smartphone.
+- Send data from smartphone to |iotdk| board, and print this data value in terminal.
 
 
 Principles
@@ -127,7 +128,7 @@ Steps
 Run project
 -----------
 
-Open the serial terminal emulator in PC (for example, Tera Term), set as **115200 baud, 8 bits data, 1 stop bit and no parity**, and connect to the IoTDK board.
+Open the serial terminal emulator in PC (for example, Tera Term), set as **115200 baud, 8 bits data, 1 stop bit and no parity**, and connect to the |iotdk| board.
 
 Open ``cmd`` from the folder *embarc_osp/arc_labs/labs/lab6_ble_rn4020*, input the command as follow
 
@@ -163,7 +164,7 @@ Write data in BLE browser APP. Check the received data in PC serial terminal.
 
 Exercises
 =========
-Try to use the received data in IoTDK board, and do some control by using GPIO. (for example, LED on/off)
+Try to use the received data in |iotdk| board, and do some control by using GPIO. (for example, LED on/off)
 
 .. |figure1| image:: /img/lab7_figure1.png
    :width: 550

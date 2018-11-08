@@ -180,9 +180,9 @@
 <div class="section" id="purpose">
 <h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Familiar with the wireless communication in IoT</li>
-<li>Familiar with the usage of RN4020 BLE module on IoT Development Kit</li>
-<li>Learn to use the API of RN4020 driver in embARC OSP</li>
+<li>To get familiar with the wireless communication in IoT</li>
+<li>To get familiar with the usage of RN4020 BLE module on IoT Development Kit</li>
+<li>To learn the usage of APIs of RN4020 driver in embARC OSP</li>
 </ul>
 </div>
 <div class="section" id="equipment">
@@ -190,6 +190,7 @@
 <p>The following hardware and tools are required:</p>
 <ul class="simple">
 <li>PC host</li>
+<li>A smartphone which supports BLE</li>
 <li>ARC GNU toolchain/MetaWare Development Toolkit</li>
 <li>ARC board (IoT Development Kit)</li>
 <li>embARC OSP package</li>
@@ -198,11 +199,11 @@
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
-<p>Complete the communication between smartphone and IoTDK board through RN4020 BLE module.</p>
+<p>The Communication between smartphone and IoT Development Kit board with RN4020 BLE module.</p>
 <ul class="simple">
 <li>Setup RN4020 BLE module by using API of RN4020 driver.</li>
-<li>Connect mobile phone and RN4020 by BLE, and check the data send by IoTDK in smartphone.</li>
-<li>Send data from smartphone to IoTDK board, and print this data value in terminal.</li>
+<li>Connect smartphone and RN4020 by BLE, and check the data send by IoT Development Kit in smartphone.</li>
+<li>Send data from smartphone to IoT Development Kit board, and print this data value in terminal.</li>
 </ul>
 </div>
 <div class="section" id="principles">
@@ -284,7 +285,7 @@ The source code using the API of RN4020 driver in embARC OSP as follows.</p>
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="run-project">
 <h3>Run project<a class="headerlink" href="#run-project" title="Permalink to this headline">¶</a></h3>
-<p>Open the serial terminal emulator in PC (for example, Tera Term), set as <strong>115200 baud, 8 bits data, 1 stop bit and no parity</strong>, and connect to the IoTDK board.</p>
+<p>Open the serial terminal emulator in PC (for example, Tera Term), set as <strong>115200 baud, 8 bits data, 1 stop bit and no parity</strong>, and connect to the IoT Development Kit board.</p>
 <p>Open <code class="docutils literal notranslate"><span class="pre">cmd</span></code> from the folder <em>embarc_osp/arc_labs/labs/lab6_ble_rn4020</em>, input the command as follow</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make run</span>
 </pre></div>
@@ -311,7 +312,7 @@ Then the output is displayed in the serial terminal.
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
-<p>Try to use the received data in IoTDK board, and do some control by using GPIO. (for example, LED on/off)</p>
+<p>Try to use the received data in IoT Development Kit board, and do some control by using GPIO. (for example, LED on/off)</p>
 </div>
 </div>
 
