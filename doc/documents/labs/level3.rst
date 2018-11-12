@@ -1,6 +1,6 @@
 .. _level3_labs:
 
-Level 3 Labs
+Exploration
 ############
 
 .. toctree::

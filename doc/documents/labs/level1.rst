@@ -1,6 +1,6 @@
 .. _level1_labs:
 
-Level 1 Labs
+Basic labs
 ############
 
 .. toctree::
