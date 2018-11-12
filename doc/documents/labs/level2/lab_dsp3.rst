@@ -1,7 +1,7 @@
 .. _dsp_lab3_dsp_lib:
 
 ARC DSP: Using DSP Library
-=========================
+================================
 
 Part 1.	Prerequisites
 -----------------------------
@@ -55,7 +55,7 @@ The following example shows the implementation of matrix multiplication of two m
 |dsp_icon_3.2|
 . Build with the command:
 
-``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf ``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
 
   ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
 
