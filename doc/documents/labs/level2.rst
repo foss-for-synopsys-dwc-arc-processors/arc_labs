@@ -1,6 +1,6 @@
 .. _level2_labs:
 
-Level 2 Labs
+Advanced labs
 ############
 
 .. toctree::
