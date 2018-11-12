@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ARC DSP Using DSP Library &mdash; ARC Labs 2018.09 documentation</title>
+  <title>ARC DSP: Using DSP Library &mdash; ARC Labs 2018.09 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="A WiFi temperature monitor" href="lab10.html" />
-    <link rel="prev" title="Programming ARC DSP Using FXAPI" href="dsp_lab2_fxapi.html" /> 
+    <link rel="prev" title="ARC DSP: Using FXAPI" href="dsp_lab2_fxapi.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -89,19 +89,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../labs.html">Labs</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../labs.html#overview">Overview</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../labs.html#id2">Labs</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../level1.html">Level 1 Labs</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../level2.html">Level 2 Labs</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="dsp_lab1_compiler_opt.html">Compiler Optimizations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="dsp_lab2_fxapi.html">Programming ARC DSP Using FXAPI</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">ARC DSP Using DSP Library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../labs.html#hands-on-labs">Hands-on labs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../level1.html">Basic labs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../level2.html">Advanced labs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab1_compiler_opt.html">ARC DSP: Compiler Optimizations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab2_fxapi.html">ARC DSP: Using FXAPI</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ARC DSP: Using DSP Library</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab10.html">A WiFi temperature monitor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab7.html">BLE Communication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab8.html">Memory map and linker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab9.html">How to use FreeRTOS</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../level3.html">Level 3 Labs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level3.html">Exploration</a></li>
 </ul>
 </li>
 </ul>
@@ -154,9 +154,9 @@
         
           <li><a href="../labs.html">Labs</a> &raquo;</li>
         
-          <li><a href="../level2.html">Level 2 Labs</a> &raquo;</li>
+          <li><a href="../level2.html">Advanced labs</a> &raquo;</li>
         
-      <li>ARC DSP Using DSP Library</li>
+      <li>ARC DSP: Using DSP Library</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,7 +176,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="arc-dsp-using-dsp-library">
-<span id="dsp-lab3-dsp-lib"></span><h1>ARC DSP Using DSP Library<a class="headerlink" href="#arc-dsp-using-dsp-library" title="Permalink to this headline">¶</a></h1>
+<span id="dsp-lab3-dsp-lib"></span><h1>ARC DSP: Using DSP Library<a class="headerlink" href="#arc-dsp-using-dsp-library" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="part-1-prerequisites">
 <h2>Part 1. Prerequisites<a class="headerlink" href="#part-1-prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>Before starting to use the ARC DSP, the following prerequisites are required:</p>
@@ -218,7 +218,9 @@
 <p>The following example shows the implementation of matrix multiplication of two matrices containing “short” values. By convention, matrices here are implemented as 1D arrays with row-first indexing, where element a_ik is indexed as
 <img alt="dsp_icon_3.2" src="../../_images/dsp_icon_3.2.png" />
 . Build with the command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT=”-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf ``</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></div></blockquote>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
@@ -452,7 +454,7 @@
         <a href="lab10.html" class="btn btn-neutral float-right" title="A WiFi temperature monitor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dsp_lab2_fxapi.html" class="btn btn-neutral" title="Programming ARC DSP Using FXAPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dsp_lab2_fxapi.html" class="btn btn-neutral" title="ARC DSP: Using FXAPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -486,7 +488,6 @@
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

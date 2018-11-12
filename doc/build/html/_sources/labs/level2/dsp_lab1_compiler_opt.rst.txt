@@ -1,6 +1,6 @@
 .. _dsp_lab1_compiler_opt:
 
-Compiler Optimizations
+ARC DSP: Compiler Optimizations
 ===============================
 
 Part 1. Prerequisites
@@ -186,7 +186,9 @@ Appendix A. IOTDK Default Core Configurations
 
 This is an ARC EM core with 32 bits address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).
 
-``-arcv2em -core1 -HL -Xcode_density -Xswap -Xnorm -Xmpy16 -Xmpy -Xmpyd -Xshift_assist -Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xtimer0 -Xtimer1``
+``-arcv2em -core1 -HL -Xcode_density -Xswap -Xnorm -Xmpy16 -Xmpy -Xmpyd -Xshift_assist -Xbarrel_shifter -Xdsp2 ``
+
+  ``-Xdsp_complex -Xtimer0 -Xtimer1``
 
 **ARC_EM7D**
 
@@ -222,7 +224,11 @@ This is an ARC EM core with 32 bits address space, 64 KB of code memory (ICCM) a
 
 ``-Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd``
 
-``-Xshift_assist -Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full -Xagu_large -Xxy -Xbitstream -Xfpus_div -Xfpu_mac -Xfpuda -Xfpus_mpy_slow -Xfpus_div_slow -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac``
+``-Xshift_assist -Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full ``
+
+  ``-Xagu_large -Xxy -Xbitstream -Xfpus_div -Xfpu_mac -Xfpuda -Xfpus_mpy_slow -Xfpus_div_slow -Xtimer0 -Xtimer1 ``
+
+  ``-Xstack_check -Hccm -Xdmac``
 
 
 .. |dsp_figure_1.1| image:: /img/dsp_figure_1.1.png

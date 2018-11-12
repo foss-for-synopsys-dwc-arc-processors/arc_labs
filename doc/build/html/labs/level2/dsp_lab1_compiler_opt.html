@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Compiler Optimizations &mdash; ARC Labs 2018.09 documentation</title>
+  <title>ARC DSP: Compiler Optimizations &mdash; ARC Labs 2018.09 documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="../../_static/style_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Programming ARC DSP Using FXAPI" href="dsp_lab2_fxapi.html" />
-    <link rel="prev" title="Level 2 Labs" href="../level2.html" /> 
+    <link rel="next" title="ARC DSP: Using FXAPI" href="dsp_lab2_fxapi.html" />
+    <link rel="prev" title="Advanced labs" href="../level2.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -89,19 +89,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../labs.html">Labs</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../labs.html#overview">Overview</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../labs.html#id2">Labs</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../level1.html">Level 1 Labs</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../level2.html">Level 2 Labs</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Compiler Optimizations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="dsp_lab2_fxapi.html">Programming ARC DSP Using FXAPI</a></li>
-<li class="toctree-l4"><a class="reference internal" href="dsp_lab3_dsp_lib.html">ARC DSP Using DSP Library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../labs.html#hands-on-labs">Hands-on labs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../level1.html">Basic labs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../level2.html">Advanced labs</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ARC DSP: Compiler Optimizations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab2_fxapi.html">ARC DSP: Using FXAPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dsp_lab3_dsp_lib.html">ARC DSP: Using DSP Library</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab10.html">A WiFi temperature monitor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab7.html">BLE Communication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab8.html">Memory map and linker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lab9.html">How to use FreeRTOS</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../level3.html">Level 3 Labs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../level3.html">Exploration</a></li>
 </ul>
 </li>
 </ul>
@@ -154,9 +154,9 @@
         
           <li><a href="../labs.html">Labs</a> &raquo;</li>
         
-          <li><a href="../level2.html">Level 2 Labs</a> &raquo;</li>
+          <li><a href="../level2.html">Advanced labs</a> &raquo;</li>
         
-      <li>Compiler Optimizations</li>
+      <li>ARC DSP: Compiler Optimizations</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -175,8 +175,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="compiler-optimizations">
-<span id="dsp-lab1-compiler-opt"></span><h1>Compiler Optimizations<a class="headerlink" href="#compiler-optimizations" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="arc-dsp-compiler-optimizations">
+<span id="dsp-lab1-compiler-opt"></span><h1>ARC DSP: Compiler Optimizations<a class="headerlink" href="#arc-dsp-compiler-optimizations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="part-1-prerequisites">
 <h2>Part 1. Prerequisites<a class="headerlink" href="#part-1-prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>Before starting to use the ARC DSP, the following prerequisites are required:</p>
@@ -321,7 +321,9 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <h2>Appendix A. IOTDK Default Core Configurations<a class="headerlink" href="#appendix-a-iotdk-default-core-configurations" title="Permalink to this headline">¶</a></h2>
 <p><strong>ARC_EM5D</strong></p>
 <p>This is an ARC EM core with 32 bits address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).</p>
-<p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span> <span class="pre">-Xswap</span> <span class="pre">-Xnorm</span> <span class="pre">-Xmpy16</span> <span class="pre">-Xmpy</span> <span class="pre">-Xmpyd</span> <span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span></code></p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>-arcv2em -core1 -HL -Xcode_density -Xswap -Xnorm -Xmpy16 -Xmpy -Xmpyd -Xshift_assist -Xbarrel_shifter -Xdsp2 ``</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span></code></div></blockquote>
 <p><strong>ARC_EM7D</strong></p>
 <p>This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core2</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span> <span class="pre">-Xdiv_rem=radix2</span> <span class="pre">-Xswap</span></code></p>
@@ -339,7 +341,11 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <p>This is an ARC EM core with 32 bits address space, 64 KB of code memory (ICCM) and 64 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core2</span> <span class="pre">-Hrgf_banked_regs=32</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">-Xdiv_rem=radix2</span> <span class="pre">-Xswap</span> <span class="pre">-Xbitscan</span> <span class="pre">-Xmpy_option=mpyd</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span> <span class="pre">-Xdsp_divsqrt=radix2</span> <span class="pre">-Xdsp_itu</span> <span class="pre">-Xdsp_accshift=full</span> <span class="pre">-Xagu_large</span> <span class="pre">-Xxy</span> <span class="pre">-Xbitstream</span> <span class="pre">-Xfpus_div</span> <span class="pre">-Xfpu_mac</span> <span class="pre">-Xfpuda</span> <span class="pre">-Xfpus_mpy_slow</span> <span class="pre">-Xfpus_div_slow</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xstack_check</span> <span class="pre">-Hccm</span> <span class="pre">-Xdmac</span></code></p>
+<p><a href="#id3"><span class="problematic" id="id4">``</span></a>-Xshift_assist -Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full ``</p>
+<blockquote>
+<div><p><a href="#id5"><span class="problematic" id="id6">``</span></a>-Xagu_large -Xxy -Xbitstream -Xfpus_div -Xfpu_mac -Xfpuda -Xfpus_mpy_slow -Xfpus_div_slow -Xtimer0 -Xtimer1 ``</p>
+<p><code class="docutils literal notranslate"><span class="pre">-Xstack_check</span> <span class="pre">-Hccm</span> <span class="pre">-Xdmac</span></code></p>
+</div></blockquote>
 </div>
 </div>
 
@@ -351,10 +357,10 @@ Try direct usage of DSP extensions through intrinsic.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dsp_lab2_fxapi.html" class="btn btn-neutral float-right" title="Programming ARC DSP Using FXAPI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dsp_lab2_fxapi.html" class="btn btn-neutral float-right" title="ARC DSP: Using FXAPI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../level2.html" class="btn btn-neutral" title="Level 2 Labs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../level2.html" class="btn btn-neutral" title="Advanced labs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -388,7 +394,6 @@ Try direct usage of DSP extensions through intrinsic.</p>
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

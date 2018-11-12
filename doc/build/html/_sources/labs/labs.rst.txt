@@ -6,7 +6,7 @@ Labs
 Overview
 ########
 
-Labs
+Hands-on labs
 ####
 
 .. toctree::

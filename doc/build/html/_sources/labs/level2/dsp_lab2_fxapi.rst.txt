@@ -1,6 +1,6 @@
 .. _dsp_lab2_fxapi:
 
-Programming ARC DSP Using FXAPI
+ARC DSP: Using FXAPI
 ===============================
 
 Part 1.	Prerequisites
@@ -164,7 +164,9 @@ To test the following example, some modification of the code is required to have
 
 Both examples are to be compiled with DSP extensions, with the following options set:
 
-``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf ``
+
+  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
 
 With high optimization level functions using "short" type is compiled to use DSP MAC operation, enabling significant speedup.
 
