@@ -8,7 +8,7 @@ Use this guide to get started with your ARC labs development.
 Software Requirement
 ####################
 * `ARC Development Tools <https://www.synopsys.com/designware-ip/processor-solutions/arc-processors/arc-development-tools.html>`_
-    Select **|mwdt|** or **|arcgnu|** from the following list according to your requirement.
+    Select |mwdt| or |arcgnu| from the following list according to your requirement.
 
   * |mwdt|
 
@@ -25,13 +25,13 @@ Software Requirement
 
 * `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection. The serial configurations are 115200 baud, 8 bits data, 1 stop bit, and no parity (115200-8-N-1) by default.
 
-.. note:: If using embARC with GNU toolchain on Windows, install `Zadig <http://zadig.akeo.ie>`_ to replace FTDI driver with WinUSB driver. See `How to Use OpenOCD on Windows <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows>`_ for more information. If you want to switch back to Metaware toolchain, make sure you switch back the usb-jtag driver from WinUSB to FTDI driver.
+.. note:: If using embARC with GNU toolchain on Windows, please install `Zadig <http://zadig.akeo.ie>`_ to replace FTDI driver with WinUSB driver. See `How to Use OpenOCD on Windows <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows>`_ for more information. If you want to switch back to Metaware toolchain, make sure you switch back the usb-jtag driver from WinUSB to FTDI driver.
 
 Install Software Tools
 ######################
 
-Install Metaware Toolkit
-************************
+Install |mwdt|
+**************
 
 Installing MetaWare Development Toolkit (2017.09).
 
@@ -85,20 +85,20 @@ If you get the following message without any error, then the MetaWare Developmen
     (c) Copyright 1995-2017, Synopsys, Inc.
 
 
-Install ARC GNU Toolchain
-*************************
+Install |arcgnu|
+****************
 
 Click (https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases) to get the latest version of
 |arcgnu|.
 
-To use and install |arcgnu|, see (http://embarc.org/toolchain/ide/index.html).
+To use and install |arcgnu|, please see (http://embarc.org/toolchain/ide/index.html).
 
 It is recommended to install |arcgnu| in the path (windows: ``C:\arc_gnu\``, linux: ``~/arc_gnu/``) and add ``arc_gnu/bin`` into $PATH variable.
 
-Install embARC OSP
-******************
+Install |embarc|
+*****************
 
-The embARC OSP source code is hosted in a GitHub repository that supports
+The |embarc| source code is hosted in a GitHub repository that supports
 cloning through git. There are scripts in this repo that you are need to set
 up your development environment, and Git is used to get this repo. If you do
 not have Git installed, see the beginning of the OS-specific instructions
@@ -120,9 +120,9 @@ You have successfully checked out a copy of the source code to your local machin
 Install ARC labs code
 *********************
 
-The source codes of ARC labs are assumed to work with embARC OSP. You need to
-use git to clone or download the ARC labs to the root folder of embARC OSP. If
-the download is successful, the following folder structure is displayed:
+The source codes of ARC labs are assumed to work with |embarc|. Please use git
+to clone or download the ARC labs to the root folder of |embarc|. If the
+download is successful, the following folder structure is displayed:
 
 .. code-block:: console
 
@@ -159,7 +159,7 @@ Check the following items and set development environment.
   * If running and debugging embARC applications using **arc-elf32-gdb** and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_, make sure the path of **OpenOCD** is added to the **PATH** in your environment variables and modify **OPENOCD_SCRIPT_ROOT variable** in *<embARC>/options/toolchain/toolchain_gnu.mk* to your **OpenOCD** root path.
   * If running GNU program with using the GNU toolchain on Linux, modify the **OpenOCD** configuration file as Linux format with LF line terminators. **dos2unix** can be used to convert it.
 
-.. note:: Check the version of your toolchain. The embARC OSP software build system is makefile-based. *make/gmake* is provided in the |mwdt| (gmake) and |arcgnu| (make)
+.. note:: Check the version of your toolchain. The |embarc| software build system is makefile-based. *make/gmake* is provided in the |mwdt| (gmake) and |arcgnu| (make)
 
 
 Learn More

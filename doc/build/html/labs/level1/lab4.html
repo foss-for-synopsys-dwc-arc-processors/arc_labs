@@ -203,8 +203,8 @@
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
-<p>The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, returns to the interrupted program and complete the response of the interrupt event.</p>
-<p>In embARC OSP, the <code class="docutils literal notranslate"><span class="pre">int_handler_install()</span></code> function is used to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then the above functions are achieved.</p>
+<p>The DesignWare® ARC® processors use vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, returns to the interrupted program and complete the response of the interrupt event.</p>
+<p>In embARC OSP, the <code class="docutils literal notranslate"><span class="pre">int_handler_install()</span></code> function is used to bind our interrupt service routine to the interrupt vector of the corresponding interrupt, and then the above functions are achieved.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
@@ -214,7 +214,7 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code> is more fundamental compared to <code class="docutils literal notranslate"><span class="pre">lab_4_2</span></code>. Go to
 folder <code class="docutils literal notranslate"><span class="pre">lab_4_1</span></code> in which the precise timing function is implemented
 through the timer interrupt.</p>
-<p>Open main.c and browse the entire program.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">main.c</span></code> and browse the entire program.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
     <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 

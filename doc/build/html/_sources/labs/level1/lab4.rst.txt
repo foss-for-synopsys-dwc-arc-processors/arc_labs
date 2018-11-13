@@ -23,9 +23,10 @@ This lab and lab 3 are both introductions to the internal characteristics of the
 
 Principles
 ===========
-The ARC EM processor uses vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, returns to the interrupted program and complete the response of the interrupt event.
 
-In |embarc|, the ``int_handler_install()`` function is used to bind our interrupt function name to the interrupt vector of the corresponding interrupt, and then the above functions are achieved.
+The |arc| use vector interrupts to handle interrupt events. When the interrupt occurs, the processor stops the execution of the current program, and queries the corresponding interrupt vector in the predefined interrupt vector table according to the current interrupt type. In other words, to find the entry address of the interrupt service program. Then program jumps to the address to execute the interrupt service routine. After the execution is completed, returns to the interrupted program and complete the response of the interrupt event.
+
+In |embarc|, the ``int_handler_install()`` function is used to bind our interrupt service routine to the interrupt vector of the corresponding interrupt, and then the above functions are achieved.
 
 Steps
 ======
@@ -39,7 +40,7 @@ The ``lab_4_1`` is more fundamental compared to ``lab_4_2``. Go to
 folder ``lab_4_1`` in which the precise timing function is implemented
 through the timer interrupt.
 
-Open main.c and browse the entire program.
+Open ``main.c`` and browse the entire program.
 
 .. code-block:: c
 

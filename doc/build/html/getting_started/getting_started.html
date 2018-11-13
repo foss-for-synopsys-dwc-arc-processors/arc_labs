@@ -89,9 +89,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#software-requirement">Software Requirement</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-software-tools">Install Software Tools</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-metaware-toolkit">Install Metaware Toolkit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-arc-gnu-toolchain">Install ARC GNU Toolchain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-embarc-osp">Install embARC OSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-mwdt">Install MetaWare Development Toolkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-arcgnu">Install GNU Toolchain for ARC Processors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-embarc">Install embARC OSP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-arc-labs-code">Install ARC labs code</a></li>
 </ul>
 </li>
@@ -173,7 +173,7 @@
 <ul>
 <li><dl class="first docutils">
 <dt><a class="reference external" href="https://www.synopsys.com/designware-ip/processor-solutions/arc-processors/arc-development-tools.html">ARC Development Tools</a></dt>
-<dd><p class="first last">Select <strong>|mwdt|</strong> or <strong>|arcgnu|</strong> from the following list according to your requirement.</p>
+<dd><p class="first last">Select MetaWare Development Toolkit or GNU Toolchain for ARC Processors from the following list according to your requirement.</p>
 </dd>
 </dl>
 <ul class="simple">
@@ -198,13 +198,13 @@ The GNU Toolchain for ARC Processors offers all of the benefits of open source t
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If using embARC with GNU toolchain on Windows, install <a class="reference external" href="http://zadig.akeo.ie">Zadig</a> to replace FTDI driver with WinUSB driver. See <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows">How to Use OpenOCD on Windows</a> for more information. If you want to switch back to Metaware toolchain, make sure you switch back the usb-jtag driver from WinUSB to FTDI driver.</p>
+<p class="last">If using embARC with GNU toolchain on Windows, please install <a class="reference external" href="http://zadig.akeo.ie">Zadig</a> to replace FTDI driver with WinUSB driver. See <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/wiki/How-to-Use-OpenOCD-on-Windows">How to Use OpenOCD on Windows</a> for more information. If you want to switch back to Metaware toolchain, make sure you switch back the usb-jtag driver from WinUSB to FTDI driver.</p>
 </div>
 </div>
 <div class="section" id="install-software-tools">
 <h2>Install Software Tools<a class="headerlink" href="#install-software-tools" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="install-metaware-toolkit">
-<h3>Install Metaware Toolkit<a class="headerlink" href="#install-metaware-toolkit" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="install-mwdt">
+<h3>Install MetaWare Development Toolkit<a class="headerlink" href="#install-mwdt" title="Permalink to this headline">¶</a></h3>
 <p>Installing MetaWare Development Toolkit (2017.09).</p>
 <ol class="arabic simple">
 <li>Double click the <code class="docutils literal notranslate"><span class="pre">mw_dekit_arc_i_2017_09_win_install.exe</span></code> and click <strong>Next</strong>.</li>
@@ -256,15 +256,15 @@ Toolkit. It can be a real file containing license or a license server.</li>
 </pre></div>
 </div>
 </div>
-<div class="section" id="install-arc-gnu-toolchain">
-<h3>Install ARC GNU Toolchain<a class="headerlink" href="#install-arc-gnu-toolchain" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="install-arcgnu">
+<h3>Install GNU Toolchain for ARC Processors<a class="headerlink" href="#install-arcgnu" title="Permalink to this headline">¶</a></h3>
 <p>Click (<a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases">https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases</a>) to get the latest version of
 GNU Toolchain for ARC Processors.</p>
-<p>To use and install GNU Toolchain for ARC Processors, see (<a class="reference external" href="http://embarc.org/toolchain/ide/index.html">http://embarc.org/toolchain/ide/index.html</a>).</p>
+<p>To use and install GNU Toolchain for ARC Processors, please see (<a class="reference external" href="http://embarc.org/toolchain/ide/index.html">http://embarc.org/toolchain/ide/index.html</a>).</p>
 <p>It is recommended to install GNU Toolchain for ARC Processors in the path (windows: <code class="docutils literal notranslate"><span class="pre">C:\arc_gnu\</span></code>, linux: <code class="docutils literal notranslate"><span class="pre">~/arc_gnu/</span></code>) and add <code class="docutils literal notranslate"><span class="pre">arc_gnu/bin</span></code> into $PATH variable.</p>
 </div>
-<div class="section" id="install-embarc-osp">
-<h3>Install embARC OSP<a class="headerlink" href="#install-embarc-osp" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="install-embarc">
+<h3>Install embARC OSP<a class="headerlink" href="#install-embarc" title="Permalink to this headline">¶</a></h3>
 <p>The embARC OSP source code is hosted in a GitHub repository that supports
 cloning through git. There are scripts in this repo that you are need to set
 up your development environment, and Git is used to get this repo. If you do
@@ -283,9 +283,9 @@ below for help.</p>
 </div>
 <div class="section" id="install-arc-labs-code">
 <h3>Install ARC labs code<a class="headerlink" href="#install-arc-labs-code" title="Permalink to this headline">¶</a></h3>
-<p>The source codes of ARC labs are assumed to work with embARC OSP. You need to
-use git to clone or download the ARC labs to the root folder of embARC OSP. If
-the download is successful, the following folder structure is displayed:</p>
+<p>The source codes of ARC labs are assumed to work with embARC OSP. Please use git
+to clone or download the ARC labs to the root folder of embARC OSP. If the
+download is successful, the following folder structure is displayed:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd path/to/embarc_osp</span>
 <span class="go">git clone https://github.com/foss-for-synopsys-dwc-arc-processors/arc_labs.git arc_labs</span>
 </pre></div>
