@@ -1,7 +1,7 @@
 .. _level2_labs:
 
 Advanced labs
-############
+##################
 
 .. toctree::
     :maxdepth: 1
