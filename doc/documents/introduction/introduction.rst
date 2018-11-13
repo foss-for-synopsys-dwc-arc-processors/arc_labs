@@ -15,13 +15,13 @@ This handbook can be used as a Lab teaching material for ARC university courses 
 undergraduate or graduate level with majors in Commuter Science, Computer
 Engineering, Electrical Engineering, or for professional engineers.
 
-This handbook includes 12 labs (more labs are added in the future), which are classified into 3 levels:
+This handbook includes a series of labs (more labs will be added in the future), which are roughly classified into 3 levels:
 
 * :ref:`Level 1: ARC basic <level1_labs>`
 
 The labs in this level cover the basic topics of |arc|. For example, the
 installation and usage of hardware and software tools, software or hardware
-development kits, first hello world example, interrupt handling and internal timers of |arc|, and so on.
+development kits, the first hello world example, interrupt handling and internal timers of |arc|, and so on.
 
 * :ref:`Level 2: ARC advanced <level2_labs>`
 
@@ -43,18 +43,18 @@ consistent and simple software interfaces to the processor and peripherals
 together with ports of several well known Free and open-source software (FOSS)
 embedded software stacks to |arc|.
 
-For more details about |embarc|, see
-`online docs <http://embarc.org/embarc_osp/>`__
+For more details about |embarc|, please see its
+`online docs <http://embarc.org/embarc_osp/>`__.
 
 Supported Hardware Platform
 ###########################
 
-The following hardware platforms are supported in this handbook.
+The following |arc| based hardware platforms are supported in this handbook.
 
   * `ARC EM Starter Kit <https://www.synopsys.com/dw/ipdir.php?ds=arc_em_starter_kit>`_
   * `ARC IoT Development Kit <https://www.synopsys.com/dw/ipdir.php?ds=arc_iot_development_kit>`_
 
-You can click the above links to get the board's data sheet and user
+You can click the above links to get the platform's data sheet and user
 manual as a reference.
 
 Reference
