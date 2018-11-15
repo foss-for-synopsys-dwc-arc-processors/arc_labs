@@ -166,31 +166,31 @@ How to flash the ARC board
     $ cd <embarc_root>/example/baremetal/bootloader
     $ gmake BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=mw bin
 
-- Program generated secondary bootloader binary file into SPIFlash
+- Program the secondary bootloader binary file into SPI Flash
     + Insert SD card to your PC, and copy the binary file ``obj_emsk_23/gnu_arcem7d/emsk_bootloader_gnu_arcem7d.bin`` to SD card root folder, and rename it to ``em7d_2bt.bin``
 
     + Insert the SD card to EMSK Board, choose the right core configuration, build and run the ``<embARC>/example/baremetal/bootloader`` example, then press any button to stop auto boot process, and enter to ntshell command mode.
 
     + Use ntshell command *spirw* to program the ``em7d_2bt.bin`` into spiflash.
         - Run *spirw* to show help
-        - Run *spirw -i* to check SPIFlash ID, it should be **Device ID = ef4018**
+        - Run *spirw -i* to check SPI Flash ID, it should be **Device ID = ef4018**
         - Run *spirw -w em7d_2bt.bin 0x17f00000 0x17f00004* to program spiflash
-        - Check the output message to see if it was programmed successfully.
+        - Check the output message to see if it has been programmed successfully.
 
         .. image:: /img/lab6_emsk_bootloader_program2spiflash.jpg
 
     + If programmed successfully, when the board is reset, make sure Bit 4 of the on-board DIP switch is ON to enable secondary bootloader run.
 
-    + If the SD card already contains the *boot.bin* in it, the bootloader automatically loads it from SD card, if not, it enters to ntshell mode.
+    + If the SD card already contains the *boot.bin* in it, the bootloader automatically loads it from SD card. If not, it enters to ntshell mode.
 
     + You can goto the next step to generate the ``boot.bin`` for proper application you want to be auto-loaded in SD card.
 
     .. image:: /img/lab6_emsk_bootloader_onspiflash.jpg
 
-- Generate ``boot.bin`` using any embARC example which ram start address should be 0x10000000 and use bootloader to run it
+- Generate ``boot.bin`` using any embARC example, its RAM start address should be 0x10000000. Use bootloader to run it
 
 - Known Issues
-    + Boot rom of EMSK1.x is not able to load secondary bootloader on SPIFlash, you need a modified EMSK1.x mcs file to enable this function, send request in forum about this mcs file.
+    + Boot rom of EMSK1.x is not able to load secondary bootloader on SPI Flash, you need a modified EMSK1.x mcs file to enable this function, send request in forum about this mcs file.
 
 |iotdk|
 *****************
@@ -202,7 +202,7 @@ How to flash the ARC board
     $ cd <embarc_root>/example/baremetal/bootloader
     $ gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw LOCATION=eflash bin
 
-- Program generated secondary bootloader binary file into SPIFlash
+- Program the secondary bootloader binary file into SPI Flash
     + Insert SD card to your PC, and copy the binary file ``obj_iotdk_10/mw_arcem9d/simple_bootloader_mw_arcem9d.bin`` to SD card Root, and rename it to ``simple_bootloader.bin``
 
     + copy the file ``example/bootloader/boot.json`` to SD card root, and change the boot_file value to ``boot.bin``, and change the ram_startaddress to 536870912(0x20000000).
@@ -231,7 +231,7 @@ How to flash the ARC board
 
     .. image:: /img/lab6_iotdk_bootloader_onspiflash.jpg
 
-- Generate ``boot.bin`` using any embARC example which ram start address should be 0x20000000 and use bootloader to run it
+- Generate ``boot.bin`` using any embARC example, its RAM start address should be 0x20000000. Use bootloader to run it
 
 Exercises
 =========
