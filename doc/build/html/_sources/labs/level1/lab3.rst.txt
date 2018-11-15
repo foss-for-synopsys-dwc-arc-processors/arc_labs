@@ -78,6 +78,12 @@ The flow of lab3'code is shown below:
 .. image:: /img/lab3_program_flow_chart.png
     :alt: program flow chart
 
+The code can be divided into 3 parts:
+
+* Part1 : read the BCR of internal timers to check the features
+* Part2 : Promgram Timer0 by auxiliary registers with the |embarc| provided API
+* Part3 : read the counts to Timer 0 to measure a code block's execution time.
+
 Steps
 =====
 
@@ -85,7 +91,7 @@ Steps
 
 .. code-block:: console
 
-    $ cd <embarc_root>/arc_labs/labs3/lab3_timer
+    $ cd <embarc_root>/arc_labs/labs/lab3_timer
     # for emsk
     $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=GNU run
     # for iotdk
