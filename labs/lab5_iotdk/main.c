@@ -32,9 +32,6 @@
 #include "embARC.h"
 #include "embARC_debug.h"
 
-
-
-
 #define IOTDK_LED_ID		DFSS_GPIO_4B2_ID
 #define IOTDK_LED_PIN		0
 

@@ -45,7 +45,7 @@ int32_t rn4020_set_prv_uuid(RN4020_DEF_PTR rn4020, uint64_t high_uuid, uint64_t 
     uint8_t i;
     uint8_t uuid_data[16];
 
-    for(i = 0; i < 16; i++) 
+    for(i = 0; i < 16; i++)
     {
         if(i < 8) uuid_data[i] = (high_uuid >> ((7-i) << 3)) & 0xff;
         else uuid_data[i] = (low_uuid >> ((15-i) << 3)) & 0xff;
@@ -55,13 +55,13 @@ int32_t rn4020_set_prv_uuid(RN4020_DEF_PTR rn4020, uint64_t high_uuid, uint64_t 
 
 }
 
-int32_t rn4020_set_prv_char(RN4020_DEF_PTR rn4020, uint64_t high_uuid, uint64_t low_uuid, 
+int32_t rn4020_set_prv_char(RN4020_DEF_PTR rn4020, uint64_t high_uuid, uint64_t low_uuid,
                             uint8_t property, uint8_t size, uint8_t security)
 {
     uint8_t i;
     uint8_t uuid_data[16];
 
-    for(i = 0; i < 16; i++) 
+    for(i = 0; i < 16; i++)
     {
         if(i < 8) uuid_data[i] = (high_uuid >> ((7-i) << 3)) & 0xff;
         else uuid_data[i] = (low_uuid >> ((15-i) << 3)) & 0xff;
@@ -84,7 +84,7 @@ int main(void)
 	rn4020_reset_to_factory(rn4020_ble);
 
     /* Set device Name */
-	rn4020_set_dev_name(rn4020_ble, "IoT DK"); 
+	rn4020_set_dev_name(rn4020_ble, "IoT DK");
 
     /* Set device services */
 	rn4020_set_services(rn4020_ble, RN4020_SERVICE_DEVICE_INFORMATION |
@@ -93,7 +93,7 @@ int main(void)
 
 	rn4020_set_features(rn4020_ble, RN4020_FEATURE_SERVER_ONLY);
     rn4020_clear_private(rn4020_ble);
-    
+
     /* Set private service UUID and private characteristic */
     rn4020_set_prv_uuid(rn4020_ble, RN4020_PRV_SERV_HIGH_UUID, RN4020_PRV_SERV_LOW_UUID);
     rn4020_set_prv_char(rn4020_ble, RN4020_PRV_CHAR_HIGH_UUID, RN4020_PRV_CHAR_LOW_UUID, 0x18, 0x06, RN4020_PRIVATE_CHAR_SEC_NONE);
@@ -115,7 +115,7 @@ int main(void)
 			battery = 100;
 		}
 	}
-    
+
 	return E_SYS;
 }
 

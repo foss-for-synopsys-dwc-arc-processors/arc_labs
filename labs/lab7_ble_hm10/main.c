@@ -39,39 +39,34 @@
 
 uint8_t isr_flag = 0;
 
-void init_Ble_HM_10(HM1X_DEF_PTR obj, uint32_t baudrate, uint32_t mode, uint32_t type, uint32_t role)
+void init_ble_hm_10(HM1X_DEF_PTR obj, uint32_t baudrate, uint32_t mode, uint32_t type, uint32_t role)
 {
 	EMBARC_PRINTF("Init HM1X with baudrate %dbps\r\n", baudrate);
 	hm1x_init(obj, baudrate);
 
 	hm1x_flush(obj);
 
-	while(hm1x_test_command(obj))
-	{
+	while (hm1x_test_command(obj)) {
 		EMBARC_PRINTF("test command Failed\r\n");
 	}
 	EMBARC_PRINTF("test command Successfully\r\n");
 
-	while(hm1x_restart(obj))
-	{
+	while (hm1x_restart(obj)) {
 		EMBARC_PRINTF("Restart Failed\r\n");
 	}
 	EMBARC_PRINTF("Restart Successfully\r\n");
 
-	while(hm1x_set_mode(obj, mode))
-	{
+	while	(hm1x_set_mode(obj, mode)) {
 		EMBARC_PRINTF("SET MODE Failed\r\n");
 	}
 	EMBARC_PRINTF("SET MODE to %d\r\n", mode);
 
-	while(hm1x_set_type(obj, type))
-	{
+	while(hm1x_set_type(obj, type)) {
 		EMBARC_PRINTF("SET TYPE Failed\r\n");
 	}
 	EMBARC_PRINTF("SET TYPE to %d\r\n", type);
 
-	while(hm1x_set_role(obj, role))
-	{
+	while(hm1x_set_role(obj, role)) {
 		EMBARC_PRINTF("SET ROLE Failed\r\n");
 	}
 	EMBARC_PRINTF("SET ROLE to %d\r\n", role);
@@ -80,17 +75,12 @@ void init_Ble_HM_10(HM1X_DEF_PTR obj, uint32_t baudrate, uint32_t mode, uint32_t
 static void timer0_isr(void *ptr)
 {
 	static uint32_t led_val = 1;
-    /* 将未执行中断标志位清零 */
 	timer_int_clear(TIMER_0);
 
-	if (isr_flag == 1)
-	{
-		if(led_val >= 0x0100)
-		{
+	if (isr_flag == 1) {
+		if(led_val >= 0x0100) {
 			led_val = 0x0001;
-		}
-		else
-		{
+		} else {
 			led_val <<= 1;
 		}
 
@@ -98,7 +88,7 @@ static void timer0_isr(void *ptr)
 	}
 }
 
-void init_Run_Timer(void)
+void init_run_timer(void)
 {
 	int_disable(INTNO_TIMER0);
 	timer_stop(TIMER_0);
@@ -115,20 +105,15 @@ uint8_t compare_chars(uint8_t* buf, uint8_t* cmd, uint8_t num)
 	uint8_t i = 0;
 	uint8_t cnt = 0;
 
-	for (i = 0; i < num; ++i)
-	{
-		if(buf[i] == cmd[i])
-		{
+	for (i = 0; i < num; ++i) {
+		if(buf[i] == cmd[i]) {
 			cnt++;
 		}
 	}
 
-	if(cnt == num)
-	{
+	if(cnt == num) {
 		return 1;
-	}
-	else
-	{
+	} else {
 		return 0;
 	}
 }
@@ -157,14 +142,14 @@ void LED_WRI_FUN(uint8_t* num_buf, uint8_t* num_cmd)
 
 	for(k = 0; k < 3; ++k)
 	{
-		for (i = 0; i < 16; ++i)
+	for (i = 0; i < 16; ++i)
+	{
+		if(num_buf[k] == num_cmd[i])
 		{
-			if(num_buf[k] == num_cmd[i])
-			{
-				led_val += i;
-			}
+		led_val += i;
 		}
-		led_val <<= 4;
+	}
+	led_val <<= 4;
 	}
 	led_val >>= 4;
 	led_write(led_val, BOARD_LED_MASK);
@@ -209,8 +194,8 @@ int main(void)
 	uint8_t LED_RED_FLAG = 0;
 
 	HM1X_DEFINE(hm1x, HM_1X_UART_ID);
-	init_Ble_HM_10(hm1x, UART_BAUDRATE_9600, BLE_HM1X_MODE_0, BLE_HM1X_TYPE_0, BLE_HM1X_SLAVE_ROLE);
-	init_Run_Timer();
+	init_ble_hm_10(hm1x, UART_BAUDRATE_9600, BLE_HM1X_MODE_0, BLE_HM1X_TYPE_0, BLE_HM1X_SLAVE_ROLE);
+	init_run_Timer();
 
 	EMBARC_PRINTF("\r\n/*****Enter THE TEST MODE*****/\r\n");
 
@@ -222,79 +207,62 @@ int main(void)
 		LED_RUN_FLAG = 0;
 		LED_RED_FLAG = 0;
 
-    	rcv_cnt = hm1x_read(hm1x, rcv_buf, sizeof(rcv_buf));
+		rcv_cnt = hm1x_read(hm1x, rcv_buf, sizeof(rcv_buf));
 		rcv_buf[rcv_cnt] = '\0';
 
-		if (rcv_cnt)
-		{
+		if (rcv_cnt) {
 			rcv_flag = 1;
-		}
-		else
-		{
+		} else {
 			rcv_flag = 0;
 		}
 
-		if(rcv_flag)
-		{
-			for (int i = 0; i < rcv_cnt; ++i)
-			{
+		if(rcv_flag) {
+			for (int i = 0; i < rcv_cnt; ++i) {
 				cmd_buf[cmd_cnt + i] = rcv_buf[i];
 			}
 			cmd_cnt += rcv_cnt;
-			//EMBARC_PRINTF("The count is %d\r\n", cmd_cnt);
+		//EMBARC_PRINTF("The count is %d\r\n", cmd_cnt);
 		}
 
-		if((rcv_flag == 0)&&(pre_flag == 1))
-		{
-			if(cmd_cnt == 6)
-			{
+		if((rcv_flag == 0) && (pre_flag == 1)) {
+			if(cmd_cnt == 6) {
 				LED_ALL_FLAG = compare_chars(cmd_buf, LED_ALL_CMD, 6);
 				LED_OFF_FLAG = compare_chars(cmd_buf, LED_OFF_CMD, 6);
 				LED_RUN_FLAG = compare_chars(cmd_buf, LED_RUN_CMD, 6);
 				LED_RED_FLAG = compare_chars(cmd_buf, LED_RED_CMD, 6);
-			}
-			else if(cmd_cnt == 9)
-			{
+			} else if(cmd_cnt == 9) {
 				LED_WRI_FLAG = compare_chars(cmd_buf, LED_WRI_CMD, 6);
 			}
-			else
-			{
-				EMBARC_PRINTF("\r\nThe command is wrong. The count is %d\r\n", cmd_cnt);
-			}
+		else {
+			EMBARC_PRINTF("\r\nThe command is wrong. The count is %d\r\n", cmd_cnt);
+		}
 
-			cmd_buf[cmd_cnt] = '\r';
-			cmd_buf[cmd_cnt+1] = '\n';
-			cmd_buf[cmd_cnt+2] = '\0';
-			hm1x_write(hm1x, cmd_buf, cmd_cnt+2);
+		cmd_buf[cmd_cnt] = '\r';
+		cmd_buf[cmd_cnt+1] = '\n';
+		cmd_buf[cmd_cnt+2] = '\0';
+		hm1x_write(hm1x, cmd_buf, cmd_cnt+2);
 
-			cmd_cnt = 0;
+		cmd_cnt = 0;
 		}
 
 		pre_flag = rcv_flag;
 		board_delay_ms(10, 1);
 
-		if(LED_ALL_FLAG)
-		{
+		if(LED_ALL_FLAG) {
 			EMBARC_PRINTF("\r\nLED_ALL_FUN\r\n");
 			LED_ALL_FUN();
-		}
-		else if (LED_OFF_FLAG)
-		{
+		} else if (LED_OFF_FLAG) {
 			EMBARC_PRINTF("\r\nLED_OFF_FUN\r\n");
 			LED_OFF_FUN();
 		}
-		else if (LED_WRI_FLAG)
-		{
+		else if (LED_WRI_FLAG) {
 			EMBARC_PRINTF("\r\nLED_WRI_FUN\r\n");
 			LED_WRI_FUN(cmd_buf+6, Num_CMD);
 		}
-		else if (LED_RUN_FLAG)
-		{
+		else if (LED_RUN_FLAG) {
 			EMBARC_PRINTF("\r\nLED_RUN_FUN\r\n");
 			LED_RUN_FUN();
-		}
-		else if (LED_RED_FLAG)
-		{
+		} else if (LED_RED_FLAG) {
 			EMBARC_PRINTF("\r\nLED_RED_FUN\r\n");
 			LED_RED_FUN();
 		}
