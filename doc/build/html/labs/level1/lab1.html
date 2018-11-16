@@ -204,11 +204,11 @@
 <li>Configure compilation options to compile, and generate executable files.</li>
 <li>Start the debugger of MetaWare Development Toolkit and enter debug mode.</li>
 </ul>
-<p>From the different angles of C language and assembly language, use the functions of setting breakpoint, single step execution, full speed execution, and so on combined with observing PC address, register status, global variable status, and profiling performance to analyze the debug target program.</p>
+<p>From the different angles of C language and assembly language, use the functions of setting breakpoint, single step execution, full speed execution, and so on combined with observing PC address, register status, global variable status, and profiling performance to analyze and debug the target program.</p>
 </div>
 <div class="section" id="principles">
 <h3>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h3>
-<p>Use the MetaWare Development Toolkit to create projects and load code. In the engineering unit, configure the compile option to compile code, debug, and analyze the compiled executable file.</p>
+<p>Use the MetaWare Development Toolkit to create projects and load code. In the engineering unit, configure the compilation options to compile code, debug, and analyze the compiled executable file.</p>
 <p>Routine code CoreTest.c:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">/////////////////////////////////////////////////////////////////////////</span>
 <span class="c1">// This small demo program finds the data point that is the</span>
@@ -270,7 +270,7 @@
 <div class="section" id="steps">
 <h3>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Establishing a project</li>
+<li>Create a project</li>
 </ol>
 <p>Open the MetaWare Development Toolkit, create an empty project called <code class="docutils literal notranslate"><span class="pre">demo</span></code>, and select the <strong>ARC EM Generic</strong> processor.</p>
 <p><img alt="figure1" src="../../_images/lab1_figure1.png" /></p>
@@ -278,32 +278,32 @@
 <li>Import the code file CoreTest.c to the project <code class="docutils literal notranslate"><span class="pre">demo</span></code>.</li>
 </ol>
 <p>In the Project Explorer, click <img alt="icon1" src="../../_images/lab1_icon1.png" /> and select <strong>Import</strong>.</p>
-<p>Import dialog box is displayed. Select the File System item from the <strong>General</strong> tab, and click <strong>Next</strong>. As shown in the following figure, add the file directory where the source code CoreTest.c is located. The dialog box is automatically displays the name of the directory and the file name of the file contained in the directory. Select CoreTest.c and click <strong>Finish</strong> to complete the import process.</p>
+<p>Import dialog box is displayed. Select the File System item from the <strong>General</strong> tab, and click <strong>Next</strong>. As shown in the following figure, add the file directory where the source code CoreTest.c is located. The dialog box automatically displays the name of the directory and the file name of the file contained in the directory. Select CoreTest.c and click <strong>Finish</strong> to complete the import process.</p>
 <p><img alt="figure2" src="../../_images/lab1_figure2.png" /></p>
 <p>After the import is complete, you can see the code file <code class="docutils literal notranslate"><span class="pre">CoreTest.c</span></code> you just added in the Project Explorer on the left side of the MetaWare Development Toolkit main interface.</p>
 <ol class="arabic simple" start="3">
 <li>Set compilation options</li>
 </ol>
-<p>Right-click in the current project demo and select Properties. Click <strong>C/C++ Build</strong> &gt; <strong>Settings</strong> &gt; <strong>Tool Settings</strong> to open the compile option settings window.</p>
+<p>Right-click in the current project demo and select Properties. Click <strong>C/C++ Build</strong> &gt; <strong>Settings</strong> &gt; <strong>Tool Settings</strong> to open the compilation options settings window.</p>
 <p><img alt="figure3" src="../../_images/lab1_figure3.png" /></p>
 <p>Select <strong>Optimization/Debugging</strong> to set the compiler
 optimization and debugging level. For example, set the optimization level to
 turn off optimization, and set the debugging level to load all debugging
 information.</p>
-<p>Select Processor/Extensions to set the compile options corresponding to the target processor hardware properties, such as the
+<p>Select Processor/Extensions to set the compilation options corresponding to the target processor hardware properties, such as the
 version of the processor, whether to support extended instructions such as
 shift, multiplication, floating-point operations, and so on whether to include
 Timer0/1. As shown in the following figure, this setting indicates that the target
-processor supports normal extended instructions.</p>
+processor supports common extended instructions.</p>
 <p><img alt="figure4" src="../../_images/lab1_figure4.png" /></p>
-<p>Select <strong>MetaWare ARC EM C/C++</strong> and check the settings compile options and click <strong>OK</strong>.</p>
+<p>Select <strong>MetaWare ARC EM C/C++</strong> and check the settings compilation options and click <strong>OK</strong>.</p>
 <ol class="arabic simple" start="4">
 <li>Compile project demo</li>
 </ol>
 <p>Select Build Project from the Project drop-down menu in the MetaWare Development Toolkit main menu
 or click the icon <img alt="icon2" src="../../_images/lab1_icon2.png" /> . In the MetaWare Development Toolkit main interface, select <strong>Console</strong>
-to view the logs during compilation. When the message ‘Finished building
-target: demo.elf’ is displayed, the compilation is successful, and the
+to view the logs during compilation. When the message “Finished building
+target: demo.elf” is displayed, the compilation is successful, and the
 compiled executable file demo.elf can be seen in the Project Explorer.</p>
 <p><img alt="figure5" src="../../_images/lab1_figure5.png" /></p>
 <ol class="arabic simple" start="5">
@@ -461,7 +461,7 @@ options column and click <strong>OK</strong> to close the Properties dialog box.
 <p>Select <strong>Build Project</strong> from the Project drop-down menu in the GNU Toolchain for ARC Processors main menu
 or click <img alt="icon16" src="../../_images/lab1_icon16.png" />. In the middle of the GNU Toolchain for ARC Processors main interface,
 select Console to view the logs during the compilation process. When
-the message ‘Finished building target: Core_test.elf’ is displayed, the compilation
+the message “Finished building target: Core_test.elf” is displayed, the compilation
 is successful, and the compiled executable file Core_test.elf can be seen in
 the <strong>Project Explorer</strong> as shown in the following figure.</p>
 <p><img alt="figure13" src="../../_images/lab1_figure13.png" /></p>

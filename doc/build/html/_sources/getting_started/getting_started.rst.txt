@@ -20,7 +20,7 @@ Software Requirement
   * |arcgnu|
 
     * `Open Source ARC GNU IDE (2018.03) <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_.
-      The |arcgnu| offers all of the benefits of open source tools such as complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with `ARC GNU plugin for Eclipse <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases>`_, `ARC GNU prebuilt toolchain <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_, and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_
+      The |arcgnu| offers all of the benefits of open source tools such as complete source code and a large install base. The ARC GNU IDE Installer consists of Eclipse IDE with `ARC GNU plugin for Eclipse <https://github.com/foss-for-synopsys-dwc-arc-processors/arc_gnu_eclipse/releases>`_, `ARC GNU prebuilt toolchain <https://github.com/foss-for-synopsys-dwc-arc-processors/toolchain/releases>`_, and `OpenOCD for ARC <https://github.com/foss-for-synopsys-dwc-arc-processors/openocd>`_.
 * `Digilent Adept Software <https://store.digilentinc.com/digilent-adept-2-download-only/>`_ for Digilent JTAG-USB cable driver. All the supported boards are equipped with on board USB-JTAG debugger. One USB cable is required and external debugger is not required.
 
 * `Tera Term <http://ttssh2.osdn.jp/>`_ or `PuTTY <https://www.putty.org/>`_ for serial terminal connection. The serial configurations are 115200 baud, 8 bits data, 1 stop bit, and no parity (115200-8-N-1) by default.
