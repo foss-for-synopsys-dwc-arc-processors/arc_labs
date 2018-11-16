@@ -1,6 +1,6 @@
 .. _lab1:
 
-How to Use ARC IDE
+How to use ARC IDE
 ======================
 
 |mwdt|

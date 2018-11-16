@@ -1,6 +1,6 @@
 .. _lab3:
 
-ARC features: auxiliary registers and processor timers
+ARC features: AUX registers and timers
 ######################################################
 
 Purpose

@@ -1,7 +1,7 @@
 .. _lab8:
 
 Memory map and linker
-#####################
+########################
 Purpose
 =======
 - To get familiar with memory layout in compilation process
