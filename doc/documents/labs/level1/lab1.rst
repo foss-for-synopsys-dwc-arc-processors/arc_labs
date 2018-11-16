@@ -31,13 +31,13 @@ Content
 * Configure compilation options to compile, and generate executable files.
 * Start the debugger of |mwdt| and enter debug mode.
 
-From the different angles of C language and assembly language, use the functions of setting breakpoint, single step execution, full speed execution, and so on combined with observing PC address, register status, global variable status, and profiling performance to analyze the debug target program.
+From the different angles of C language and assembly language, use the functions of setting breakpoint, single step execution, full speed execution, and so on combined with observing PC address, register status, global variable status, and profiling performance to analyze and debug the target program.
 
 
 Principles
 ^^^^^^^^^^^
 
-Use the |mwdt| to create projects and load code. In the engineering unit, configure the compile option to compile code, debug, and analyze the compiled executable file.
+Use the |mwdt| to create projects and load code. In the engineering unit, configure the compilation options to compile code, debug, and analyze the compiled executable file.
 
 Routine code CoreTest.c:
 
@@ -102,7 +102,7 @@ Routine code CoreTest.c:
 Steps
 ^^^^^^
 
-1. Establishing a project
+1. Create a project
 
 Open the |mwdt|, create an empty project called ``demo``, and select the **ARC EM Generic** processor.
 
@@ -112,7 +112,7 @@ Open the |mwdt|, create an empty project called ``demo``, and select the **ARC E
 
 In the Project Explorer, click |icon1| and select **Import**.
 
-Import dialog box is displayed. Select the File System item from the **General** tab, and click **Next**. As shown in the following figure, add the file directory where the source code CoreTest.c is located. The dialog box is automatically displays the name of the directory and the file name of the file contained in the directory. Select CoreTest.c and click **Finish** to complete the import process.
+Import dialog box is displayed. Select the File System item from the **General** tab, and click **Next**. As shown in the following figure, add the file directory where the source code CoreTest.c is located. The dialog box automatically displays the name of the directory and the file name of the file contained in the directory. Select CoreTest.c and click **Finish** to complete the import process.
 
 |figure2|
 
@@ -120,7 +120,7 @@ After the import is complete, you can see the code file ``CoreTest.c`` you just 
 
 3. Set compilation options
 
-Right-click in the current project demo and select Properties. Click **C/C++ Build** > **Settings** > **Tool Settings** to open the compile option settings window.
+Right-click in the current project demo and select Properties. Click **C/C++ Build** > **Settings** > **Tool Settings** to open the compilation options settings window.
 
 |figure3|
 
@@ -129,22 +129,22 @@ optimization and debugging level. For example, set the optimization level to
 turn off optimization, and set the debugging level to load all debugging
 information.
 
-Select Processor/Extensions to set the compile options corresponding to the target processor hardware properties, such as the
+Select Processor/Extensions to set the compilation options corresponding to the target processor hardware properties, such as the
 version of the processor, whether to support extended instructions such as
 shift, multiplication, floating-point operations, and so on whether to include
 Timer0/1. As shown in the following figure, this setting indicates that the target
-processor supports normal extended instructions.
+processor supports common extended instructions.
 
 |figure4|
 
-Select **MetaWare ARC EM C/C++** and check the settings compile options and click **OK**.
+Select **MetaWare ARC EM C/C++** and check the settings compilation options and click **OK**.
 
 4. Compile project demo
 
 Select Build Project from the Project drop-down menu in the |mwdt| main menu
 or click the icon |icon2| . In the |mwdt| main interface, select **Console**
-to view the logs during compilation. When the message 'Finished building
-target: demo.elf' is displayed, the compilation is successful, and the
+to view the logs during compilation. When the message "Finished building
+target: demo.elf" is displayed, the compilation is successful, and the
 compiled executable file demo.elf can be seen in the Project Explorer.
 
 |figure5|
@@ -323,7 +323,7 @@ options column and click **OK** to close the Properties dialog box.
 Select **Build Project** from the Project drop-down menu in the |arcgnu| main menu
 or click |icon16|. In the middle of the |arcgnu| main interface,
 select Console to view the logs during the compilation process. When
-the message 'Finished building target: Core_test.elf' is displayed, the compilation
+the message "Finished building target: Core_test.elf" is displayed, the compilation
 is successful, and the compiled executable file Core_test.elf can be seen in
 the **Project Explorer** as shown in the following figure.
 

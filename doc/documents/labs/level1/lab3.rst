@@ -5,7 +5,7 @@ ARC features: auxiliary registers and processor timers
 
 Purpose
 =======
-- To know about the auxiliary registers and processor timers of |arc|
+- To know the auxiliary registers and processor timers of |arc|
 - To learn how to program auxiliary registers to control the processor timers
 
 Equipment
@@ -47,7 +47,7 @@ Processor Timers
 ----------------
 
 The processor timers are two independent 32-bit timers and a 64-bit real-time
-counter (RTC). Timer 0 and timer 1 are identical in operation. The only
+counter (RTC). **Timer0** and **Timer1** are identical in operation. The only
 difference is that these timers are connected to different interrupts. The
 Timers cannot be included in a configuration without interrupts. Each timer is
 optional and when present, it is connected to a fixed interrupt; interrupt 16

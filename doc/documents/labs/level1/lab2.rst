@@ -120,7 +120,7 @@ Use the **blinky** as an example.
    make TOOLCHAIN=gnu BOARD=iotdk run
 
 .. Note:: for |emsk|, make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
-  You could press configure button (located above the letter “C” of the ARC logo) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board information is sent by UART and displayed on your UART terminal.
+  You could press configure button (located above the letter “C” of the ARC logo on the |emsk|) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board information is sent by UART and displayed on your UART terminal.
 
 4. Get the results
 
@@ -229,7 +229,7 @@ Create your own application in |embarc|.
 
         * Update the include-folders settings: change the value of
           ``APPL_INC_DIR`` which is the application include path to the
-          application folder (-I).
+          application folder.
 
         * If more than one directory is needed, use whitespace between the folder paths.
 
