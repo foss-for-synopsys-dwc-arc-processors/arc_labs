@@ -3,7 +3,7 @@
 A WiFi temperature monitor
 ===========================
 
-ESPB266 WIFI module
+ESPB266 WiFi module
 ----------------------
 
 Purpose
@@ -26,9 +26,9 @@ The following hardware and tools are required:
 Content
 ^^^^^^^^
 
-Through this lab, you get a preliminary understanding of ESP8266 WIFI module and the AT command.
+Through this lab, you get a preliminary understanding of ESP8266 WiFi module and the AT command.
 
-The lab is based on the |embarc| package and on the supports of the popular WIFI module, ESP8266.
+The lab is based on the |embarc| package and on the supports of the popular WiFi module, ESP8266.
 During the lab, you will first use the AT command to set the ESP8266 to the server mode.
 Then you can use your laptop or mobile phone to access ESP8266 by IP address.
 You will get a static webpage transmitted via TCP protocol.
@@ -39,14 +39,14 @@ Principles
 
 **ESP8266**
 
-The ESP8266 is an ultra-low-power WIFI chip with industry-leading package size and ultra-low power technology.
+The ESP8266 is an ultra-low-power WiFi chip with industry-leading package size and ultra-low power technology.
 It is designed for mobile devices and IoT applications, facilitating the connection between user devices to IoT environments.
 
 The ESP8266 is available with various encapsulations. On-board PCB antenna, IPEX interface, and stamp hole interface are supported.
 
 ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handhold devices, industrial control, and other IoT fields.
 
-Ai-Thinker company has developed several WIFI modules based on ESP8266, including ESP01 and ESP01S which will be used in this lab.
+Ai-Thinker company has developed several WiFi modules based on ESP8266, including ESP01 and ESP01S which will be used in this lab.
 
 .. note::  See `embARC doc <http://embarc.org/embarc_osp/doc/build/html/getting_started/peripheral_preparation.html#other-pmod-or-compatible-modules>`_ to learn how to connect it with your board.
 
@@ -70,8 +70,8 @@ Ai-Thinker company has developed several WIFI modules based on ESP8266, includin
     #include <stdio.h>
     #include <string.h>
 
-    #define WIFI_SSID	"\"embARC\""
-    #define WIFI_PWD	"\"12345678\""
+    #define WiFi_SSID	"\"embARC\""
+    #define WiFi_PWD	"\"12345678\""
 
     static char http_get[] = "GET /";
     static char http_IDP[] = "+IPD,";
@@ -106,20 +106,20 @@ Ai-Thinker company has developed several WIFI modules based on ESP8266, includin
             do
             {
                     esp8266_wifi_scan(esp8266, scan_result);
-                    EMBARC_PRINTF("Searching for WIFI %s ......\n", WIFI_SSID);
+                    EMBARC_PRINTF("Searching for WiFi %s ......\n", WiFi_SSID);
                     board_delay_ms(100, 1);
             }
-            while (strstr(scan_result, WIFI_SSID) == NULL);
+            while (strstr(scan_result, WiFi_SSID) == NULL);
 
-            EMBARC_PRINTF("WIFI %s found! Try to connect\n", WIFI_SSID);
+            EMBARC_PRINTF("WiFi %s found! Try to connect\n", WiFi_SSID);
 
-            while(esp8266_wifi_connect(esp8266, WIFI_SSID, WIFI_PWD, false)!=AT_OK)
+            while(esp8266_wifi_connect(esp8266, WiFi_SSID, WiFi_PWD, false)!=AT_OK)
             {
-                    EMBARC_PRINTF("WIFI %s connect failed\n", WIFI_SSID);
+                    EMBARC_PRINTF("WiFi %s connect failed\n", WiFi_SSID);
                     board_delay_ms(100, 1);
             }
 
-            EMBARC_PRINTF("WIFI %s connect succeed\n", WIFI_SSID);
+            EMBARC_PRINTF("WiFi %s connect succeed\n", WiFi_SSID);
 
             //Creat Server
             EMBARC_PRINTF("============================ Connect Server ============================\n");
@@ -227,7 +227,7 @@ At this point, feedback information will be shown on your serial port console, r
 
     ..........
 
-    WIFI "embARC_test" connect succeed
+    WiFi "embARC_test" connect succeed
     ============================ Connect Server ============================
     [at_send_cmd]117: at_out: "AT+CIPMUX=1
     " (13)
@@ -254,9 +254,9 @@ At this point, feedback information will be shown on your serial port console, r
 
 **Access server**
 
-The serial port feedback information above shows that the board has successfully connected to the target WIFI through ESP8266. It is set to the server mode by using the AT command, and the IP address of the server is also given.
+The serial port feedback information above shows that the board has successfully connected to the target WiFi through ESP8266. It is set to the server mode by using the AT command, and the IP address of the server is also given.
 
-At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page. Notice the IP address that you enter should be the same IP address shown in *Show IP* section at your serial port console.
+At this point, use a PC or mobile phone to connect to the same WiFi, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page. Notice the IP address that you enter should be the same IP address shown in *Show IP* section at your serial port console.
 
 Exercises
 ^^^^^^^^^^

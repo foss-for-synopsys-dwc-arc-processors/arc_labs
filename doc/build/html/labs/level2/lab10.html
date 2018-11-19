@@ -92,7 +92,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../level2.html">Advanced labs</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="lab8.html">Memory map and linker</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">A WiFi temperature monitor</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#espb266-wifi-module">ESPB266 WIFI module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#espb266-wifi-module">ESPB266 WiFi module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="lab7.html">BLE Communication</a></li>
@@ -177,7 +177,7 @@
   <div class="section" id="a-wifi-temperature-monitor">
 <span id="lab10"></span><h1>A WiFi temperature monitor<a class="headerlink" href="#a-wifi-temperature-monitor" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="espb266-wifi-module">
-<h2>ESPB266 WIFI module<a class="headerlink" href="#espb266-wifi-module" title="Permalink to this headline">¶</a></h2>
+<h2>ESPB266 WiFi module<a class="headerlink" href="#espb266-wifi-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="purpose">
 <h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -199,8 +199,8 @@
 </div>
 <div class="section" id="content">
 <h3>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h3>
-<p>Through this lab, you get a preliminary understanding of ESP8266 WIFI module and the AT command.</p>
-<p>The lab is based on the embARC OSP package and on the supports of the popular WIFI module, ESP8266.
+<p>Through this lab, you get a preliminary understanding of ESP8266 WiFi module and the AT command.</p>
+<p>The lab is based on the embARC OSP package and on the supports of the popular WiFi module, ESP8266.
 During the lab, you will first use the AT command to set the ESP8266 to the server mode.
 Then you can use your laptop or mobile phone to access ESP8266 by IP address.
 You will get a static webpage transmitted via TCP protocol.</p>
@@ -208,11 +208,11 @@ You will get a static webpage transmitted via TCP protocol.</p>
 <div class="section" id="principles">
 <h3>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h3>
 <p><strong>ESP8266</strong></p>
-<p>The ESP8266 is an ultra-low-power WIFI chip with industry-leading package size and ultra-low power technology.
+<p>The ESP8266 is an ultra-low-power WiFi chip with industry-leading package size and ultra-low power technology.
 It is designed for mobile devices and IoT applications, facilitating the connection between user devices to IoT environments.</p>
 <p>The ESP8266 is available with various encapsulations. On-board PCB antenna, IPEX interface, and stamp hole interface are supported.</p>
 <p>ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handhold devices, industrial control, and other IoT fields.</p>
-<p>Ai-Thinker company has developed several WIFI modules based on ESP8266, including ESP01 and ESP01S which will be used in this lab.</p>
+<p>Ai-Thinker company has developed several WiFi modules based on ESP8266, including ESP01 and ESP01S which will be used in this lab.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">See <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/getting_started/peripheral_preparation.html#other-pmod-or-compatible-modules">embARC doc</a> to learn how to connect it with your board.</p>
@@ -231,8 +231,8 @@ It is designed for mobile devices and IoT applications, facilitating the connect
 <span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
 
-<span class="cp">#define WIFI_SSID   &quot;\&quot;embARC\&quot;&quot;</span>
-<span class="cp">#define WIFI_PWD    &quot;\&quot;12345678\&quot;&quot;</span>
+<span class="cp">#define WiFi_SSID   &quot;\&quot;embARC\&quot;&quot;</span>
+<span class="cp">#define WiFi_PWD    &quot;\&quot;12345678\&quot;&quot;</span>
 
 <span class="k">static</span> <span class="kt">char</span> <span class="n">http_get</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;GET /&quot;</span><span class="p">;</span>
 <span class="k">static</span> <span class="kt">char</span> <span class="n">http_IDP</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;+IPD,&quot;</span><span class="p">;</span>
@@ -267,20 +267,20 @@ It is designed for mobile devices and IoT applications, facilitating the connect
         <span class="k">do</span>
         <span class="p">{</span>
                 <span class="n">esp8266_wifi_scan</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">scan_result</span><span class="p">);</span>
-                <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Searching for WIFI %s ......</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+                <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;Searching for WiFi %s ......</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WiFi_SSID</span><span class="p">);</span>
                 <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
         <span class="p">}</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">scan_result</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">)</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">scan_result</span><span class="p">,</span> <span class="n">WiFi_SSID</span><span class="p">)</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">);</span>
 
-        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WIFI %s found! Try to connect</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WiFi %s found! Try to connect</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WiFi_SSID</span><span class="p">);</span>
 
-        <span class="k">while</span><span class="p">(</span><span class="n">esp8266_wifi_connect</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">,</span> <span class="n">WIFI_PWD</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span><span class="o">!=</span><span class="n">AT_OK</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">esp8266_wifi_connect</span><span class="p">(</span><span class="n">esp8266</span><span class="p">,</span> <span class="n">WiFi_SSID</span><span class="p">,</span> <span class="n">WiFi_PWD</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span><span class="o">!=</span><span class="n">AT_OK</span><span class="p">)</span>
         <span class="p">{</span>
-                <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WIFI %s connect failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+                <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WiFi %s connect failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WiFi_SSID</span><span class="p">);</span>
                 <span class="n">board_delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
         <span class="p">}</span>
 
-        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WIFI %s connect succeed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+        <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;WiFi %s connect succeed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WiFi_SSID</span><span class="p">);</span>
 
         <span class="c1">//Creat Server</span>
         <span class="n">EMBARC_PRINTF</span><span class="p">(</span><span class="s">&quot;============================ Connect Server ============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
@@ -380,7 +380,7 @@ It is designed for mobile devices and IoT applications, facilitating the connect
 
 <span class="go">..........</span>
 
-<span class="go">WIFI &quot;embARC_test&quot; connect succeed</span>
+<span class="go">WiFi &quot;embARC_test&quot; connect succeed</span>
 <span class="go">============================ Connect Server ============================</span>
 <span class="go">[at_send_cmd]117: at_out: &quot;AT+CIPMUX=1</span>
 <span class="go">&quot; (13)</span>
@@ -407,8 +407,8 @@ It is designed for mobile devices and IoT applications, facilitating the connect
 </pre></div>
 </div>
 <p><strong>Access server</strong></p>
-<p>The serial port feedback information above shows that the board has successfully connected to the target WIFI through ESP8266. It is set to the server mode by using the AT command, and the IP address of the server is also given.</p>
-<p>At this point, use a PC or mobile phone to connect to the same WIFI, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page. Notice the IP address that you enter should be the same IP address shown in <em>Show IP</em> section at your serial port console.</p>
+<p>The serial port feedback information above shows that the board has successfully connected to the target WiFi through ESP8266. It is set to the server mode by using the AT command, and the IP address of the server is also given.</p>
+<p>At this point, use a PC or mobile phone to connect to the same WiFi, open a browser, and enter the IP address 192.168.137.81 to see the static HTTP page. Notice the IP address that you enter should be the same IP address shown in <em>Show IP</em> section at your serial port console.</p>
 </div>
 <div class="section" id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
