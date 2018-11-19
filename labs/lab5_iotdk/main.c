@@ -1,5 +1,5 @@
 /* ------------------------------------------
- * Copyright (c) 2017, Synopsys, Inc. All rights reserved.
+ * Copyright (c) 2018, Synopsys, Inc. All rights reserved.
 
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -28,51 +28,39 @@
  *
 --------------------------------------------- */
 
-
 /* embARC HAL */
 #include "embARC.h"
 #include "embARC_debug.h"
 
-#define COUNT BOARD_CPU_CLOCK/1000
+#define IOTDK_LED_ID		DFSS_GPIO_4B2_ID
+#define IOTDK_LED_PIN		0
 
-volatile static int t0 = 0;
-volatile static int second = 1;
 
-/** arc timer 0 interrupt routine */
-static void timer0_isr(void *ptr)
-{
-	timer_int_clear(TIMER_0);
-	t0++;
-}
-
-/** arc timer 0 interrupt delay */
-void timer0_delay_ms(int ms)
-{
-	t0 = 0;
-	while(t0<ms);
-}
-
-/** main entry for testing arc fiq interrupt */
+/**
+ * \brief	Test hardware board without any peripheral
+ */
 int main(void)
 {
-	int_disable(INTNO_TIMER0);
-	timer_stop(TIMER_0);
+	DEV_GPIO_PTR gpio_led;
 
-	int_handler_install(INTNO_TIMER0, timer0_isr);
-	int_pri_set(INTNO_TIMER0, INT_PRI_MIN);
+	io_arduino_config(ARDUINO_PIN_0, ARDUINO_GPIO, IO_PINMUX_ENABLE);
 
-	EMBARC_PRINTF("\r\nThis is a example about timer interrupt.\r\n");
-	EMBARC_PRINTF("\r\n/******** TEST MODE START ********/\r\n\r\n");
-
-	int_enable(INTNO_TIMER0);
-	timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);
-
-	while(1)
+	gpio_led = gpio_get_dev(IOTDK_LED_ID);
+	if (gpio_led->gpio_open((1 << IOTDK_LED_PIN)) == E_OPNED)
 	{
-		timer0_delay_ms(1000);
-		EMBARC_PRINTF("\r\n %ds.\r\n",second);
-		second ++;
+		gpio_led->gpio_control(GPIO_CMD_SET_BIT_DIR_OUTPUT,
+								(void *)(1 << IOTDK_LED_PIN));
 	}
+
+	while (1)
+	{
+		gpio_led->gpio_write(1, 1 << IOTDK_LED_PIN);
+		board_delay_ms(10, 1);
+		gpio_led->gpio_write(0, 1 << IOTDK_LED_PIN);
+		board_delay_ms(190, 1);
+	}
+
 	return E_SYS;
 }
 
+/** @} */

@@ -27,111 +27,51 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
 --------------------------------------------- */
+
+
 /* embARC HAL */
 #include "embARC.h"
 #include "embARC_debug.h"
 
-#define MAX_COUNT 0xfffff
+#define COUNT BOARD_CPU_CLOCK/1000
 
-volatile static uint8_t timer_flag = 0;
-volatile static uint8_t hits = 0;
-
-volatile static uint8_t nesting_flag = 1;
+volatile static int t0 = 0;
+volatile static int second = 1;
 
 /** arc timer 0 interrupt routine */
 static void timer0_isr(void *ptr)
 {
 	timer_int_clear(TIMER_0);
-
-	timer_flag = 0;
-
-	board_delay_ms(10, 1);
-
-	if(timer_flag)
-	{
-		EMBARC_PRINTF("Interrupt nesting!\r\n");
-	}
-	else
-	{
-		EMBARC_PRINTF("Interrupt\r\n");
-	}
-
-	hits++;
+	t0++;
 }
 
-/** arc timer 1 interrupt routine */
-static void timer1_isr(void *ptr)
+/** arc timer 0 interrupt delay */
+void timer0_delay_ms(int ms)
 {
-	timer_int_clear(TIMER_1);
-
-	timer_flag = 1;
+	t0 = 0;
+	while(t0 < ms);
 }
 
 /** main entry for testing arc fiq interrupt */
 int main(void)
 {
-	timer_stop(TIMER_0);
-	timer_stop(TIMER_1);
-
 	int_disable(INTNO_TIMER0);
-	int_disable(INTNO_TIMER1);
+	timer_stop(TIMER_0);
 
 	int_handler_install(INTNO_TIMER0, timer0_isr);
-	int_pri_set(INTNO_TIMER0, INT_PRI_MAX);
+	int_pri_set(INTNO_TIMER0, INT_PRI_MIN);
 
-	int_handler_install(INTNO_TIMER1, timer1_isr);
-	int_pri_set(INTNO_TIMER1, INT_PRI_MIN);
-
-	EMBARC_PRINTF("\r\nThe test will start in 1s.\r\n");
-	EMBARC_PRINTF("\r\n/******** TEST MODE START ********/\r\n\r\n");
+	EMBARC_PRINTF("\r\nThis is a example about timer interrupt.\r\n");
 
 	int_enable(INTNO_TIMER0);
-	int_enable(INTNO_TIMER1);
-
-	timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-	timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
+	timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);
 
 	while(1)
 	{
-		if((hits >= 5)&&(nesting_flag == 1))
-		{
-			timer_stop(TIMER_0);
-			timer_stop(TIMER_1);
-
-			int_disable(INTNO_TIMER0);
-			int_disable(INTNO_TIMER1);
-
-			int_pri_set(INTNO_TIMER0, INT_PRI_MIN);
-			int_pri_set(INTNO_TIMER1, INT_PRI_MAX);
-
-			nesting_flag = 0;
-
-			int_enable(INTNO_TIMER0);
-			int_enable(INTNO_TIMER1);
-
-			timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-			timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/10);
-		}
-		else if((hits >= 10)&&(nesting_flag == 0))
-		{
-			timer_stop(TIMER_0);
-			timer_stop(TIMER_1);
-
-			int_disable(INTNO_TIMER0);
-			int_disable(INTNO_TIMER1);
-
-			int_pri_set(INTNO_TIMER0, INT_PRI_MAX);
-			int_pri_set(INTNO_TIMER1, INT_PRI_MIN);
-
-			hits = 0;
-			nesting_flag = 1;
-
-			int_enable(INTNO_TIMER0);
-			int_enable(INTNO_TIMER1);
-
-			timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-			timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
-		}
+		timer0_delay_ms(1000);
+		EMBARC_PRINTF("\r\n %ds.\r\n",second);
+		second ++;
 	}
 	return E_SYS;
 }
+

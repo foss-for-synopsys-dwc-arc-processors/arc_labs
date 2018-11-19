@@ -26,13 +26,13 @@ TOOLCHAIN ?= gnu
 ##
 # HEAP & STACK SETTINGS
 ##
-HEAPSZ ?= 81920
-STACKSZ ?= 81920
+#HEAPSZ ?= 81920
+#STACKSZ ?= 81920
 
 #
 # root dir of embARC
 #
-EMBARC_ROOT = ../../..
+EMBARC_ROOT = ../../../..
 # Selected OS
 OS_SEL ?= freertos
 

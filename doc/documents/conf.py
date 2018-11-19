@@ -178,4 +178,9 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 
 rst_epilog =  u"""
 .. |arc| replace:: DesignWare® ARC® processors
+.. |embarc| replace:: embARC OSP
+.. |iotdk| replace:: IoT Development Kit
+.. |emsk| replace:: EM Starter Kit
+.. |mwdt| replace:: MetaWare Development Toolkit
+.. |arcgnu| replace:: GNU Toolchain for ARC Processors
 """

@@ -1,5 +1,5 @@
 /* ------------------------------------------
- * Copyright (c) 2017, Synopsys, Inc. All rights reserved.
+ * Copyright (c) 2018, Synopsys, Inc. All rights reserved.
 
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -63,9 +63,7 @@ int main(void)
 	    != pdPASS) {	/*!< FreeRTOS xTaskCreate() API function */
 		EMBARC_PRINTF("Create task1 Failed\r\n");
 		return -1;
-	}
-	else
-	{
+	} else {
 		EMBARC_PRINTF("Create task1 Successfully\r\n");
 	}
 
@@ -73,9 +71,7 @@ int main(void)
 	    != pdPASS) {	/*!< FreeRTOS xTaskCreate() API function */
 		EMBARC_PRINTF("Create task2 Failed\r\n");
 		return -1;
-	}
-	else
-	{
+	} else {
 		EMBARC_PRINTF("Create task2 Successfully\r\n");
 	}
 
@@ -83,9 +79,7 @@ int main(void)
 	    != pdPASS) {	/*!< FreeRTOS xTaskCreate() API function */
 		EMBARC_PRINTF("Create task3 Failed\r\n");
 		return -1;
-	}
-	else
-	{
+	} else {
 		EMBARC_PRINTF("Create task3 Successfully\r\n");
 	}
 
@@ -112,15 +106,13 @@ static void task1(void *par)
 
 	xLastWakeTime = xTaskGetTickCount();
 
-	while (1)
-	{
+	while (1) {
 		/* delay 10ms  */
 		vTaskDelayUntil( &xLastWakeTime,xFrequency );
 
 		xQueuePeek(dtq1_id, (void *)(&led_val), portMAX_DELAY);
 
-		if(led_val >= 0x0100)
-		{
+		if (led_val >= 0x0100) {
 			xSemaphoreGive(sem1_id);
 		}
 	}
@@ -135,15 +127,14 @@ static void task2(void *par)
 
 	xLastWakeTime = xTaskGetTickCount();
 
-	while (1)
-	{
+	while (1) {
 		/* delay 100ms  */
 		vTaskDelayUntil( &xLastWakeTime,xFrequency );
 
 		xQueueSend(dtq1_id, (void *)(&led_val),  portMAX_DELAY);
 		led_val <<= 1;
 
-		if( sem1_id != NULL ) {
+		if (sem1_id != NULL) {
 			/* if semapohre is invalid, wait 10 more ticks */
 			if( xSemaphoreTake( sem1_id, ( TickType_t ) 10 ) == pdTRUE )
 			{
@@ -163,8 +154,7 @@ static void task3(void *par)
 
 	xLastWakeTime = xTaskGetTickCount();
 
-	while (1)
-	{
+	while (1) {
 		/* delay 200ms */
 		vTaskDelayUntil( &xLastWakeTime,xFrequency );
 

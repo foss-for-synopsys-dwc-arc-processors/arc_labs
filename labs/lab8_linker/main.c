@@ -28,17 +28,19 @@
  *
 --------------------------------------------- */
 #pragma Code ("modify_seg")
-void modify(int list[], int size) {
-    int out, in, temp;
 
-    for(out=0; out<size; out++)
-        for(in=out+1; in<size; in++)
-            if(list[out] > list[in]) {
-                temp = list[in];
-                list[in] = list[out];
-                list[out] = temp;
-                }
-    }
+void modify(int list[], int size)
+{
+	int out, in, temp;
+
+	for(out=0; out<size; out++)
+		for(in=out+1; in<size; in++)
+			if(list[out] > list[in]) {
+				temp = list[in];
+				list[in] = list[out];
+				list[out] = temp;
+				}
+	}
 #pragma Code ()
 
 
@@ -46,7 +48,7 @@ void modify(int list[], int size) {
 int data[] = {4, 8, 2, 6, 7, 8, 10, 5};
 
 void main (void) {
-    int nItems = sizeof(data) / sizeof(int);
+	int nItems = sizeof(data) / sizeof(int);
 
-    modify(data, nItems);
-    }
+	modify(data, nItems);
+}
