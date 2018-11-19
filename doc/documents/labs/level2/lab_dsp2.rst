@@ -1,4 +1,4 @@
-.. _dsp_lab2_fxapi:
+.. _lab_dsp2:
 
 ARC DSP: Using FXAPI
 =============================

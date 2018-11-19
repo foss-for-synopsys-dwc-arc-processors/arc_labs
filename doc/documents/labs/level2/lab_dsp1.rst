@@ -1,4 +1,4 @@
-.. _dsp_lab1_compiler_opt:
+.. _lab_dsp1:
 
 ARC DSP: Compiler Optimizations
 ====================================
