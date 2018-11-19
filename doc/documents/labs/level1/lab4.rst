@@ -21,7 +21,7 @@ Content
 =========
 
 * Through ``embarc_osp/arc_labs/labs/lab4_interrupt/part1`` to learn the basics of interrupt handling of |arc| and the interrupt API provided by |embarc|
-* Through ``embarc_osp/arc_labs/labs/lab4_interrupt/part2`` to leanr the interrupt priority and interrupt nesting of |arc| and corresponding API of |embarc|
+* Through ``embarc_osp/arc_labs/labs/lab4_interrupt/part2`` to learn the interrupt priority and interrupt nesting of |arc| and corresponding API of |embarc|
 
 
 Principles
@@ -45,19 +45,19 @@ is highly programmable and supports the following interrupt types:
 The interrupt unit of |arc| has the following interrupt specifications:
 
 * Support for up to 240 interrupts
-  * User configurable from 0 to 240
-  * Level sensitive or pulse sensitive
+	* User configurable from 0 to 240
+	* Level sensitive or pulse sensitive
 * Support for up to 16 interrupt priority levels
-  * Programmable from 0 (highest priority) to 15 (lowest priority)
+	* Programmable from 0 (highest priority) to 15 (lowest priority)
 * The priority of each interrupt can be programmed individually by software
 * Interrupt handlers can be preempted by higher-priority interrupts
-  * Optionally, highest priority level 0 interrupts can be configured as ‘Fast Interrupts’
-  * Optional second core register bank for use with Fast Interrupts option to minimize interrupt service latency by minimizing the time needed for context saving
+	* Optionally, highest priority level 0 interrupts can be configured as "Fast Interrupts"
+	* Optional second core register bank for use with Fast Interrupts option to minimize interrupt service latency by minimizing the time needed for context saving
 * Automatic save and restore of selected registers on interrupt entry and exit for fast context switch
 * User context saved to user or kernel stack, under program control
 * Software can set a priority level threshold in STATUS32.E that must be met for an interrupt request to interrupt or wake the processor
 * Minimal interrupt / wake-up logic clocked in sleep state
-  * Interrupt prioritization logic is purely combinational
+	* Interrupt prioritization logic is purely combinational
 * Any Interrupt can be triggered by software
 
 The interrupt unit can be programmed by auxiliary registers. For more details, please to refer the |arc| ISA.
