@@ -1,5 +1,5 @@
 # Application name
-APPL ?= Ble_Test
+APPL ?= lab5_iotdk
 
 # Optimization Level
 # Please Refer to toolchain_xxx.mk for this option
@@ -8,9 +8,9 @@ OLEVEL ?= O2
 ##
 # Current Board And Core
 ##
-BOARD ?= emsk
-BD_VER ?= 22
-CUR_CORE ?= arcem7d
+BOARD ?= iotdk
+BD_VER ?= 10
+CUR_CORE ?= arcem9d
 
 ##
 # select debugging jtag
@@ -20,16 +20,15 @@ JTAG ?= usb
 ##
 # Set toolchain
 ##
-TOOLCHAIN ?= mw
-#TOOLCHAIN ?= gnu
+TOOLCHAIN ?= gnu
 
-EXT_DEV_LIST += ble/hm1x
+
 #
 # root dir of embARC
 #
-EMBARC_ROOT = ../../../..
+EMBARC_ROOT = ../../..
 
-MID_SEL = common
+MID_SEL =
 
 # application source dirs
 APPL_CSRC_DIR = .

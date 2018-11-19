@@ -36,7 +36,11 @@
 
 
 /** uart id which HM-10 BLE uses */
+#if defined(BOARD_EMSK)
 #define ESP8266_UART_ID		DW_UART_0_ID
+#else
+#define ESP8266_UART_ID		DFSS_UART_1_ID
+#endif
 
 typedef enum{
 	ESP8266_STA=1,

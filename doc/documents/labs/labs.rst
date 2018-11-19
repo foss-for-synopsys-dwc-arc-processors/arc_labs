@@ -1,13 +1,7 @@
 .. _labs:
 
-Labs
-==========
-
-Overview
-########
-
-Labs
-####
+Hands-on labs
+#################
 
 .. toctree::
     :maxdepth: 2

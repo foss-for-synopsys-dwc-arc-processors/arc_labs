@@ -39,8 +39,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define WIFI_SSID   "\"liusongwei\""
-#define WIFI_PWD    "\"632139751\""
+#define WIFI_SSID   "\"embARC\""
+#define WIFI_PWD    "\"qazwsxedc\""
 
 static char http_get[] = "GET /";
 static char http_IDP[] = "+IPD,";

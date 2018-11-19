@@ -1,225 +1,103 @@
 .. _lab3:
 
-ARC features: timer and auxiliary registers
-###########################################
+ARC features: AUX registers and timers
+######################################################
 
 Purpose
 =======
-- To learn the timer resource of ARC EM processor
-- To learn how to use the auxiliary registers to control the timer
-- Read the count value of the timer, and implement a time clock by the timer
+- To know the auxiliary registers and processor timers of |arc|
+- To learn how to program auxiliary registers to control the processor timers
 
 Equipment
 =========
-PC, IoTDK, embARC OSP, example \\Lab\\timer in embARC OSP
+The following hardware and tools are required:
+
+* PC host
+* |arcgnu| / |mwdt|
+* ARC board (|emsk| / |iotdk|)
+* ``embarc_osp/arc_labs/labs/lab3_timer``
 
 Content
 ========
-Read the auxiliary registers of ARC EM to get the version and  other setting information of the timer resource. As all the EM processors have **Timer0**, we use the **Timer0** in this lab, and write the auxiliary registers to initialize, start and stop the timer. By reading the count value of the timer, we can calculate the execution time of a code block with the count value and the clock frequency.
+
+- Through reading the corresponding BCR (Build Configuration Register) auxiliary registers of processor timers to get the configuration information.
+- Through programming the auxiliary registers to initialize, start and stop the timer (here TIMER0 is used)
+- By reading the count value of processor timers, get the execution time of a code block
 
 Principles
 ==========
 
-Introduction of timer and auxiliary registers
-----------------------------------------------
-The timers in ARC EM processor
+Auxiliary Registers
+-------------------
 
-- Two 32-bits programmable timers **Timer0** and **Timer1**
-- One 64-bits **RTC**\ (Real-Time Counter)
+The auxiliary register set contains status and control registers, which by default are 32 bits wide to implement the processor control, e.g. interrupt and exception management and processor timers. These
+auxiliary registers occupy a separate 32-bit address space from the normal memory-access (i.e. load and
+store) instructions. Auxiliary registers accessed using distinct Load Register (LR), Store Register (SR), and
+Auxiliary EXchange (AEX) instructions.
 
-All the times are configurable, for example, there are four EM processor cores in **ARC EMSK1.1**, the configuration information are as follow.
+The auxiliary register address region 0x60 up to 0x7F and region 0xC0 up to 0xFF is reserved for the Build
+Configuration Registers (BCRs) that can be used by embedded software or host debug software to detect the
+configuration of the ARCv2-based hardware. The Build Configuration Registers contain the version of each
+ARCv2-based extension and also the build-specific configuration information.
 
-=========== ===== =========== ===== ===========
- Timer       EM4   EM4_16CR    EM4   EM4_16CR
-=========== ===== =========== ===== ===========
-HAS_TIMER0    1       1         1        1
-HAS_TIMER1    1       0         1        0
-RTC_OPTION    0       0         0        0
-=========== ===== =========== ===== ===========
+In |embarc|,  ``arc_builtin.h`` provides API (**_arc_aux_read** and **_arc_aux_read**) to access the auxiliary registers
 
-The auxiliary register Timer BCR storaged the timer resource information of an EM processor core, the register address of **TIMER_BUILD** is *0x75*.
 
-**TIMER_BUILD**
+Processor Timers
+----------------
 
-.. image:: /img/lab3_register_TIMER_BUILD.png
-    :alt: register bit
+The processor timers are two independent 32-bit timers and a 64-bit real-time
+counter (RTC). **Timer0** and **Timer1** are identical in operation. The only
+difference is that these timers are connected to different interrupts. The
+Timers cannot be included in a configuration without interrupts. Each timer is
+optional and when present, it is connected to a fixed interrupt; interrupt 16
+for timer 0 and interrupt 17 for timer 1.
 
-As we know the timer resources the EM processor configured, we can get the timer's configuration information and control the timers by writing and reading the auxiliary register of that timer. For example, there are the related auxiliary registers of the **Timer0**.
 
-==================== ========== ============ =======================
- Auxiliary Register   Name       Permission   Description
-==================== ========== ============ =======================
-0x21                  COUNT0     RW           Processor timer 0 count value
-0x22                  CONTROL0   RW           Processor timer 0 control value
-0x23                  LIMIT0     RW           Processor timer 0 limit value
-==================== ========== ============ =======================
+The processor timers are connected to a system clock signal that operates even
+when the ARCv2-based processor is in the sleep state. The timers can be used
+to generate interrupt signals that wake the processor from the SLEEP state.
+For more information about internal clocks during the sleep state, see Table
+18-3 on page 924. The processor timers automatically reset and restart their
+operation after reaching the limit value. The processor timers can be
+programmed to count only the clock cycles when the processor is not halted.
+The processor timers can also be programmed to generate an interrupt or to
+generate a system Reset upon reaching the limit value. The 64-bit RTC does not
+generate any interrupts. This timer is used to count the clock cycles
+atomically.
+
+Through the BCR register *0x75*, you can get the configuration information of processor timers
+
+In |embarc|, ``arc_timer.h`` provides API to operate the processor timers.
 
 Program flow chart
 ------------------
 
+The flow of lab3'code is shown below:
+
 .. image:: /img/lab3_program_flow_chart.png
     :alt: program flow chart
+
+The code can be divided into 3 parts:
+
+* Part1 : read the BCR of internal timers to check the features
+* Part2 : Promgram Timer0 by auxiliary registers with the |embarc| provided API
+* Part3 : read the counts to Timer 0 to measure a code block's execution time.
 
 Steps
 =====
 
-Makefile configuration
-----------------------
-
-There are two ways to do the configuration.
-
-**First**, configured by compile command, for example:
+1. Build and Run
 
 .. code-block:: console
 
-	make BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d -j4 TOOLCHAIN=gnu run
+    $ cd <embarc_root>/arc_labs/labs/lab3_timer
+    # for emsk
+    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=GNU run
+    # for iotdk
+    $ make BOARD=emsk TOOLCHAIN=GNU run
 
-**Second**, configured by modifying the makefile. At here, the compile command will be very simple, for example:
-
-.. code-block:: console
-
-	make -j4 run
-
-Open the folder *embarc_osp\\example\\Lab\\timer*, and open the *makefile*, here is the default configuration.
-
-.. code-block:: console
-
-	# Application name
-	APPL ?= lab_3_Timer_Interrupts
-
-	##
-	# Current Board And Core
-	##
-	BOARD ?= iotdk
-	BD_VER ?= 10
-	CUR_CORE ?= arcem9d
-
-	##
-	# Set toolchain
-	##
-	TOOLCHAIN ?= gnu
-
-	#
-	# root dir of embARC
-	#
-	EMBARC_ROOT = ../../..
-
-	MID_SEL = common
-
-	# application source dirs
-	APPL_CSRC_DIR = .
-	APPL_ASMSRC_DIR = .
-
-	# application include dirs
-	APPL_INC_DIR = .
-
-- Reconfigure **BOARD** and **CUR_CORE**, in this lab, we use the launch board *iotdk*
-
-.. code-block:: console
-
-	##
-	# Current Board And Core
-	##
-	BOARD ?= iotdk
-	BD_VER ?= 10
-	CUR_CORE ?= arcem9d
-
-- Reconfigure **TOOLCHAIN**, select the toolchain *gnu* or *metaware* you used
-
-.. code-block:: console
-
-	##
-	# Set toolchain
-	##
-	TOOLCHAIN ?= gnu
-
-- Reconfigure **EMBARC_ROOT**, make sure the relative path between *embARC OSP* root folder and the *timer* folder is correct.
-
-.. code-block:: console
-
-	#
-	# root dir of embARC
-	#
-	EMBARC_ROOT = ../../..
-
-Main code
----------
-
-Read auxiliary register BCR_BUILD
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-We can use the function ``_arc_aux_read`` to read the auxiliary register for the timer resource information.
-
-Read auxiliary register **TIMER_BUILD**. In the register **TIMER_BUILD** The lower 8 bits indicate the core version information, the bit 9 indicate the **Timer0**, the bit 10 indicate the **Timer1**, the bit 11 indicate the **RTC**. Here is the code:
-
-.. code-block:: console
-
-	uint32_t bcr = _arc_aux_read(AUX_BCR_TIMERS);
-	int timer0_flag=(bcr >> 8) & 1;
-	int timer1_flag=(bcr >> 9) & 1;
-	int RTC_flag=(bcr >> 10) & 1;
-
-Read timer related auxiliary registers, for example, the **Timer0**. Here is the code:
-
-.. code-block:: console
-
-	EMBARC_PRINTF("Does this timer0 exist?  YES\r\n");
-	/*Read auxiliary register configuration information*/
-	EMBARC_PRINTF("timer0's operating mode:0x%08x\r\n",_arc_aux_read(AUX_TIMER0_CTRL));
-	EMBARC_PRINTF("timer0's limit value :0x%08x\r\n",_arc_aux_read(AUX_TIMER0_LIMIT));
-	EMBARC_PRINTF("timer0's current cnt_number:0x%08x\r\n",_arc_aux_read(AUX_TIMER0_CNT));
-
-Stop-Set-Start the Timer0
-^^^^^^^^^^^^^^^^^^^^^^^^^
-We can use the function ``_arc_aux_write`` to write the auxiliary register.
-
-To control the **Timer0** with the related auxiliary registers.
-
-- **COUNT0**: write this register to set the initial value of the **Timer0**. It will increase from the set value at anytime you write this register.
-- **CONTROL0**: write this register to update the control modes of the **Timer0**.
-- **LIMIT0**: write this register to set the limit value of the **Timer0**, the limit value is the value after which an interrupt or a reset must be generated.
-
-In this lab, we should stop timer before setting and starting it, the function ``timer_stop`` is already encapsulated in embARC OSP, you can  use this function or directly write the register. And then set the timer work mode, enable interrupt or not and set the limit value. At last start the timer. Here is the code:
-
-.. code-block:: console
-
-	/* Stop it first since it might be enabled before */
-	_arc_aux_write(AUX_TIMER0_CTRL, 0);
-	_arc_aux_write(AUX_TIMER0_LIMIT,0);
-	_arc_aux_write(AUX_TIMER0_CNT, 0);
-	/* This is a example about timer0's timer function. */
-	uint32_t mode = TIMER_CTRL_NH;/*Timing without triggering interruption.*/
-	uint32_t val = MAX_COUNT;
-	_arc_aux_write(AUX_TIMER0_CNT, 0);
-	_arc_aux_write(AUX_TIMER0_LIMIT,val);
-        /* start the specific timer */
-	_arc_aux_write(AUX_TIMER0_CTRL,mode);
-
-When the timer is running, we can read the count value of the timer,and calculate the execution time of a code block. Here is the code:
-
-.. code-block:: console
-
-    uint32_t start_cnt=_arc_aux_read(AUX_TIMER0_CNT);
-    /**
-     * code block
-     */
-    uint32_t end_cnt=_arc_aux_read(AUX_TIMER0_CNT);
-    uint32_t time=(end_cnt-start_cnt)/(BOARD_CPU_CLOCK/1000);
-
-Compile and debug
-^^^^^^^^^^^^^^^^^
-- Compile and download
-
-Open ``cmd`` under the folder *example\\Lab\\timer*, input the compile command as follow:
-
-.. code-block:: console
-
-    make -j4 run
-
-.. note::
-    If your toolchain is meteware, you should use ``gmake``.
-    If you don't use core configuration specified in makefile, you need to pass all the make options to trigger make command
-
-- Output
+2. Output
 
 .. code-block:: console
 
@@ -238,7 +116,7 @@ Open ``cmd`` under the folder *example\\Lab\\timer*, input the compile command a
 	------------------------------------------------------------
 
 	embARC Build Time: Aug 22 2018, 15:32:54
-	Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1 (branches/release_40)
+	Compiler Version: MetaWare, 4.2.1 Compatible Clang 4.0.1 (branches/release_40)
 	Does this timer0 exist?  YES
 	timer0's operating mode:0x00000003
 	timer0's limit value :0x00023280
@@ -266,28 +144,8 @@ Open ``cmd`` under the folder *example\\Lab\\timer*, input the compile command a
 
 	Total time of TEST CODE BLOCK operation:116
 
-- Debug
-
-Open ``cmd`` under the folder *example\\Lab\\timer*, input the command as follow:
-
-.. code-block:: console
-
-    make gui
-
-
-.. image:: /img/lab3_debug_view_1.png
-    :alt: debug view 1
-
-.. image:: /img/lab3_debug_view_2.png
-    :alt: debug view 2
-
-
-The debug view will pop up automatically, we can watch the variables and registers.
-
-
 Exercises
 =========
-In the debug view, observe and understand the contents of the interrupt vector table.
 
-.. note::
-     Click the Memory button in the debug view Debugger drop-down menu to see the contents of the memory in real time.
+1. Try to program TIMER1
+2. Try to create a clock with a tick of 1 second

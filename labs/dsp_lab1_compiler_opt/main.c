@@ -1,5 +1,5 @@
 /* ------------------------------------------
- * Copyright (c) 2018, Synopsys, Inc. All rights reserved.
+ * Copyright (c) 2017, Synopsys, Inc. All rights reserved.
 
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -27,23 +27,69 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
 --------------------------------------------- */
-#ifndef _EZ_SIOSIO_H_
-#define _EZ_SIOSIO_H_
 
-#include "stdint.h"
-#include "ringbuffer.h"
-#include "dev_uart.h"
+/**
+ * \defgroup	EMBARC_APP_BAREMETAL_BLINKY	embARC Blinky Example
+ * \ingroup	EMBARC_APPS_TOTAL
+ * \ingroup	EMBARC_APPS_BAREMETAL
+ * \brief	embARC example for toggle leds on board
+ *
+ * \details
+ * ### Extra Required Tools
+ *
+ * ### Extra Required Peripherals
+ *
+ * ### Design Concept
+ *     This example is designed to test board without any extra peripheral
+ *
+ * ### Usage Manual
+ *     Toggle all leds on board in 1s period
+ *
+ * ### Extra Comments
+ *
+ */
 
-/** easy serial io structure */
-typedef struct ez_sio {
-	DEV_UART *sio_uart_obj;
-	RINGBUFFER snd_rb;
-	RINGBUFFER rcv_rb;
-} EZ_SIO;
+/**
+ * \file
+ * \ingroup	EMBARC_APP_BAREMETAL_BLINKY
+ * \brief	main source file for blinky example
+ */
 
-extern EZ_SIO *ez_sio_open(uint32_t uart_id, uint32_t baudrate, uint32_t tx_bufsz, uint32_t rx_bufsz);
-extern void ez_sio_close(EZ_SIO *sio);
-extern int32_t ez_sio_read(EZ_SIO *sio, char *buf, uint32_t cnt);
-extern int32_t ez_sio_write(EZ_SIO *sio, char *buf, uint32_t cnt);
+/**
+ * \addtogroup	EMBARC_APP_BAREMETAL_BLINKY
+ * @{
+ */
+/* embARC HAL */
+#include "embARC.h"
+#include "embARC_debug.h"
 
-#endif /*  _EZ_SIOSIO_H_ */
+#define LED_TOGGLE_MASK		BOARD_LED_MASK
+
+/**
+ * \brief	Test hardware board without any peripheral
+ */
+short test(short *a, short *b) {
+	int i;
+
+	long acc = 0;
+	for(i = 0; i < 10; i++)
+		acc += ( ((long)(*a++)) * *b++) <<1 ;
+
+	return (short) (acc);
+}
+
+short a[] = {1,2,3,4,5, 6,7,8,9,10};
+short b[] = {11,12,13,14,15, 16,17,18,19,20};
+
+int main(void)
+{
+	EMBARC_PRINTF("LAB 1\r\n");
+
+	short c = test(a,b);
+
+	EMBARC_PRINTF("result=%d",c);
+
+	return 0;
+}
+
+/** @} */
