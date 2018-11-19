@@ -201,7 +201,7 @@
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt/part1</span></code> to learn the basics of interrupt handling of DesignWare® ARC® processors and the interrupt API provided by embARC OSP</li>
-<li>Through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt/part2</span></code> to leanr the interrupt priority and interrupt nesting of DesignWare® ARC® processors and corresponding API of embARC OSP</li>
+<li>Through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt/part2</span></code> to learn the interrupt priority and interrupt nesting of DesignWare® ARC® processors and corresponding API of embARC OSP</li>
 </ul>
 </div>
 <div class="section" id="principles">
@@ -224,20 +224,44 @@ is highly programmable and supports the following interrupt types:</p>
 </ul>
 <p>The interrupt unit of DesignWare® ARC® processors has the following interrupt specifications:</p>
 <ul class="simple">
-<li>Support for up to 240 interrupts
-* User configurable from 0 to 240
-* Level sensitive or pulse sensitive</li>
-<li>Support for up to 16 interrupt priority levels
-* Programmable from 0 (highest priority) to 15 (lowest priority)</li>
+<li><dl class="first docutils">
+<dt>Support for up to 240 interrupts</dt>
+<dd><ul class="first last">
+<li>User configurable from 0 to 240</li>
+<li>Level sensitive or pulse sensitive</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Support for up to 16 interrupt priority levels</dt>
+<dd><ul class="first last">
+<li>Programmable from 0 (highest priority) to 15 (lowest priority)</li>
+</ul>
+</dd>
+</dl>
+</li>
 <li>The priority of each interrupt can be programmed individually by software</li>
-<li>Interrupt handlers can be preempted by higher-priority interrupts
-* Optionally, highest priority level 0 interrupts can be configured as ‘Fast Interrupts’
-* Optional second core register bank for use with Fast Interrupts option to minimize interrupt service latency by minimizing the time needed for context saving</li>
+<li><dl class="first docutils">
+<dt>Interrupt handlers can be preempted by higher-priority interrupts</dt>
+<dd><ul class="first last">
+<li>Optionally, highest priority level 0 interrupts can be configured as “Fast Interrupts”</li>
+<li>Optional second core register bank for use with Fast Interrupts option to minimize interrupt service latency by minimizing the time needed for context saving</li>
+</ul>
+</dd>
+</dl>
+</li>
 <li>Automatic save and restore of selected registers on interrupt entry and exit for fast context switch</li>
 <li>User context saved to user or kernel stack, under program control</li>
 <li>Software can set a priority level threshold in STATUS32.E that must be met for an interrupt request to interrupt or wake the processor</li>
-<li>Minimal interrupt / wake-up logic clocked in sleep state
-* Interrupt prioritization logic is purely combinational</li>
+<li><dl class="first docutils">
+<dt>Minimal interrupt / wake-up logic clocked in sleep state</dt>
+<dd><ul class="first last">
+<li>Interrupt prioritization logic is purely combinational</li>
+</ul>
+</dd>
+</dl>
+</li>
 <li>Any Interrupt can be triggered by software</li>
 </ul>
 <p>The interrupt unit can be programmed by auxiliary registers. For more details, please to refer the DesignWare® ARC® processors ISA.</p>
