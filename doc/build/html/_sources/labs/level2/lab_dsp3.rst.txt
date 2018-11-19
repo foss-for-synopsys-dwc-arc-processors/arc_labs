@@ -1,4 +1,4 @@
-.. _dsp_lab3_dsp_lib:
+.. _lab_dsp3:
 
 ARC DSP: Using DSP Library
 ===============================
