@@ -25,8 +25,9 @@ For the detailed tool requirements of |embarc|, see `Software Requirement <http:
 Content
 ========
 
-A brief introduction of |embarc|, downloading, running, and debugging the provided examples is explained. You
-can try to create your own embARC applications.
+* A brief introduction of |embarc|
+* Get |embarc| and run and debug the provided examples
+* Create an |embarc| application
 
 Principles
 ==========

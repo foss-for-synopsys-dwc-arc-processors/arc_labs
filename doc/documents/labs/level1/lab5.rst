@@ -6,8 +6,8 @@ How to use ARC board
 Purpose
 =======
 1. To get familiar with ARC board and on-board peripherals
-2. To how to use ARC board and on-board peripherals
-3. To how to debug the ARC board and on-board peripherals
+2. To know how to use ARC board and on-board peripherals
+3. To know how to debug the ARC board and on-board peripherals
 
 Equipment
 =========
