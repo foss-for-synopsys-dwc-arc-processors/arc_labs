@@ -91,9 +91,9 @@ Steps
 
     $ cd <embarc_root>/arc_labs/labs/lab3_timer
     # for emsk
-    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=GNU run
+    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run
     # for iotdk
-    $ make BOARD=emsk TOOLCHAIN=GNU run
+    $ make BOARD=emsk TOOLCHAIN=gnu run
 
 2. Output
 
