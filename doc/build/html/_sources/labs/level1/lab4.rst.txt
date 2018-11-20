@@ -81,9 +81,9 @@ Part I: implement a customized timer0 interrupt handling
 
     $ cd <embarc_root>/arc_labs/labs/lab4_interrupt/part1
     # for emsk
-    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=GNU run
+    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run
     # for iotdk
-    $ make BOARD=emsk TOOLCHAIN=GNU run
+    $ make BOARD=emsk TOOLCHAIN=gnu run
 
  2. Output
 
@@ -196,9 +196,9 @@ Part II: interrupt priority and interrupt nesting
 
     $ cd <embarc_root>/arc_labs/labs/lab4_interrupt/part2
     # for emsk
-    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=GNU run
+    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run
     # for iotdk
-    $ make BOARD=emsk TOOLCHAIN=GNU run
+    $ make BOARD=emsk TOOLCHAIN=gnu run
 
  2. Output
 

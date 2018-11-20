@@ -350,14 +350,14 @@ from the TF card. The startup sequence for IoT Development Kit is listed below:<
 <li>Generate a secondary bootloader binary file</li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/example/baremetal/bootloader
-<span class="gp">$</span> gmake <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">22</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem7d <span class="nv">TOOLCHAIN</span><span class="o">=</span>mw bin
+<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">22</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem7d <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu bin
 </pre></div>
 </div>
 <ul>
 <li><dl class="first docutils">
 <dt>Program the secondary bootloader binary file into SPI Flash</dt>
 <dd><ul class="first">
-<li><p class="first">Insert SD card to your PC, and copy the binary file <code class="docutils literal notranslate"><span class="pre">obj_emsk_23/gnu_arcem7d/emsk_bootloader_gnu_arcem7d.bin</span></code> to SD card root folder, and rename it to <code class="docutils literal notranslate"><span class="pre">em7d_2bt.bin</span></code></p>
+<li><p class="first">Insert SD card to your PC, and copy the binary file <code class="docutils literal notranslate"><span class="pre">obj_emsk_22/gnu_arcem7d/emsk_bootloader_gnu_arcem7d.bin</span></code> to SD card root folder, and rename it to <code class="docutils literal notranslate"><span class="pre">em7d_2bt.bin</span></code></p>
 </li>
 <li><p class="first">Insert the SD card to EMSK Board, choose the right core configuration, build and run the <code class="docutils literal notranslate"><span class="pre">&lt;embARC&gt;/example/baremetal/bootloader</span></code> example, then press any button to stop auto boot process, and enter to ntshell command mode.</p>
 </li>
