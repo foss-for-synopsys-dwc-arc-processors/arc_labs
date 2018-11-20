@@ -56,15 +56,13 @@ for timer 0 and interrupt 17 for timer 1.
 
 The processor timers are connected to a system clock signal that operates even
 when the ARCv2-based processor is in the sleep state. The timers can be used
-to generate interrupt signals that wake the processor from the SLEEP state.
-For more information about internal clocks during the sleep state, see Table
-18-3 on page 924. The processor timers automatically reset and restart their
-operation after reaching the limit value. The processor timers can be
-programmed to count only the clock cycles when the processor is not halted.
-The processor timers can also be programmed to generate an interrupt or to
-generate a system Reset upon reaching the limit value. The 64-bit RTC does not
-generate any interrupts. This timer is used to count the clock cycles
-atomically.
+to generate interrupt signals that wake the processor from the SLEEP state.The
+processor timers automatically reset and restart their operation after
+reaching the limit value. The processor timers can be programmed to count only
+the clock cycles when the processor is not halted. The processor timers can
+also be programmed to generate an interrupt or to generate a system Reset upon
+reaching the limit value. The 64-bit RTC does not generate any interrupts.
+This timer is used to count the clock cycles atomically.
 
 Through the BCR register *0x75*, you can get the configuration information of processor timers
 
@@ -93,9 +91,9 @@ Steps
 
     $ cd <embarc_root>/arc_labs/labs/lab3_timer
     # for emsk
-    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=GNU run
+    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run
     # for iotdk
-    $ make BOARD=emsk TOOLCHAIN=GNU run
+    $ make BOARD=emsk TOOLCHAIN=gnu run
 
 2. Output
 

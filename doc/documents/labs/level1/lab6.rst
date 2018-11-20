@@ -164,10 +164,10 @@ How to flash the ARC board
 .. code-block:: console
 
     $ cd <embarc_root>/example/baremetal/bootloader
-    $ gmake BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=mw bin
+    $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu bin
 
 - Program the secondary bootloader binary file into SPI Flash
-    + Insert SD card to your PC, and copy the binary file ``obj_emsk_23/gnu_arcem7d/emsk_bootloader_gnu_arcem7d.bin`` to SD card root folder, and rename it to ``em7d_2bt.bin``
+    + Insert SD card to your PC, and copy the binary file ``obj_emsk_22/gnu_arcem7d/emsk_bootloader_gnu_arcem7d.bin`` to SD card root folder, and rename it to ``em7d_2bt.bin``
 
     + Insert the SD card to EMSK Board, choose the right core configuration, build and run the ``<embARC>/example/baremetal/bootloader`` example, then press any button to stop auto boot process, and enter to ntshell command mode.
 
