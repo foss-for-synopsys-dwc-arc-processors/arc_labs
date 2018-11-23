@@ -3,39 +3,59 @@
 ARC DSP: Compiler Optimizations
 ====================================
 
-Part 1. Prerequisites
+Lab Objectives
 ---------------------------
+- To understand Metaware compiler DSP extension options and optimization level
+- To learn how to use Metaware compiler to optimize regular C code with DSP instructions
 
-Before starting to use the ARC DSP, the following prerequisites are required:
+Lab Requirements
+-----------------------------
+The following hardware and tools are required:
 
-* Make sure that the MetaWare tools for Windows is installed
+* PC host
+* |mwdt|
+* ARC board (|emsk| / |iotdk|)
+* ``embarc_osp/arc_labs/labs/dsp_lab_compiler_opt``
 
-  `<https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
-
-* Learn how to create, edit, build, and debug projects in MetaWare IDE
-* Make sure that the |iotdk| and Digilent USB drivers (Digilent Adept 2) installed and tested
-
-  `<http://store.digilentinc.com/digilent-adept-2-download-only>`_
-
-* |iotdk| board is EM9D based
-
-The following needs to be tested before starting this lab:
-
-* Connecting |iotdk| to computer
-* Connecting serial console (PuTTY) to |iotdk| COM port (For information on how to do initial board setup and configuration, see *Getting Started* chapter of *ARC IOT Design Kit User Guide*).
-
-Part 2. Lab Objectives
+Lab Content
 -----------------------------
 
-Use MetaWare compiler options to optimize regular C code employing DSP extensions.
-Try direct usage of DSP extensions through intrinsic.
+An example code below contains a function "test" which contains a 20 step for loop and a multiply accumulate operation done manually.
 
-Part 3. Lab principle and method
+.. code-block:: c
+
+    #include <stdio.h>
+
+    short test(short *a, short *b) {
+    	int i;
+
+    	long acc = 0;
+    	for(i = 0; i < 10; i++)
+    		acc += ( ((long)(*a++)) * *b++) <<1 ;
+
+    	return (short) (acc);
+    }
+
+    short a[] = {1,2,3,4,5, 6,7,8,9,10};
+    short b[] = {11,12,13,14,15, 16,17,18,19,20};
+
+    int main(int argc, char *argv[]) {
+
+    	short c = test(a,b);
+
+    	printf("result=%d",c);
+
+    	return 0;
+    }
+
+Use Metaware compiler to optimize the C code with and without DSP extension options, and analyze the assembly code. 
+
+Lab Principle
 ------------------------------------
 
 This section describes compiler options in MetaWare used in this lab.
 
-To optimize code to use DSP extensions two sets of compiler options are used throughout the lab, DSP Extensions options and optimization level.
+To optimize code with DSP extensions, two sets of compiler options are used throughout the lab: DSP Extensions options and optimization level.
 
 DSP Extensions Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -96,41 +116,8 @@ Optimization for DSP extensions
 
 A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever applicable, which compiler can do automatically with DSP extension options corresponding to hardware are set and high-level of optimization is selected.
 
-Checking options
-^^^^^^^^^^^^^^^^^^
-
-Options are specified in the makefile or command line, as shown in the previous section.
-
-Part 4. Optimizing code
+Lab Steps
 --------------------------
-
-An example code below contains a function "test" which contains a 20 step for loop and a multiply accumulate operation done manually.
-
-.. code-block:: c
-
-    #include <stdio.h>
-
-    short test(short *a, short *b) {
-    	int i;
-
-    	long acc = 0;
-    	for(i = 0; i < 10; i++)
-    		acc += ( ((long)(*a++)) * *b++) <<1 ;
-
-    	return (short) (acc);
-    }
-
-    short a[] = {1,2,3,4,5, 6,7,8,9,10};
-    short b[] = {11,12,13,14,15, 16,17,18,19,20};
-
-    int main(int argc, char *argv[]) {
-
-    	short c = test(a,b);
-
-    	printf("result=%d",c);
-
-    	return 0;
-    }
 
 Step 1. Compiling without DSP extensions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -147,7 +134,7 @@ You can use the following command to generate disassembly code:
 
 ``elfdump -T -S <your_working_directory>/obj_iotdk_10/mw_arcem9d/dsp_lab1_mw_arcem9d.elf``
 
-Notice assembly code in the disassembled output. See how many assembly instruction are used for each lin. For example, for loop spends several instruction to calculate loop variable value and check whether to stop.
+Notice assembly code in the disassembled output. See how many assembly instruction are used for each line. For example, for loop spends several instruction to calculate loop variable value and check whether to stop.
 
 |dsp_figure_1.1|
 
@@ -175,61 +162,10 @@ Adding -Xdsp1 (optimization level changed to -O3) helps compiler to optimize awa
 
 |dsp_figure_1.3|
 
-.. note::
-
-    **Assignment:** Remove "<<1" from test function and see changes in the output instructions.
-
-Appendix A. IOTDK Default Core Configurations
+Exercises
 -----------------------------------------------
 
-**ARC_EM5D**
-
-This is an ARC EM core with 32 bits address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).
-
-``-arcv2em -core1 -HL -Xcode_density -Xswap -Xnorm -Xmpy16 -Xmpy -Xmpyd -Xshift_assist -Xbarrel_shifter -Xdsp2``
-
-  ``-Xdsp_complex -Xtimer0 -Xtimer1``
-
-**ARC_EM7D**
-
-This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:
-
-``-arcv2em -core2 -HL -Xcode_density -Xdiv_rem=radix2 -Xswap``
-
-``-Xbitscan -Xmpy_option=mpyd -Xshift_assist -Xbarrel_shifter``
-
-``-Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_accshift=limited -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac``
-
-**ARC_EM9D**
-
-This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). The corresponding MetaWare compiler options for this configuration are:
-
-``-arcv2em -core2 -Hrgf_banked_regs=32 -HL -Xcode_density``
-
-``-Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd``
-
-``-Xshift_assist -Xbarrel_shifter -Xdsp2 -Xdsp_complex``
-
-``-Xdsp_divsqrt=radix2 -Xdsp_itu-Xdsp_accshift=full -Xagu_large``
-
-``-Xxy -Xbitstream -Xfpus_div -Xfpu_mac -Xfpus_mpy_slow``
-
-``-Xfpus_div_slow -Xtimer0 -Xtimer1 -Xstack_check -Hccm -Xdmac``
-
-**ARC_EM11D Configuration**
-
-This is an ARC EM core with 32 bits address space, 64 KB of code memory (ICCM) and 64 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:
-
-``-arcv2em -core2 -Hrgf_banked_regs=32 -HL -Xcode_density``
-
-``-Xdiv_rem=radix2 -Xswap -Xbitscan -Xmpy_option=mpyd``
-
-``-Xshift_assist -Xbarrel_shifter -Xdsp2 -Xdsp_complex -Xdsp_divsqrt=radix2 -Xdsp_itu -Xdsp_accshift=full``
-
-  ``-Xagu_large -Xxy -Xbitstream -Xfpus_div -Xfpu_mac -Xfpuda -Xfpus_mpy_slow -Xfpus_div_slow -Xtimer0 -Xtimer1``
-
-  ``-Xstack_check -Hccm -Xdmac``
-
+Remove "<<1" from test function and see changes in the output instructions.
 
 .. |dsp_figure_1.1| image:: /img/dsp_figure_1.1.png
 .. |dsp_figure_1.2| image:: /img/dsp_figure_1.2.png

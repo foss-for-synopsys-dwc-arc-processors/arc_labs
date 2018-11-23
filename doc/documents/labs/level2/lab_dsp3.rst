@@ -3,39 +3,28 @@
 ARC DSP: Using DSP Library
 ===============================
 
-Part 1.	Prerequisites
+Lab Objectives
 ----------------------------
+- To understand what is ARC DSP library 
+- To learn how to use DSP library to optimize DSP programs
 
-Before starting to use the ARC DSP, the following prerequisites are required:
-
-* Make sure that the MetaWare tools for Windows installed
-
-  `<https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
-
-* Learn how to create, edit, build and debug projects in MetaWare IDE
-
-* Make sure that the |iotdk| and Digilent USB drivers (Digilent Adept 2) installed and tested
-
-  `<http://store.digilentinc.com/digilent-adept-2-download-only>`_
-
-* |iotdk| configured with DSP-enabled core configuration EM9D
-
-The following procedures need to be tested before starting this lab:
-
-* Connecting |iotdk| to computer
-* Configuring |iotdk| to use ARC core with DSP extensions (these labs use EM5D core configuration)
-
-* Connecting serial console (PuTTY) to |iotdk| COM port (For information on how to do initial board setup and configuration please refer to  *Getting Started* chapter of *ARC IOT Design Kit User Guide* that came along with IOTDK  board).
-
-Part 2.	Lab Objectives
+Lab Requirements
 -----------------------------
+The following hardware and tools are required:
 
-Use DSP Library and compare program run speed with and without DSP library, that is, DSP extension usage.
+* PC host
+* |mwdt|
+* ARC board (|emsk| / |iotdk|)
+* ``embarc_osp/arc_labs/labs/dsp_lab_dsp_lib``
 
-Part 3.	Lab principle and method
+Lab Content
 -------------------------------------
 
 This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions with shorter code.
+Use DSP Library and compare program run speed with and without DSP library.
+
+Lab Principle
+-------------------------------------
 
 In this lab two implementations of matrix multiplication are shown: implemented manually and with the use of DSP library.
 
@@ -53,11 +42,6 @@ Implementation without DSP
 
 The following example shows the implementation of matrix multiplication of two matrices containing "short" values. By convention, matrices here are implemented as 1D arrays with row-first indexing, where element a_ik is indexed as
 |dsp_icon_3.2|
-. Build with the command:
-
-``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
-
-  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
 
 .. code-block:: c
 
@@ -262,26 +246,38 @@ DSP library contains matrix multiplication function, implementing matrix multipl
         EMBARC_PRINTF("------\n\r");
     }
 
+Using |iotdk| board for performance comparison
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. note::
 
-    **Assignment 1:** Use example in previous lab to create an |iotdk| application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library. Adjust number of loops made to achieve measurable delay.
+Create an |iotdk| application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library, adjust number of loops made to achieve measurable delay. Run the example and compare computational delay with and without DSPLIB.
 
-Part 4.	Test
+Lab Steps
 -----------------
-
-To test the example below, an example program needs to be created that has two loops of matrix multiplications with and without DSP library.
 
 Both examples are to be compiled with DSP extensions, with the following options set:
 
 ``-O2  -arcv2em -core1 -Xlib -Xtimer0 -Xtimer1 -Xdsp1 -Hdsplib``
 
-.. note::
+Step 1. Run program without DSP library
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    **Assignment 2:** Run the example and compare computational delay with and without DSPLIB
+Build with the command:
 
-.. note::
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
 
-    Note that DSPLIB is statically linked with the project when -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program does not affect DSPLIB performance. On the other hand, even with highest optimization level a function utilizing simple instructions on "short" type (even converted to MACs if possible) is less efficient that direct use of DSPLIB.
+  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
+
+Step 2. Run program with DSP library
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Rename main.c.dsplib to main.c, then execute the command: 
+
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
+
+  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
+
+Note that DSPLIB is statically linked with the project when -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program does not affect DSPLIB performance. On the other hand, even with highest optimization level a function utilizing simple instructions on "short" type (even converted to MACs if possible) is less efficient that direct use of DSPLIB.
 
 .. |dsp_icon_3.1| image:: /img/dsp_icon_3.1.png
 .. |dsp_icon_3.2| image:: /img/dsp_icon_3.2.png
