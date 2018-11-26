@@ -39,9 +39,9 @@ fi
 # Generate latex pdf only on non-pull request master branch
 # this is time costing including creating the documentation
 echo 'Generating pdf documentation ...'
-make latex &> build_latex.log || { tail -n 100 build_latex.log ; die "Build Latex failing" ; }
-make latexpdf &> build_latexpdf_phase1.log || { tail -n 100 build_latexpdf_phase1.log ; die "Build latex pdf failing in phase 1" ; }
-make latexpdf &> build_latexpdf_phase2.log || { tail -n 100 build_latexpdf_phase2.log ; die "Build latex pdf failing in phase 2" ; }
+make latex #&> build_latex.log || { tail -n 100 build_latex.log ; die "Build Latex failing" ; }
+make latexpdf #&> build_latexpdf_phase1.log || { tail -n 100 build_latexpdf_phase1.log ; die "Build latex pdf failing in phase 1" ; }
+make latexpdf #&> build_latexpdf_phase2.log || { tail -n 100 build_latexpdf_phase2.log ; die "Build latex pdf failing in phase 2" ; }
 find build/latex -type f -not -name "*.pdf" -delete || die "No latex pdf generated"
 
 echo 'Push generated documentation to gh-pages branch...'
