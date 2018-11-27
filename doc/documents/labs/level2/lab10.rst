@@ -13,8 +13,8 @@ Purpose
 * To know how to use ESP8266 module and AT commands
 * To learn more about the usage of FreeRTOS operating system
 
-Equipment
-^^^^^^^^^^
+Requirements
+^^^^^^^^^^^^
 The following hardware and tools are required:
 
 * PC host

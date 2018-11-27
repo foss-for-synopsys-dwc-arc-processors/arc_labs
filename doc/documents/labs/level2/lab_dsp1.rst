@@ -3,12 +3,13 @@
 ARC DSP: Compiler Optimizations
 ====================================
 
-Lab Objectives
+Purpose
 ---------------------------
+
 - To understand Metaware compiler DSP extension options and optimization level
 - To learn how to use Metaware compiler to optimize regular C code with DSP instructions
 
-Lab Requirements
+Requirements
 -----------------------------
 The following hardware and tools are required:
 
@@ -17,7 +18,7 @@ The following hardware and tools are required:
 * ARC board (|emsk| / |iotdk|)
 * ``embarc_osp/arc_labs/labs/dsp_lab_compiler_opt``
 
-Lab Content
+Content
 -----------------------------
 
 An example code below contains a function "test" which contains a 20 step for loop and a multiply accumulate operation done manually.
@@ -50,7 +51,7 @@ An example code below contains a function "test" which contains a 20 step for lo
 
 Use Metaware compiler to optimize the C code with and without DSP extension options, and analyze the assembly code. 
 
-Lab Principle
+Principles
 ------------------------------------
 
 This section describes compiler options in MetaWare used in this lab.
@@ -116,7 +117,7 @@ Optimization for DSP extensions
 
 A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever applicable, which compiler can do automatically with DSP extension options corresponding to hardware are set and high-level of optimization is selected.
 
-Lab Steps
+Steps
 --------------------------
 
 Step 1. Compiling without DSP extensions

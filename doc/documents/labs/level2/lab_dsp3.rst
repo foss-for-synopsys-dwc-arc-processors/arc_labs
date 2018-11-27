@@ -3,12 +3,12 @@
 ARC DSP: Using DSP Library
 ===============================
 
-Lab Objectives
+Purpose
 ----------------------------
 - To understand what is ARC DSP library 
 - To learn how to use DSP library to optimize DSP programs
 
-Lab Requirements
+Requirements
 -----------------------------
 The following hardware and tools are required:
 
@@ -17,13 +17,13 @@ The following hardware and tools are required:
 * ARC board (|emsk| / |iotdk|)
 * ``embarc_osp/arc_labs/labs/dsp_lab_dsp_lib``
 
-Lab Content
+Content
 -------------------------------------
 
 This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions with shorter code.
 Use DSP Library and compare program run speed with and without DSP library.
 
-Lab Principle
+Principle
 -------------------------------------
 
 In this lab two implementations of matrix multiplication are shown: implemented manually and with the use of DSP library.
@@ -250,9 +250,9 @@ Using |iotdk| board for performance comparison
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. note::
 
-Create an |iotdk| application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library, adjust number of loops made to achieve measurable delay. Run the example and compare computational delay with and without DSPLIB.
+    Create an |iotdk| application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library, adjust number of loops made to achieve measurable delay. Run the example and compare computational delay with and without DSPLIB.
 
-Lab Steps
+Steps
 -----------------
 
 Both examples are to be compiled with DSP extensions, with the following options set:
@@ -271,7 +271,7 @@ Build with the command:
 Step 2. Run program with DSP library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Rename main.c.dsplib to main.c, then execute the command: 
+Rename main.c.dsplib to main.c, then execute the command:
 
 ``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
 

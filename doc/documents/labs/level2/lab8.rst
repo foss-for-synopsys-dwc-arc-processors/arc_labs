@@ -7,8 +7,8 @@ Purpose
 - To get familiar with memory layout in compilation process
 - To learn how to use linker
 
-Equipment
-=========
+Requirements
+============
 The following hardware and tools are required:
 
 * PC host

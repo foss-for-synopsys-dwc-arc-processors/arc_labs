@@ -8,8 +8,9 @@ Purpose
 - To introduce the interrupt handling of |arc|
 - To know how to use the interrupt and timer APIs already defined in |embarc|
 
-Equipment
-==========
+Requirements
+============
+
 The following hardware and tools are required:
 
 * PC host

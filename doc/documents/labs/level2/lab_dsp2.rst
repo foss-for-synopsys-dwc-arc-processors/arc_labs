@@ -3,12 +3,12 @@
 ARC DSP: Using FXAPI
 =============================
 
-Lab Objectives
+Purpose
 ------------------------
-- To understand what is ARC Fixed-point API (FXAPI) 
+- To understand what is ARC Fixed-point API (FXAPI)
 - To learn how to use FXAPI to optimize DSP programs
 
-Lab Requirements
+Requirements
 ----------------------------
 The following hardware and tools are required:
 
@@ -17,11 +17,11 @@ The following hardware and tools are required:
 * ARC board (|emsk| / |iotdk|)
 * ``embarc_osp/arc_labs/labs/dsp_lab_fxapi``
 
-Lab Content
+Content
 --------------------------------
 This lab uses complex number multiplication as an example where using just compiler optimization options cannot gain the same effect as calling DSP instructions manually through FXAPI.
 
-Lab principle
+Principle
 --------------------------------
 In this lab two implementations of complex multiplication are shown with and without FXAPI.
 
@@ -99,9 +99,9 @@ Using |iotdk| board for performance comparison
 
 To compare performance of these two functions a simple application is created that performs complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop (1 000 000-10 000 000 times) to make calculation delay measurable in seconds. This is done 8 times, and after each loop a LED on board turns-on. In the result, LED strip on board works as a "progress bar" showing the process of looped multiplications.
 
-The main performance check loop is shown in the following example. The outer loop runs 8 times (number of LEDs on LED strip), the inner loop makes "LOOPS/8" calls to complex multiplication function. LOOPS variable is configurable to change the total delay. 
+The main performance check loop is shown in the following example. The outer loop runs 8 times (number of LEDs on LED strip), the inner loop makes "LOOPS/8" calls to complex multiplication function. LOOPS variable is configurable to change the total delay.
 
-Lab Steps
+Steps
 ------------
 
 To test the following example, some modification of the code is required to have two loops with and without DSP. You must re-build libraries for this particular configuration of IOTDK:
@@ -128,7 +128,7 @@ With high optimization level functions using "short" type is compiled to use DSP
 Step 2. Run program with FXAPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Rename main.c.fxapi to main.c, then execute the command: 
+Rename main.c.fxapi to main.c, then execute the command:
 
 ``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
 

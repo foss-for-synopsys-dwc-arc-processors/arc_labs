@@ -9,8 +9,8 @@ Purpose
 - To learn how to register tasks in FreeRTOS
 - To get familiar with inter-task communication of FreeRTOS
 
-Equipment
-=========
+Requirements
+============
 The following hardware and tools are required:
 
 * PC host

@@ -8,8 +8,9 @@ Purpose
 - To get familiar with the usage of ARC board and on-board peripherals
 - To know how to program and debug the ARC board and on-board peripherals
 
-Equipment
-=========
+Requirements
+============
+
 The following hardware and tools are required:
 
 * PC host
