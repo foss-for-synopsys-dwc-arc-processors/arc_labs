@@ -1,4 +1,4 @@
-﻿.. _lab5:
+.. _lab5:
 
 How to use ARC board
 #######################
@@ -25,7 +25,7 @@ Content
 - Based on |embarc|, program the GPIO to control some on-board peripherals
 
 .. note::
-    About the detailed usage of |embarc|，please refer to `How to use embARC OSP <http://embarc.org/arc_labs/doc/build/html/labs/level1/lab2.html>`__
+    About the detailed usage of |embarc|, please refer to `How to use embARC OSP <http://embarc.org/arc_labs/doc/build/html/labs/level1/lab2.html>`__
 
 Principles
 ==========

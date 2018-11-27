@@ -1,4 +1,4 @@
-﻿.. _lab6:
+.. _lab6:
 
 A simple bootloader
 ######################

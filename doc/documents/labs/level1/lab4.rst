@@ -1,4 +1,4 @@
-﻿.. _lab4:
+.. _lab4:
 
 ARC features: Interrupts
 ###########################
