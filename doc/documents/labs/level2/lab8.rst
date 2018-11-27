@@ -25,7 +25,7 @@ Content
 
 Principles
 ==========
-By default, compiler-generated code is placed in the *.text* section. The default code section name can be overridden by using the *code pragma*. After compile process, the linker automatically maps all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a linker command file.
+By default, compiler-generated code is placed in the *.text* section. The default code section name can be overridden by using the *code pragma*. After compilation process, the linker automatically maps all input sections from object files to output sections in executable files. If you want to customize the mapping, you can change the default linker mapping by invoking a linker command file.
 
 Steps
 =====
