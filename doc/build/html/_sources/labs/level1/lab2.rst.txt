@@ -10,8 +10,8 @@ Purpose
 * To know how to debug the examples in |embarc|
 * To know how to create application in |embarc|
 
-Equipment
-=========
+Requirements
+============
 
 The following hardware and tools are required:
 

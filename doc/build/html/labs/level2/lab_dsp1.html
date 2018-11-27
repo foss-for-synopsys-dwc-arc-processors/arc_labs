@@ -95,11 +95,12 @@
 <li class="toctree-l3"><a class="reference internal" href="lab7.html">BLE Communication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lab9.html">How to use FreeRTOS</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ARC DSP: Compiler Optimizations</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#part-1-prerequisites">Part 1. Prerequisites</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part-2-lab-objectives">Part 2. Lab Objectives</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part-3-lab-principle-and-method">Part 3. Lab principle and method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part-4-optimizing-code">Part 4. Optimizing code</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#appendix-a-iotdk-default-core-configurations">Appendix A. IOTDK Default Core Configurations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#purpose">Purpose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#content">Content</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#principles">Principles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exercises">Exercises</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="lab_dsp2.html">ARC DSP: Using FXAPI</a></li>
@@ -180,36 +181,57 @@
             
   <div class="section" id="arc-dsp-compiler-optimizations">
 <span id="lab-dsp1"></span><h1>ARC DSP: Compiler Optimizations<a class="headerlink" href="#arc-dsp-compiler-optimizations" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="part-1-prerequisites">
-<h2>Part 1. Prerequisites<a class="headerlink" href="#part-1-prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>Before starting to use the ARC DSP, the following prerequisites are required:</p>
-<ul>
-<li><p class="first">Make sure that the MetaWare tools for Windows is installed</p>
-<p><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware</a></p>
-</li>
-<li><p class="first">Learn how to create, edit, build, and debug projects in MetaWare IDE</p>
-</li>
-<li><p class="first">Make sure that the IoT Development Kit and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
-<p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
-</li>
-<li><p class="first">IoT Development Kit board is EM9D based</p>
-</li>
-</ul>
-<p>The following needs to be tested before starting this lab:</p>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Connecting IoT Development Kit to computer</li>
-<li>Connecting serial console (PuTTY) to IoT Development Kit COM port (For information on how to do initial board setup and configuration, see <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em>).</li>
+<li>To understand Metaware compiler DSP extension options and optimization level</li>
+<li>To learn how to use Metaware compiler to optimize regular C code with DSP instructions</li>
 </ul>
 </div>
-<div class="section" id="part-2-lab-objectives">
-<h2>Part 2. Lab Objectives<a class="headerlink" href="#part-2-lab-objectives" title="Permalink to this headline">¶</a></h2>
-<p>Use MetaWare compiler options to optimize regular C code employing DSP extensions.
-Try direct usage of DSP extensions through intrinsic.</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>The following hardware and tools are required:</p>
+<ul class="simple">
+<li>PC host</li>
+<li>MetaWare Development Toolkit</li>
+<li>ARC board (EM Starter Kit / IoT Development Kit)</li>
+<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/dsp_lab_compiler_opt</span></code></li>
+</ul>
 </div>
-<div class="section" id="part-3-lab-principle-and-method">
-<h2>Part 3. Lab principle and method<a class="headerlink" href="#part-3-lab-principle-and-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="content">
+<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>An example code below contains a function “test” which contains a 20 step for loop and a multiply accumulate operation done manually.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">short</span> <span class="nf">test</span><span class="p">(</span><span class="kt">short</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">short</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="kt">long</span> <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">acc</span> <span class="o">+=</span> <span class="p">(</span> <span class="p">((</span><span class="kt">long</span><span class="p">)(</span><span class="o">*</span><span class="n">a</span><span class="o">++</span><span class="p">))</span> <span class="o">*</span> <span class="o">*</span><span class="n">b</span><span class="o">++</span><span class="p">)</span> <span class="o">&lt;&lt;</span><span class="mi">1</span> <span class="p">;</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="kt">short</span><span class="p">)</span> <span class="p">(</span><span class="n">acc</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">short</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">};</span>
+<span class="kt">short</span> <span class="n">b</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">20</span><span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+
+    <span class="kt">short</span> <span class="n">c</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;result=%d&quot;</span><span class="p">,</span><span class="n">c</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Use Metaware compiler to optimize the C code with and without DSP extension options, and analyze the assembly code.</p>
+</div>
+<div class="section" id="principles">
+<h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
 <p>This section describes compiler options in MetaWare used in this lab.</p>
-<p>To optimize code to use DSP extensions two sets of compiler options are used throughout the lab, DSP Extensions options and optimization level.</p>
+<p>To optimize code with DSP extensions, two sets of compiler options are used throughout the lab: DSP Extensions options and optimization level.</p>
 <div class="section" id="dsp-extensions-options">
 <h3>DSP Extensions Options<a class="headerlink" href="#dsp-extensions-options" title="Permalink to this headline">¶</a></h3>
 <p>Use embARC OSP build system to build tool. The details can be found in embARC OSP document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.</p>
@@ -256,39 +278,9 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <h3>Optimization for DSP extensions<a class="headerlink" href="#optimization-for-dsp-extensions" title="Permalink to this headline">¶</a></h3>
 <p>A regular code without direct usage of DSP extensions can be optimized to use DSP extensions wherever applicable, which compiler can do automatically with DSP extension options corresponding to hardware are set and high-level of optimization is selected.</p>
 </div>
-<div class="section" id="checking-options">
-<h3>Checking options<a class="headerlink" href="#checking-options" title="Permalink to this headline">¶</a></h3>
-<p>Options are specified in the makefile or command line, as shown in the previous section.</p>
 </div>
-</div>
-<div class="section" id="part-4-optimizing-code">
-<h2>Part 4. Optimizing code<a class="headerlink" href="#part-4-optimizing-code" title="Permalink to this headline">¶</a></h2>
-<p>An example code below contains a function “test” which contains a 20 step for loop and a multiply accumulate operation done manually.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-
-<span class="kt">short</span> <span class="nf">test</span><span class="p">(</span><span class="kt">short</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">short</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-
-    <span class="kt">long</span> <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-            <span class="n">acc</span> <span class="o">+=</span> <span class="p">(</span> <span class="p">((</span><span class="kt">long</span><span class="p">)(</span><span class="o">*</span><span class="n">a</span><span class="o">++</span><span class="p">))</span> <span class="o">*</span> <span class="o">*</span><span class="n">b</span><span class="o">++</span><span class="p">)</span> <span class="o">&lt;&lt;</span><span class="mi">1</span> <span class="p">;</span>
-
-    <span class="k">return</span> <span class="p">(</span><span class="kt">short</span><span class="p">)</span> <span class="p">(</span><span class="n">acc</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kt">short</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">};</span>
-<span class="kt">short</span> <span class="n">b</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">20</span><span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-
-    <span class="kt">short</span> <span class="n">c</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
-
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;result=%d&quot;</span><span class="p">,</span><span class="n">c</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<div class="section" id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="step-1-compiling-without-dsp-extensions">
 <h3>Step 1. Compiling without DSP extensions<a class="headerlink" href="#step-1-compiling-without-dsp-extensions" title="Permalink to this headline">¶</a></h3>
 <p>Set optimization level “-O0”, and no DSP extensions (unchecking -Xdsp1, -Xdsp2).</p>
@@ -297,7 +289,7 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <p><code class="docutils literal notranslate"><span class="pre">OLEVEL=O0</span>&#160; <span class="pre">ADT_COPT=&quot;-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-Xlib</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1&quot;</span></code></p>
 <p>You can use the following command to generate disassembly code:</p>
 <p><code class="docutils literal notranslate"><span class="pre">elfdump</span> <span class="pre">-T</span> <span class="pre">-S</span> <span class="pre">&lt;your_working_directory&gt;/obj_iotdk_10/mw_arcem9d/dsp_lab1_mw_arcem9d.elf</span></code></p>
-<p>Notice assembly code in the disassembled output. See how many assembly instruction are used for each lin. For example, for loop spends several instruction to calculate loop variable value and check whether to stop.</p>
+<p>Notice assembly code in the disassembled output. See how many assembly instruction are used for each line. For example, for loop spends several instruction to calculate loop variable value and check whether to stop.</p>
 <p><img alt="dsp_figure_1.1" src="../../_images/dsp_figure_1.1.png" /></p>
 </div>
 <div class="section" id="step-2-compiling-without-dsp-extensions-with-o2">
@@ -314,41 +306,11 @@ Try direct usage of DSP extensions through intrinsic.</p>
 <p><code class="docutils literal notranslate"><span class="pre">OLEVEL=O3</span>&#160; <span class="pre">ADT_COPT=&quot;-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-Xlib</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xdsp1&quot;</span></code></p>
 <p>Adding -Xdsp1 (optimization level changed to -O3) helps compiler to optimize away “mpyw_s” and “add1_s” instructions and replace them with hardware dual-16bit SIMD multilication “vmpy2h”. Notice the loop count is now 5.</p>
 <p><img alt="dsp_figure_1.3" src="../../_images/dsp_figure_1.3.png" /></p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Assignment:</strong> Remove “&lt;&lt;1” from test function and see changes in the output instructions.</p>
 </div>
 </div>
-</div>
-<div class="section" id="appendix-a-iotdk-default-core-configurations">
-<h2>Appendix A. IOTDK Default Core Configurations<a class="headerlink" href="#appendix-a-iotdk-default-core-configurations" title="Permalink to this headline">¶</a></h2>
-<p><strong>ARC_EM5D</strong></p>
-<p>This is an ARC EM core with 32 bits address space, 128 KB of code memory (ICCM) and 256 KB of data memory (DCCM).</p>
-<p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span> <span class="pre">-Xswap</span> <span class="pre">-Xnorm</span> <span class="pre">-Xmpy16</span> <span class="pre">-Xmpy</span> <span class="pre">-Xmpyd</span> <span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span></code></p>
-<blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span></code></div></blockquote>
-<p><strong>ARC_EM7D</strong></p>
-<p>This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:</p>
-<p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core2</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span> <span class="pre">-Xdiv_rem=radix2</span> <span class="pre">-Xswap</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xbitscan</span> <span class="pre">-Xmpy_option=mpyd</span> <span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span> <span class="pre">-Xdsp_divsqrt=radix2</span> <span class="pre">-Xdsp_accshift=limited</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xstack_check</span> <span class="pre">-Hccm</span> <span class="pre">-Xdmac</span></code></p>
-<p><strong>ARC_EM9D</strong></p>
-<p>This is an ARC EM core with 32 bits address space, 256 KB of code memory (ICCM) and 128 KB of data memory (DCCM). The corresponding MetaWare compiler options for this configuration are:</p>
-<p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core2</span> <span class="pre">-Hrgf_banked_regs=32</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xdiv_rem=radix2</span> <span class="pre">-Xswap</span> <span class="pre">-Xbitscan</span> <span class="pre">-Xmpy_option=mpyd</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xdsp_divsqrt=radix2</span> <span class="pre">-Xdsp_itu-Xdsp_accshift=full</span> <span class="pre">-Xagu_large</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xxy</span> <span class="pre">-Xbitstream</span> <span class="pre">-Xfpus_div</span> <span class="pre">-Xfpu_mac</span> <span class="pre">-Xfpus_mpy_slow</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xfpus_div_slow</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xstack_check</span> <span class="pre">-Hccm</span> <span class="pre">-Xdmac</span></code></p>
-<p><strong>ARC_EM11D Configuration</strong></p>
-<p>This is an ARC EM core with 32 bits address space, 64 KB of code memory (ICCM) and 64 KB of data memory (DCCM). Corresponding MetaWare compiler options for this configuration are:</p>
-<p><code class="docutils literal notranslate"><span class="pre">-arcv2em</span> <span class="pre">-core2</span> <span class="pre">-Hrgf_banked_regs=32</span> <span class="pre">-HL</span> <span class="pre">-Xcode_density</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xdiv_rem=radix2</span> <span class="pre">-Xswap</span> <span class="pre">-Xbitscan</span> <span class="pre">-Xmpy_option=mpyd</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xshift_assist</span> <span class="pre">-Xbarrel_shifter</span> <span class="pre">-Xdsp2</span> <span class="pre">-Xdsp_complex</span> <span class="pre">-Xdsp_divsqrt=radix2</span> <span class="pre">-Xdsp_itu</span> <span class="pre">-Xdsp_accshift=full</span></code></p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">-Xagu_large</span> <span class="pre">-Xxy</span> <span class="pre">-Xbitstream</span> <span class="pre">-Xfpus_div</span> <span class="pre">-Xfpu_mac</span> <span class="pre">-Xfpuda</span> <span class="pre">-Xfpus_mpy_slow</span> <span class="pre">-Xfpus_div_slow</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">-Xstack_check</span> <span class="pre">-Hccm</span> <span class="pre">-Xdmac</span></code></p>
-</div></blockquote>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>Remove “&lt;&lt;1” from test function and see changes in the output instructions.</p>
 </div>
 </div>
 

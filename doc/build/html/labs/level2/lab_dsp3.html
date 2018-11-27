@@ -97,10 +97,11 @@
 <li class="toctree-l3"><a class="reference internal" href="lab_dsp1.html">ARC DSP: Compiler Optimizations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lab_dsp2.html">ARC DSP: Using FXAPI</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ARC DSP: Using DSP Library</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#part-1-prerequisites">Part 1. Prerequisites</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part-2-lab-objectives">Part 2. Lab Objectives</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part-3-lab-principle-and-method">Part 3. Lab principle and method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part-4-test">Part 4. Test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#purpose">Purpose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#content">Content</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#principle">Principle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
 </ul>
 </li>
 </ul>
@@ -179,35 +180,30 @@
             
   <div class="section" id="arc-dsp-using-dsp-library">
 <span id="lab-dsp3"></span><h1>ARC DSP: Using DSP Library<a class="headerlink" href="#arc-dsp-using-dsp-library" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="part-1-prerequisites">
-<h2>Part 1. Prerequisites<a class="headerlink" href="#part-1-prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>Before starting to use the ARC DSP, the following prerequisites are required:</p>
-<ul>
-<li><p class="first">Make sure that the MetaWare tools for Windows installed</p>
-<p><a class="reference external" href="https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware">https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware</a></p>
-</li>
-<li><p class="first">Learn how to create, edit, build and debug projects in MetaWare IDE</p>
-</li>
-<li><p class="first">Make sure that the IoT Development Kit and Digilent USB drivers (Digilent Adept 2) installed and tested</p>
-<p><a class="reference external" href="http://store.digilentinc.com/digilent-adept-2-download-only">http://store.digilentinc.com/digilent-adept-2-download-only</a></p>
-</li>
-<li><p class="first">IoT Development Kit configured with DSP-enabled core configuration EM9D</p>
-</li>
-</ul>
-<p>The following procedures need to be tested before starting this lab:</p>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Connecting IoT Development Kit to computer</li>
-<li>Configuring IoT Development Kit to use ARC core with DSP extensions (these labs use EM5D core configuration)</li>
-<li>Connecting serial console (PuTTY) to IoT Development Kit COM port (For information on how to do initial board setup and configuration please refer to  <em>Getting Started</em> chapter of <em>ARC IOT Design Kit User Guide</em> that came along with IOTDK  board).</li>
+<li>To understand what is ARC DSP library</li>
+<li>To learn how to use DSP library to optimize DSP programs</li>
 </ul>
 </div>
-<div class="section" id="part-2-lab-objectives">
-<h2>Part 2. Lab Objectives<a class="headerlink" href="#part-2-lab-objectives" title="Permalink to this headline">¶</a></h2>
-<p>Use DSP Library and compare program run speed with and without DSP library, that is, DSP extension usage.</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>The following hardware and tools are required:</p>
+<ul class="simple">
+<li>PC host</li>
+<li>MetaWare Development Toolkit</li>
+<li>ARC board (EM Starter Kit / IoT Development Kit)</li>
+<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/dsp_lab_dsp_lib</span></code></li>
+</ul>
 </div>
-<div class="section" id="part-3-lab-principle-and-method">
-<h2>Part 3. Lab principle and method<a class="headerlink" href="#part-3-lab-principle-and-method" title="Permalink to this headline">¶</a></h2>
-<p>This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions with shorter code.</p>
+<div class="section" id="content">
+<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions with shorter code.
+Use DSP Library and compare program run speed with and without DSP library.</p>
+</div>
+<div class="section" id="principle">
+<h2>Principle<a class="headerlink" href="#principle" title="Permalink to this headline">¶</a></h2>
 <p>In this lab two implementations of matrix multiplication are shown: implemented manually and with the use of DSP library.</p>
 <div class="section" id="matrix-multiplication">
 <h3>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Permalink to this headline">¶</a></h3>
@@ -218,11 +214,7 @@
 <div class="section" id="implementation-without-dsp">
 <h3>Implementation without DSP<a class="headerlink" href="#implementation-without-dsp" title="Permalink to this headline">¶</a></h3>
 <p>The following example shows the implementation of matrix multiplication of two matrices containing “short” values. By convention, matrices here are implemented as 1D arrays with row-first indexing, where element a_ik is indexed as
-<img alt="dsp_icon_3.2" src="../../_images/dsp_icon_3.2.png" />
-. Build with the command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span></code></p>
-<blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></div></blockquote>
+<img alt="dsp_icon_3.2" src="../../_images/dsp_icon_3.2.png" /></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embARC.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;embARC_debug.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
@@ -423,24 +415,33 @@
 <span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="using-iotdk-board-for-performance-comparison">
+<h3>Using IoT Development Kit board for performance comparison<a class="headerlink" href="#using-iotdk-board-for-performance-comparison" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>Assignment 1:</strong> Use example in previous lab to create an IoT Development Kit application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library. Adjust number of loops made to achieve measurable delay.</p>
+<p class="last">Create an IoT Development Kit application that uses LED strip as progress bar for large number of matrix multiplications with and without DSP library, adjust number of loops made to achieve measurable delay. Run the example and compare computational delay with and without DSPLIB.</p>
 </div>
 </div>
 </div>
-<div class="section" id="part-4-test">
-<h2>Part 4. Test<a class="headerlink" href="#part-4-test" title="Permalink to this headline">¶</a></h2>
-<p>To test the example below, an example program needs to be created that has two loops of matrix multiplications with and without DSP library.</p>
+<div class="section" id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
 <p>Both examples are to be compiled with DSP extensions, with the following options set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-O2</span>&#160; <span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-Xlib</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xdsp1</span> <span class="pre">-Hdsplib</span></code></p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Assignment 2:</strong> Run the example and compare computational delay with and without DSPLIB</p>
+<div class="section" id="step-1-run-program-without-dsp-library">
+<h3>Step 1. Run program without DSP library<a class="headerlink" href="#step-1-run-program-without-dsp-library" title="Permalink to this headline">¶</a></h3>
+<p>Build with the command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span></code></p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></div></blockquote>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note that DSPLIB is statically linked with the project when -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program does not affect DSPLIB performance. On the other hand, even with highest optimization level a function utilizing simple instructions on “short” type (even converted to MACs if possible) is less efficient that direct use of DSPLIB.</p>
+<div class="section" id="step-2-run-program-with-dsp-library">
+<h3>Step 2. Run program with DSP library<a class="headerlink" href="#step-2-run-program-with-dsp-library" title="Permalink to this headline">¶</a></h3>
+<p>Rename main.c.dsplib to main.c, then execute the command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span></code></p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></div></blockquote>
+<p>Note that DSPLIB is statically linked with the project when -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program does not affect DSPLIB performance. On the other hand, even with highest optimization level a function utilizing simple instructions on “short” type (even converted to MACs if possible) is less efficient that direct use of DSPLIB.</p>
 </div>
 </div>
 </div>

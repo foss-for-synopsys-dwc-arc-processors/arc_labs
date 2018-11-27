@@ -13,8 +13,8 @@ Purpose
 * To get familiar with the basic usage of the |mwdt|
 * To get familiar with the features and usage of the MetaWare Debugger (mdb)
 
-Equipment
-^^^^^^^^^^
+Requirements
+^^^^^^^^^^^^
 
 The following hardware and tools are required:
 

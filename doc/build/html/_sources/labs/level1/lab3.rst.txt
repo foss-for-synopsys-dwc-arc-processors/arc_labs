@@ -8,8 +8,9 @@ Purpose
 - To know the auxiliary registers and processor timers of |arc|
 - To learn how to program auxiliary registers to control the processor timers
 
-Equipment
-=========
+Requirements
+============
+
 The following hardware and tools are required:
 
 * PC host

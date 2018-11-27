@@ -10,8 +10,8 @@ Purpose
 - To learn the usage of APIs of RN4020 driver in |embarc|
 
 
-Equipment
-=========
+Requirements
+============
 The following hardware and tools are required:
 
 * PC host

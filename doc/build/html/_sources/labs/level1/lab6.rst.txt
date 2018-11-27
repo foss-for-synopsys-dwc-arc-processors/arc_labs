@@ -1,4 +1,4 @@
-﻿.. _lab6:
+.. _lab6:
 
 A simple bootloader
 ######################
@@ -11,8 +11,9 @@ Purpose
 - Create a self-booting application
 
 
-Equipment
-=========
+Requirements
+============
+
 The following hardware and tools are required:
 
 * PC host
