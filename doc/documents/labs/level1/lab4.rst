@@ -16,13 +16,13 @@ The following hardware and tools are required:
 * PC host
 * |arcgnu| / |mwdt|
 * ARC board (|emsk| / |iotdk|)
-* ``embarc_osp/arc_labs/labs/lab4_interrupt``
+* ``embarc_osp/arc_labs/labs/lab_interrupt``
 
 Content
 =========
 
-* Through ``embarc_osp/arc_labs/labs/lab4_interrupt/part1`` to learn the basics of interrupt handling of |arc| and the interrupt API provided by |embarc|
-* Through ``embarc_osp/arc_labs/labs/lab4_interrupt/part2`` to learn the interrupt priority and interrupt nesting of |arc| and corresponding API of |embarc|
+* Through ``embarc_osp/arc_labs/labs/lab_interrupt/part1`` to learn the basics of interrupt handling of |arc| and the interrupt API provided by |embarc|
+* Through ``embarc_osp/arc_labs/labs/lab_interrupt/part2`` to learn the interrupt priority and interrupt nesting of |arc| and corresponding API of |embarc|
 
 
 Principles
@@ -84,9 +84,9 @@ Part I: implement a customized timer0 interrupt handling
     # for emsk
     $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run
     # for iotdk
-    $ make BOARD=emsk TOOLCHAIN=gnu run
+    $ make BOARD=iotdk TOOLCHAIN=gnu run
 
- 2. Output
+2. Output
 
 .. code-block:: console
 
@@ -167,7 +167,7 @@ This code uses the |embarc| API to program **Timer0**. In fact, in essence, thes
 **Then** configure the interrupt service function and priority for our interrupts. This work is done by the functions ``int_handler_install`` and ``int_pri_set``.
 
 **Finally**, after the interrupt configuration is complete, enable the **Timer0** and interrupts that are previously turned off. This work is done by the functions ``int_enable`` and ``timer_start``.
-The implementation of the ``timer_start`` function is the same as the reading and writing of the auxiliary registers in our lab_3. Interested students can view them in the file arc_timer.c. One point to note in this step is the configuration of ``timer_limit`` (the last parameter of ``timer_start``). Configure the interrupt time to 1ms , do a simple calculation (the formula is the expression after COUNT).
+The implementation of the ``timer_start`` function is the same as the reading and writing of the auxiliary registers in our lab_timer. Interested students can view them in the file arc_timer.c. One point to note in this step is the configuration of ``timer_limit`` (the last parameter of ``timer_start``). Configure the interrupt time to 1ms , do a simple calculation (the formula is the expression after COUNT).
 
 In this example, the loop body only serves as an effect display. Our own delay function in the loop body to print the time per second is called.
 
@@ -199,9 +199,9 @@ Part II: interrupt priority and interrupt nesting
     # for emsk
     $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run
     # for iotdk
-    $ make BOARD=emsk TOOLCHAIN=gnu run
+    $ make BOARD=iotdk TOOLCHAIN=gnu run
 
- 2. Output
+2. Output
 
 .. code-block:: console
 
