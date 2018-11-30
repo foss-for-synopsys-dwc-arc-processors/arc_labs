@@ -63,9 +63,9 @@ Steps
 .. code-block:: console
 
    cd /arc_labs/lab5_emsk
-   make run
+   make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run
 
-3. Press the buttons and toggle the DIP switches, then check the result in UART terminal, and watch the changes of on-board LEDs.
+3. Press the buttons (L or/and R) and toggle the DIP switches (3 or/and 4), then check the result in UART terminal, and watch the changes of on-board LEDs.
 
 |figure1| 
 
@@ -76,14 +76,16 @@ Steps
 
 1. Find a LED, connect the LED anode pin to **ARDUINO_PIN_0**, connect the LED cathode pin to **GND** of |iotdk|.
 
-2. Compile and run the ``embarc_osp/arc_labs/lab5_iotdk`` example with the following cmds.
+2. Connect the USB cable to the USB data port of |iotdk| and the PC.
+
+3. Compile and run the ``embarc_osp/arc_labs/lab5_iotdk`` example with the following cmds.
 
 .. code-block:: console
 
    cd /arc_labs/lab5_iotdk
-   make run
+   make BOARD=iotdk TOOLCHAIN=gnu run
 
-3. Watch the changes of external connected LED.
+4. Watch the changes of external connected LED.
 
 |figure2|
 
