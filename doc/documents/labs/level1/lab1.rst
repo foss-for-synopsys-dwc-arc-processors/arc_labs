@@ -13,21 +13,21 @@ Purpose
 * To get familiar with the basic usage of the |mwdt|
 * To get familiar with the features and usage of the MetaWare Debugger (mdb)
 
-Equipment
-^^^^^^^^^^
+Requirements
+^^^^^^^^^^^^
 
 The following hardware and tools are required:
 
 * PC host
 * |mwdt|
 * nSIM simulator or ARC board (|emsk| / |iotdk|)
-* ``embarc_osp/arc_labs/labs/lab1_core_test``
+* ``embarc_osp/arc_labs/labs/lab_core_test``
 
 Content
 ^^^^^^^^^
 
 * Create a C project using the |mwdt|
-* Import the code ``CoreTest.c`` from ``embarc_osp/arc_labs/labs/lab1_core_test``
+* Import the code ``CoreTest.c`` from ``embarc_osp/arc_labs/labs/lab_core_test``
 * Configure compilation options to compile, and generate executable files.
 * Start the debugger of |mwdt| and enter debug mode.
 
@@ -216,7 +216,7 @@ statement), and click |icon13| in the toolbar above the debug
 interface to let the program execute to the breakpoint. Click |icon14| in the Profiling window, and only the information related
 to the main() function is displayed. Therefore, flexible
 setting of breakpoints, combined with the clear function, can perform
-performance analysis on the concerned blocks (figure 9).
+performance analysis on the concerned blocks.
 
 |figure9|
 
@@ -235,7 +235,7 @@ implement multiplication more efficiently.
 Exercises
 ^^^^^^^^^^
 
-How can I implement multiplication more efficiently with fewer instructions? Apply this method to the project demo of the fifth part, analyze it with the debugger's Profiling function, observe the total number of instructions consumed by the main function, and compare it with the previous Profiling result of Figure 8.
+How can I implement multiplication more efficiently with fewer instructions? Apply this method to the project demo of the fifth part, analyze it with the debugger's Profiling function, observe the total number of instructions consumed by the main function, and compare it with the previous Profiling result.
 
 
 |arcgnu|
@@ -256,13 +256,13 @@ The following hardware and tools are required:
 * PC host
 * |arcgnu|
 * nSIM simulator or ARC board (|emsk| / |iotdk|)
-* ``embarc_osp/arc_labs/labs/lab1_core_test``
+* ``embarc_osp/arc_labs/labs/lab_core_test``
 
 Content
 ^^^^^^^^^^^
 
 * Create a C project using |arcgnu|
-* Import the code ``CoreTest.c`` from ``embarc_osp/arc_labs/labs/lab1_core_test``
+* Import the code ``CoreTest.c`` from ``embarc_osp/arc_labs/labs/lab_core_test``
 * Configure compilation options to compile, and generate executable files.
 * Start the |arcgnu| debugger to enter the debug mode
 
@@ -318,7 +318,7 @@ EMSK, the corresponding necessary options have been set by default. If
 there is no special requirement, check the setting compile options in the All
 options column and click **OK** to close the Properties dialog box.
 
-4. Compile the project core_test**
+4. Compile the project core_test
 
 Select **Build Project** from the Project drop-down menu in the |arcgnu| main menu
 or click |icon16|. In the middle of the |arcgnu| main interface,
@@ -385,7 +385,7 @@ program debugging. If you want to end the current debugging process, click |icon
 
 7. Code performance analysis using the debugger
 
-Same as the code performance analysis method of |mwdt|. For details, see first part of Lab 1.
+Same as the code performance analysis method of |mwdt|.
 
 For the use of these two IDEs, you can refer to the Help documentation in the respective IDE, or you can view the on-line documentation provided by Synopsys.
 

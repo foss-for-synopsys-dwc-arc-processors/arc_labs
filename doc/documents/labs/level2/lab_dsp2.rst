@@ -3,40 +3,26 @@
 ARC DSP: Using FXAPI
 =============================
 
-Part 1.	Prerequisites
+Purpose
 ------------------------
+- To understand what is ARC Fixed-point API (FXAPI)
+- To learn how to use FXAPI to optimize DSP programs
 
-Before starting to use the ARC DSP, the following prerequisites are required:
-
-* Make sure that the MetaWare tools for Windows installed
-
-  `<https://www.synopsys.com/dw/ipdir.php?ds=sw_metaware>`_
-
-
-* Lean how to create, edit, build, and debug projects in MetaWare IDE
-
-* Make sure that the |iotdk| and Digilent USB drivers (Digilent Adept 2) installed and tested
-
-  `<http://store.digilentinc.com/digilent-adept-2-download-only>`_
-
-* |iotdk| is based on DSP-enabled core configuration EM9D
-
-The following procedures need to be tested before this lab:
-
-* Connecting |iotdk| to computer
-
-* Connecting serial console (PuTTY) to |iotdk| COM port (For information on how to do initial board setup and configuration, see *Getting Started* chapter of *ARC IOT Design Kit User Guide*).
-
-Part 2.	Lab Objectives
+Requirements
 ----------------------------
+The following hardware and tools are required:
 
-Use FXAPI and compare program run speed with and without FXAPI, i.e. DSP extension usage.
+* PC host
+* |mwdt|
+* ARC board (|emsk| / |iotdk|)
+* ``embarc_osp/arc_labs/labs/dsp_lab_fxapi``
 
-Part 3.	Lab principle and method
+Content
 --------------------------------
-
 This lab uses complex number multiplication as an example where using just compiler optimization options cannot gain the same effect as calling DSP instructions manually through FXAPI.
 
+Principle
+--------------------------------
 In this lab two implementations of complex multiplication are shown with and without FXAPI.
 
 Complex number multiplication
@@ -111,49 +97,11 @@ As with previous implementation ``q15_t`` is of similar size as ``short`` type, 
 Using |iotdk| board for performance comparison
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To compare performance of these two functions a simple ESMK application is created that performs complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop (1 000 000-10 000 000 times) to make calculation delay measurable in seconds. This is done 8 times, and after each loop a LED on board turns-on. In the result, LED strip on board works as a "progress bar" showing the process of looped multiplications.
+To compare performance of these two functions a simple application is created that performs complex array multiplication using either of the implementations above. The program initializes two arrays of complex numbers with random values and calls functions above in a loop (1 000 000-10 000 000 times) to make calculation delay measurable in seconds. This is done 8 times, and after each loop a LED on board turns-on. In the result, LED strip on board works as a "progress bar" showing the process of looped multiplications.
 
-The main performance check loop is shown in the following example. The outer loop runs 8 times (number of LEDs on LED strip), the inner loop makes "LOOPS/8" calls to complex multiplication function. LOOPS variable is configurable to change the total delay. The following example uses DSP types, and can be changed to use short-based struct type.
+The main performance check loop is shown in the following example. The outer loop runs 8 times (number of LEDs on LED strip), the inner loop makes "LOOPS/8" calls to complex multiplication function. LOOPS variable is configurable to change the total delay.
 
-.. code-block:: c
-
-    #include "fxarc.h"
-    #define LOOPS 10000000
-    int main(int argc, char *argv[]) {
-    	unsigned int led_status = 0x40 ;
-    	DWCREG_PTR pctr =
-             (DWCREG_PTR) (DWC_GPIO_0 | PERIPHERAL_BASE);
-    	DWCREG_PTR uart =
-             (DWCREG_PTR) (DWC_UART_CONSOLE | PERIPHERAL_BASE);
-
-    	gpio_init(pctr);
-    	uart_initDevice(uart, UART_CFG_BAUDRATE_115200,
-               UART_CFG_DATA_8BITS,
-               UART_CFG_1STOP, UART_CFG_PARITY_NONE);
-
-    	cq15_t  cq15_a[20] = {{0x2000,10},{0x100,20},{4,30}};
-    	cq15_t  cq15_b[20] = {{0x2000,11},{0x100,21},{5,31}};
-    	cq15_t res;
-
-    	uart_print(uart, "*** Start ***\n\r");
-
-    	led_status = 0x7F;
-
-    	for (int i =0; i< 8; i++) {
-    		gpio_set_leds(pctr, led_status);
-    		for (int j = 1; j < LOOPS/8; j++ ) {
-    			res = fx_complex_array_mult(cq15_a, cq15_b, 2);
-    		};
-
-    		led_status = led_status >> 1;
-    	}
-
-    	gpio_set_leds(pctr, 0x01ff);
-    	uart_print(uart, "*** End ***\n\r");
-    	return 0;
-    }
-
-Part 4.	Test
+Steps
 ------------
 
 To test the following example, some modification of the code is required to have two loops with and without DSP. You must re-build libraries for this particular configuration of IOTDK:
@@ -162,16 +110,29 @@ To test the following example, some modification of the code is required to have
 
 |iotdk| tcf file can be found in ``embarc_osp/board/iotdk/configs/10/tcf/arcem9d.tcf``
 
-Both examples are to be compiled with DSP extensions, with the following options set:
+Both examples are to be compiled with DSP extensions.
 
-``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
+Step 1. Run program without FXAPI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Build with the command:
+
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
 
   ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
 
 With high optimization level functions using "short" type is compiled to use DSP MAC operation, enabling significant speedup.
 
-
 |dsp_figure_2.1|
+
+Step 2. Run program with FXAPI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Rename main.c.fxapi to main.c, then execute the command:
+
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
+
+  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
 
 However, using FXAPI enables compiler to directly use complex MAC instruction "cmachfr".
 

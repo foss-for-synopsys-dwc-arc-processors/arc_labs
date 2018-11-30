@@ -9,8 +9,8 @@ Purpose
 - To learn how to register tasks in FreeRTOS
 - To get familiar with inter-task communication of FreeRTOS
 
-Equipment
-=========
+Requirements
+============
 The following hardware and tools are required:
 
 * PC host
@@ -29,7 +29,7 @@ Principles
 Background
 ----------
 
-Operating System is software that controls basic hardware and software resources and provides access to them as a service for applications. In this sense applications that are sued by users are said to be run on top of or inside operating system.
+Operating System is software that controls basic hardware and software resources and provides access to them as a service for applications. In this sense applications that are used by users are said to be run on top of or inside the operating system.
 
 There are different kind of operating systems and many definitions of OSes depending on the available features. One of the main features of every OS is how it organizes several tasks (programs) to work together. Some OSes execute only one task at the time (these are called single-tasking) other allow multiple programs to work together (multi-tasking). Most common desktop operating systems are multi-tasking (Linux, Windows, etc.).
 
@@ -38,9 +38,9 @@ As processors on which programs are executed are sequential devices, technically
 Depending on scheduler multi-tasking algorithm OSes are classified on real-time and non-real-time. In desktop operating systems (Linux, Windows) the usual approach of scheduler is to try to distribute processor time evenly between running application, so that each uses fair amount of resources. However, this approach has significant drawback which is unpredictable times when specific task will be running. On the other hand, some applications (especially embedded) are time constrained and thus require deterministic execution of tasks. For example, if embedded system is controlling industrial machinery then software application is controlling some operation in the machine, which should be done at specific times disregarding of what other operations are pending. For this purpose, schedulers in some operating systems are made in a way to start tasks and predefined times. Such operating systems are called real-time operating systems (RTOS), because each task (application) running in RTOS can specify specific time (in milliseconds or other real time unit) at which it should be started. To organize this for several tasks scheduler uses priorities set for tasks, so that if two applications requested to be called at the same time, the one with higher priority gets the resources.
 
 
-As resources becoming abundant for modern micro processors, the cost to run RTOS is become increasingly insignificant. RTOS also provides event-driven mode for better utilization of CPU with efficiency.
+As resources becoming abundant for modern micro processors, the cost to run RTOS becomes increasingly insignificant. RTOS also provides event-driven mode for better utilization of CPU with efficiency.
 
-FreeRTOS is an implementation of RTOS specially designed to be compact, easy to use and freely available (under GPL license with several exceptions). FreeRTOS source code is available for download at http://freertos.org and for different processor it should be ported (architecture specific code needs to be changed) so that it can operate on the specific processor. |embarc| includes FreeRTOS port for |arc| that can be used to run applications using RTOS. FreeRTOS contains all the basic features of RTOS: tasks, scheduler, notifications, semaphores, mutexes, etc.
+FreeRTOS is an implementation of RTOS specially designed to be compact, easy to use and freely available (under GPL license with several exceptions). FreeRTOS source code is available for download at http://freertos.org and for different processor it could be ported (architecture specific code needs to be changed) so that it can operate on the specific processor. |embarc| includes FreeRTOS port for |arc| that can be used to run applications using RTOS. FreeRTOS contains all the basic features of RTOS: tasks, scheduler, notifications, semaphores, mutexes, etc.
 
 
 Design
@@ -216,12 +216,12 @@ Three functions can be helpful: ``xQueueSend()``, ``xSemaphoreTake()``, ``xQueue
 Build and run the completed code
 --------------------------------
 
-BUild the completed program and debug it to fulfill all requirements. (8-digit running LEDs are used in example code)
+Build the completed program and debug it to fulfill all requirements. (8-digit running LEDs are used in example code)
 
 Exercises
 =========
 The problem of philosophers having meal:
 
-Five philosophers sitting at a round dining table. Suppose they are either thinking or eating, but they cannot do these two things at same time. So each time when they are having food, they stop thinking and vice versa. There are five forks on the table for eating noddle, each fork is placed between two adjacent philosophers  It is hard to eat noddle with one fork, so all philosophers need two forks in order to eat.
+Five philosophers sitting at a round dining table. Suppose they are either thinking or eating, but they cannot do these two things at the same time. So each time when they are having food, they stop thinking and vice versa. There are five forks on the table for eating noddle, each fork is placed between two adjacent philosophers. It is hard to eat noodles with one fork, so all philosophers need two forks in order to eat.
 
 Write a program with proper console output to simulate this process.
