@@ -194,7 +194,7 @@
 <li>PC host</li>
 <li>GNU Toolchain for ARC Processors / MetaWare Development Toolkit</li>
 <li>ARC board (EM Starter Kit / IoT Development Kit)</li>
-<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab3_timer</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab_timer</span></code></li>
 </ul>
 </div>
 <div class="section" id="content">
@@ -241,7 +241,7 @@ This timer is used to count the clock cycles atomically.</p>
 </div>
 <div class="section" id="program-flow-chart">
 <h3>Program flow chart<a class="headerlink" href="#program-flow-chart" title="Permalink to this headline">¶</a></h3>
-<p>The flow of lab3’code is shown below:</p>
+<p>The code’s flow is shown below:</p>
 <img alt="program flow chart" src="../../_images/lab3_program_flow_chart.png" />
 <p>The code can be divided into 3 parts:</p>
 <ul class="simple">
@@ -256,11 +256,11 @@ This timer is used to count the clock cycles atomically.</p>
 <ol class="arabic simple">
 <li>Build and Run</li>
 </ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/arc_labs/labs/lab3_timer
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/arc_labs/labs/lab_timer
 <span class="gp">#</span> <span class="k">for</span> emsk
 <span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">22</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem7d <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
 <span class="gp">#</span> <span class="k">for</span> iotdk
-<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
+<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>iotdk <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">

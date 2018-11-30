@@ -194,14 +194,14 @@
 <li>PC host</li>
 <li>GNU Toolchain for ARC Processors / MetaWare Development Toolkit</li>
 <li>ARC board (EM Starter Kit / IoT Development Kit)</li>
-<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab_interrupt</span></code></li>
 </ul>
 </div>
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt/part1</span></code> to learn the basics of interrupt handling of DesignWare® ARC® processors and the interrupt API provided by embARC OSP</li>
-<li>Through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab4_interrupt/part2</span></code> to learn the interrupt priority and interrupt nesting of DesignWare® ARC® processors and corresponding API of embARC OSP</li>
+<li>Through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab_interrupt/part1</span></code> to learn the basics of interrupt handling of DesignWare® ARC® processors and the interrupt API provided by embARC OSP</li>
+<li>Through <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab_interrupt/part2</span></code> to learn the interrupt priority and interrupt nesting of DesignWare® ARC® processors and corresponding API of embARC OSP</li>
 </ul>
 </div>
 <div class="section" id="principles">
@@ -278,15 +278,16 @@ is highly programmable and supports the following interrupt types:</p>
 <ol class="arabic simple">
 <li>Build and Run</li>
 </ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">   $</span> <span class="nb">cd</span> &lt;embarc_root&gt;/arc_labs/labs/lab4_interrupt/part1
-<span class="gp">   #</span> <span class="k">for</span> emsk
-<span class="gp">   $</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">22</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem7d <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
-<span class="gp">   #</span> <span class="k">for</span> iotdk
-<span class="gp">   $</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
-
-<span class="go">2. Output</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/arc_labs/labs/lab4_interrupt/part1
+<span class="gp">#</span> <span class="k">for</span> emsk
+<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">22</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem7d <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
+<span class="gp">#</span> <span class="k">for</span> iotdk
+<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>iotdk <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
 </pre></div>
 </div>
+<ol class="arabic simple" start="2">
+<li>Output</li>
+</ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar 16 2018, 09:58:46</span>
 <span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1</span>
 
@@ -357,7 +358,7 @@ is highly programmable and supports the following interrupt types:</p>
 <p><strong>First</strong>, in order to configure <strong>Timer0</strong> and it’s interrupts, turn them off first. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_disable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_stop</span></code>.</p>
 <p><strong>Then</strong> configure the interrupt service function and priority for our interrupts. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_handler_install</span></code> and <code class="docutils literal notranslate"><span class="pre">int_pri_set</span></code>.</p>
 <p><strong>Finally</strong>, after the interrupt configuration is complete, enable the <strong>Timer0</strong> and interrupts that are previously turned off. This work is done by the functions <code class="docutils literal notranslate"><span class="pre">int_enable</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>.
-The implementation of the <code class="docutils literal notranslate"><span class="pre">timer_start</span></code> function is the same as the reading and writing of the auxiliary registers in our lab_3. Interested students can view them in the file arc_timer.c. One point to note in this step is the configuration of <code class="docutils literal notranslate"><span class="pre">timer_limit</span></code> (the last parameter of <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>). Configure the interrupt time to 1ms , do a simple calculation (the formula is the expression after COUNT).</p>
+The implementation of the <code class="docutils literal notranslate"><span class="pre">timer_start</span></code> function is the same as the reading and writing of the auxiliary registers in our lab_timer. Interested students can view them in the file arc_timer.c. One point to note in this step is the configuration of <code class="docutils literal notranslate"><span class="pre">timer_limit</span></code> (the last parameter of <code class="docutils literal notranslate"><span class="pre">timer_start</span></code>). Configure the interrupt time to 1ms , do a simple calculation (the formula is the expression after COUNT).</p>
 <p>In this example, the loop body only serves as an effect display. Our own delay function in the loop body to print the time per second is called.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -381,15 +382,16 @@ The implementation of the <code class="docutils literal notranslate"><span class
 <ol class="arabic simple">
 <li>Build and Run</li>
 </ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">   $</span> <span class="nb">cd</span> &lt;embarc_root&gt;/arc_labs/labs/lab4_interrupt/part2
-<span class="gp">   #</span> <span class="k">for</span> emsk
-<span class="gp">   $</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">22</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem7d <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
-<span class="gp">   #</span> <span class="k">for</span> iotdk
-<span class="gp">   $</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
-
-<span class="go">2. Output</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/arc_labs/labs/lab4_interrupt/part2
+<span class="gp">#</span> <span class="k">for</span> emsk
+<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>emsk <span class="nv">BD_VER</span><span class="o">=</span><span class="m">22</span> <span class="nv">CUR_CORE</span><span class="o">=</span>arcem7d <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
+<span class="gp">#</span> <span class="k">for</span> iotdk
+<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>iotdk <span class="nv">TOOLCHAIN</span><span class="o">=</span>gnu run
 </pre></div>
 </div>
+<ol class="arabic simple" start="2">
+<li>Output</li>
+</ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">embARC Build Time: Mar 16 2018, 09:58:46</span>
 <span class="go">Compiler Version: Metaware, 4.2.1 Compatible Clang 4.0.1</span>
 

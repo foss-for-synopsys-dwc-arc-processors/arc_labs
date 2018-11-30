@@ -193,14 +193,14 @@
 <li>PC host</li>
 <li>MetaWare Development Toolkit</li>
 <li>nSIM simulator or ARC board (EM Starter Kit / IoT Development Kit)</li>
-<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab1_core_test</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab_core_test</span></code></li>
 </ul>
 </div>
 <div class="section" id="content">
 <h3>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Create a C project using the MetaWare Development Toolkit</li>
-<li>Import the code <code class="docutils literal notranslate"><span class="pre">CoreTest.c</span></code> from <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab1_core_test</span></code></li>
+<li>Import the code <code class="docutils literal notranslate"><span class="pre">CoreTest.c</span></code> from <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab_core_test</span></code></li>
 <li>Configure compilation options to compile, and generate executable files.</li>
 <li>Start the debugger of MetaWare Development Toolkit and enter debug mode.</li>
 </ul>
@@ -366,7 +366,7 @@ statement), and click <img alt="icon13" src="../../_images/lab1_icon13.png" /> i
 interface to let the program execute to the breakpoint. Click <img alt="icon14" src="../../_images/lab1_icon14.png" /> in the Profiling window, and only the information related
 to the main() function is displayed. Therefore, flexible
 setting of breakpoints, combined with the clear function, can perform
-performance analysis on the concerned blocks (figure 9).</p>
+performance analysis on the concerned blocks.</p>
 <p><img alt="figure9" src="../../_images/lab1_figure9.png" /></p>
 <p>It can be seen that the multiplication library function _mw_mpy_32x32y32 in
 the main() function is called 20 times, and a total of 2064 instructions are
@@ -382,7 +382,7 @@ implement multiplication more efficiently.</p>
 </div>
 <div class="section" id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
-<p>How can I implement multiplication more efficiently with fewer instructions? Apply this method to the project demo of the fifth part, analyze it with the debugger’s Profiling function, observe the total number of instructions consumed by the main function, and compare it with the previous Profiling result of Figure 8.</p>
+<p>How can I implement multiplication more efficiently with fewer instructions? Apply this method to the project demo of the fifth part, analyze it with the debugger’s Profiling function, observe the total number of instructions consumed by the main function, and compare it with the previous Profiling result.</p>
 </div>
 </div>
 <div class="section" id="arcgnu">
@@ -402,14 +402,14 @@ implement multiplication more efficiently.</p>
 <li>PC host</li>
 <li>GNU Toolchain for ARC Processors</li>
 <li>nSIM simulator or ARC board (EM Starter Kit / IoT Development Kit)</li>
-<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab1_core_test</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab_core_test</span></code></li>
 </ul>
 </div>
 <div class="section" id="id2">
 <h3>Content<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Create a C project using GNU Toolchain for ARC Processors</li>
-<li>Import the code <code class="docutils literal notranslate"><span class="pre">CoreTest.c</span></code> from <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab1_core_test</span></code></li>
+<li>Import the code <code class="docutils literal notranslate"><span class="pre">CoreTest.c</span></code> from <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab_core_test</span></code></li>
 <li>Configure compilation options to compile, and generate executable files.</li>
 <li>Start the GNU Toolchain for ARC Processors debugger to enter the debug mode</li>
 </ul>
@@ -456,7 +456,7 @@ EMSK, the corresponding necessary options have been set by default. If
 there is no special requirement, check the setting compile options in the All
 options column and click <strong>OK</strong> to close the Properties dialog box.</p>
 <ol class="arabic simple" start="4">
-<li>Compile the project core_test**</li>
+<li>Compile the project core_test</li>
 </ol>
 <p>Select <strong>Build Project</strong> from the Project drop-down menu in the GNU Toolchain for ARC Processors main menu
 or click <img alt="icon16" src="../../_images/lab1_icon16.png" />. In the middle of the GNU Toolchain for ARC Processors main interface,
@@ -514,7 +514,7 @@ program debugging. If you want to end the current debugging process, click <img 
 <ol class="arabic simple" start="7">
 <li>Code performance analysis using the debugger</li>
 </ol>
-<p>Same as the code performance analysis method of MetaWare Development Toolkit. For details, see first part of Lab 1.</p>
+<p>Same as the code performance analysis method of MetaWare Development Toolkit.</p>
 <p>For the use of these two IDEs, you can refer to the Help documentation in the respective IDE, or you can view the on-line documentation provided by Synopsys.</p>
 </div>
 </div>
