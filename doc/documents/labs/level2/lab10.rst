@@ -19,16 +19,16 @@ The following hardware and tools are required:
 
 * PC host
 * |arcgnu| / |mwdt|
-* ARC board (|emsk| / |iotdk|)
+* ARC board (|iotdk|)
 * |embarc| package
-* ``embarc_osp/arc_labs/labs/lab10_esp8266_wifi``
+* ``embarc_osp/arc_labs/labs/lab_esp8266_wifi``
 
 Content
 ^^^^^^^^
 
 Through this lab, you get a preliminary understanding of ESP8266 WiFi module and the AT command.
 
-The lab is based on the |embarc| package and on the supports of the popular WiFi module, ESP8266.
+The lab is based on the |embarc| package and the supports of the popular WiFi module, ESP8266.
 During the lab, you will first use the AT command to set the ESP8266 to the server mode.
 Then you can use your laptop or mobile phone to access ESP8266 by IP address.
 You will get a static webpage transmitted via TCP protocol.
@@ -291,7 +291,7 @@ At this point, feedback information will be shown on your serial port console, r
 
 The serial port feedback information above shows that the board has successfully connected to the target WiFi through ESP8266. It is set to the server mode by using the AT command, and the IP address of the server is also given.
 
-At this point, use a PC or mobile phone to connect to the same WiFi, open a browser(recommend Google Chrome for PC), and enter the IP address to see the static HTTP page. Notice the IP address that you enter should be the same IP address shown in *Show IP* section at your serial port console. The content of your serial port console browser is shown below:
+At this point, use a PC or mobile phone to connect to the same WiFi, open a browser(recommend Google Chrome for PC), and enter the IP address to see the static HTTP page. Notice the IP address that you enter should be the same IP address shown in *Show IP* section at your serial port console. The content of your serial port console and browser is shown below:
 
 .. code-block:: console
 

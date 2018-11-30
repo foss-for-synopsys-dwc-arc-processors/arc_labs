@@ -16,7 +16,7 @@ The following hardware and tools are required:
 * PC host
 * |arcgnu| / |mwdt|
 * ARC board (|emsk| / |iotdk|)
-* ``embarc_osp/arc_labs/labs/lab3_timer``
+* ``embarc_osp/arc_labs/labs/lab_timer``
 
 Content
 ========
@@ -72,7 +72,7 @@ In |embarc|, ``arc_timer.h`` provides API to operate the processor timers.
 Program flow chart
 ------------------
 
-The flow of lab3'code is shown below:
+The code's flow is shown below:
 
 .. image:: /img/lab3_program_flow_chart.png
     :alt: program flow chart
@@ -90,11 +90,11 @@ Steps
 
 .. code-block:: console
 
-    $ cd <embarc_root>/arc_labs/labs/lab3_timer
+    $ cd <embarc_root>/arc_labs/labs/lab_timer
     # for emsk
     $ make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run
     # for iotdk
-    $ make BOARD=emsk TOOLCHAIN=gnu run
+    $ make BOARD=iotdk TOOLCHAIN=gnu run
 
 2. Output
 
