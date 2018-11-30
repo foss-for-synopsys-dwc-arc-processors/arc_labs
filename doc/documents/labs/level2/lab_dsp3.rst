@@ -255,27 +255,27 @@ Using |iotdk| board for performance comparison
 Steps
 -----------------
 
-Both examples are to be compiled with DSP extensions, with the following options set:
+Firstly you must build DSP libraries for this particular configuration of IOTDK:
 
-``-O2  -arcv2em -core1 -Xlib -Xtimer0 -Xtimer1 -Xdsp1 -Hdsplib``
+``buildlib my_dsp -tcf=<IOTDK tcf file> -bd ../ -f``
 
-Step 1. Run program without DSP library
+|iotdk| tcf file can be found in ``embarc_osp/board/iotdk/configs/10/tcf/arcem9d.tcf``
+
+Both examples are to be compiled with DSP extensions.
+
+1. Run program without DSP library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Build with the command:
 
-``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw ADT_COPT="-Hdsplib" ADT_LOPT="-Hdsplib -Hlib=../my_dsp"``
 
-  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
-
-Step 2. Run program with DSP library
+2. Run program with DSP library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Rename main.c.dsplib to main.c, then execute the command:
 
-``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
-
-  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw ADT_COPT="-Hdsplib" ADT_LOPT="-Hdsplib -Hlib=../my_dsp"``
 
 Note that DSPLIB is statically linked with the project when -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program does not affect DSPLIB performance. On the other hand, even with highest optimization level a function utilizing simple instructions on "short" type (even converted to MACs if possible) is less efficient that direct use of DSPLIB.
 

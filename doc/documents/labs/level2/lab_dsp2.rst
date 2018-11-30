@@ -104,35 +104,33 @@ The main performance check loop is shown in the following example. The outer loo
 Steps
 ------------
 
-To test the following example, some modification of the code is required to have two loops with and without DSP. You must re-build libraries for this particular configuration of IOTDK:
+To test the following example, some modification of the code is required to have two loops with and without DSP. 
 
-``buildlib my_dsp -tcf=<IOTDK tcf file> -bd . -f``
+Firstly you must build DSP libraries for this particular configuration of IOTDK:
+
+``buildlib my_dsp -tcf=<IOTDK tcf file> -bd ../ -f``
 
 |iotdk| tcf file can be found in ``embarc_osp/board/iotdk/configs/10/tcf/arcem9d.tcf``
 
 Both examples are to be compiled with DSP extensions.
 
-Step 1. Run program without FXAPI
+1. Run program without FXAPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Build with the command:
 
-``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
-
-  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib" ADT_LOPT="-Hdsplib -Hlib=../my_dsp"``
 
 With high optimization level functions using "short" type is compiled to use DSP MAC operation, enabling significant speedup.
 
 |dsp_figure_2.1|
 
-Step 2. Run program with FXAPI
+2. Run program with FXAPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Rename main.c.fxapi to main.c, then execute the command:
 
-``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw ADT_COPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf``
-
-  ``-Xdsp_complex" ADT_LOPT="-Hdsplib -Xdsp2 -tcf=./arcem9d.tcf -Hlib=./my_dsp"``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hdsplib" ADT_LOPT="-Hdsplib -Hlib=../my_dsp"``
 
 However, using FXAPI enables compiler to directly use complex MAC instruction "cmachfr".
 
