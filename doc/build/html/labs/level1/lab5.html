@@ -234,11 +234,11 @@ The code for this lab is located in <code class="docutils literal notranslate"><
 <li>Compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_emsk</span></code> example with the following cmds.</li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd /arc_labs/lab5_emsk</span>
-<span class="go">make run</span>
+<span class="go">make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li>Press the buttons and toggle the DIP switches, then check the result in UART terminal, and watch the changes of on-board LEDs.</li>
+<li>Press the buttons (L or/and R) and toggle the DIP switches (3 or/and 4), then check the result in UART terminal, and watch the changes of on-board LEDs.</li>
 </ol>
 <p><a class="reference internal" href="../../_images/lab5_emsk.png"><img alt="lab5_emsk" src="../../_images/lab5_emsk.png" style="width: 400px;" /></a></p>
 </div>
@@ -247,13 +247,14 @@ The code for this lab is located in <code class="docutils literal notranslate"><
 <p>IoT Development Kit has an arduino interface, here select arduino digital pinout <strong>ARDUINO_PIN_0(iotdk gpio4b_2[0])</strong> to control LED.</p>
 <ol class="arabic simple">
 <li>Find a LED, connect the LED anode pin to <strong>ARDUINO_PIN_0</strong>, connect the LED cathode pin to <strong>GND</strong> of IoT Development Kit.</li>
+<li>Connect the USB cable to the USB data port of IoT Development Kit and the PC.</li>
 <li>Compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_iotdk</span></code> example with the following cmds.</li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd /arc_labs/lab5_iotdk</span>
-<span class="go">make run</span>
+<span class="go">make BOARD=iotdk TOOLCHAIN=gnu run</span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="3">
+<ol class="arabic simple" start="4">
 <li>Watch the changes of external connected LED.</li>
 </ol>
 <p><a class="reference internal" href="../../_images/lab5_iotdk_pin_connect.png"><img alt="lab5_iotdk_pin_connect" src="../../_images/lab5_iotdk_pin_connect.png" style="width: 400px;" /></a></p>
