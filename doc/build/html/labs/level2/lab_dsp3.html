@@ -426,21 +426,19 @@ Use DSP Library and compare program run speed with and without DSP library.</p>
 </div>
 <div class="section" id="steps">
 <h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
-<p>Both examples are to be compiled with DSP extensions, with the following options set:</p>
-<p><code class="docutils literal notranslate"><span class="pre">-O2</span>&#160; <span class="pre">-arcv2em</span> <span class="pre">-core1</span> <span class="pre">-Xlib</span> <span class="pre">-Xtimer0</span> <span class="pre">-Xtimer1</span> <span class="pre">-Xdsp1</span> <span class="pre">-Hdsplib</span></code></p>
-<div class="section" id="step-1-run-program-without-dsp-library">
-<h3>Step 1. Run program without DSP library<a class="headerlink" href="#step-1-run-program-without-dsp-library" title="Permalink to this headline">¶</a></h3>
+<p>Firstly you must build DSP libraries for this particular configuration of IOTDK:</p>
+<p><code class="docutils literal notranslate"><span class="pre">buildlib</span> <span class="pre">my_dsp</span> <span class="pre">-tcf=&lt;IOTDK</span> <span class="pre">tcf</span> <span class="pre">file&gt;</span> <span class="pre">-bd</span> <span class="pre">../</span> <span class="pre">-f</span></code></p>
+<p>IoT Development Kit tcf file can be found in <code class="docutils literal notranslate"><span class="pre">embarc_osp/board/iotdk/configs/10/tcf/arcem9d.tcf</span></code></p>
+<p>Both examples are to be compiled with DSP extensions.</p>
+<div class="section" id="run-program-without-dsp-library">
+<h3>1. Run program without DSP library<a class="headerlink" href="#run-program-without-dsp-library" title="Permalink to this headline">¶</a></h3>
 <p>Build with the command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span></code></p>
-<blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">ADT_COPT=&quot;-Hdsplib&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Hlib=../my_dsp&quot;</span></code></p>
 </div>
-<div class="section" id="step-2-run-program-with-dsp-library">
-<h3>Step 2. Run program with DSP library<a class="headerlink" href="#step-2-run-program-with-dsp-library" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="run-program-with-dsp-library">
+<h3>2. Run program with DSP library<a class="headerlink" href="#run-program-with-dsp-library" title="Permalink to this headline">¶</a></h3>
 <p>Rename main.c.dsplib to main.c, then execute the command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">gui</span> <span class="pre">ADT_COPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span></code></p>
-<blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">-Xdsp_complex&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Xdsp2</span> <span class="pre">-tcf=./arcem9d.tcf</span> <span class="pre">-Hlib=./my_dsp&quot;</span></code></div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">gmake</span> <span class="pre">BOARD=iotdk</span> <span class="pre">BD_VER=10</span> <span class="pre">CUR_CORE=arcem9d</span> <span class="pre">TOOLCHAIN=mw</span> <span class="pre">ADT_COPT=&quot;-Hdsplib&quot;</span> <span class="pre">ADT_LOPT=&quot;-Hdsplib</span> <span class="pre">-Hlib=../my_dsp&quot;</span></code></p>
 <p>Note that DSPLIB is statically linked with the project when -Hdsplib is set, and as the DSPLIB itself is pre-compiled with high level of optimization, changing optimization option for example program does not affect DSPLIB performance. On the other hand, even with highest optimization level a function utilizing simple instructions on “short” type (even converted to MACs if possible) is less efficient that direct use of DSPLIB.</p>
 </div>
 </div>
