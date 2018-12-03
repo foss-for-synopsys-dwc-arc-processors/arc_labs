@@ -31,7 +31,7 @@ Content
 * Configure compilation options to compile, and generate executable files.
 * Start the debugger of |mwdt| and enter debug mode.
 
-From the different angles of C language and assembly language, use the functions of setting breakpoint, single step execution, full speed execution, and so on combined with observing PC address, register status, global variable status, and profiling performance to analyze and debug the target program.
+From two different perspectives of C language and assembly language, use the methods of setting breakpoint, single-step execution, full-speed executions, etc., combined with observing PC address, register status, global variable status, and profiling performance to analyze and debug the target program.
 
 
 Principles
@@ -108,19 +108,20 @@ Open the |mwdt|, create an empty project called ``demo``, and select the **ARC E
 
 |figure1|
 
-2. Import the code file CoreTest.c to the project ``demo``.
+2. Import the code file CoreTest.c to the project demo.
 
 In the Project Explorer, click |icon1| and select **Import**.
 
-Import dialog box is displayed. Select the File System item from the **General** tab, and click **Next**. As shown in the following figure, add the file directory where the source code CoreTest.c is located. The dialog box automatically displays the name of the directory and the file name of the file contained in the directory. Select CoreTest.c and click **Finish** to complete the import process.
+In the Implort wizard, select **File system** from the **General** tab, then click **Next**. As shown in the following figure, in the From directory fileld, type or browse to select the directory contain the file CoreTest.c. Recent directories that have been imported from are shown on the From directory field's combo box. In the left pane, check a folder that will import its entire contents into the Workbench, and in the right pane check the file CoreTest.c. 
 
 |figure2|
 
-After the import is complete, you can see the code file ``CoreTest.c`` you just added in the Project Explorer on the left side of the |mwdt| main interface.
+Click **Finish** when done, the file CoreTest.c is now shown in the one of the navigation views in the project ``demo``. 
 
 3. Set compilation options
 
-Right-click in the current project demo and select Properties. Click **C/C++ Build** > **Settings** > **Tool Settings** to open the compilation options settings window.
+From the Project Explorer view, right-click the project ``demo`` and choose Properties. Click **C/C++ Build** > **Settings** > **Tool Settings** menu options.
+The **Tool Settings** dialog opens.
 
 |figure3|
 
@@ -129,7 +130,7 @@ optimization and debugging level. For example, set the optimization level to
 turn off optimization, and set the debugging level to load all debugging
 information.
 
-Select Processor/Extensions to set the compilation options corresponding to the target processor hardware properties, such as the
+Select **Processor/Extensions** to set the compilation options corresponding to the target processor hardware properties, such as the
 version of the processor, whether to support extended instructions such as
 shift, multiplication, floating-point operations, and so on whether to include
 Timer0/1. As shown in the following figure, this setting indicates that the target
@@ -137,86 +138,46 @@ processor supports common extended instructions.
 
 |figure4|
 
-Select **MetaWare ARC EM C/C++** and check the settings compilation options and click **OK**.
+Select **MetaWare ARC EM C/C++** and check the settings compilation options. Click **OK** when done.
 
-4. Compile project demo
+4. Build project
 
-Select Build Project from the Project drop-down menu in the |mwdt| main menu
-or click the icon |icon2| . In the |mwdt| main interface, select **Console**
-to view the logs during compilation. When the message "Finished building
-target: demo.elf" is displayed, the compilation is successful, and the
-compiled executable file demo.elf can be seen in the Project Explorer.
+In the Project Explorer view, select project ``demo``. 
+Click **Project** > **Build Project** or click the icon |icon2| on the toolbar. 
+In the |mwdt| main interface, you can see in the **Console** view the output and results of the build command. Click on its tab to bring the view forward if it is not currently visible. If for some reason it's not present, you can open it by selecting **Window** > **Show View** > **Console**. When the message ``Finished building target: demo.elf`` is displayed, the compilation is successful, and the compiled executable file demo.elf can be seen in the Project Explorer.
 
 |figure5|
 
 5. Set debug options
 
-Select Debug Configurations from the **Run** drop-down menu and double-click **C/C++ Application** or right-click **New**
+Click the **Run** > **Debug Configurations...** menu option to open the **Debug Configurations** dialog.
+Double-click **C/C++ Application** or right-click **New** to create a new launch configuration.
 
 |figure6|
 
-Click **Debugger**. You do not need to make any changes. Check the contents of the Debugger Options, click **Debug** to enter the debugging interface.
+If a project is selected in the Project Explorer view all data is automatically entered, take a moment to verify its accuracy or change as needed. Here you do not need to make any changes, just click **Debug** to enter the debugging interface.
 
 6. Debug executable file demo.elf
 
-Select the required debug window from the main menu of the debug interface, such as source code window, assembly code
-window, register window, global variable window, breakpoint window, function
-window, and so on.
+You may be prompted to switch to the **Debug** perspective. Click **Yes**.
+
+The Debug perspective appears with the required windows open. And the windows can be source code window, assembly code window, register window, global variable window, breakpoint window, function window, and so on.
 
 |figure7|
 
-In the C code window, right-click the code line number on the left side of the
-window, select **Toggle Breakpoint** or double-click the line
-number to set a breakpoint on the current line. In the assembly code window,
-double-click a line of code to set a breakpoint on the current line.
+In the C code window, right-click the code line number on the left side of the window, select **Toggle Breakpoint** or double-click the line number to set a breakpoint on. In the assembly code window, double-click a line of code to set a breakpoint on. You'll see a blue circle there indicating the breakpoint is set.
 
-After the breakpoint is set, click |icon3| to run the program. The program runs directly to the nearest breakpoint. You can observe the current program execution and the relevant status
-information of the processor through the various windows as described in previous step. If you want to know more about the details of program execution
-and the instruction behavior of the processor, you can use the following three
-execution commands |icon4| to perform single-step debugging. The icon |icon5|
-can choose to step through a C language statement or an assembly instruction
-to match the status information of each window. It can be very convenient for
-program debugging. If you want to end the current debugging process, click |icon6| . If you want to return to the main |mwdt| page, click C/C++
-|icon7|.
+After the breakpoint is set, click **Run** > **Resume** or you can use the **Resume** button |icon3| on the toolbar of the Debug view to run the program. The program runs directly to the nearest breakpoint. You can observe the current program execution and the relevant status information of the processor through the various windows as described in previous step. If you want to know more about the details of program execution and the instruction behavior of the processor, you can use the following three execution commands |icon4| to perform single-step debugging. The icon |icon5| can choose to step through a C language statement or an assembly instruction to match the status information of each window. It can be very convenient for program debugging. If you want to end the current debugging process, click |icon6|. If you want to return to the main |mwdt| page, click C/C++ |icon7|.
 
 7. Code performance analysis using the debugger
 
-Based on the previous project demo, open the **Compile Options** dialog box in step 3
-and set the Optimization Level to -O0 in the **Optimization/Debugging** column.
-Then click |icon8| to recompile the project, and click |icon9| to enter the
-debugging interface. Click **Debugger** in the main menu of the debugging
-interface, select **Disassembly** from the menu drop-down menu, open the
-disassembly code window, and you can see that the program is paused at the
-entrance of the main() function. In the same way, select **Profiling** in the
-**Debugger** drop-down menu, open the performance analysis window and click |icon10|.
+Based on the previous project ``demo``, open the **Compile Options** dialog box in step 3 and set the Optimization Level to -O0 in the **Optimization/Debugging** column. Then click |icon8| to recompile the project, and click |icon9| to enter the debugging interface. Click **Debugger** in the main menu of the debugging interface, select **Disassembly** from the menu drop-down menu, open the disassembly code window, and you can see that the program is paused at the entrance of the main() function. In the same way, select **Profiling** in the **Debugger** drop-down menu, open the performance analysis window and click |icon10|.
 
 |figure8|
 
-The **Profiling** window displays the corresponding of the number of executed
-instructions of the program with each function under the current debug window.
-From left to right, the total number of executions of function instructions in
-the total number of executions of the entire program instruction, the total
-number of executions of the accumulated instructions, the total number of
-executions of the functions, the number of times the function is called, the
-number of including functions, the address of the function, and the name of
-the function. Through the relationship between the instruction information and
-the function in the Profiling window, it is very convenient to analyze the
-program efficiency and find the shortcoming of the program performance.
+The **Profiling** window displays the corresponding of the number of executed instructions of the program with each function under the current debug window. From left to right, the total number of executions of function instructions in the total number of executions of the entire program instruction, the total number of executions of the accumulated instructions, the total number of executions of the functions, the number of times the function is called, the number of including functions, the address of the function, and the name of the function. Through the relationship between the instruction information and the function in the Profiling window, it is very convenient to analyze the program efficiency and find the shortcoming of the program performance.
 
-Use this project as an example to continue to introduce the use of the
-Profiling window. The program is paused at the entrance of the
-main() function and the Profiling window opens. The main()
-function is the main object of performance analysis optimization. The content displayed in the Profiling window is some function
-information initialized by the processor before the main() function is
-executed. Click |icon11| in the Profiling window to clear the current
-information. If you click |icon12|, nothing is displayed,
-and it indicates that the cleaning is successful. Set a breakpoint at the
-last statement of the main() function (either C statement or assembly
-statement), and click |icon13| in the toolbar above the debug
-interface to let the program execute to the breakpoint. Click |icon14| in the Profiling window, and only the information related
-to the main() function is displayed. Therefore, flexible
-setting of breakpoints, combined with the clear function, can perform
-performance analysis on the concerned blocks.
+Use this project as an example to continue to introduce the use of the **Profiling** window. The program is paused at the entrance of the main() function and the **Profiling** window opens. The main() function is the main object of performance analysis optimization. The content displayed in the **Profiling** window is some function information initialized by the processor before the main() function is executed. Click |icon11| in the **Profiling** window to clear the current information. If you click |icon12|, nothing is displayed, and it indicates that the cleaning is successful. Set a breakpoint at the last statement of the main() function (either C statement or assembly statement), and click |icon13| in the toolbar above the debug interface to let the program run until it hits the breakpoint. Click |icon14| in the **Profiling** window, and only the information related to the main() function is displayed. Therefore, flexible setting of breakpoints, combined with the clear function, can perform performance analysis on the concerned blocks.
 
 |figure9|
 
@@ -248,8 +209,8 @@ Purpose
 * Familiar with the |arcgnu|
 * Familiar with the functions and usage of the |arcgnu| debugger
 
-Equipment
-^^^^^^^^^
+Requirements
+^^^^^^^^^^^^^
 
 The following hardware and tools are required:
 
@@ -266,7 +227,7 @@ Content
 * Configure compilation options to compile, and generate executable files.
 * Start the |arcgnu| debugger to enter the debug mode
 
-From the C language and assembly language different perspectives, use set breakpoints, single-step execution, full-speed execution and other functions, combined with observation of PC address, register status, global variable status and Profiling Performance analysis window, analysis of the debug target program.
+From two different perspectives of C language and assembly language, use the methods of setting breakpoint, single-step execution, full-speed executions, etc., combined with observing PC address, register status, global variable status, and profiling performance to analyze and debug the target program.
 
 Principles
 ^^^^^^^^^^
@@ -276,31 +237,26 @@ Use the |arcgnu| integrated development environment to create projects and load 
 Steps
 ^^^^^
 
-1. Establishing a project
+1. Create a project
 
-Open the |arcgnu|, create an empty project called core_test, and select **ARC EM series processor**.
+Open the |arcgnu|, create an empty project called ``core_test``, and select **ARC EM series processor**.
 
 |figure10|
 
 2. Import the code file CoreTest.c to the project demo
 
-Right-click |icon15|, and then select **Import**.
+In the Project Explorer, right-click |icon15|, and select **Import**..
 
-Import dialog box is displayed. Select **File System** from the
-the **General** tab, and click **Next**. As shown in the following figure,
-add the file directory where the source code CoreTest.c is located. The dialog
-box automatically displays the name of the directory and the file name of
-the file contained in the directory. Select the file to be added, CoreTest.c,
-and click Finish to complete the entire import process.
+In the Implort wizard, select **File system** from the **General** tab, then click **Next**. As shown in the following figure, in the From directory fileld, type or browse to select the directory contain the file CoreTest.c. Recent directories that have been imported from are shown on the From directory field's combo box. In the left pane, check a folder that will import its entire contents into the Workbench, and in the right pane check the file CoreTest.c. 
 
 |figure11|
 
-After the import is complete, you can see the code file CoreTest.c that you
-just added in the Project Explorer.
+Click **Finish** when done, the file CoreTest.c is now shown in the one of the navigation views in the project ``core_test``.
 
 3. Set compilation options
 
-Right-click in the current project core_test and select **Properties**. Click **C/C++ Build** > **Settings** > **Tool Settings** to view the compile option settings page.
+From the Project Explorer view, right-click the project ``core_test`` and choose Properties. Click **C/C++ Build** > **Settings** > **Tool Settings** menu options.
+The **Tool Settings** dialog opens.
 
 |figure12|
 
@@ -308,7 +264,7 @@ Select **Debugging** to set the compiler optimization
 and debugging level. For example, set the optimization level to off
 optimization, and the debugging level is to load all debugging information.
 
-Select Processor in the current interface to set the compile options
+Select **Processor** in the current interface to set the compile options
 corresponding to the target processor hardware attributes, such as the version
 of the processor, whether to support extended instructions such as shift,
 multiplication, floating-point operations, and so on whether to include Timer0/1.
@@ -316,37 +272,31 @@ multiplication, floating-point operations, and so on whether to include Timer0/1
 In step 1, you already built the project using the engineering template of
 EMSK, the corresponding necessary options have been set by default. If
 there is no special requirement, check the setting compile options in the All
-options column and click **OK** to close the Properties dialog box.
+options column and click **OK** when done.
 
-4. Compile the project core_test
+4. Build project
 
-Select **Build Project** from the Project drop-down menu in the |arcgnu| main menu
-or click |icon16|. In the middle of the |arcgnu| main interface,
-select Console to view the logs during the compilation process. When
-the message "Finished building target: Core_test.elf" is displayed, the compilation
-is successful, and the compiled executable file Core_test.elf can be seen in
-the **Project Explorer** as shown in the following figure.
+In the Project Explorer view, select project ``core_test``.
+
+Click **Project** > **Build Project** or click the icon |icon16| on the toolbar. 
+In the middle of the |arcgnu| main interface, you can see in the **Console** view the output and results of the build command. Click on its tab to bring the view forward if it is not currently visible. If for some reason it's not present, you can open it by selecting **Window** > **Show View** > **Console**. When the message ``Finished building target: Core_test.elf`` is displayed, the compilation is successful, and the compiled executable file Core_test.elf can be seen in the Project Explorer.
 
 |figure13|
 
 5. Set debugger options
 
-Select Debug Configurations from the Run drop-down menu in the main menu. Then
-double-click in C/C++ Application or right-click **New** to get a dialog box
-similar to the one shown in the following figure.
+Click the **Run** > **Debug Configurations...** menu option to open the **Debug Configurations** dialog.
+Double-click **C/C++ Application** or right-click **New** to create a new launch configuration.
 
 |figure14|
 
-Check if the information in Main is correct. As you use nSIM simulator to simulate EMSK development board, you need to
-modify the settings of Debugger, Common, and Terminal (this is because nSIM
-cannot be called directly in GNU IDE. Still need GDB Server for indirect
-calls). The specific settings are as follows:
+If a project is selected in the Project Explorer view all data is automatically entered, take a moment to verify its accuracy or change as needed. As you use nSIM simulator to simulate EMSK development board, you need to modify the settings of Debugger, Common, and Terminal (this is because nSIM cannot be called directly in GNU IDE. Still need GDB Server for indirect calls). The specific settings are as follows:
 
-* Set Debugger->Gdbsrever Settings
+* Set Debugger->Gdbserver Settings
 
 |figure15|
 
-The ARC GDB Server should select nSIM. The port number default setting is 49105. It is important to check the Use TCF. Otherwise, the nSIM cannot work normally. The TCF start file is under *nSIM/nSIM/etc/tcf/templates* (the default installation path). If you have downloaded the MetaWare IDE, the default nSIM path is *C:/ARC/nSIM/nSIM/etc/tcf/templates*, and you can select a TCF file from this folder (depending on the version of the board you are simulating and the kernel model), as shown earlier.
+Select nSIM as the **ARC GDB Server**, and the default **port number** is 49105. Notice that **Use TCF** is enabled. Otherwise, the nSIM cannot work normally. The TCF start file is under *nSIM/nSIM/etc/tcf/templates* (the default installation path). If you have downloaded the MetaWare IDE, the default nSIM path is *C:/ARC/nSIM/nSIM/etc/tcf/templates*, and you can select a TCF file from this folder (depending on the version of the board you are simulating and the kernel model), as shown earlier.
 
 * Pay attention to Debug in Common
 
@@ -354,34 +304,23 @@ The ARC GDB Server should select nSIM. The port number default setting is 49105.
 
 * Terminal settings
 
-If you are using the |emsk|, the terminal automatically selects the correct port number, and you are using the emulator without a port, uncheck it, as show in the following figure.
+If you are using the |emsk|, the terminal automatically selects the correct port number, and if you are using the emulator without a port, uncheck it, as show in the following figure.
 
 |figure17|
 
-After all settings are completed, click **Debug** to enter the debugging interface.
+When you are done, click **Debug** to enter the debugging interface.
 
 6. Debug executable file core_test.elf
 
-Select the required debug window from the Debugger menu in the
-main menu of the debug interface, such as source code window, assembly code
-window, register window, global variable window, breakpoint window, function
-window, and so on as shown in the following figure.
+You may be prompted to switch to the **Debug** perspective. Click **Yes**.
+
+The Debug perspective appears with the required windows open. And the windows can be source code window, assembly code window, register window, global variable window, breakpoint window, function window, and so on.
 
 |figure18|
 
-In the C code window, right-click the code line number on the left side of the
-window, select **Toggle Breakpoint** or double-click the line
-number to set a breakpoint on the current line. In the assembly code window,
-double-click a line of code to set a breakpoint on the current line.
+In the C code window, right-click the code line number on the left side of the window, select **Toggle Breakpoint** or double-click the line number to set a breakpoint on. In the assembly code window, double-click a line of code to set a breakpoint on. You'll see a blue circle there indicating the breakpoint is set.
 
-After the breakpoint is set, click |icon3| to run the program. The program runs directly to the nearest breakpoint. You can observe the current program execution and the relevant status
-information of the processor through the various windows as described in previous step. If you want to know more about the details of program execution
-and the instruction behavior of the processor, you can use the following three
-execution commands |icon4| to perform single-step debugging. The icon |icon5|
-can choose to step through a C language statement or an assembly instruction
-to match the status information of each window. It can be very convenient for
-program debugging. If you want to end the current debugging process, click |icon6| . If you want to return to the main |mwdt| page, click C/C++
-|icon7|.
+After the breakpoint is set, click **Run** > **Resume** or you can use the **Resume** button |icon3| on the toolbar of the Debug view to run the program. The program runs directly to the nearest breakpoint. You can observe the current program execution and the relevant status information of the processor through the various windows as described in previous step. If you want to know more about the details of program execution and the instruction behavior of the processor, you can use the following three execution commands |icon4| to perform single-step debugging. The icon |icon5| can choose to step through a C language statement or an assembly instruction to match the status information of each window. It can be very convenient for program debugging. If you want to end the current debugging process, click |icon6|. If you want to return to the main |arcgnu| page, click C/C++ |icon7|.
 
 7. Code performance analysis using the debugger
 
@@ -429,7 +368,3 @@ For the use of these two IDEs, you can refer to the Help documentation in the re
 .. |icon19| image:: /img/lab1_icon19.png
 .. |icon20| image:: /img/lab1_icon20.png
 .. |icon21| image:: /img/lab1_icon21.png
-
-
-
-
