@@ -291,7 +291,7 @@ The source code using the API of RN4020 driver in embARC OSP as follows.</p>
 <h3>Run project<a class="headerlink" href="#run-project" title="Permalink to this headline">¶</a></h3>
 <p>Open the serial terminal emulator in PC (for example, Tera Term), set as <strong>115200 baud, 8 bits data, 1 stop bit and no parity</strong>, and connect to the IoT Development Kit board.</p>
 <p>Open <code class="docutils literal notranslate"><span class="pre">cmd</span></code> from the folder <em>embarc_osp/arc_labs/labs/lab6_ble_rn4020</em>, input the command as follow</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make run</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make BOARD=iotdk TOOLCHAIN=gnu run</span>
 </pre></div>
 </div>
 <p>Then the output is displayed in the serial terminal.
