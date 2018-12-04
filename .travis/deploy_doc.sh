@@ -68,7 +68,7 @@ tar xzf doc.tar.gz || die
 rm -rf doc.tar.gz || die
 
 git add --all || die
-git commit -s -a -m "doc: Push updated generated sphinx documentation of commit ${TRAVIS_COMMIT}" || die
+git commit -s -a -m "doc: Push updated generated sphinx documentation of commit ${TRAVIS_COMMIT} ${TRAVIS_COMMIT_MESSAGE}" || die
 if [ $? -eq 0 ] ; then
     echo 'Push changes to gh-pages branch.'
     git push ${REPO_LINK} gh-pages:gh-pages > /dev/null 2>&1 || die
