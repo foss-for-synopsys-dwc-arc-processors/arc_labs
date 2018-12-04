@@ -134,7 +134,7 @@ Open ``cmd`` from the folder *embarc_osp/arc_labs/labs/lab6_ble_rn4020*, input t
 
 .. code-block:: console
 
-    make run
+    make BOARD=iotdk TOOLCHAIN=gnu run
 
 Then the output is displayed in the serial terminal.
 |figure1|

@@ -98,6 +98,9 @@ Exercises
 
 Try to create you own application to control the peripherals of ARC board
 
+.. note::
+    The ARC |iotdk| is powered over USB. Note that the ARC |iotdk| needs to be powered by an external power adapter if additional devices are connected to the extension interfaces. External power supply must be 5V DC (A 12V power supply will most probably damage your board).
+
 .. |figure1| image:: /img/lab5_emsk.png
    :alt: lab5_emsk
    :width: 400
