@@ -21,12 +21,13 @@ Content
 -------------------------------------
 
 This lab uses matrix multiplication as an example where DSP library helps to efficiently use DSP extensions with shorter code.
-Use DSP Library and compare program run speed with and without DSP library.
+To use DSP Library and compare the execution speed of the programs with and without DSP library.
 
 Principle
 -------------------------------------
 
-In this lab two implementations of matrix multiplication are shown: implemented manually and with the use of DSP library.
+In this lab two implementations of matrix multiplication are shown:
+One manual implementation and the other using the DSP library.
 
 Matrix multiplication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^

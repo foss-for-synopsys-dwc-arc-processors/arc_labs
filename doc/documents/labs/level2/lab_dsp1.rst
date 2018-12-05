@@ -49,7 +49,7 @@ An example code below contains a function "test" which contains a 20 step for lo
     	return 0;
     }
 
-Use Metaware compiler to optimize the C code with and without DSP extension options, and analyze the assembly code. 
+Use Metaware compiler to optimize the C code with and without DSP extension options, and analyze the assembly code.
 
 Principles
 ------------------------------------
@@ -61,7 +61,7 @@ To optimize code with DSP extensions, two sets of compiler options are used thro
 DSP Extensions Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use |embarc| build system to build tool. The details can be found in |embarc| document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.
+Use |embarc| build system to build tool. The details can be found in |embarc| document page. Here is the example command. You can pass extra compiler/linker options by ADT_COPT/ADT_LOPT.
 
 .. code-block:: console
 
@@ -91,7 +91,7 @@ Options that are used in the lab are:
 
   Used with ``-Xdsp``. Provides low level intrinsic support for ARC EM DSP instructions.
 
-  Programs written using this API execute natively on an ARC EM processor with DSP extensions and can also be emulated on x86 Windows hosts.
+  Programs written using this API execute natively on an ARC EM processor with DSP extensions and can also be emulated on x86 Windows hosts
 
 * ``-Xxy``: Specifies that XY memory is available
 
