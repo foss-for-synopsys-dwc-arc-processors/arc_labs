@@ -61,11 +61,11 @@ To optimize code with DSP extensions, two sets of compiler options are used thro
 DSP Extensions Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use |embarc| build system to build tool. The details can be found in |embarc| document page. Here is the example command. You can pass extra compiler/linker options by ADT_COPT/ADT_LOPT.
+Use |embarc| build system to compile the code. The details can be found in |embarc| document page. Here is the example command. You can pass extra compiler/liner options by ADT_COPT/ADT_LOPT.
 
 .. code-block:: console
 
-  gmake BOARD=emsk BD_VER=23 CUR_CORE=arcem9d TOOLCHAIN=mw gui ADT_COPT="-Hfxapi -Xdsp2" OLEVEL=O2
+  gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw ADT_COPT="-Hfxapi -Xdsp2" OLEVEL=O2
 
 Options that are used in the lab are:
 
@@ -99,11 +99,11 @@ Options that are used in the lab are:
 
 * ``-Xagu_small, -Xagu_medium, -Xagu_large``:
 
-  Enables AGU, and specifies its size. Note, IOTDK has small AGU
+  Enables AGU, and specifies its size.
 
 .. note::
 
-    Because ARC is configurable processor, different cores can contain different extensions on hardware level. Therefore, options set for compiler should match underlying hardware. On the other hand, if specific hardware feature is present in the core but compiler option is not set, it cannot be used effectively, if used at all. IOTDK Core default options are presented in Appendix A.
+    Because ARC is configurable processor, different cores can contain different extensions on hardware level. Therefore, options set for compiler should match underlying hardware. On the other hand, if specific hardware feature is present in the core but compiler option is not set, it cannot be used effectively, if used at all. IOTDK Core default options are presented in tcf file.
 
 Optimization level
 ^^^^^^^^^^^^^^^^^^^^
@@ -120,18 +120,14 @@ A regular code without direct usage of DSP extensions can be optimized to use DS
 Steps
 --------------------------
 
-Step 1. Compiling without DSP extensions
+1. Compiling with option -O0, DSP extensions will be specified in TCF file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Set optimization level "-O0", and no DSP extensions (unchecking -Xdsp1, -Xdsp2).
-
-After compilation, open disassembly window and check assembly code for function "test".
 
 Below is the list of options used when launching gmake:
 
-``OLEVEL=O0  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1"``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw OLEVEL=O0``
 
-You can use the following command to generate disassembly code:
+You can use the following command to generate disassembly code, and check assembly code for function "test".
 
 ``elfdump -T -S <your_working_directory>/obj_iotdk_10/mw_arcem9d/dsp_lab1_mw_arcem9d.elf``
 
@@ -139,12 +135,12 @@ Notice assembly code in the disassembled output. See how many assembly instructi
 
 |dsp_figure_1.1|
 
-Step 2. Compiling without DSP extensions, with -O2
+2. Compiling with DSP extensions, with -O2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Compile with:
 
-``OLEVEL=O2  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1"``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw OLEVEL=O2``
 
 Adding optimization level -O2, optimizes out many of the instructions:
 
@@ -152,12 +148,12 @@ Adding optimization level -O2, optimizes out many of the instructions:
 
 In this code it is easy to find zero-delay loop ("lp" command) which acts as for loop. Note that multiply-accumulate is done with separate "mpyw_s" and "add1_s" instructions.
 
-Step 3. Compiling with DSP extensions
+3. Compiling with DSP extensions, with -O3
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Compile with:
 
-``OLEVEL=O3  ADT_COPT="-arcv2em -core1 -Xlib -Xtimer0 -Xtimer1 -Xdsp1"``
+``gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw OLEVEL=O3``
 
 Adding -Xdsp1 (optimization level changed to -O3) helps compiler to optimize away "mpyw_s" and "add1_s" instructions and replace them with hardware dual-16bit SIMD multilication "vmpy2h". Notice the loop count is now 5.
 
