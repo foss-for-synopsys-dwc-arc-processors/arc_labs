@@ -112,7 +112,7 @@ Creating and setting smart home node
    certificate.
 
    .. note::
-      for more details, see `[Using a Smart Home Iot Application with EMSK] <http://embarc.org/pdf/embARC_appnote_how_to_use_smart_home_iot.pdf>`_
+      for more details, see `[Using a Smart Home IoT Application with EMSK] <http://embarc.org/pdf/embARC_appnote_how_to_use_smart_home_iot.pdf>`_
 
    .. image:: /img/lab11_steps_3.png
         :alt: smarthome system
