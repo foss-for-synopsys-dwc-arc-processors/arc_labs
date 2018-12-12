@@ -29,9 +29,9 @@ Content
 Through this lab, you get a preliminary understanding of ESP8266 WiFi module and the AT command.
 
 The lab is based on the |embarc| package and the supports of the popular WiFi module, ESP8266.
-During the lab, you will first use the AT command to set the ESP8266 to the server mode.
+During the lab, you first use the AT command to set the ESP8266 to the server mode.
 Then you can use your laptop or mobile phone to access ESP8266 by IP address.
-You will get a static webpage transmitted via TCP protocol.
+You get a static webpage transmitted via TCP protocol.
 
 
 Principles
@@ -46,7 +46,7 @@ The ESP8266 is available with various encapsulations. On-board PCB antenna, IPEX
 
 ESP8266 can be widely used in smart grid, intelligent transportation, smart furniture, handhold devices, industrial control, and other IoT fields.
 
-Ai-Thinker company has developed several WiFi modules based on ESP8266, including ESP01 and ESP01S which will be used in this lab.
+Ai-Thinker company has developed several WiFi modules based on ESP8266, including ESP01 and ESP01S which are used in this lab.
 
 .. note::  See `embARC doc <http://embarc.org/embarc_osp/doc/build/html/getting_started/peripheral_preparation.html#other-pmod-or-compatible-modules>`_ to learn how to connect it with your board.
 
@@ -202,7 +202,7 @@ Compile and download the program, after downloading successfully, the relevant d
     Initializing.  System name is ARC_DLL; my DLL was C:/ARC/MetaWare/arc/bin/freertos.
     freeRTOS: there are 10 task priorities.
 
-At this point, feedback information will be shown on your serial port console, representing the process of the board establishing connection with http server with AT command (showing below).
+At this point, feedback information is shown on your serial port console, representing the process of the board establishing connection with http server with AT command (showing below).
 
 .. code-block:: console
 
