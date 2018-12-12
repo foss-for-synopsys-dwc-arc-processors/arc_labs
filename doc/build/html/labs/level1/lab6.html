@@ -228,7 +228,7 @@ The example can be used as ntshell application.</p>
 <h3>Memory Map of ARC board<a class="headerlink" href="#memory-map-of-arc-board" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="emsk">
 <h4>EM Starter Kit<a class="headerlink" href="#emsk" title="Permalink to this headline">¶</a></h4>
-<p>The available memory regions of EM Starter Kit are shown below.</p>
+<p>The available memory regions of EM Starter Kit are shown below:</p>
 <table border="1" class="colwidths-auto docutils" id="id5">
 <caption><span class="caption-text">Memory Map of EM Starter Kit</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
 <thead valign="bottom">
@@ -337,8 +337,8 @@ from the TF card. The startup sequence for IoT Development Kit is listed below:<
 <ol class="arabic simple">
 <li>Power on or reset event</li>
 <li>Boot from on-chip eflash or extern boot SPI flash decided by the FWU switch</li>
-<li>Run simple bootloader to load application from the TF card into ICCM.</li>
-<li>Run the application from ICCM memory.</li>
+<li>Run simple bootloader to load application from the TF card into ICCM</li>
+<li>Run the application from ICCM memory</li>
 </ol>
 </div>
 </div>
@@ -359,32 +359,32 @@ from the TF card. The startup sequence for IoT Development Kit is listed below:<
 <dd><ul class="first">
 <li><p class="first">Insert SD card to your PC, and copy the binary file <code class="docutils literal notranslate"><span class="pre">obj_emsk_22/gnu_arcem7d/emsk_bootloader_gnu_arcem7d.bin</span></code> to SD card root folder, and rename it to <code class="docutils literal notranslate"><span class="pre">em7d_2bt.bin</span></code></p>
 </li>
-<li><p class="first">Insert the SD card to EMSK Board, choose the right core configuration, build and run the <code class="docutils literal notranslate"><span class="pre">&lt;embARC&gt;/example/baremetal/bootloader</span></code> example, then press any button to stop auto boot process, and enter to ntshell command mode.</p>
+<li><p class="first">Insert the SD card to EMSK Board, choose the right core configuration, build and run the <code class="docutils literal notranslate"><span class="pre">&lt;embARC&gt;/example/baremetal/bootloader</span></code> example, then press any button to stop auto boot process, and enter to ntshell command mode</p>
 </li>
 <li><dl class="first docutils">
-<dt>Use ntshell command <em>spirw</em> to program the <code class="docutils literal notranslate"><span class="pre">em7d_2bt.bin</span></code> into spiflash.</dt>
+<dt>Use ntshell command <em>spirw</em> to program the <code class="docutils literal notranslate"><span class="pre">em7d_2bt.bin</span></code> into spiflash</dt>
 <dd><ul class="first simple">
 <li>Run <em>spirw</em> to show help</li>
 <li>Run <em>spirw -i</em> to check SPI Flash ID, it should be <strong>Device ID = ef4018</strong></li>
 <li>Run <em>spirw -w em7d_2bt.bin 0x17f00000 0x17f00004</em> to program spiflash</li>
-<li>Check the output message to see if it has been programmed successfully.</li>
+<li>Check the output message to see if it has been programmed successfully</li>
 </ul>
 <img alt="../../_images/lab6_emsk_bootloader_program2spiflash.jpg" class="last" src="../../_images/lab6_emsk_bootloader_program2spiflash.jpg" />
 </dd>
 </dl>
 </li>
-<li><p class="first">If programmed successfully, when the board is reset, make sure Bit 4 of the on-board DIP switch is ON to enable secondary bootloader run.</p>
+<li><p class="first">If programmed successfully, when the board is reset, make sure Bit 4 of the on-board DIP switch is ON to enable secondary bootloader run</p>
 </li>
-<li><p class="first">If the SD card already contains the <em>boot.bin</em> in it, the bootloader automatically loads it from SD card. If not, it enters to ntshell mode.</p>
+<li><p class="first">If the SD card already contains the <em>boot.bin</em> in it, the bootloader automatically loads it from SD card. If not, it enters to ntshell mode</p>
 </li>
-<li><p class="first">You can goto the next step to generate the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> for proper application you want to be auto-loaded in SD card.</p>
+<li><p class="first">You can goto the next step to generate the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> for proper application you want to be auto-loaded in SD card</p>
 </li>
 </ul>
 <img alt="../../_images/lab6_emsk_bootloader_onspiflash.jpg" class="last" src="../../_images/lab6_emsk_bootloader_onspiflash.jpg" />
 </dd>
 </dl>
 </li>
-<li><p class="first">Generate <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> using any embARC example, its RAM start address should be 0x10000000. Use bootloader to run it</p>
+<li><p class="first">Generate <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> using any embARC example, it’s RAM start address should be 0x10000000. Use bootloader to run it</p>
 </li>
 <li><dl class="first docutils">
 <dt>Known Issues</dt>
@@ -410,11 +410,11 @@ from the TF card. The startup sequence for IoT Development Kit is listed below:<
 <dt>Program the secondary bootloader binary file into SPI Flash</dt>
 <dd><ul class="first simple">
 <li>Insert SD card to your PC, and copy the binary file <code class="docutils literal notranslate"><span class="pre">obj_iotdk_10/mw_arcem9d/simple_bootloader_mw_arcem9d.bin</span></code> to SD card Root, and rename it to <code class="docutils literal notranslate"><span class="pre">simple_bootloader.bin</span></code></li>
-<li>copy the file <code class="docutils literal notranslate"><span class="pre">example/bootloader/boot.json</span></code> to SD card root, and change the boot_file value to <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code>, and change the ram_startaddress to 536870912(0x20000000).</li>
+<li>copy the file <code class="docutils literal notranslate"><span class="pre">example/bootloader/boot.json</span></code> to SD card root, and change the boot_file value to <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code>, and change the ram_startaddress to 536870912(0x20000000)</li>
 </ul>
 <img alt="../../_images/lab6_iotdk_bootloader_bootjson.jpg" src="../../_images/lab6_iotdk_bootloader_bootjson.jpg" />
 <ul class="simple">
-<li>Insert the SD card to iotdk Board, build and run the <code class="docutils literal notranslate"><span class="pre">&lt;embARC&gt;/example/baremetal/bootloader</span></code> example, and enter to ntshell command mode.</li>
+<li>Insert the SD card to iotdk Board, build and run the <code class="docutils literal notranslate"><span class="pre">&lt;embARC&gt;/example/baremetal/bootloader</span></code> example, and enter to ntshell command mode</li>
 </ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;embarc_root&gt;/example/baremetal/bootloader
 <span class="gp">$</span> gmake distclean
@@ -423,20 +423,20 @@ from the TF card. The startup sequence for IoT Development Kit is listed below:<
 </div>
 <ul>
 <li><dl class="first docutils">
-<dt>Use ntshell command <em>flash</em> to program the <code class="docutils literal notranslate"><span class="pre">simple_bootloader.bin</span></code> into both flash.</dt>
+<dt>Use ntshell command <em>flash</em> to program the <code class="docutils literal notranslate"><span class="pre">simple_bootloader.bin</span></code> into both flash</dt>
 <dd><ul class="first simple">
-<li>Run <em>flash -h</em> to show help.</li>
-<li>Run <em>flash -eflsh simple_bootloader.bin</em> to program eflash.</li>
-<li>Run <em>flash -bootspi simple_bootloader.bin</em> to program bootspi flash.</li>
-<li>Check the output message to see if it was programmed successfully.</li>
+<li>Run <em>flash -h</em> to show help</li>
+<li>Run <em>flash -eflsh simple_bootloader.bin</em> to program eflash</li>
+<li>Run <em>flash -bootspi simple_bootloader.bin</em> to program bootspi flash</li>
+<li>Check the output message to see if it was programmed successfully</li>
 </ul>
 <img alt="../../_images/lab6_iotdk_bootloader_program2spiflash.jpg" class="last" src="../../_images/lab6_iotdk_bootloader_program2spiflash.jpg" />
 </dd>
 </dl>
 </li>
-<li><p class="first">If the SD card already contains the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> and <code class="docutils literal notranslate"><span class="pre">boot.json</span></code> in it, the bootloader automatically loads it from SD card, if not, it enters to ntshell mode.</p>
+<li><p class="first">If the SD card already contains the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> and <code class="docutils literal notranslate"><span class="pre">boot.json</span></code> in it, the bootloader automatically loads it from SD card, if not, it enters to ntshell mode</p>
 </li>
-<li><p class="first">You can goto the next step to generate the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> for proper application you want to be auto-loaded in SD card.</p>
+<li><p class="first">You can goto the next step to generate the <code class="docutils literal notranslate"><span class="pre">boot.bin</span></code> for proper application you want to be auto-loaded in SD card</p>
 </li>
 </ul>
 <img alt="../../_images/lab6_iotdk_bootloader_onspiflash.jpg" class="last" src="../../_images/lab6_iotdk_bootloader_onspiflash.jpg" />

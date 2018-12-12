@@ -205,23 +205,23 @@
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">About the detailed usage of embARC OSP, please refer to <a class="reference external" href="http://embarc.org/arc_labs/doc/build/html/labs/level1/lab2.html">How to use embARC OSP</a></p>
+<p class="last">About the detailed usage of embARC OSP, see <a class="reference external" href="http://embarc.org/arc_labs/doc/build/html/labs/level1/lab2.html">How to use embARC OSP</a></p>
 </div>
 </div>
 <div class="section" id="principles">
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="emsk">
 <h3>EM Starter Kit<a class="headerlink" href="#emsk" title="Permalink to this headline">¶</a></h3>
-<p>About the brief introduction of EM Starter Kit, please refer to <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/board/emsk.html">embARC OSP Documentation</a></p>
-<p>There are LEDs, DIP switches and buttons on EM Starter Kit, this lab will show
+<p>About the brief introduction of EM Starter Kit, see to <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/board/emsk.html">embARC OSP Documentation</a></p>
+<p>There are LEDs, DIP switches, and buttons on EM Starter Kit, this lab shows
 how to program the GPIO to control these on-board peripherals of EM Starter Kit.
 The code for this lab is located in <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab5_emsk</span></code>. In the code, the on-board buttons and DIP switches’ values
 are read, and whether LEDs are on or off depend on the value of the buttons and DIP switches.</p>
 </div>
 <div class="section" id="iotdk">
 <h3>IoT Development Kit<a class="headerlink" href="#iotdk" title="Permalink to this headline">¶</a></h3>
-<p>About the brief introduction of IoT Development Kit, please refer to <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/board/iotdk.html">embARC OSP Documentation</a></p>
-<p>As there are no LED or other easy-to-use peripherals on IoT Development Kit, this lab will show how to control a LED through the arduino interface of IoT Development Kit.
+<p>About the brief introduction of IoT Development Kit, see <a class="reference external" href="http://embarc.org/embarc_osp/doc/build/html/board/iotdk.html">embARC OSP Documentation</a></p>
+<p>As there are no LED or other easy-to-use peripherals on IoT Development Kit, this lab shows how to control a LED through the arduino interface of IoT Development Kit.
 The code for this lab is located in <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/labs/lab5_iotdk</span></code>. In the code, the external connected LED blinks periodically.</p>
 </div>
 </div>
@@ -230,8 +230,8 @@ The code for this lab is located in <code class="docutils literal notranslate"><
 <div class="section" id="id1">
 <h3>EM Starter Kit<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Connect EM Starter Kit to PC, select <strong>em7d</strong> configuration and open UART terminal.</li>
-<li>Compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_emsk</span></code> example with the following cmds.</li>
+<li>Connect EM Starter Kit to your computer, select <strong>em7d</strong> configuration and open UART terminal.</li>
+<li>Compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_emsk</span></code> example with the following commands:</li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd /arc_labs/lab5_emsk</span>
 <span class="go">make BOARD=emsk BD_VER=22 CUR_CORE=arcem7d TOOLCHAIN=gnu run</span>
@@ -247,8 +247,8 @@ The code for this lab is located in <code class="docutils literal notranslate"><
 <p>IoT Development Kit has an arduino interface, here select arduino digital pinout <strong>ARDUINO_PIN_0(iotdk gpio4b_2[0])</strong> to control LED.</p>
 <ol class="arabic simple">
 <li>Find a LED, connect the LED anode pin to <strong>ARDUINO_PIN_0</strong>, connect the LED cathode pin to <strong>GND</strong> of IoT Development Kit.</li>
-<li>Connect the USB cable to the USB data port of IoT Development Kit and the PC.</li>
-<li>Compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_iotdk</span></code> example with the following cmds.</li>
+<li>Connect the USB cable to the USB data port of IoT Development Kit and the computer.</li>
+<li>Compile and run the <code class="docutils literal notranslate"><span class="pre">embarc_osp/arc_labs/lab5_iotdk</span></code> example with the following commands:</li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd /arc_labs/lab5_iotdk</span>
 <span class="go">make BOARD=iotdk TOOLCHAIN=gnu run</span>

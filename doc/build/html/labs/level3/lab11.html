@@ -287,10 +287,10 @@ a dash board in order to monitor and control smart home nodes.</p>
 <li><p class="first">Create an AWS account at <a class="reference external" href="https://aws.amazon.com/">[Amazon AWS Website]</a>. Amazon offers various account levels,
 including a free tier for AWS IoT.</p>
 </li>
-<li><p class="first">Login AWS console and choose AWS IoT.</p>
+<li><p class="first">Login AWS console and select AWS IoT.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_1.png" />
 </li>
-<li><p class="first">Choose an appropriate IoT server in the top right corner of the AWS IoT console page. As an example we choose US East (N. Virginia) server, you may choose other server as you see fit.</p>
+<li><p class="first">Select an appropriate IoT server in the top right corner of the AWS IoT console page. As an example US East (N. Virginia) server is selected, you may select other server as you see fit.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_2.png" />
 </li>
 <li><p class="first">Create your smart home node in the thing registry and generate X.509 certificate for the
@@ -312,7 +312,7 @@ Insert the SD card to your PC, and copy the certificate folder cert to the SD Ca
 obtained from <a class="reference external" href="https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_applications/tree/master/aws_iot_smarthome">[embARC/example/freertos/iot/aws/smarthome_demo]</a>. The dashboard can be loaded automatically</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_5.png" />
 </li>
-<li><p class="first">Click “ADD” to go to DATASOURCE page and fill the forms.</p>
+<li><p class="first">Click <strong>ADD</strong> to go to DATASOURCE page and fill the forms.</p>
 </li>
 </ol>
 <blockquote>
@@ -331,15 +331,15 @@ obtained from <a class="reference external" href="https://github.com/foss-for-sy
 </li>
 <li><p class="first">CLIENT ID: Leave it blank as default.</p>
 </li>
-<li><p class="first">ACCESS KEY and SECRET KEY: Go to AWS Services page and click “IAM”.</p>
+<li><p class="first">ACCESS KEY and SECRET KEY: Go to AWS Services page and click <strong>IAM</strong>.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_8.png" />
-<p>Go to User page and click “Create New Users”. Enter User Names “AWSIoTUser”. Then
-download user security credentials, Access Key ID and Secret Access Key. Copy Access
+<p>Go to user page and click <strong>Create New Users</strong>. Enter User Names <strong>AWSIoTUser</strong>. Then
+download user security credentials, Access Key ID, and Secret Access Key. Copy Access
 Key ID to ACCESS KEY and Secret Access Key to SECRET KEY.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_9.png" />
-<p>Go to user page and click “AWSIoTUser”. Click “Attach Policy” to attach “AWSIoTDataAccess” to “AWSIoTUser”.</p>
+<p>Go to user page and click <strong>AWSIoTUser</strong>. Click <strong>Attach Policy</strong> to attach <strong>AWSIoTDataAccess</strong> to <strong>AWSIoTUser</strong>.</p>
 </li>
-<li><p class="first">THINGS: AWS IoT thing name “SmartHome”.</p>
+<li><p class="first">THINGS: AWS IoT thing name <strong>SmartHome</strong>.</p>
 <img alt="smarthome system" src="../../_images/lab11_steps_10.png" />
 </li>
 <li><p class="first">Click <strong>Save</strong> to finish the setting.</p>
@@ -370,8 +370,8 @@ Go to <em>embARC/example/freertos/iot/aws/smarthome_demo</em> in command-line, r
 </div>
 </li>
 <li><p class="first">FreeRTOS-based runtime environment can be loaded automatically. Wait for WiFi initialization and
-connection establishment (30 seconds or less) until the “WiFi connected” message is shown in the
-terminal emulator. “Network is ok” is shown after the certificate files cert.crt, privateKey.pem,
+connection establishment (30 seconds or less) until the “WiFi connected” message is displayed in the
+terminal emulator. “Network is ok” is displayed after the certificate files cert.crt, privateKey.pem,
 and rootCA.crt are validated. The information in “reported”: {} is the state of the EMSK-based
 smart home node. “Updated Accepted !!” means the connection works between the smart home node and AWS IoT cloud.</p>
 </li>

@@ -23,7 +23,7 @@ The following hardware and tools are required:
 
 Content
 ========
-The Communication between smartphone and |iotdk| board with RN4020 BLE module.
+The communication between smartphone and |iotdk| board with RN4020 BLE module.
 
 - Setup RN4020 BLE module by using API of RN4020 driver.
 - Connect smartphone and RN4020 by BLE, and check the data send by |iotdk| in smartphone.
@@ -94,7 +94,7 @@ Advertise
 ---------
 
 Run the command **A** to start advertisement.
-The source code using the API of RN4020 driver in |embarc| as follows.
+The source code using the API of RN4020 driver in |embarc| as follows:
 
 .. code-block:: console
 
@@ -105,7 +105,7 @@ Send data
 ---------
 
 Run the command **SUW, 2A19, value** to set the level of Battery.
-The source code using the API of RN4020 driver in |embarc| as follows.
+The source code using the API of RN4020 driver in |embarc| as follows:
 
 .. code-block:: console
 
@@ -120,7 +120,7 @@ The source code using the API of RN4020 driver in |embarc| as follows.
 	}
 
 .. note::
-	About detailed usage of RN4020 BLE module, see RN4020 Bluetooth Low Energy Module User's Guide
+	About detailed usage of RN4020 BLE module, see RN4020 Bluetooth Low Energy Module User's Guide.
 
 Steps
 =====
@@ -128,9 +128,9 @@ Steps
 Run project
 -----------
 
-Open the serial terminal emulator in PC (for example, Tera Term), set as **115200 baud, 8 bits data, 1 stop bit and no parity**, and connect to the |iotdk| board.
+Open the serial terminal emulator in computer (for example, Tera Term), set as **115200 baud, 8 bits data, 1 stop bit and no parity**, and connect to the |iotdk| board.
 
-Open ``cmd`` from the folder *embarc_osp/arc_labs/labs/lab6_ble_rn4020*, input the command as follow
+Open ``cmd`` from the folder *embarc_osp/arc_labs/labs/lab6_ble_rn4020*, input the command as follows:
 
 .. code-block:: console
 

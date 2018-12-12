@@ -200,7 +200,7 @@
 <div class="section" id="content">
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Through reading the corresponding BCR (Build Configuration Register) auxiliary registers of processor timers to get the configuration information.</li>
+<li>Through reading the corresponding Build Configuration Register (BCR) auxiliary registers of processor timers to get the configuration information</li>
 <li>Through programming the auxiliary registers to initialize, start and stop the timer (here TIMER0 is used)</li>
 <li>By reading the count value of processor timers, get the execution time of a code block</li>
 </ul>
@@ -209,27 +209,27 @@
 <h2>Principles<a class="headerlink" href="#principles" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="auxiliary-registers">
 <h3>Auxiliary Registers<a class="headerlink" href="#auxiliary-registers" title="Permalink to this headline">¶</a></h3>
-<p>The auxiliary register set contains status and control registers, which by default are 32 bits wide to implement the processor control, e.g. interrupt and exception management and processor timers. These
-auxiliary registers occupy a separate 32-bit address space from the normal memory-access (i.e. load and
+<p>The auxiliary register set contains status and control registers, which by default are 32 bits wide to implement the processor control, for example, interrupt and exception management and processor timers. These
+auxiliary registers occupy a separate 32-bit address space from the normal memory-access (that is load and
 store) instructions. Auxiliary registers accessed using distinct Load Register (LR), Store Register (SR), and
 Auxiliary EXchange (AEX) instructions.</p>
 <p>The auxiliary register address region 0x60 up to 0x7F and region 0xC0 up to 0xFF is reserved for the Build
 Configuration Registers (BCRs) that can be used by embedded software or host debug software to detect the
 configuration of the ARCv2-based hardware. The Build Configuration Registers contain the version of each
 ARCv2-based extension and also the build-specific configuration information.</p>
-<p>In embARC OSP,  <code class="docutils literal notranslate"><span class="pre">arc_builtin.h</span></code> provides API (<strong>_arc_aux_read</strong> and <strong>_arc_aux_read</strong>) to access the auxiliary registers</p>
+<p>In embARC OSP, <code class="docutils literal notranslate"><span class="pre">arc_builtin.h</span></code> provides API (<strong>_arc_aux_read</strong> and <strong>_arc_aux_read</strong>) to access the auxiliary registers.</p>
 </div>
 <div class="section" id="processor-timers">
 <h3>Processor Timers<a class="headerlink" href="#processor-timers" title="Permalink to this headline">¶</a></h3>
 <p>The processor timers are two independent 32-bit timers and a 64-bit real-time
 counter (RTC). <strong>Timer0</strong> and <strong>Timer1</strong> are identical in operation. The only
 difference is that these timers are connected to different interrupts. The
-Timers cannot be included in a configuration without interrupts. Each timer is
+timers cannot be included in a configuration without interrupts. Each timer is
 optional and when present, it is connected to a fixed interrupt; interrupt 16
 for timer 0 and interrupt 17 for timer 1.</p>
 <p>The processor timers are connected to a system clock signal that operates even
 when the ARCv2-based processor is in the sleep state. The timers can be used
-to generate interrupt signals that wake the processor from the SLEEP state.The
+to generate interrupt signals that wake the processor from the SLEEP state. The
 processor timers automatically reset and restart their operation after
 reaching the limit value. The processor timers can be programmed to count only
 the clock cycles when the processor is not halted. The processor timers can
@@ -246,8 +246,8 @@ This timer is used to count the clock cycles atomically.</p>
 <p>The code can be divided into 3 parts:</p>
 <ul class="simple">
 <li>Part1 : read the BCR of internal timers to check the features</li>
-<li>Part2 : Promgram Timer0 by auxiliary registers with the embARC OSP provided API</li>
-<li>Part3 : read the counts to Timer 0 to measure a code block’s execution time.</li>
+<li>Part2 : promgram Timer0 by auxiliary registers with the embARC OSP provided API</li>
+<li>Part3 : read the counts to Timer 0 to measure a code block’s execution time</li>
 </ul>
 </div>
 </div>
