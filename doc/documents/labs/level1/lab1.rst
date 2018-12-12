@@ -196,8 +196,8 @@ implement multiplication more efficiently.
 Exercises
 ^^^^^^^^^^
 
-Enable MPY extension instrctions by setting Multiply Option -Xmpy_option = wlh1 in step 3, it will implement multiplication more efficiently with fewer instructions.
-Redo step 4 - 7 to analyze with the debugger's Profiling function, observe the total number of instructions consumed by the main function, and compare it with the above Profiling result.
+Enable MPY extension instrctions by setting Multiply Option -Xmpy_option = wlh1 in step 3, it implements multiplication more efficiently with fewer instructions.
+Redo steps 4 - 7 to analyze with the debugger's Profiling function, observe the total number of instructions consumed by the main function, and compare it with the above Profiling result.
 
 |arcgnu|
 -------------------
@@ -224,10 +224,10 @@ Content
 
 * Create a C project using |arcgnu|
 * Import the code ``CoreTest.c`` from ``embarc_osp/arc_labs/labs/lab_core_test``
-* Configure compilation options to compile, and generate executable files.
+* Configure compilation options to compile, and generate executable files
 * Start the |arcgnu| debugger to enter the debug mode
 
-From two different perspectives of C language and assembly language, use the methods of setting breakpoint, single-step execution, full-speed executions, etc., combined with observing PC address, register status, global variable status, and profiling performance to analyze and debug the target program.
+From two different perspectives of C language and assembly language, use the methods of setting breakpoint, single-step execution, full-speed executions, and so on combined with observing PC address, register status, global variable status, and profiling performance to analyze and debug the target program.
 
 Principles
 ^^^^^^^^^^
@@ -247,7 +247,7 @@ Open the |arcgnu|, create an empty project called ``core_test``, and select **AR
 
 In the Project Explorer, right-click |icon15|, and select **Import**..
 
-In the Implort wizard, select **File system** from the **General** tab, then click **Next**. As shown in the following figure, in the From directory fileld, type or browse to select the directory contain the file CoreTest.c. Recent directories that have been imported from are shown on the From directory field's combo box. In the left pane, check a folder that will import its entire contents into the Workbench, and in the right pane check the file CoreTest.c. 
+In the Implort wizard, select **File system** from the **General** tab, then click **Next**. As shown in the following figure, in the From directory fileld, type or browse to select the directory contain the file CoreTest.c. Recent directories that have been imported from are shown on the From directory field's combo box. In the left pane, check a folder that imports the contents into the Workbench, and in the right pane check the file CoreTest.c. 
 
 |figure11|
 
@@ -255,7 +255,7 @@ Click **Finish** when done, the file CoreTest.c is now shown in the one of the n
 
 3. Set compilation options
 
-From the Project Explorer view, right-click the project ``core_test`` and choose Properties. Click **C/C++ Build** > **Settings** > **Tool Settings** menu options.
+From the Project Explorer view, right-click the project ``core_test`` and choose Properties. Click **C/C++ Build** > **Settings** > **Tool Settings**.
 The **Tool Settings** dialog opens.
 
 |figure12|
@@ -269,7 +269,7 @@ corresponding to the target processor hardware attributes, such as the version
 of the processor, whether to support extended instructions such as shift,
 multiplication, floating-point operations, and so on whether to include Timer0/1.
 
-In step 1, you already built the project using the engineering template of
+In step 1, you built the project using the engineering template of
 EMSK, the corresponding necessary options have been set by default. If
 there is no special requirement, check the setting compile options in the All
 options column and click **OK** when done.
@@ -278,8 +278,8 @@ options column and click **OK** when done.
 
 In the Project Explorer view, select project ``core_test``.
 
-Click **Project** > **Build Project** or click the icon |icon16| on the toolbar. 
-In the middle of the |arcgnu| main interface, you can see in the **Console** view the output and results of the build command. Click on its tab to bring the view forward if it is not currently visible. If for some reason it's not present, you can open it by selecting **Window** > **Show View** > **Console**. When the message ``Finished building target: Core_test.elf`` is displayed, the compilation is successful, and the compiled executable file Core_test.elf can be seen in the Project Explorer.
+Click **Project** > **Build Project** or click |icon16|. 
+In the middle of the |arcgnu| main interface, you can see in the **Console** view the output and results of the build command. Click the tab to bring the view forward if it is not currently visible. If for some reason it is not present, you can open it by selecting **Window** > **Show View** > **Console**. When the message ``Finished building target: Core_test.elf`` is displayed, the compilation is successful, and the compiled executable file Core_test.elf can be seen in the Project Explorer.
 
 |figure13|
 
@@ -290,13 +290,13 @@ Double-click **C/C++ Application** or right-click **New** to create a new launch
 
 |figure14|
 
-If a project is selected in the Project Explorer view all data is automatically entered, take a moment to verify its accuracy or change as needed. As you use nSIM simulator to simulate EMSK development board, you need to modify the settings of Debugger, Common, and Terminal (this is because nSIM cannot be called directly in GNU IDE. Still need GDB Server for indirect calls). The specific settings are as follows:
+If a project is selected in the Project Explorer view all data is automatically entered, take a moment to verify its accuracy or change as needed. As you use nSIM simulator to simulate EMSK development board, you need to modify the settings of Debugger, Common, and Terminal (this is because nSIM cannot be called directly in GNU IDE. Still needs GDB Server for indirect calls). The specific settings are as follows:
 
 * Set Debugger->Gdbserver Settings
 
 |figure15|
 
-Select nSIM as the **ARC GDB Server**, and the default **port number** is 49105. Notice that **Use TCF** is enabled. Otherwise, the nSIM cannot work normally. The TCF start file is under *nSIM/nSIM/etc/tcf/templates* (the default installation path). If you have downloaded the MetaWare IDE, the default nSIM path is *C:/ARC/nSIM/nSIM/etc/tcf/templates*, and you can select a TCF file from this folder (depending on the version of the board you are simulating and the kernel model), as shown earlier.
+Select nSIM as the **ARC GDB Server**, and the default **port number** is 49105. Note that **Use TCF** is enabled. Otherwise, the nSIM cannot work normally. The TCF start file is under *nSIM/nSIM/etc/tcf/templates* (the default installation path). If you have downloaded the MetaWare IDE, the default nSIM path is *C:/ARC/nSIM/nSIM/etc/tcf/templates*, and you can select a TCF file from this folder (depending on the version of the board you are simulating and the kernel model), as shown earlier.
 
 * Pay attention to Debug in Common
 
@@ -304,7 +304,7 @@ Select nSIM as the **ARC GDB Server**, and the default **port number** is 49105.
 
 * Terminal settings
 
-If you are using the |emsk|, the terminal automatically selects the correct port number, and if you are using the emulator without a port, uncheck it, as show in the following figure.
+If you are using the |emsk|, the terminal automatically selects the correct port number, and if you are using the emulator without a port, uncheck it as shown in the following figure.
 
 |figure17|
 
@@ -314,11 +314,11 @@ When you are done, click **Debug** to enter the debugging interface.
 
 You may be prompted to switch to the **Debug** perspective. Click **Yes**.
 
-The Debug perspective appears with the required windows open. And the windows can be source code window, assembly code window, register window, global variable window, breakpoint window, function window, and so on.
+The Debug perspective appears with the source code window, assembly code window, register window, global variable window, breakpoint window, function window, and so on.
 
 |figure18|
 
-In the C code window, right-click the code line number on the left side of the window, select **Toggle Breakpoint** or double-click the line number to set a breakpoint on. In the assembly code window, double-click a line of code to set a breakpoint on. You'll see a blue circle there indicating the breakpoint is set.
+In the C code window, right-click the code line number on the left side of the window, select **Toggle Breakpoint** or double-click the line number to set a breakpoint on. In the assembly code window, double-click a line of code to set a breakpoint on. A blue circle is seen indicating the breakpoint is set.
 
 After the breakpoint is set, click **Run** > **Resume** or you can use the **Resume** button |icon3| on the toolbar of the Debug view to run the program. The program runs directly to the nearest breakpoint. You can observe the current program execution and the relevant status information of the processor through the various windows as described in previous step. If you want to know more about the details of program execution and the instruction behavior of the processor, you can use the following three execution commands |icon4| to perform single-step debugging. The icon |icon5| can choose to step through a C language statement or an assembly instruction to match the status information of each window. It can be very convenient for program debugging. If you want to end the current debugging process, click |icon6|. If you want to return to the main |arcgnu| page, click C/C++ |icon7|.
 

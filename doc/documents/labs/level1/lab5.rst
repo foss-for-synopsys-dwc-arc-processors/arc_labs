@@ -25,7 +25,7 @@ Content
 - Based on |embarc|, program the GPIO to control some on-board peripherals
 
 .. note::
-    About the detailed usage of |embarc|, please refer to `How to use embARC OSP <http://embarc.org/arc_labs/doc/build/html/labs/level1/lab2.html>`__
+    About the detailed usage of |embarc|, see `How to use embARC OSP <http://embarc.org/arc_labs/doc/build/html/labs/level1/lab2.html>`__
 
 Principles
 ==========
@@ -33,9 +33,9 @@ Principles
 |emsk|
 *******
 
-About the brief introduction of |emsk|, please refer to `embARC OSP Documentation <http://embarc.org/embarc_osp/doc/build/html/board/emsk.html>`__
+About the brief introduction of |emsk|, see to `embARC OSP Documentation <http://embarc.org/embarc_osp/doc/build/html/board/emsk.html>`__
 
-There are LEDs, DIP switches and buttons on |emsk|, this lab will show
+There are LEDs, DIP switches, and buttons on |emsk|, this lab shows
 how to program the GPIO to control these on-board peripherals of |emsk|.
 The code for this lab is located in ``embarc_osp/arc_labs/labs/lab5_emsk``. In the code, the on-board buttons and DIP switches' values
 are read, and whether LEDs are on or off depend on the value of the buttons and DIP switches.
@@ -45,9 +45,9 @@ are read, and whether LEDs are on or off depend on the value of the buttons and 
 |iotdk|
 *******
 
-About the brief introduction of |iotdk|, please refer to `embARC OSP Documentation <http://embarc.org/embarc_osp/doc/build/html/board/iotdk.html>`__
+About the brief introduction of |iotdk|, see `embARC OSP Documentation <http://embarc.org/embarc_osp/doc/build/html/board/iotdk.html>`__
 
-As there are no LED or other easy-to-use peripherals on |iotdk|, this lab will show how to control a LED through the arduino interface of |iotdk|. 
+As there are no LED or other easy-to-use peripherals on |iotdk|, this lab shows how to control a LED through the arduino interface of |iotdk|. 
 The code for this lab is located in ``embarc_osp/arc_labs/labs/lab5_iotdk``. In the code, the external connected LED blinks periodically.
 
 Steps
@@ -56,9 +56,9 @@ Steps
 |emsk|
 ******
 
-1. Connect |emsk| to PC, select **em7d** configuration and open UART terminal.
+1. Connect |emsk| to your computer, select **em7d** configuration and open UART terminal.
 
-2. Compile and run the ``embarc_osp/arc_labs/lab5_emsk`` example with the following cmds.
+2. Compile and run the ``embarc_osp/arc_labs/lab5_emsk`` example with the following commands:
 
 .. code-block:: console
 
@@ -76,9 +76,9 @@ Steps
 
 1. Find a LED, connect the LED anode pin to **ARDUINO_PIN_0**, connect the LED cathode pin to **GND** of |iotdk|.
 
-2. Connect the USB cable to the USB data port of |iotdk| and the PC.
+2. Connect the USB cable to the USB data port of |iotdk| and the computer.
 
-3. Compile and run the ``embarc_osp/arc_labs/lab5_iotdk`` example with the following cmds.
+3. Compile and run the ``embarc_osp/arc_labs/lab5_iotdk`` example with the following commands:
 
 .. code-block:: console
 

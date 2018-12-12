@@ -21,7 +21,7 @@ The following hardware and tools are required:
 Content
 ========
 
-- Through reading the corresponding BCR (Build Configuration Register) auxiliary registers of processor timers to get the configuration information.
+- Through reading the corresponding Build Configuration Register (BCR) auxiliary registers of processor timers to get the configuration information
 - Through programming the auxiliary registers to initialize, start and stop the timer (here TIMER0 is used)
 - By reading the count value of processor timers, get the execution time of a code block
 
@@ -31,8 +31,8 @@ Principles
 Auxiliary Registers
 -------------------
 
-The auxiliary register set contains status and control registers, which by default are 32 bits wide to implement the processor control, e.g. interrupt and exception management and processor timers. These
-auxiliary registers occupy a separate 32-bit address space from the normal memory-access (i.e. load and
+The auxiliary register set contains status and control registers, which by default are 32 bits wide to implement the processor control, for example, interrupt and exception management and processor timers. These
+auxiliary registers occupy a separate 32-bit address space from the normal memory-access (that is load and
 store) instructions. Auxiliary registers accessed using distinct Load Register (LR), Store Register (SR), and
 Auxiliary EXchange (AEX) instructions.
 
@@ -41,7 +41,7 @@ Configuration Registers (BCRs) that can be used by embedded software or host deb
 configuration of the ARCv2-based hardware. The Build Configuration Registers contain the version of each
 ARCv2-based extension and also the build-specific configuration information.
 
-In |embarc|,  ``arc_builtin.h`` provides API (**_arc_aux_read** and **_arc_aux_read**) to access the auxiliary registers
+In |embarc|, ``arc_builtin.h`` provides API (**_arc_aux_read** and **_arc_aux_read**) to access the auxiliary registers.
 
 
 Processor Timers
@@ -50,14 +50,13 @@ Processor Timers
 The processor timers are two independent 32-bit timers and a 64-bit real-time
 counter (RTC). **Timer0** and **Timer1** are identical in operation. The only
 difference is that these timers are connected to different interrupts. The
-Timers cannot be included in a configuration without interrupts. Each timer is
+timers cannot be included in a configuration without interrupts. Each timer is
 optional and when present, it is connected to a fixed interrupt; interrupt 16
 for timer 0 and interrupt 17 for timer 1.
 
-
 The processor timers are connected to a system clock signal that operates even
 when the ARCv2-based processor is in the sleep state. The timers can be used
-to generate interrupt signals that wake the processor from the SLEEP state.The
+to generate interrupt signals that wake the processor from the SLEEP state. The
 processor timers automatically reset and restart their operation after
 reaching the limit value. The processor timers can be programmed to count only
 the clock cycles when the processor is not halted. The processor timers can
@@ -80,8 +79,8 @@ The code's flow is shown below:
 The code can be divided into 3 parts:
 
 * Part1 : read the BCR of internal timers to check the features
-* Part2 : Promgram Timer0 by auxiliary registers with the |embarc| provided API
-* Part3 : read the counts to Timer 0 to measure a code block's execution time.
+* Part2 : promgram Timer0 by auxiliary registers with the |embarc| provided API
+* Part3 : read the counts to Timer 0 to measure a code block's execution time
 
 Steps
 =====

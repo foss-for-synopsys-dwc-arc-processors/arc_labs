@@ -89,7 +89,7 @@ Options that are used in the lab are:
 
 * ``-Hfxapi``: Use the Fixed Point API support library
 
-  Used with ``-Xdsp``. Provides low level intrinsic support for ARC EM DSP instructions.
+  Used with ``-Xdsp``. Provides low level intrinsic support for ARC EM DSP instructions
 
   Programs written using this API execute natively on an ARC EM processor with DSP extensions and can also be emulated on x86 Windows hosts
 
@@ -99,7 +99,7 @@ Options that are used in the lab are:
 
 * ``-Xagu_small, -Xagu_medium, -Xagu_large``:
 
-  Enables AGU, and specifies its size.
+  Enables AGU, and specifies its size
 
 .. note::
 
