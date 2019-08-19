@@ -157,6 +157,8 @@ from the TF card. The startup sequence for |iotdk| is listed below:
 How to flash the ARC board
 --------------------------
 
+.. note:: In this lab, we do not use MCUBoot, so we need to disable MCUBoot, we should set **USE_MCUBOOT = 0** in makefile.
+
 |emsk|
 **************
 
@@ -199,9 +201,9 @@ How to flash the ARC board
 - Generate a secondary bootloader binary file
 
 .. code-block:: console
-
+    //to generate bin file which can run in eflash, we need to set APPL_DEFINES += -DUSE_APPL_MEM_CONFIG in makefile.
     $ cd <embarc_root>/example/baremetal/bootloader
-    $ gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw LOCATION=eflash bin
+    $ gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw bin
 
 - Program the secondary bootloader binary file into SPI Flash
     + Insert SD card to your PC, and copy the binary file ``obj_iotdk_10/mw_arcem9d/simple_bootloader_mw_arcem9d.bin`` to SD card Root, and rename it to ``simple_bootloader.bin``
@@ -210,10 +212,10 @@ How to flash the ARC board
 
     .. image:: /img/lab6_iotdk_bootloader_bootjson.jpg
 
-    + Insert the SD card to iotdk Board, build and run the ``<embARC>/example/baremetal/bootloader`` example, and enter to ntshell command mode
+    + Insert the SD card to iotdk Board, rmove **APPL_DEFINES += -DUSE_APPL_MEM_CONFIG** in makefile, build and run the ``<embARC>/example/baremetal/bootloader`` example, and enter to ntshell command mode.
 
     .. code-block:: console
-
+        //to run example in ICCM, we need to rmove APPL_DEFINES += -DUSE_APPL_MEM_CONFIG in makefile.
         $ cd <embarc_root>/example/baremetal/bootloader
         $ gmake distclean
         $ gmake BOARD=iotdk BD_VER=10 CUR_CORE=arcem9d TOOLCHAIN=mw run
