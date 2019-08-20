@@ -1,5 +1,5 @@
 language: python
-python: 2.7
+python: 3.6
 
 sudo: required
 dist: trusty
@@ -20,23 +20,38 @@ env:
       "context": "travis-ci/$NAME",
       "target_url": "https://travis-ci.org/$TRAVIS_REPO_SLUG/jobs/$TRAVIS_JOB_ID"
       }\nDATA'
-
+      
       COMMENT=none
       COMMENTS=$'curl -so/dev/null --user "$EMBARC_BOT" --request POST
       https://api.github.com/repos/$TRAVIS_REPO_SLUG/issues/$TRAVIS_PULL_REQUEST/comments
       --data @- << DATA\n{
       "body": "$COMMENT"
       }\nDATA'
+    - TOOLCHAIN_VER="latest"
+    - OSP_ROOT="."
+    - EXAMPLES="arc_labs/labs"
+
+cache:
+  pip: true
+  directories:
+    - .cache/result
+    - .cache/toolchain
 
 branches:
   except:
     - gh-pages
 
 before_install:
-  - bash .travis/before_install.sh
-  # setup git config
   - git config --global user.name "${U_NAME}"
   - git config --global user.email "${U_EMAIL}"
+  - >
+    if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+      diff=$(git diff FETCH_HEAD master .ci)
+      if [ "$diff" == "" ]; then
+        git checkout remotes/origin/master -- .ci
+      fi
+    fi
+  - bash .ci/before_install.sh
 
 after_success:
   - bash -c "$STATUS" success "Local $NAME testing has passed"
@@ -45,7 +60,7 @@ after_failure:
   - bash -c "$STATUS" failure "Local $NAME testing has failed"
 
 script:
-  - bash .travis/script.sh
+  - bash .ci/script.sh
   
 matrix:
   include:
@@ -53,18 +68,22 @@ matrix:
       os: linux
       compiler: gcc
 
-    - env: NAME="labs-emsk-gnu-201709" TOOLCHAIN="gnu" BOARD="emsk" OSP_ROOT="." TOOLCHAIN_VER="2017.09" EXAMPLES="arc_labs/labs" EXPECTED="arc_labs/.travis/expected.ini"
+    - env: NAME="code-style-check"
       os: linux
       compiler: gcc
 
-    - env: NAME="labs-emsk-gnu-201803" TOOLCHAIN="gnu" BOARD="emsk" OSP_ROOT="." TOOLCHAIN_VER="2018.03" EXAMPLES="arc_labs/labs" EXPECTED="arc_labs/.travis/expected.ini"
+    - env: NAME="emsk-11-gnu-latest" TOOLCHAIN="gnu"  BOARD="emsk" BD_VER="11" EXPECTED="arc_labs/.ci/expected.ini"
       os: linux
       compiler: gcc
 
-    - env: NAME="labs-iotdk-gnu-201709" TOOLCHAIN="gnu" BOARD="iotdk" OSP_ROOT="." TOOLCHAIN_VER="2017.09" EXAMPLES="arc_labs/labs" EXPECTED="arc_labs/.travis/expected.ini"
+    - env: NAME="emsk-22-gnu-latest" TOOLCHAIN="gnu" BOARD="emsk" BD_VER="22" EXPECTED="arc_labs/.ci/expected.ini"
       os: linux
       compiler: gcc
 
-    - env: NAME="labs-iotdk-gnu-201803" TOOLCHAIN="gnu" BOARD="iotdk" OSP_ROOT="." TOOLCHAIN_VER="2018.03" EXAMPLES=arc_labs/labs" EXPECTED="arc_labs/.travis/expected.ini"
+    - env: NAME="baremetal-emsk-23-gnu-latest" TOOLCHAIN="gnu" BOARD="emsk" BD_VER="23" EXPECTED="arc_labs/.ci/expected.ini"
+      os: linux
+      compiler: gcc
+
+    - env: NAME="iotdk-gnu-latest" TOOLCHAIN="gnu" BOARD="iotdk" EXPECTED="arc_labs/.ci/expected.ini"
       os: linux
       compiler: gcc

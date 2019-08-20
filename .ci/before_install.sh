@@ -27,8 +27,9 @@ die() {
     pip install breathe || die "Failed to install breathe"
     pip install recommonmark || die "Failed to install recommonmark"
     pip install sphinx_rtd_theme || die "Failed to install sphinx_rtd_theme"
-    pip install PrettyTable || die
-    pip install colorama || die
-    pip install configparser || die
-    pip install requests || die
+    pip install GitPython || die "Failed to install GitPython"
+    pip install embarc_cli || die "Failed to install embarc_cli"
+    pip install configparser || die "Failed to install configparser"
+    pip install requests || die "Failed to install requests"
+    pip install XlsxWriter || die "Failed to install XlsxWriter"
 }
