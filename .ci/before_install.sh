@@ -32,4 +32,6 @@ die() {
     pip install configparser || die "Failed to install configparser"
     pip install requests || die "Failed to install requests"
     pip install XlsxWriter || die "Failed to install XlsxWriter"
+    pip install cpplint || die "Failed to install cpplint"
+    pip install flake8 || die "Failed to install cpplint"
 }
