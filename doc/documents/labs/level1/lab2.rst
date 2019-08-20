@@ -97,7 +97,7 @@ Run the examples
 ****************
 
 The command-line interface is the default interface to use |embarc|. After getting the |embarc|
-package, you need to open a **cmd** console in Windows / a **terminal** in Linux and change directory to the root of |embarc|.
+package, you need to open a **cmd** console in Windows or a **terminal** in Linux and change directory to the root of |embarc|.
 
 Use the **blinky** as an example.
 
@@ -120,7 +120,7 @@ Use the **blinky** as an example.
    # For IoTDK
    make TOOLCHAIN=gnu BOARD=iotdk run
 
-.. Note:: for |emsk|, make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
+.. Note:: For |emsk|, make sure the board version (BD_VER) and core configuration (CUR_CORE) match your hardware.
   You could press configure button (located above the letter “C” of the ARC logo on the |emsk|) when bit 3 and bit 4 of SW1 switch is off to run a self-test. By doing so, board information is sent by UART and displayed on your UART terminal.
 
 4. Get the results

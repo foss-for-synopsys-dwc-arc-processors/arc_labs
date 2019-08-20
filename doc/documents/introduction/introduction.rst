@@ -12,7 +12,7 @@ Anyone interested in |arc| can also take this handbook as a quick start-up to ge
 In this handbook, all the basic elements of ARC are described in the labs with a step-by-step approach.
 
 This handbook can be used as a Lab teaching material for ARC university courses at
-undergraduate or graduate level with majors in Commuter Science, Computer
+undergraduate or graduate level with majors in Computer Science, Computer
 Engineering, Electrical Engineering, or for professional engineers.
 
 This handbook includes a series of labs (more labs will be added in the future), which are roughly classified into 3 levels:

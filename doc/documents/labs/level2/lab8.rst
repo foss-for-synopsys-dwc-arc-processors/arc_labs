@@ -61,10 +61,10 @@ Pragma code has two forms that must be used in pairs to bracket the affected fun
 	/* ----- Affected function definitions go here ---- */
 	#pragma code() /* No parameters here */
 
-Section_name is a constant string expression that denotes the name of the section
+Section_name is a constant string expression that denotes the name of the section.
 
 .. note::
-	About detailed usage of the compiler pragmas, see MetaWare C/C++ Programmer's Guide for the ccac Compiler
+	About detailed usage of the compiler pragmas, see MetaWare C/C++ Programmer's Guide for the ccac Compiler.
 
 Edit the linker command file
 ----------------------------
@@ -89,12 +89,12 @@ Add one new block named "*MyBlock*" in MEMORY, the start address is 0x00002000, 
 	......
 
 .. note::
-	About format and syntax of the linker command file, please refer to the document "MetaWare ELF Linker and Utilities User's Guide"
+	About format and syntax of the linker command file, see MetaWare ELF Linker and Utilities User's Guide.
 
 Add the linker command file into the project
 --------------------------------------------
 
-Right click the current project lab_linker and select Properties. Click **C/C++ build** > **Settings** > **Tool Settings** to open the linker option settings page.
+Right-click the current project lab_linker and select Properties. Click **C/C++ build** > **Settings** > **Tool Settings** to open the linker option settings page.
 
 |figure1|
 

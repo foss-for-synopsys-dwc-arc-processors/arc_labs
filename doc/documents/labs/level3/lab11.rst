@@ -97,12 +97,12 @@ Creating and setting smart home node
 1. Create an AWS account at `[Amazon AWS Website] <https://aws.amazon.com/>`__. Amazon offers various account levels,
    including a free tier for AWS IoT.
 
-2. Login AWS console and choose AWS IoT.
+2. Login AWS console and select AWS IoT.
 
    .. image:: /img/lab11_steps_1.png
         :alt: smarthome system
 
-3. Choose an appropriate IoT server in the top right corner of the AWS IoT console page. As an example we choose US East (N. Virginia) server, you may choose other server as you see fit.
+3. Select an appropriate IoT server in the top right corner of the AWS IoT console page. As an example US East (N. Virginia) server is selected, you may select other server as you see fit.
 
    .. image:: /img/lab11_steps_2.png
         :alt: smarthome system
@@ -131,7 +131,7 @@ Creating and setting smart home node
    .. image:: /img/lab11_steps_5.png
         :alt: smarthome system
 
-7. Click "ADD" to go to DATASOURCE page and fill the forms.
+7. Click **ADD** to go to DATASOURCE page and fill the forms.
 
   a) TYPE: Choose AWS IoT.
   b) NAME: Name is aws.
@@ -150,21 +150,21 @@ Creating and setting smart home node
 
   e) CLIENT ID: Leave it blank as default.
 
-  f) ACCESS KEY and SECRET KEY: Go to AWS Services page and click "IAM".
+  f) ACCESS KEY and SECRET KEY: Go to AWS Services page and click **IAM**.
 
      .. image:: /img/lab11_steps_8.png
            :alt: smarthome system
 
-     Go to User page and click "Create New Users". Enter User Names "AWSIoTUser". Then
-     download user security credentials, Access Key ID and Secret Access Key. Copy Access
+     Go to user page and click **Create New Users**. Enter User Names **AWSIoTUser**. Then
+     download user security credentials, Access Key ID, and Secret Access Key. Copy Access
      Key ID to ACCESS KEY and Secret Access Key to SECRET KEY.
 
      .. image:: /img/lab11_steps_9.png
            :alt: smarthome system
 
-     Go to user page and click "AWSIoTUser". Click "Attach Policy" to attach "AWSIoTDataAccess" to "AWSIoTUser".
+     Go to user page and click **AWSIoTUser**. Click **Attach Policy** to attach **AWSIoTDataAccess** to **AWSIoTUser**.
 
-  g) THINGS: AWS IoT thing name "SmartHome".
+  g) THINGS: AWS IoT thing name **SmartHome**.
 
      .. image:: /img/lab11_steps_10.png
            :alt: smarthome system
@@ -194,8 +194,8 @@ Building and Running AWS IoT Smart Home Example
        make TOOLCHAIN=gnu BD_VER=22 CUR_CORE=arcem7d run
 
 4. FreeRTOS-based runtime environment can be loaded automatically. Wait for WiFi initialization and
-   connection establishment (30 seconds or less) until the "WiFi connected" message is shown in the
-   terminal emulator. "Network is ok" is shown after the certificate files cert.crt, privateKey.pem,
+   connection establishment (30 seconds or less) until the "WiFi connected" message is displayed in the
+   terminal emulator. "Network is ok" is displayed after the certificate files cert.crt, privateKey.pem,
    and rootCA.crt are validated. The information in "reported": {} is the state of the EMSK-based
    smart home node. "Updated Accepted !!" means the connection works between the smart home node and AWS IoT cloud.
 
