@@ -134,5 +134,5 @@ Look for any errors in the above output or in build\linkcheck/output.txt
 4. `make latexpdf`
 
 ## Review the existing online documentation
-* Online HTML: http://embarc.org/arc_labs
+* Online HTML: https://foss-for-synopsys-dwc-arc-processors.github.io/arc_labs/doc/build/html/introduction/introduction.html, http://embarc.org/arc_labs
 * Online PDF: https://github.com/foss-for-synopsys-dwc-arc-processors/arc_labs/blob/gh-pages/doc/build/latex/arc_labs.pdf
