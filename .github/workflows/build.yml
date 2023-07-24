@@ -1,0 +1,67 @@
+name: Build
+
+env:
+  GIT_AUTHOR_NAME: svc-arcoss_auto arc
+  GIT_COMMITTER_NAME: svc-arcoss_auto arc
+  GIT_AUTHOR_EMAIL: svc-arcoss_auto@synopsys.com
+  GIT_COMMITTER_EMAIL: svc-arcoss_auto@synopsys.com
+  TOOLCHAIN: gnu
+  TOOLCHAIN_VER: 2020.09
+on:
+  push:
+    branches:
+      - master
+      - jingru-github-ci-flow
+
+jobs:
+  example-build-on-iotdk:
+    name: "Build arc_labs tests on iotdk"
+    runs-on: ubuntu-latest
+    env:
+      BOARD: iotdk
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: checkout-embarc_osp
+      uses: actions/checkout@v2
+      with:
+        repository: foss-for-synopsys-dwc-arc-processors/embarc_osp
+        path: 'embarc_osp'
+        ref: scripts-allow-insert-tests
+
+    - name: install-dependencies
+      run: |
+        bash ./embarc_osp/scripts/.ci/before_install.sh
+
+    - name: build
+      run: |
+        bash .github/workflows/script.sh
+
+  example-build-on-nsim:
+    name: "Build arc_labs tests on nsim"
+    runs-on: ubuntu-latest
+    env:
+      BOARD: nsim
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: checkout-embarc_osp
+      uses: actions/checkout@v2
+      with:
+        repository: foss-for-synopsys-dwc-arc-processors/embarc_osp
+        path: 'embarc_osp'
+        ref: scripts-allow-insert-tests
+
+    - name: install-dependencies
+      run: |
+        bash ./embarc_osp/scripts/.ci/before_install.sh
+
+    - name: build
+      run: |
+        bash .github/workflows/script.sh
