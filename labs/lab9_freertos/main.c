@@ -29,6 +29,7 @@
 --------------------------------------------- */
 #include "embARC.h"
 #include "embARC_debug.h"
+#include "os_hal_inc.h"
 #include <stdlib.h>
 
 static void task1(void *par);

@@ -32,7 +32,7 @@
 #include "embARC_debug.h"
 
 #include "board.h"
-#include "dev_uart.h"
+#include "device/ip_hal/dev_uart.h"
 #include "hm1x.h"
 
 #define MAX_COUNT 0xfffff
@@ -75,7 +75,7 @@ void init_ble_hm_10(HM1X_DEF_PTR obj, uint32_t baudrate, uint32_t mode, uint32_t
 static void timer0_isr(void *ptr)
 {
 	static uint32_t led_val = 1;
-	timer_int_clear(TIMER_0);
+	arc_timer_int_clear(TIMER_0);
 
 	if (isr_flag == 1) {
 		if(led_val >= 0x0100) {
@@ -91,13 +91,13 @@ static void timer0_isr(void *ptr)
 void init_run_timer(void)
 {
 	int_disable(INTNO_TIMER0);
-	timer_stop(TIMER_0);
+	arc_timer_stop(TIMER_0);
 
 	int_handler_install(INTNO_TIMER0, timer0_isr);
 	int_pri_set(INTNO_TIMER0, INT_PRI_MIN);
 
 	int_enable(INTNO_TIMER0);
-	timer_start(0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
+	arc_timer_start(0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
 }
 
 uint8_t compare_chars(uint8_t* buf, uint8_t* cmd, uint8_t num)

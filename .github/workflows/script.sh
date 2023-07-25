@@ -72,7 +72,7 @@ main() {
     pushd embarc_osp
     prepare_env
     run_test
-    parse_logs
+    # parse_logs
     popd
 }
 

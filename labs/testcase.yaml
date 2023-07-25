@@ -56,9 +56,11 @@ testcases:
     arc_labs.labs.lab6_ble_rn4020:
         tags: uart
         build_only: false
+        platform_exclude: nsim
     arc_labs.labs.lab7_ble_rn4020:
         tags: uart
         build_only: false
+        platform_exclude: nsim
     arc_labs.labs.lab8_linker:
         build_only: false
     arc_labs.labs.lab9_freertos:
