@@ -41,7 +41,7 @@ Configuration Registers (BCRs) that can be used by embedded software or host deb
 configuration of the ARCv2-based hardware. The Build Configuration Registers contain the version of each
 ARCv2-based extension and also the build-specific configuration information.
 
-In |embarc|, ``arc_builtin.h`` provides API (**_arc_aux_read** and **_arc_aux_read**) to access the auxiliary registers.
+In |embarc|, ``arc_builtin.h`` provides API (**arc_aux_read** and **arc_aux_read**) to access the auxiliary registers.
 
 
 Processor Timers
@@ -66,7 +66,7 @@ This timer is used to count the clock cycles atomically.
 
 Through the BCR register *0x75*, you can get the configuration information of processor timers
 
-In |embarc|, ``arc_timer.h`` provides API to operate the processor timers.
+In |embarc|, ``arc/arc_timer.h`` provides API to operate the processor timers.
 
 Program flow chart
 ------------------

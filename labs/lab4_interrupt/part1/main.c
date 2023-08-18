@@ -41,7 +41,7 @@ volatile static int second = 1;
 /** arc timer 0 interrupt routine */
 static void timer0_isr(void *ptr)
 {
-	timer_int_clear(TIMER_0);
+	arc_timer_int_clear(TIMER_0);
 	t0++;
 }
 
@@ -56,7 +56,7 @@ void timer0_delay_ms(int ms)
 int main(void)
 {
 	int_disable(INTNO_TIMER0);
-	timer_stop(TIMER_0);
+	arc_timer_stop(TIMER_0);
 
 	int_handler_install(INTNO_TIMER0, timer0_isr);
 	int_pri_set(INTNO_TIMER0, INT_PRI_MIN);
@@ -64,7 +64,7 @@ int main(void)
 	EMBARC_PRINTF("\r\nThis is a example about timer interrupt.\r\n");
 
 	int_enable(INTNO_TIMER0);
-	timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);
+	arc_timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);
 
 	while(1)
 	{

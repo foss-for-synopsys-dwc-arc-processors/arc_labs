@@ -41,7 +41,7 @@ volatile static uint8_t nesting_flag = 1;
 /** arc timer 0 interrupt routine */
 static void timer0_isr(void *ptr)
 {
-	timer_int_clear(TIMER_0);
+	arc_timer_int_clear(TIMER_0);
 
 	timer_flag = 0;
 
@@ -59,7 +59,7 @@ static void timer0_isr(void *ptr)
 /** arc timer 1 interrupt routine */
 static void timer1_isr(void *ptr)
 {
-	timer_int_clear(TIMER_1);
+	arc_timer_int_clear(TIMER_1);
 
 	timer_flag = 1;
 }
@@ -67,8 +67,8 @@ static void timer1_isr(void *ptr)
 /** main entry for testing arc fiq interrupt */
 int main(void)
 {
-	timer_stop(TIMER_0);
-	timer_stop(TIMER_1);
+	arc_timer_stop(TIMER_0);
+	arc_timer_stop(TIMER_1);
 
 	int_disable(INTNO_TIMER0);
 	int_disable(INTNO_TIMER1);
@@ -85,14 +85,14 @@ int main(void)
 	int_enable(INTNO_TIMER0);
 	int_enable(INTNO_TIMER1);
 
-	timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-	timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
+	arc_timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
+	arc_timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
 
 	while(1)
 	{
 		if((hits >= 5) && (nesting_flag == 1)) {
-			timer_stop(TIMER_0);
-			timer_stop(TIMER_1);
+			arc_timer_stop(TIMER_0);
+			arc_timer_stop(TIMER_1);
 
 			int_disable(INTNO_TIMER0);
 			int_disable(INTNO_TIMER1);
@@ -105,11 +105,11 @@ int main(void)
 			int_enable(INTNO_TIMER0);
 			int_enable(INTNO_TIMER1);
 
-			timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-			timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/10);
+			arc_timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
+			arc_timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/10);
 		} else if((hits >= 10) && (nesting_flag == 0)) {
-			timer_stop(TIMER_0);
-			timer_stop(TIMER_1);
+			arc_timer_stop(TIMER_0);
+			arc_timer_stop(TIMER_1);
 
 			int_disable(INTNO_TIMER0);
 			int_disable(INTNO_TIMER1);
@@ -123,8 +123,8 @@ int main(void)
 			int_enable(INTNO_TIMER0);
 			int_enable(INTNO_TIMER1);
 
-			timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-			timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
+			arc_timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
+			arc_timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
 		}
 	}
 	return E_SYS;

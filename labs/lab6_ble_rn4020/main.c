@@ -32,7 +32,7 @@
 #include "embARC_debug.h"
 
 #include "board.h"
-#include "dev_uart.h"
+#include "device/ip_hal/dev_uart.h"
 #include "rn4020.h"
 
 #define RN4020_PRV_SERV_HIGH_UUID  0x1122334455667788

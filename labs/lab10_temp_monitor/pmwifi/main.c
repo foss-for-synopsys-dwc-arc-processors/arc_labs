@@ -32,7 +32,7 @@
 #include "embARC_debug.h"
 
 #include "board.h"
-#include "dev_iic.h"
+#include "device/ip_hal/dev_iic.h"
 #include "tcn75.h"
 
 #include "lwip/opt.h"

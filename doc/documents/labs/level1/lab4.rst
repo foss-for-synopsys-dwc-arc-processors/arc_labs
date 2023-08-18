@@ -119,7 +119,7 @@ The code can be divided into three parts: interrupt service function, main funct
 
 	static void timer0_isr(void *ptr)
 	{
-	  timer_int_clear(TIMER_0);
+	  arc_timer_int_clear(TIMER_0);
 	  t0++;
 	}
 
@@ -134,7 +134,7 @@ In this function, the count variable t0 is incremented by one.
 	int main(void)
 	{
 	  int_disable(INTNO_TIMER0);
-	  timer_stop(TIMER_0);
+	  arc_timer_stop(TIMER_0);
 
 	  int_handler_install(INTNO_TIMER0, timer0_isr);
 	  int_pri_set(INTNO_TIMER0, INT_PRI_MIN);
@@ -143,7 +143,7 @@ In this function, the count variable t0 is incremented by one.
 	  EMBARC_PRINTF("\r\n/******** TEST MODE START ********/\r\n\r\n");
 
 	  int_enable(INTNO_TIMER0);
-	  timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);
+	  arc_timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, COUNT);
 
 	  while(1)
 	  {
@@ -162,12 +162,12 @@ In the initialization section, the timer and timer interrupts are configured.
 
 This code uses the |embarc| API to program **Timer0**. These two methods are the same. The API just encapsulates the read and write operations of the auxiliary registers for convenience.
 
-**First**, in order to configure **Timer0** and it's interrupts, turn them off first. This work is done by the functions ``int_disable`` and ``timer_stop``.
+**First**, in order to configure **Timer0** and it's interrupts, turn them off first. This work is done by the functions ``int_disable`` and ``arc_timer_stop``.
 
 **Then** configure the interrupt service function and priority for our interrupts. This work is done by the functions ``int_handler_install`` and ``int_pri_set``.
 
-**Finally**, after the interrupt configuration is complete, enable the **Timer0** and interrupts that are previously turned off. This work is done by the functions ``int_enable`` and ``timer_start``.
-The implementation of the ``timer_start`` function is the same as the reading and writing of the auxiliary registers in lab_timer. You can view them in the file arc_timer.c. One point to note in this step is the configuration of ``timer_limit`` (the last parameter of ``timer_start``). Configure the interrupt time to 1ms, do a simple calculation (the formula is the expression after COUNT).
+**Finally**, after the interrupt configuration is complete, enable the **Timer0** and interrupts that are previously turned off. This work is done by the functions ``int_enable`` and ``arc_timer_start``.
+The implementation of the ``arc_timer_start`` function is the same as the reading and writing of the auxiliary registers in lab_timer. You can view them in the file arc_timer.c. One point to note in this step is the configuration of ``timer_limit`` (the last parameter of ``arc_timer_start``). Configure the interrupt time to 1ms, do a simple calculation (the formula is the expression after COUNT).
 
 In this example, the loop body only serves as an effect display. Delay function in the loop body to print the time per second is called.
 
@@ -184,7 +184,7 @@ In this example, the loop body only serves as an effect display. Delay function 
 	  while(t0<ms);
 	}
 
-This code is very simple and the idea is clear. When the function entered, clear the global variable t0. The interrupt interval is set to 1ms in the above timer_start, assume that every time t0 is incremented, the time has passed 1ms.
+This code is very simple and the idea is clear. When the function entered, clear the global variable t0. The interrupt interval is set to 1ms in the above arc_timer_start, assume that every time t0 is incremented, the time has passed 1ms.
 
 Wait through the while(t0<ms) sentence, so that the full ms delay with higher precision is received.
 
@@ -241,7 +241,7 @@ The code for PART II can be divided into two parts: the interrupt service routin
 
 	static void timer0_isr(void *ptr)
 	{
-	  timer_int_clear(TIMER_0);
+	  arc_timer_int_clear(TIMER_0);
 
 	  timer_flag = 0;
 
@@ -261,7 +261,7 @@ The code for PART II can be divided into two parts: the interrupt service routin
 
 	static void timer1_isr(void *ptr)
 	{
-	  timer_int_clear(TIMER_1);
+	  arc_timer_int_clear(TIMER_1);
 
 	  timer_flag = 1;
 	}
@@ -278,8 +278,8 @@ Through the above code, when timer0's interrupt comes in and is serviced, differ
 
 	int main(void)
 	{
-		timer_stop(TIMER_0);
-		timer_stop(TIMER_1);
+		arc_timer_stop(TIMER_0);
+		arc_timer_stop(TIMER_1);
 
 		int_disable(INTNO_TIMER0);
 		int_disable(INTNO_TIMER1);
@@ -295,14 +295,14 @@ Through the above code, when timer0's interrupt comes in and is serviced, differ
 		int_enable(INTNO_TIMER0);
 		int_enable(INTNO_TIMER1);
 
-		timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-		timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
+		arc_timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
+		arc_timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
 
 		while(1)
 		{
 			if((hits >= 5) && (nesting_flag == 1)) {
-				timer_stop(TIMER_0);
-				timer_stop(TIMER_1);
+				arc_timer_stop(TIMER_0);
+				arc_timer_stop(TIMER_1);
 
 				int_disable(INTNO_TIMER0);
 				int_disable(INTNO_TIMER1);
@@ -315,11 +315,11 @@ Through the above code, when timer0's interrupt comes in and is serviced, differ
 				int_enable(INTNO_TIMER0);
 				int_enable(INTNO_TIMER1);
 
-				timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-				timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/10);
+				arc_timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
+				arc_timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/10);
 			} else if((hits >= 10) && (nesting_flag == 0)) {
-				timer_stop(TIMER_0);
-				timer_stop(TIMER_1);
+				arc_timer_stop(TIMER_0);
+				arc_timer_stop(TIMER_1);
 
 				int_disable(INTNO_TIMER0);
 				int_disable(INTNO_TIMER1);
@@ -333,8 +333,8 @@ Through the above code, when timer0's interrupt comes in and is serviced, differ
 				int_enable(INTNO_TIMER0);
 				int_enable(INTNO_TIMER1);
 
-				timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
-				timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
+				arc_timer_start(TIMER_0, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT);
+				arc_timer_start(TIMER_1, TIMER_CTRL_IE | TIMER_CTRL_NH, MAX_COUNT/100);
 			}
 		}
 		return E_SYS;
