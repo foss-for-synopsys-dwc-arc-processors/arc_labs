@@ -1,8 +1,8 @@
 # DOC: used to generate docs
 
-breathe~=4.23,!=4.29.0
-sphinx~=3.3
-sphinx_rtd_theme>=0.5.2,<1.0
+breathe
+sphinx
+sphinx_rtd_theme
 sphinx-tabs
 sphinxcontrib-svg2pdfconverter
-sphinx-notfound-page>=0.6
+sphinx-notfound-page
