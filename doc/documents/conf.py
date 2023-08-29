@@ -22,7 +22,6 @@ import sphinx_rtd_theme
 
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath('../../'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'extensions'))
 
 
 # -- General configuration ------------------------------------------------
@@ -36,13 +35,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'extensions'))
 # ones.
 extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.extlinks',
     'sphinx.ext.todo',
-    'breathe',
-    'sphinx.ext.ifconfig',
-    'embarc.link-roles',
-    'embarc.html_redirects',
-    'sphinx_tabs.tabs']
+    'sphinx.ext.ifconfig']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -104,11 +98,6 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 html_theme_options = {
     'prev_next_buttons_location': None,
     'leftsidebar': True,
-}
-
-html_sidebars = {
-   '**': ['globaltoc.html', 'sourcelink.html', 'searchbox.html'],
-   'using/windows': ['windowssidebar.html', 'searchbox.html'],
 }
 
 # Theme options are theme-specific and customize the look and feel of a theme
