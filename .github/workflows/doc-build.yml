@@ -5,11 +5,11 @@ on:
     branches:
       - master
         sudo pip3 install -U setuptools wheel pip
-    paths:
-    - 'doc/**'
-    - '**.rst'
-    - '**.md'
-    - '.github/workflows/doc-build.yml'
+    # paths:
+    # - 'doc/**'
+    # - '**.rst'
+    # - '**.md'
+    # - '.github/workflows/doc-build.yml'
 
 jobs:
   doc-build-html:
