@@ -1,6 +1,5 @@
 # Synopsys ARC Labs University Program
 
-[![Build Status](https://travis-ci.org/foss-for-synopsys-dwc-arc-processors/arc_labs.svg?branch=master)](https://travis-ci.org/foss-for-synopsys-dwc-arc-processors/arc_labs)
 
 The labs of Synopsys ARC university courses.
 
